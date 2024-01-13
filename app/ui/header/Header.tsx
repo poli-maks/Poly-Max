@@ -14,7 +14,7 @@ const Header = async ({ lang }: { lang: Locale }) => {
 	return (
 		<SectionWrapper as={'header'} py={{ base: '0', lg: '0', xl: '0' }}>
 			<Flex justifyContent="space-between">
-				<NavBar navItems={navItems} />
+				<NavBar lang={lang} navItems={navItems} />
 				<LocaleSwitcher />
 			</Flex>
 		</SectionWrapper>
