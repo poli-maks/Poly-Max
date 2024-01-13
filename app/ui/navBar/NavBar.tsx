@@ -1,5 +1,6 @@
 'use client'
 
+import { Locale } from '@/i18n.config'
 import { Link } from '@chakra-ui/next-js'
 import { Flex } from '@chakra-ui/react'
 
@@ -12,19 +13,20 @@ type NavItem = {
 
 interface NavBarProps {
 	navItems: NavItem[]
+	lang: Locale
 }
 
-export const NavBar: React.FC<NavBarProps> = ({ navItems }) => {
+export const NavBar: React.FC<NavBarProps> = ({ navItems, lang }) => {
 	return (
 		<Flex as="nav" gap={10}>
-			<Link href={'/'}>
+			<Link href={`/${lang}`}>
 				<BrandLogo />
 			</Link>
 
 			{navItems.map((item, idx) => (
 				<Link
 					key={idx}
-					href={item.path}
+					href={`/${lang}${item.path}`}
 					display={'flex'}
 					alignItems={'center'}
 					gap={1}
