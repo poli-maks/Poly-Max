@@ -1,0 +1,22 @@
+{
+	"navigation": {
+		"navItems": [
+			{
+				"title": "Home",
+				"path": "/"
+			},
+			{
+				"title": "Katalog",
+				"path": "/catalog"
+			},
+			{
+				"title": "Über uns",
+				"path": "/about"
+			},
+			{
+				"title": "Kontakt",
+				"path": "/contakt"
+			}
+		]
+	}
+}
