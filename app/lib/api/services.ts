@@ -3,8 +3,9 @@ import { notFound } from 'next/navigation'
 import { cache } from 'react'
 
 import { instance } from '../instance'
+import { ICategory } from '../interfaces'
 
-const getCategories = async (lang: string) => {
+const getCategories = async (lang: string): Promise<ICategory[]> => {
 	try {
 		const {
 			data: { data },
