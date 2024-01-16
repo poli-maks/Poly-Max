@@ -16,6 +16,7 @@ interface IMobileMenu {
 }
 
 const MobileMenu = ({ onClose, isOpen, lang, navItems }: IMobileMenu) => {
+	//заменить именйдж на компонент(крестик на закрытие)
 	return (
 		<Drawer placement={'top'} onClose={onClose} isOpen={isOpen} isFullHeight blockScrollOnMount>
 			<DrawerOverlay />
@@ -50,6 +51,7 @@ const MobileMenu = ({ onClose, isOpen, lang, navItems }: IMobileMenu) => {
 						fontSize={'40px'}
 						fontWeight={'500'}
 						gap={'30px'}
+						onClose={() => onClose()}
 					/>
 				</DrawerBody>
 			</DrawerContent>

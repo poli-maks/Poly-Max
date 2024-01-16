@@ -1,13 +1,9 @@
-import { useMediaQuery } from '@chakra-ui/react'
-
 const BrandLogo = () => {
-	const [isLargerThan768] = useMediaQuery('(max-width: 767px)')
-
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			width={!isLargerThan768 ? '200' : '160'}
-			height={!isLargerThan768 ? '76' : '60'}
+			width={'100%'}
+			height={'100%'}
 			viewBox="0 0 200 76"
 			fill="none"
 		>
