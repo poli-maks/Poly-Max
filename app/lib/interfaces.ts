@@ -116,3 +116,24 @@ export interface IProductProps {
 		localizations: unknown[]
 	}
 }
+
+export interface ICategory {
+	id: number
+	attributes: {
+		uid: number
+		title: string
+		locale: Locale
+		createdAt: Date
+		updatedAt: Date
+		publishedAt: Date
+		sub_categories: { data: ISubCategory[] }
+	}
+}
+
+export interface ISubCategory {
+	id: number
+	attributes: {
+		uid: number
+		title: string
+	}
+}
