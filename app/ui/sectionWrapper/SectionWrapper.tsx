@@ -63,7 +63,6 @@ const SectionWrapper: React.FC<ISectionWrapper> = ({
 	w = '',
 	zIndex = '',
 	style = {},
-	containerWrapStyles = {},
 	pt = {},
 }) => {
 	return (
@@ -82,21 +81,19 @@ const SectionWrapper: React.FC<ISectionWrapper> = ({
 			borderTopRadius={borderTopRadius}
 			pt={pt}
 		>
-			<Box style={containerWrapStyles} h={'100%'}>
-				<Container maxW={{ base: '744px', lg: '1000px', xl: '1176px' }} px="12px" height={'100%'}>
-					{heading && (
-						<Heading
-							as={headingAs}
-							mb={{ base: 6, lg: 8 }}
-							fontSize={{ base: '2xl', lg: '4xl' }}
-							fontWeight={900}
-						>
-							{heading}
-						</Heading>
-					)}
-					{children}
-				</Container>
-			</Box>
+			<Container maxW={{ base: '744px', lg: '1000px', xl: '1176px' }} px="12px" height={'100%'}>
+				{heading && (
+					<Heading
+						as={headingAs}
+						mb={{ base: 6, lg: 8 }}
+						fontSize={{ base: '2xl', lg: '4xl' }}
+						fontWeight={900}
+					>
+						{heading}
+					</Heading>
+				)}
+				{children}
+			</Container>
 		</Box>
 	)
 }
