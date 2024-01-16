@@ -2,42 +2,65 @@
 
 import { Locale } from '@/i18n.config'
 import { Link } from '@chakra-ui/next-js'
-import { Flex } from '@chakra-ui/react'
+import { Box, Flex, ResponsiveValue } from '@chakra-ui/react'
+import { usePathname } from 'next/navigation'
 
-import BrandLogo from '../svg/BrandLogo'
+import { theme } from '../theme'
 
-type NavItem = {
+export type NavItem = {
 	title: string
 	path: string
 }
 
-interface NavBarProps {
+export interface NavBarProps {
 	navItems: NavItem[]
 	lang: Locale
+	displayLogo: ResponsiveValue<'flex' | 'none'>
+	flexDir: ResponsiveValue<'row' | 'column'>
+	color: string
+	fontSize: string
+	fontWeight: string
+	gap: string
 }
 
-export const NavBar: React.FC<NavBarProps> = ({ navItems, lang }) => {
+export const NavBar: React.FC<NavBarProps> = ({
+	navItems,
+	lang,
+	// displayLogo,
+	flexDir,
+	color = theme.colors.hText,
+	fontSize,
+	fontWeight,
+	gap,
+}) => {
+	const pathname = usePathname()
+
 	return (
 		<Flex as="nav" gap={10}>
-			<Link href={`/${lang}`}>
-				<BrandLogo />
-			</Link>
-
-			{navItems.map((item, idx) => (
-				<Link
-					key={idx}
-					href={`/${lang}${item.path}`}
-					display={'flex'}
-					alignItems={'center'}
-					gap={1}
-					textDecor={'none'}
-					fontSize={'md'}
-					fontWeight={400}
-					_hover={{ textDecoration: 'none' }}
-				>
-					{item.title}
-				</Link>
-			))}
+			<Box as={'ul'} display={'flex'} flexDirection={flexDir} gap={gap}>
+				{navItems.map((item, idx) => (
+					<Box as={'li'} key={idx}>
+						<Link
+							href={`/${lang}${item.path}`}
+							color={color}
+							display={'flex'}
+							alignItems={'center'}
+							textDecor={'none'}
+							textDecoration={
+								pathname === '/' + lang + item.path ||
+								(pathname === `/${lang}` && item.path === '/')
+									? 'underline'
+									: 'none'
+							}
+							fontSize={fontSize}
+							fontWeight={fontWeight}
+							_hover={{ textDecoration: 'none' }}
+						>
+							{item.title}
+						</Link>
+					</Box>
+				))}
+			</Box>
 		</Flex>
 	)
 }
