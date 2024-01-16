@@ -16,7 +16,7 @@ export const LocaleSwitcher = () => {
 	}
 
 	const linksStyle = (locale: string) => {
-		const isActive = pathName === `/${locale}`
+		const isActive = pathName.includes(locale)
 		if (isActive) {
 			return {
 				color: colorMode === 'light' ? '#0D1010' : '#FAFAFA',
