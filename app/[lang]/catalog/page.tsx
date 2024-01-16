@@ -24,7 +24,7 @@ const CatalogPage: React.FC<
 	return (
 		<>
 			<Search
-				placeholder="Enter what u wanna search for..."
+				placeholder="Geben Sie ein, wonach Sie suchen..."
 				isQuery={!!query}
 				isSearch={!!search}
 			/>
