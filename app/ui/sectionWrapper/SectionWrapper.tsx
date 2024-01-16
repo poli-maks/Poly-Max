@@ -47,7 +47,6 @@ interface ISectionWrapper {
 	w?: string
 	zIndex?: string
 	style?: React.CSSProperties
-	containerWrapStyles?: React.CSSProperties
 }
 
 const SectionWrapper: React.FC<ISectionWrapper> = ({
@@ -57,7 +56,7 @@ const SectionWrapper: React.FC<ISectionWrapper> = ({
 	bg = 'transparent',
 	as = 'section',
 	heading = '',
-	py = { base: '30px', lg: '50px', xl: '70px' },
+	py = { base: '40px', lg: '60px', xl: '120px' },
 	headingAs = 'h2',
 	borderTopRadius = '0px',
 	w = '',
@@ -81,7 +80,7 @@ const SectionWrapper: React.FC<ISectionWrapper> = ({
 			borderTopRadius={borderTopRadius}
 			pt={pt}
 		>
-			<Container maxW={{ base: '744px', lg: '1000px', xl: '1176px' }} px="12px" height={'100%'}>
+			<Container maxW={{ base: '744px', lg: '1000px', xl: '1300px' }} px="12px" height={'100%'}>
 				{heading && (
 					<Heading
 						as={headingAs}
