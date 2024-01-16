@@ -1,14 +1,6 @@
 'use client'
 
-import {
-	Drawer,
-	DrawerBody,
-	DrawerContent,
-	IconButton,
-	Input,
-	InputGroup,
-	InputRightElement,
-} from '@chakra-ui/react'
+import { Box, IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { usePathname, useSearchParams, useRouter } from 'next/navigation'
 import React, { useRef } from 'react'
@@ -51,13 +43,13 @@ const Search = ({
 		replace(`${pathname}?${params}`)
 	}
 
-	const closeSearch = () => {
-		ref?.current?.reset()
-		const params = new URLSearchParams(searchParams)
-		params.delete('query')
-		params.delete('search')
-		replace(`${pathname}?${params}`)
-	}
+	// const closeSearch = () => {
+	// 	ref?.current?.reset()
+	// 	const params = new URLSearchParams(searchParams)
+	// 	params.delete('query')
+	// 	params.delete('search')
+	// 	replace(`${pathname}?${params}`)
+	// }
 
 	const searchAnimation = {
 		hidden: {
@@ -75,66 +67,71 @@ const Search = ({
 		},
 	}
 
-	return (
-		<Drawer placement={'top'} onClose={() => {}} isOpen={isSearch} onOverlayClick={closeSearch}>
-			<DrawerContent style={{ top: '110px', backgroundColor: 'transparent' }} boxShadow={'none'}>
-				<DrawerBody
-					as={motion.div}
-					initial="hidden"
-					whileInView="visible"
-					viewport={{ amount: 0.3, once: true }}
-					variants={searchAnimation}
-					p={0}
-				>
-					<SectionWrapper bg="base" py={{ base: '35px', lg: '40px', xl: '40px' }}>
-						<InputGroup
-							as={'form'}
-							ref={ref}
-							size="md"
-							onSubmit={(e) => {
-								e.preventDefault()
+	if (isSearch)
+		return (
+			<Box
+				as={motion.div}
+				initial="hidden"
+				exit={{
+					y: -20,
+					opacity: 0,
+				}}
+				whileInView="visible"
+				viewport={{ amount: 0.3, once: true }}
+				variants={searchAnimation}
+				p={0}
+				pos={'absolute'}
+				top={'110px'}
+				w={'100%'}
+			>
+				<SectionWrapper bg="base" py={{ base: '35px', lg: '40px', xl: '40px' }}>
+					<InputGroup
+						as={'form'}
+						ref={ref}
+						size="md"
+						onSubmit={(e) => {
+							e.preventDefault()
+						}}
+					>
+						<Input
+							p={0}
+							pl={0}
+							fontSize={'20px'}
+							fontWeight={600}
+							lineHeight={1}
+							type="text"
+							placeholder={placeholder}
+							border={'none'}
+							bgColor={'base'}
+							onChange={handleSearch}
+							color={'hText'}
+							_placeholder={{ color: 'hText' }}
+							_active={{ outlineColor: 'transparent' }}
+							_focus={{
+								outlineColor: 'transparent',
 							}}
-						>
-							<Input
-								fontSize={'20px'}
-								fontWeight={600}
-								lineHeight={1}
-								type="text"
-								placeholder={placeholder}
-								pl={8}
-								border={'none'}
-								bgColor={'base'}
-								onChange={handleSearch}
-								color={'hText'}
-								_placeholder={{ color: 'hText' }}
-								_active={{ outlineColor: 'transparent' }}
-								_focus={{
-									outlineColor: 'transparent',
-								}}
-								_focusVisible={{
-									borderColor: 'transparent',
-									boxShadow: 'none',
-								}}
-							/>
-							{isQuery && (
-								<InputRightElement width="4.5rem">
-									<IconButton
-										isRound={true}
-										variant="solid"
-										colorScheme="ghost"
-										aria-label="clear search"
-										icon={<CloseIcon />}
-										_hover={{ color: 'accent' }}
-										onClick={clearSearch}
-									/>
-								</InputRightElement>
-							)}
-						</InputGroup>
-					</SectionWrapper>
-				</DrawerBody>
-			</DrawerContent>
-		</Drawer>
-	)
+							_focusVisible={{
+								borderColor: 'transparent',
+								boxShadow: 'none',
+							}}
+						/>
+						{isQuery && (
+							<InputRightElement width="4.5rem">
+								<IconButton
+									isRound={true}
+									variant="solid"
+									colorScheme="ghost"
+									aria-label="clear search"
+									icon={<CloseIcon />}
+									_hover={{ color: 'accent' }}
+									onClick={clearSearch}
+								/>
+							</InputRightElement>
+						)}
+					</InputGroup>
+				</SectionWrapper>
+			</Box>
+		)
 }
 
 export default Search
