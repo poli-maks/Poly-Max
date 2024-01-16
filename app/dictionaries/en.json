@@ -18,5 +18,31 @@
 				"path": "/contact"
 			}
 		]
+	},
+	"homePage": {
+		"title": "Our location",
+		"subTitle": "The city's location on the banks of the Dnipro gives it a special charm and makes it an important transport hub in the country.",
+		"locations": [
+			{
+				"text": "The urban landscape does not leave you untouched either. Beautiful parks, squares, and embankments give the Dnipro a pleasant atmosphere for relaxation and leisure. The Dnipro is a popular place for walking, water fun, and sporting events.",
+				"img": "/img/location1.jpg"
+			},
+			{
+				"text": "Dnipro is one of the largest and most significant cities in Ukraine. With its rich history, the city is a living testament to historical events and the cultural diversity of the region.",
+				"img": "/img/location2.jpg"
+			},
+			{
+				"text": "The city of Dnipro also attracts a lot of attention through its diverse cultural heritage. In its historical buildings, museums, and art galleries, you can learn more about the past and culture of the area. The diverse range of events, exhibitions, and cultural festivals make the city vibrant and interesting for tourists and residents.",
+				"img": "/img/location3.jpg"
+			},
+			{
+				"text": "One of the main aspects of the city is its industry. The Dnipro is considered a powerful industrial center, with various sectors represented, including mechanical engineering, metallurgy, chemistry, and others. An important sector is the production of building components, playing a crucial role in various construction projects and infrastructure developments.",
+				"img": "/img/location4.jpg"
+			},
+			{
+				"text": "Overall, Dnipro is a unique blend of industry, culture, and nature. Rich historical heritage, the production of high-quality building fixtures, and an appealing urban landscape make it an interesting place to visit, work, and live.",
+				"img": "/img/location5.jpg"
+			}
+		]
 	}
 }
