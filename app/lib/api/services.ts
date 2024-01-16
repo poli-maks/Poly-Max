@@ -85,7 +85,7 @@ const getProductByUid = async (lang: string, uid: number) => {
 
 export const fetchProductByUid = cache(getProductByUid)
 
-const searchProductByTitle = async (lang: string, query: string, page: number) => {
+const getProductByTitle = async (lang: string, query: string, page: number) => {
 	try {
 		const {
 			data: { data },
@@ -111,7 +111,7 @@ const searchProductByTitle = async (lang: string, query: string, page: number) =
 	}
 }
 
-export const fetchProductByTitle = cache(searchProductByTitle)
+export const searchProductByTitle = cache(getProductByTitle)
 
 const getProductsByCategory = async (lang: string, catUid: string, page: number) => {
 	try {
