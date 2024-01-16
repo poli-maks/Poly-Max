@@ -18,5 +18,31 @@
 				"path": "/contact"
 			}
 		]
+	},
+	"homePage": {
+		"title": "Unser Standort",
+		"subTitle": "Die Lage der Stadt an den Ufern des Dnipro verleiht ihm einen besonderen Charme und macht ihn zu einem wichtigen Verkehrsknotenpunkt im Land.",
+		"locations": [
+			{
+				"text": "Die Stadtlandschaft lässt einen ebenfalls nicht unberührt. Schöne Parks, Plätze und Uferböschungen geben der Dnipro eine angenehme Atmosphäre zum Entspannen und Relaxen. Der Dnipro ist ein beliebter Ort zum Spazierengehen, zum Wasservergnügen und zu sportlichen Veranstaltungen,",
+				"img": "/img/location1.jpg"
+			},
+			{
+				"text": "Dnipro ist eine der größten und bedeutendsten Städte in Ukraine. Mit seiner reichen Geschichte ist die Stadt ein lebendiges Zeugnis für historische Ereignisse und die kulturelle Vielfalt der Region.",
+				"img": "/img/location2.jpg"
+			},
+			{
+				"text": "Der Stadt Dnepr zieht auch viel Aufmerksamkeit auf sich durch sein vielfältiges kulturelles Erbe. In seinen historischen Gebäuden, Museen und Kunstgalerien können Sie mehr über die Vergangenheit und Kultur des Gebiets erfahren. Das vielfältige Angebot an Veranstaltungen, Ausstellungen und Kulturfestivals machen die Stadt lebendig und interessant für Touristen und Einwohner.",
+				"img": "/img/location3.jpg"
+			},
+			{
+				"text": "Einer der Hauptaspekte der Stadt ist ihre Industrie. Der Dnipro gilt als ein leistungsstarkes industrielles Zentrum, in dem verschiedene Industriebereiche wie Maschinenbau, Metallurgie, Chemie und andere vertreten sind. Ein wichtiger Sektor stellt die Herstellung von Bauteilen dar, die eine wichtige Rolle bei verschiedenen Bauprojekten und Infrastrukturentwicklungen spielt.",
+				"img": "/img/location4.jpg"
+			},
+			{
+				"text": "Insgesamt ist Dnepr ein einzigartiges Zusammenspiel aus Industrie, Kultur und Natur. Reichhaltiges historisches Erbe, die Produktion qualitativ hochwertiger Bauarmaturen und ein ansprechender städtischer Landschaftsgarten machen es zu einem interessanten Ort zum Besuchen, Arbeiten und Leben.",
+				"img": "/img/location5.jpg"
+			}
+		]
 	}
 }

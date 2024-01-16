@@ -44,7 +44,7 @@ const ProductItem = ({ product: { attributes }, lang }: { product: IProduct; lan
 						}}
 					>
 						<Image
-							src={attributes.img.data[0].attributes.url || '/productPlaceholder.jpg'}
+							src={attributes.img.data[0].attributes.url || '/img/productPlaceholder.jpg'}
 							alt={attributes.title + '' + attributes.descShort || 'product image'}
 							fill
 							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

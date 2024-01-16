@@ -203,3 +203,8 @@ interface ImageFormat {
 		resource_type: string
 	}
 }
+
+export interface ILocation {
+	img: string
+	text: string
+}
