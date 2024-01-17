@@ -32,7 +32,7 @@ export default function RootLayout({
 				<Providers>
 					<Header lang={lang} />
 					<main>{children}</main>
-					<Footer />
+					<Footer lang={lang} />
 				</Providers>
 			</body>
 		</html>

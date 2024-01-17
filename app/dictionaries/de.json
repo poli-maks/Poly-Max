@@ -6,8 +6,8 @@
 				"path": "/"
 			},
 			{
-				"title": "Katalog",
-				"path": "/catalog"
+				"title": "Produkte",
+				"path": "/catalog?page=1"
 			},
 			{
 				"title": "Über uns",

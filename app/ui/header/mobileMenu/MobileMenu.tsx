@@ -5,8 +5,8 @@ import closeIcon from '@/public/img/closeIcon.svg'
 import { Button, Drawer, DrawerBody, DrawerContent, DrawerOverlay, Spacer } from '@chakra-ui/react'
 import Image from 'next/image'
 
-import { NavBar, NavItem } from '../navBar/NavBar'
-import { theme } from '../theme'
+import { NavBar, NavItem } from '../../navBar/NavBar'
+import { theme } from '../../theme'
 
 interface IMobileMenu {
 	onClose: () => void

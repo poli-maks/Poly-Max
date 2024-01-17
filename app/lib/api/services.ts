@@ -168,3 +168,22 @@ const getProductsBySubCategory = async (lang: string, subCatUid: number, page: n
 }
 
 export const fetchProductsBySubCategory = cache(getProductsBySubCategory)
+
+export const getContacts = async (lang: string) => {
+	try {
+		const {
+			data: { data },
+		} = await instance.get(`/api/contacts?locale=${lang}`)
+		if (data.length === 0) return notFound()
+
+		const [{ attributes }] = data
+
+		return attributes
+	} catch (error) {
+		if (axios.isAxiosError(error) === undefined) {
+			return notFound()
+		}
+	}
+}
+
+export const fetchContacts = cache(getContacts)

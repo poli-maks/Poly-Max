@@ -208,3 +208,14 @@ export interface ILocation {
 	img: string
 	text: string
 }
+
+export interface IContacts {
+	email: string
+	phone: string
+	address: string
+	officeEmail: string
+	createdAt: string
+	updatedAt: string
+	publishedAt: string
+	locale: string
+}
