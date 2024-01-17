@@ -204,6 +204,9 @@ interface ImageFormat {
 	}
 }
 
+export type TitleSize = ['xl', 'lg', 'md', 'sm']
+export type TitleLevel = ['h1', 'h2', 'h3', 'h4']
+
 export interface ILocation {
 	img: string
 	text: string

@@ -1,7 +1,7 @@
 'use client'
 
 import { ImageAttributes } from '@/app/lib/interfaces'
-import { Box } from '@chakra-ui/react'
+import { Box, useBreakpointValue } from '@chakra-ui/react'
 import Image from 'next/image'
 import React from 'react'
 import { Scrollbar } from 'swiper/modules'
@@ -13,8 +13,10 @@ import 'swiper/css/scrollbar'
 import './SwiperProducts.css'
 
 export const ProductSlider = ({ productImages }: { productImages: ImageAttributes[] }) => {
+	const size = useBreakpointValue({ base: 'sm', lg: 'md' }, { ssr: false })
+
 	return (
-		<>
+		<Box mb="41px" display={{ base: 'block', lg: 'none' }}>
 			<Swiper
 				direction="horizontal"
 				slidesPerView={1}
@@ -22,14 +24,18 @@ export const ProductSlider = ({ productImages }: { productImages: ImageAttribute
 				scrollbar={true}
 				loop={true}
 				modules={[Scrollbar]}
+				observer={true}
+				observeParents={true}
+				hidden={size !== 'sm' ? true : false}
 			>
 				{productImages.map((item) => (
 					<SwiperSlide key={item.id}>
 						<Box
 							position="relative"
 							z-index="2"
-							width="340px"
-							height="255px"
+							maxW="768px"
+							minW="340px"
+							h={{ base: '255px', md: '480px', sm: '380px' }}
 							bgRepeat={'no-repeat'}
 							bgPos={'center'}
 							bgSize={'cover'}
@@ -45,7 +51,7 @@ export const ProductSlider = ({ productImages }: { productImages: ImageAttribute
 								style={{
 									display: 'block',
 									height: '100%',
-									maxWidth: '100%',
+									width: '100%',
 									objectFit: 'cover',
 								}}
 							/>
@@ -53,6 +59,6 @@ export const ProductSlider = ({ productImages }: { productImages: ImageAttribute
 					</SwiperSlide>
 				))}
 			</Swiper>
-		</>
+		</Box>
 	)
 }

@@ -9,6 +9,23 @@ export const theme = extendTheme({
 		initialColorMode: 'light',
 		useSystemColorMode: false,
 	},
+	styles: {
+		global: {
+			h1: {
+				FontFace: 'Manrope',
+				fontSize: '50px',
+				fontWeight: '600',
+			},
+			h2: {
+				fontSize: '40px',
+				fontWeight: '500',
+			},
+			h3: {
+				fontSize: '20px',
+				fontWeight: '600',
+			},
+		},
+	},
 	colors: {
 		base: '#FAFAFA',
 		accent: '#ECEFF1',
@@ -17,8 +34,37 @@ export const theme = extendTheme({
 		unfocus: '#9E9E9E',
 		line: '#E0E0E0',
 		error: '#D30000',
+		tableRow: '#F5F5F5',
 	},
 	components: {
+		Heading: {
+			baseStyle: {
+				fontFace: 'Manrope',
+				fontWeight: '500',
+				lineHeight: 1,
+			},
+			sizes: {
+				/// h1 ///
+				xl: {
+					fontSize: '50px',
+					fontWeight: '600',
+				},
+				/// h2 ///
+				lg: {
+					fontSize: '40px',
+				},
+				/// h3 ///
+				md: {
+					fontSize: '20px',
+					fontWeight: '600',
+				},
+				/// h4 ///
+				sm: {
+					fontSize: '36px',
+				},
+			},
+		},
+
 		Button: {
 			variants: {
 				accent: {
