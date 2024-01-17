@@ -31,6 +31,11 @@ body {
 	background-color: #fafafa;
 }
 
+::selection {
+	background: #212121;
+	color: #fafafa;
+}
+
 hr {
 	height: 0;
 	color: inherit;

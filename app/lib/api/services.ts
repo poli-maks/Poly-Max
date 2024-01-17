@@ -50,9 +50,11 @@ const getAllProducts = async (lang: string, page: number) => {
 
 			return notFound()
 		} else {
-			console.error(error)
-
-			return notFound()
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
 		}
 	}
 }
@@ -134,9 +136,11 @@ const getProductsByCategory = async (lang: string, catUid: string, page: number)
 
 			return notFound()
 		} else {
-			console.error(error)
-
-			return notFound()
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
 		}
 	}
 }
@@ -162,9 +166,11 @@ const getProductsBySubCategory = async (lang: string, subCatUid: number, page: n
 
 			return notFound()
 		} else {
-			console.error(error)
-
-			return notFound()
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
 		}
 	}
 }
