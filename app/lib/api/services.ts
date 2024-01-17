@@ -78,9 +78,11 @@ const getProductByUid = async (lang: string, uid: number) => {
 
 			return notFound()
 		} else {
-			console.error(error)
-
-			return notFound()
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
 		}
 	}
 }
@@ -124,11 +126,14 @@ const getProductsByCategory = async (lang: string, catUid: string, page: number)
 		} = await instance.get(
 			`/api/categories?locale=${lang}&populate=deep&filters[uid][$in][0]=${catUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
-		if (data.length === 0) {
+
+		const products = data[0].attributes.products.data
+
+		if (products.length === 0) {
 			return notFound()
 		}
 
-		return data
+		return products
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
@@ -154,11 +159,14 @@ const getProductsBySubCategory = async (lang: string, subCatUid: number, page: n
 		} = await instance.get(
 			`api/sub-categories?locale=${lang}&populate[0]=products&filters[uid][$in][0]=${subCatUid}&populate[1]=products.img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
-		if (data.length === 0) {
+
+		const products = data[0].attributes.products.data
+
+		if (products.length === 0) {
 			return notFound()
 		}
 
-		return data
+		return products
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)

@@ -78,5 +78,9 @@
 			"descriptionUnder1": "Sell together with us. Poli-Maks offers favorable conditions for wholesalers. For you this means – profitable sales of products from the manufacturer. Poli-Maks would like to thank its regular customers for their trust.",
 			"descriptionUnder2": "We strive for the highest satisfaction of our customers with the quality of our products and their development into our regular customers after a first purchase."
 		}
+	},
+	"catalog": {
+		"title": "products",
+		"all_category": "All"
 	}
 }
