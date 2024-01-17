@@ -18,6 +18,7 @@ const FooterContacts = ({ contacts }: { contacts: IContacts }) => {
 			flexDir={'column'}
 			gap={'30px'}
 			style={textStyle}
+			maxW={'383px'}
 			borderTop={{ base: 'solid 1px #E0E0E0', lg: 'none' }}
 			pt={{ base: '30px', lg: '0' }}
 		>
