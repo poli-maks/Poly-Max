@@ -14,7 +14,7 @@ import './SwiperProducts.css'
 
 export const ProductSlider = ({ productImages }: { productImages: ImageAttributes[] }) => {
 	return (
-		<>
+		<Box mb="41px" display={{ base: 'block', lg: 'none' }}>
 			<Swiper
 				direction="horizontal"
 				slidesPerView={1}
@@ -28,8 +28,9 @@ export const ProductSlider = ({ productImages }: { productImages: ImageAttribute
 						<Box
 							position="relative"
 							z-index="2"
-							width="340px"
-							height="255px"
+							maxW="768px"
+							minW="340px"
+							h={{ base: '255px', md: '480px', sm: '380px' }}
 							bgRepeat={'no-repeat'}
 							bgPos={'center'}
 							bgSize={'cover'}
@@ -45,7 +46,7 @@ export const ProductSlider = ({ productImages }: { productImages: ImageAttribute
 								style={{
 									display: 'block',
 									height: '100%',
-									maxWidth: '100%',
+									width: '100%',
 									objectFit: 'cover',
 								}}
 							/>
@@ -53,6 +54,6 @@ export const ProductSlider = ({ productImages }: { productImages: ImageAttribute
 					</SwiperSlide>
 				))}
 			</Swiper>
-		</>
+		</Box>
 	)
 }

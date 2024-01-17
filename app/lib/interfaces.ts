@@ -203,3 +203,6 @@ interface ImageFormat {
 		resource_type: string
 	}
 }
+
+export type TitleSize = ['xl', 'lg', 'md', 'sm']
+export type TitleLevel = ['h1', 'h2', 'h3', 'h4']
