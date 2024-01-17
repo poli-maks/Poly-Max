@@ -1,6 +1,6 @@
 'use client'
 
-import { Grid, Text, GridItem, Box, Heading } from '@chakra-ui/react'
+import { Grid, Text, GridItem, Box, Heading, Flex } from '@chakra-ui/react'
 
 import SectionWrapper from '../../sectionWrapper/SectionWrapper'
 import BenefitIcon1 from '../../svg/BenefitIcon1'
@@ -9,6 +9,7 @@ import BenefitIcon3 from '../../svg/BenefitIcon3'
 import BenefitIcon4 from '../../svg/BenefitIcon4'
 import BenefitIcon5 from '../../svg/BenefitIcon5'
 import BenefitIcon6 from '../../svg/BenefitIcon6'
+import { theme } from '../../theme'
 
 const icons = [BenefitIcon1, BenefitIcon2, BenefitIcon3, BenefitIcon4, BenefitIcon5, BenefitIcon6]
 
@@ -28,42 +29,38 @@ interface BenefitsProps {
 const Benefits: React.FC<BenefitsProps> = ({ dictionary }) => {
 	return (
 		<SectionWrapper>
-			<Box
-				display="flex"
-				flexDirection={{ base: 'column', lg: 'row' }}
-				justifyContent={'space-between'}
-			>
+			<Flex flexDirection={{ base: 'column', lg: 'row' }}>
 				<Heading
 					as={'h3'}
 					fontSize="20px"
-					color="#212121"
+					color={theme.colors.hText}
 					marginBottom={{ base: '30px', lg: '0' }}
-					style={{ lineHeight: '20px', fontWeight: '600', maxWidth: '189px' }}
+					flex={{ lg: 2 }}
+					style={{ lineHeight: '20px', fontWeight: '600' }}
 				>
 					{dictionary.homePage.benefits.title}
 				</Heading>
-				<Box>
-					<Text
-						fontSize={{ base: '24px', sm: '40px' }}
-						lineHeight={{ base: '24px', sm: '40px' }}
-						color="#212121"
+				<Box flex={{ lg: 2.15 }}>
+					<Heading
+						as={'h2'}
+						fontSize={{ base: '24px', lg: '40px' }}
+						lineHeight={{ base: '24px', lg: '40px' }}
+						color={theme.colors.hText}
 						fontWeight="500"
-						w={{ base: '100%', md: '640px' }}
-						marginBottom={{ base: '20px', sm: '40px' }}
+						marginBottom={{ base: '20px', lg: '40px' }}
 					>
 						{dictionary.homePage.benefits.descriptionUp}
-					</Text>
+					</Heading>
 					<Text
-						fontSize={{ base: '12px', sm: '18px' }}
-						lineHeight={{ base: '16.8px', sm: '25.2px' }}
-						color="#616161"
-						w={{ base: '100%', md: '550px' }}
-						marginBottom={{ base: '20px', sm: '60px' }}
+						fontSize={{ base: '12px', lg: '18px' }}
+						lineHeight={{ base: '16.8px', lg: '25.2px' }}
+						color={theme.colors.bodyText}
+						marginBottom={{ base: '20px', lg: '60px' }}
 					>
 						{dictionary.homePage.benefits.descriptionUnder}
 					</Text>
 				</Box>
-			</Box>
+			</Flex>
 			<Grid
 				as={'ul'}
 				templateColumns={{ base: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }}
@@ -77,8 +74,8 @@ const Benefits: React.FC<BenefitsProps> = ({ dictionary }) => {
 								{icons[idx]()}
 							</Box>
 							<Text
-								marginLeft={{ base: '10px', md: '20px' }}
-								fontSize={{ base: '12px', sm: '16px', md: '18px' }}
+								marginLeft={{ base: '10px', lg: '20px' }}
+								fontSize={{ base: '12px', lg: '18px' }}
 							>
 								{item}
 							</Text>

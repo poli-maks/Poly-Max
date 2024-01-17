@@ -1,8 +1,9 @@
-import { Box, Heading, Text } from '@chakra-ui/react'
+import { Box, Heading, Text, Flex } from '@chakra-ui/react'
 import Image from 'next/image'
 
 import forBuisnessImg from '../../../../public/img/forBuisnessImg.png'
 import SectionWrapper from '../../sectionWrapper/SectionWrapper'
+import { theme } from '../../theme'
 
 interface ForBuisnessProps {
 	dictionary: {
@@ -20,51 +21,45 @@ interface ForBuisnessProps {
 const ForBuisness: React.FC<ForBuisnessProps> = ({ dictionary }) => {
 	return (
 		<SectionWrapper>
-			<Box
-				display="flex"
-				flexDirection={{ base: 'column', lg: 'row' }}
-				justifyContent={'space-between'}
-			>
+			<Flex flexDirection={{ base: 'column', lg: 'row' }} justifyContent={'space-between'}>
 				<Heading
 					as={'h3'}
 					fontSize="20px"
-					color="#212121"
+					color={theme.colors.hText}
 					marginBottom={{ base: '30px', lg: '0' }}
-					style={{ lineHeight: '20px', fontWeight: '600', maxWidth: '189px' }}
+					flex={{ lg: 2 }}
+					style={{ lineHeight: '20px', fontWeight: '600' }}
 				>
 					{dictionary.homePage.forBuisness.title}
 				</Heading>
-				<Box>
-					<Text
-						fontSize={{ base: '24px', sm: '40px' }}
-						lineHeight={{ base: '24px', sm: '40px' }}
-						color="#212121"
+				<Box flex={{ lg: 2.15 }}>
+					<Heading
+						fontSize={{ base: '24px', lg: '40px' }}
+						lineHeight={{ base: '24px', lg: '40px' }}
+						color={theme.colors.hText}
 						fontWeight="500"
-						w={{ base: '100%', md: '640px' }}
-						marginBottom={{ base: '20px', sm: '40px' }}
+						marginBottom={{ base: '20px', lg: '40px' }}
 					>
 						{dictionary.homePage.forBuisness.descriptionUp}
-					</Text>
+					</Heading>
 					<Text
-						fontSize={{ base: '12px', sm: '18px' }}
-						lineHeight={{ base: '16.8px', sm: '25.2px' }}
-						color="#616161"
-						w={{ base: '100%', md: '550px' }}
-						marginBottom={{ base: '25px', sm: '30px' }}
+						fontSize={{ base: '12px', lg: '18px' }}
+						lineHeight={{ base: '16.8px', lg: '25.2px' }}
+						color={theme.colors.bodyText}
+						marginBottom={{ base: '20px', lg: '30px' }}
 					>
 						{dictionary.homePage.forBuisness.descriptionUnder1}
 					</Text>
 					<Text
-						fontSize={{ base: '12px', sm: '18px' }}
-						lineHeight={{ base: '16.8px', sm: '25.2px' }}
-						color="#616161"
-						w={{ base: '100%', md: '550px' }}
-						marginBottom={{ base: '20px', sm: '60px' }}
+						fontSize={{ base: '12px', lg: '18px' }}
+						lineHeight={{ base: '16.8px', lg: '25.2px' }}
+						color={theme.colors.bodyText}
+						marginBottom={{ base: '20px', lg: '60px' }}
 					>
 						{dictionary.homePage.forBuisness.descriptionUnder2}
 					</Text>
 				</Box>
-			</Box>
+			</Flex>
 			<Image src={forBuisnessImg} alt={`For buisness section image`} />
 		</SectionWrapper>
 	)
