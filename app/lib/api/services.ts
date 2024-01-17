@@ -104,9 +104,11 @@ const getProductByTitle = async (lang: string, query: string, page: number) => {
 
 			return notFound()
 		} else {
-			console.error(error)
-
-			return notFound()
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
 		}
 	}
 }

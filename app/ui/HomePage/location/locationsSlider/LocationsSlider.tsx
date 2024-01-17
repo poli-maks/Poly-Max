@@ -47,6 +47,7 @@ const LocationsSlider = ({ locations }: { locations: ILocation[] }) => {
 										src={img || '/img/productPlaceholder.jpg'}
 										alt={'location photo'}
 										fill
+										sizes="(max-width: 768px) 100vw, (max-width: 1300px) 50vw, 33vw"
 										style={{
 											objectFit: 'cover',
 										}}
