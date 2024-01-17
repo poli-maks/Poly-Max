@@ -219,3 +219,12 @@ export interface IContacts {
 	publishedAt: string
 	locale: string
 }
+
+export enum SEARCH_PARAMS {
+	CATEGORY = 'category',
+	SUB_CATEGORY = 'sub',
+	SEARCH = 'search',
+	QUERY = 'query',
+	PAGE = 'page',
+	TOTAL = 'total',
+}
