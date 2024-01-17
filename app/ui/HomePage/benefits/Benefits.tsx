@@ -9,7 +9,7 @@ import Arrow from '../../svg/Arrow'
 const Benefits = () => {
 	return (
 		<SectionWrapper>
-			BENEFITS_SECTION
+			BENEFITS
 			<Flex flexDir={'column'} gap={2}>
 				<Button variant={'accent'}>Accent</Button>
 				<Button variant={'accentAlt'}>Accent alt</Button>
