@@ -12,14 +12,14 @@ const HomePage: React.FC<IParams> = async ({ params: { lang } }) => {
 	return (
 		<>
 			<Hero />
-			<Manufacture />
-			<Benefits />
+			<Manufacture dictionary={dictionary} lang={lang} />
+			<Benefits dictionary={dictionary} />
 			<Location
 				locations={dictionary.homePage.locations}
 				title={dictionary.homePage.title}
 				subTitle={dictionary.homePage.subTitle}
 			/>
-			<ForBuisness />
+			<ForBuisness dictionary={dictionary} />
 		</>
 	)
 }

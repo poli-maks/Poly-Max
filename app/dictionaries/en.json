@@ -46,6 +46,33 @@
 				"text": "Overall, Dnipro is a unique blend of industry, culture, and nature. Rich historical heritage, the production of high-quality building fixtures, and an appealing urban landscape make it an interesting place to visit, work, and live.",
 				"img": "/img/location5.jpg"
 			}
-		]
+		],
+		"manufacture": {
+			"title": "Modern machines and systems",
+			"descriptionUp": "Our steel products are manufactured using modern machines and systems using the forging process.",
+			"descriptionUnder": "Poli-Maks is a young company founded in 2005. Despite its youth, today it has earned the reputation of a reliable partner that always delivers the high quality product on the agreed date.",
+			"button": "Learn more"
+		},
+
+		"benefits": {
+			"title": "Why Poli-Maks?",
+			"descriptionUp": "The company grows with daily improvements in production, logistics and services.",
+			"descriptionUnder": "The company has a thorough knowledge of legislation relating to the production and delivery of its products, thereby avoiding amateurish mistakes at every stage. Company activities are based on four fundamental principles:",
+			"benefitsList": [
+				"Working with Poli-Maks means pleasant service, easy ordering, good prices.",
+				"Professionalism and responsibility in all aspects of the company's activities.",
+				"Well-running logistics in key areas, fast and safe deliveries.",
+				"Stability and accuracy in the realization of activities, goals and tasks of the company of any kind.",
+				"Respecting customers, partners, employees and government authorities.",
+				"Our steel product is packed on the pallets, can be marked as customer's request."
+			]
+		},
+
+		"forBuisness": {
+			"title": "For business",
+			"descriptionUp": "The scope and quality of our products ensure high demand and sales levels throughout Europe.",
+			"descriptionUnder1": "Sell together with us. Poli-Maks offers favorable conditions for wholesalers. For you this means – profitable sales of products from the manufacturer. Poli-Maks would like to thank its regular customers for their trust.",
+			"descriptionUnder2": "We strive for the highest satisfaction of our customers with the quality of our products and their development into our regular customers after a first purchase."
+		}
 	}
 }
