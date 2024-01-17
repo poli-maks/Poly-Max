@@ -19,6 +19,9 @@
 			}
 		]
 	},
+	"button": {
+		"loadMore": "Zeige alle"
+	},
 	"homePage": {
 		"title": "Unser Standort",
 		"subTitle": "Die Lage der Stadt an den Ufern des Dnipro verleiht ihm einen besonderen Charme und macht ihn zu einem wichtigen Verkehrsknotenpunkt im Land.",

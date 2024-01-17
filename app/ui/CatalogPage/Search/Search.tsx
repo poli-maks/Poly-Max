@@ -9,6 +9,22 @@ import { useDebouncedCallback } from 'use-debounce'
 import SectionWrapper from '../../sectionWrapper/SectionWrapper'
 import CloseIcon from '../../svg/CloseIcon'
 
+const searchAnimation = {
+	hidden: {
+		y: -20,
+		opacity: 0,
+	},
+	visible: {
+		y: 0,
+		opacity: 1,
+		transition: {
+			delay: 0.2,
+			ease: 'easeOut',
+			duration: 0.5,
+		},
+	},
+}
+
 const Search = ({
 	placeholder,
 	isQuery,
@@ -45,44 +61,53 @@ const Search = ({
 	}
 
 	useEffect(() => {
-		const closeSearch = () => {
-			ref?.current?.reset()
-			setIsSearchOpen(false)
-			const params = new URLSearchParams(searchParams)
-			params.delete('query')
-			params.delete('search')
-			replace(`${pathname}?${params}`)
+		if (isSearch) {
+			setIsSearchOpen(true)
 		}
+	}, [isSearch])
 
-		const handleClickOutside = (event: MouseEvent) => {
-			if (ref.current && !ref.current.contains(event.target as Node)) {
-				closeSearch()
-			}
-		}
+	// const closeSearch = () => {
+	// 	ref?.current?.reset()
+	// 	setIsSearchOpen(false)
+	// 	const params = new URLSearchParams(searchParams)
+	// 	params.delete('query')
+	// 	params.delete('search')
+	// 	replace(`${pathname}?${params}`)
+	// }
 
-		document.addEventListener('click', handleClickOutside)
+	// useEffect(() => {
+	// 	const closeSearch = () => {
+	// 		ref?.current?.reset()
+	// 		setIsSearchOpen(false)
+	// 		const params = new URLSearchParams(searchParams)
+	// 		params.delete('query')
+	// 		params.delete('search')
+	// 		replace(`${pathname}?${params}`)
+	// 	}
 
-		return () => {
-			document.removeEventListener('click', handleClickOutside)
-		}
-	}, [pathname, replace, searchParams])
+	// 	const handleClickOutside = (event: MouseEvent) => {
+	// 		if (ref.current && !ref.current.contains(event.target as Node)) {
+	// 			closeSearch()
+	// 		}
+	// 	}
+
+	// 	document.addEventListener('click', handleClickOutside)
+
+	// 	return () => {
+	// 		document.removeEventListener('click', handleClickOutside)
+	// 	}
+	// }, [pathname, replace, searchParams])
 
 	if (isSearchOpen)
 		return (
 			<AnimatePresence>
 				<Box
 					as={motion.div}
-					initial={{
-						y: -20,
-						opacity: 0,
-					}}
-					animate={{ opacity: 1, y: 0 }}
-					exit={{
-						y: -20,
-						opacity: 0,
-					}}
+					initial={'hidden'}
+					variants={searchAnimation}
+					whileInView="visible"
+					viewport={{ amount: 0.3, once: true }}
 					overflow={'hidden'}
-					transition={'all easeOut 3000ms'}
 					p={0}
 					pos={'absolute'}
 					top={'110px'}
