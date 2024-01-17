@@ -23,7 +23,7 @@ const ImagesSection = ({ productImages }: { productImages: ImageAttributes[] }) 
 								paddingBottom="25px"
 							>
 								<Image
-									src={item.attributes.url || '/img/productPlaceholder.jpg'}
+									src={item.attributes?.url || '/img/productPlaceholder.jpg'}
 									alt=""
 									layout="fill"
 									fill
