@@ -4,13 +4,13 @@ import { Locale } from '@/i18n.config'
 import { Box, Flex, IconButton, useDisclosure } from '@chakra-ui/react'
 import Link from 'next/link'
 
-import { LocaleSwitcher } from '../localeSwitcher/LocaleSwitcher'
-import { NavBar, NavItem } from '../navBar/NavBar'
-import BrandLogo from '../svg/BrandLogo'
-import BurgerIcon from '../svg/BurgerIcon'
-import SearchIcon from '../svg/SearchIcon'
-import { theme } from '../theme'
-import MobileMenu from './MobileMenu'
+import { LocaleSwitcher } from '../../localeSwitcher/LocaleSwitcher'
+import { NavBar, NavItem } from '../../navBar/NavBar'
+import BrandLogo from '../../svg/BrandLogo'
+import BurgerIcon from '../../svg/BurgerIcon'
+import SearchIcon from '../../svg/SearchIcon'
+import { theme } from '../../theme'
+import MobileMenu from '../mobileMenu/MobileMenu'
 
 const HeaderWrapper = ({ lang, navItems }: { lang: Locale; navItems: NavItem[] }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure()

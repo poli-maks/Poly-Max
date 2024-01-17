@@ -18,13 +18,14 @@ export interface NavBarProps {
 	navItems: NavItem[]
 	lang: Locale
 	displayLogo: ResponsiveValue<'flex' | 'none'>
-	flexDir: ResponsiveValue<'row' | 'column'>
+	flexDir?: ResponsiveValue<'row' | 'column'>
 	color: string
 	fontSize: string
 	fontWeight: string
 	gap: string
 	onClose?: () => void
-	display?: { base: string; md: string }
+	display?: { base: string; md: string } | string
+	width?: { base?: string; lg?: string } | string
 }
 
 export const NavBar: React.FC<NavBarProps> = ({
@@ -37,20 +38,20 @@ export const NavBar: React.FC<NavBarProps> = ({
 	gap,
 	onClose,
 	display,
+	width,
 }) => {
 	const pathname = usePathname()
 
 	return (
 		<Box display={display} as="nav" gap={10}>
-			<Box as={'ul'} display={'flex'} flexDirection={flexDir} gap={gap}>
+			<Box as={'ul'} display={'flex'} flexDirection={flexDir} gap={gap} flexWrap={'wrap'}>
 				{navItems.map((item, idx) => (
-					<Box as={'li'} key={idx} onClick={onClose}>
+					<Box as={'li'} key={idx} onClick={onClose} width={width}>
 						<Link
 							position={'relative'}
 							href={`/${lang}${item.path}`}
 							color={color}
-							display={'flex'}
-							alignItems={'center'}
+							display={'inline'}
 							textDecor={'none'}
 							css={{
 								'&::after': {
@@ -77,11 +78,6 @@ export const NavBar: React.FC<NavBarProps> = ({
 									? 'active'
 									: ''
 							}
-							// textDecoration={
-
-							// 		? 'underline'
-							// 		: 'none'
-							// }
 							fontSize={fontSize}
 							fontWeight={fontWeight}
 							_hover={{ textDecoration: 'none' }}

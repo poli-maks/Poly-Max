@@ -1,3 +1,5 @@
+'use client'
+
 import { i18n } from '@/i18n.config'
 import { Link, List, ListItem, useColorMode } from '@chakra-ui/react'
 import { usePathname } from 'next/navigation'
