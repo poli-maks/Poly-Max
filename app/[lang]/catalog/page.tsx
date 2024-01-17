@@ -27,7 +27,7 @@ const CatalogPage: React.FC<
 				isSearch={!!search}
 			/>
 			<Catalog lang={lang} products={products} />
-			<LoadMore total={total} hasProducts={!!products}>
+			<LoadMore total={total} hasProducts={!!Array.isArray(products)}>
 				{dictionary.button.loadMore}
 			</LoadMore>
 		</>
