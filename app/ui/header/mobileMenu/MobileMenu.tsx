@@ -5,8 +5,8 @@ import closeIcon from '@/public/img/closeIcon.svg'
 import { Button, Drawer, DrawerBody, DrawerContent, DrawerOverlay, Spacer } from '@chakra-ui/react'
 import Image from 'next/image'
 
-import { NavBar, NavItem } from '../navBar/NavBar'
-import { theme } from '../theme'
+import { NavBar, NavItem } from '../../navBar/NavBar'
+import { theme } from '../../theme'
 
 interface IMobileMenu {
 	onClose: () => void
@@ -16,6 +16,7 @@ interface IMobileMenu {
 }
 
 const MobileMenu = ({ onClose, isOpen, lang, navItems }: IMobileMenu) => {
+	//заменить именйдж на компонент(крестик на закрытие)
 	return (
 		<Drawer placement={'top'} onClose={onClose} isOpen={isOpen} isFullHeight blockScrollOnMount>
 			<DrawerOverlay />
@@ -50,6 +51,7 @@ const MobileMenu = ({ onClose, isOpen, lang, navItems }: IMobileMenu) => {
 						fontSize={'40px'}
 						fontWeight={'500'}
 						gap={'30px'}
+						onClose={() => onClose()}
 					/>
 				</DrawerBody>
 			</DrawerContent>

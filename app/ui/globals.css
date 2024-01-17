@@ -28,6 +28,12 @@ html {
 body {
 	margin: 0;
 	font-family: 'Manrope', sans-serif;
+	background-color: #fafafa;
+}
+
+::selection {
+	background: #212121;
+	color: #fafafa;
 }
 
 hr {

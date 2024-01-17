@@ -2,7 +2,7 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { Locale } from '@/i18n.config'
 
 import SectionWrapper from '../sectionWrapper/SectionWrapper'
-import HeaderWrapper from './HeaderWrapper'
+import HeaderWrapper from './headerWrapper/HeaderWrapper'
 
 const Header = async ({ lang }: { lang: Locale }) => {
 	const {

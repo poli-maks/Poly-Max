@@ -1,7 +1,7 @@
 'use client'
 
 import { IProductProps, TitleLevel, TitleSize } from '@/app/lib/interfaces'
-import { Box, Button, Flex, Heading, List, ListItem, Text, UnorderedList } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react'
 import { nanoid } from 'nanoid'
 import React from 'react'
 
@@ -31,14 +31,13 @@ export const ProductContent = ({ product }: { product: IProductProps[] }) => {
 				<Button variant={'accentAlt'} mb="20px">
 					Eine Bestellung aufgeben
 				</Button>
-				<List display="flex" alignItems="center" gap="10px">
-					<ListItem>
-						<BoxIcon />
-					</ListItem>
-					<ListItem>
+				<Flex display="flex" alignItems="center" gap="10px">
+					<BoxIcon />
+
+					<Text maxW={{ lg: '371px' }}>
 						Um für unsere Kunden bequemer zu machen, liefern wir zu DDP-Lieferbedingungen.
-					</ListItem>
-				</List>
+					</Text>
+				</Flex>
 			</Box>
 			<Box>
 				<ProductTable tableRows={tableRows} />

@@ -2,7 +2,7 @@
 
 import { IProduct } from '@/app/lib/interfaces'
 import { Box, Heading, useMediaQuery } from '@chakra-ui/react'
-import Image from 'next/image'
+// import Image from 'next/image'
 import Link from 'next/link'
 
 const ProductItem = ({ product: { attributes }, lang }: { product: IProduct; lang: string }) => {
@@ -43,13 +43,16 @@ const ProductItem = ({ product: { attributes }, lang }: { product: IProduct; lan
 							transition: 'all 500ms ease-in-out',
 						}}
 					>
-						<Image
-							src={attributes.img.data[0].attributes.url || '/productPlaceholder.jpg'}
+						{/* <Image
+							src={
+								(attributes && attributes.img?.data[0].attributes.url) ||
+								'/img/productPlaceholder.jpg'
+							}
 							alt={attributes.title + '' + attributes.descShort || 'product image'}
 							fill
 							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 							style={{ objectFit: 'cover' }}
-						/>
+						/> */}
 					</Box>
 					<Box
 						borderRadius={'10px'}

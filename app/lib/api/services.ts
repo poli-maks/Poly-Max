@@ -50,9 +50,11 @@ const getAllProducts = async (lang: string, page: number) => {
 
 			return notFound()
 		} else {
-			console.error(error)
-
-			return notFound()
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
 		}
 	}
 }
@@ -104,9 +106,11 @@ const getProductByTitle = async (lang: string, query: string, page: number) => {
 
 			return notFound()
 		} else {
-			console.error(error)
-
-			return notFound()
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
 		}
 	}
 }
@@ -132,9 +136,11 @@ const getProductsByCategory = async (lang: string, catUid: string, page: number)
 
 			return notFound()
 		} else {
-			console.error(error)
-
-			return notFound()
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
 		}
 	}
 }
@@ -160,11 +166,32 @@ const getProductsBySubCategory = async (lang: string, subCatUid: number, page: n
 
 			return notFound()
 		} else {
-			console.error(error)
-
-			return notFound()
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
 		}
 	}
 }
 
 export const fetchProductsBySubCategory = cache(getProductsBySubCategory)
+
+export const getContacts = async (lang: string) => {
+	try {
+		const {
+			data: { data },
+		} = await instance.get(`/api/contacts?locale=${lang}`)
+		if (data.length === 0) return notFound()
+
+		const [{ attributes }] = data
+
+		return attributes
+	} catch (error) {
+		if (axios.isAxiosError(error) === undefined) {
+			return notFound()
+		}
+	}
+}
+
+export const fetchContacts = cache(getContacts)

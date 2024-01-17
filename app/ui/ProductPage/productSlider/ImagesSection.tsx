@@ -23,12 +23,12 @@ const ImagesSection = ({ productImages }: { productImages: ImageAttributes[] }) 
 								paddingBottom="25px"
 							>
 								<Image
-									src={item.attributes.url}
+									src={item.attributes.url || '/img/productPlaceholder.jpg'}
 									alt=""
 									layout="fill"
 									fill
 									placeholder="blur"
-									blurDataURL="/blur-product.jpg"
+									blurDataURL="/img/productPlaceholder.jpg"
 									sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 									style={{
 										display: 'block',

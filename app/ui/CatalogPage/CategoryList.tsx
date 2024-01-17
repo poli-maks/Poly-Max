@@ -1,71 +1,96 @@
 'use client'
 
-import { ICategory } from '@/app/lib/interfaces'
-import { Box, Button, Flex, Select } from '@chakra-ui/react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import React, { useCallback } from 'react'
+import useSearchString from '@/app/lib/hooks/useSearchString'
+import { ICategory, SEARCH_PARAMS } from '@/app/lib/interfaces'
+import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import React, { useState } from 'react'
+
+import MenuArrowClosed from '../svg/MenuArrowClosed'
+import MenuArrowOpen from '../svg/MenuArrowOpen'
 
 interface ICategoryList {
 	categories: ICategory[]
 }
 
 const CategoryList = ({ categories }: ICategoryList) => {
-	const router = useRouter()
-	const pathname = usePathname()
-	const searchParams = useSearchParams()
-
-	const createQueryString = useCallback(
-		(name: string, value: number) => {
-			const params = new URLSearchParams(searchParams.toString())
-			params.set(name, value.toString())
-
-			return params.toString()
-		},
-		[searchParams]
-	)
-
+	const { searchParams, createString } = useSearchString()
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const choosedCategory = searchParams.get('category')
 
 	return (
 		<>
-			<Flex as={'ul'} pos={'relative'} gap={'45px'}>
+			<Flex as={'ul'} gap={'45px'} borderBottom={'1px #E0E0E0 solid'} mb={'80px'}>
 				{categories.map(({ attributes: category }) => {
-					if (category.sub_categories.data.length !== 0) {
-						return (
-							<Select
-								key={category.uid}
-								placeholder={category.title}
-								border={'none'}
-								maxW={'max-content'}
-							>
-								{category.sub_categories.data.map(({ attributes: sub }) => (
-									<option
-										value={sub.title}
-										style={{ fontFamily: '"Manrope", sans-serif' }}
-										key={sub.uid}
-									>
-										{sub.title}
-									</option>
-								))}
-							</Select>
-						)
-					}
+					const {
+						sub_categories: { data: subs },
+					} = category
 
 					return (
-						<Box as={'li'} key={category.uid}>
-							<Button
-								onClick={() =>
-									router.push(pathname + '?' + createQueryString('category', category.uid))
-								}
-								variant={'ghost'}
-							>
-								{category.title}
-							</Button>
-							{choosedCategory && choosedCategory === category.uid.toString() && <div>Choosed</div>}
+						<Box as={'li'} position={'relative'} pb={'20px'} key={category.uid}>
+							{subs.length !== 0 ? (
+								<Menu
+									key={category.uid}
+									onOpen={() => setIsMenuOpen(true)}
+									onClose={() => setIsMenuOpen(false)}
+								>
+									<MenuButton
+										position={'relative'}
+										as={Button}
+										variant={'ghost'}
+										alignItems={'center'}
+										rightIcon={!isMenuOpen ? <MenuArrowClosed /> : <MenuArrowOpen />}
+									>
+										{category.title}
+									</MenuButton>
+									{choosedCategory && choosedCategory === category.uid.toString() && (
+										<Box
+											position={'absolute'}
+											top={'100%'}
+											left={0}
+											w={'100%'}
+											h={'3px'}
+											bgColor={'#000'}
+										></Box>
+									)}
+									<MenuList>
+										{subs.map(({ attributes: sub }) => (
+											<MenuItem
+												onClick={() => {
+													createString({
+														[SEARCH_PARAMS.CATEGORY]: category.uid,
+														[SEARCH_PARAMS.SUB_CATEGORY]: sub.uid,
+													})
+												}}
+												key={sub.uid}
+											>
+												{sub.title}
+											</MenuItem>
+										))}
+									</MenuList>
+								</Menu>
+							) : (
+								<>
+									<Button
+										onClick={() => createString({ [SEARCH_PARAMS.CATEGORY]: category.uid })}
+										variant={'ghost'}
+									>
+										{category.title}
+									</Button>
+									{choosedCategory && choosedCategory === category.uid.toString() && (
+										<Box
+											position={'absolute'}
+											top={'100%'}
+											left={0}
+											w={'100%'}
+											h={'3px'}
+											bgColor={'#000'}
+										></Box>
+									)}
+								</>
+							)}
 						</Box>
 					)
 				})}
-				<Box pos={'absolute'} top={'120%'} left={0} bgColor={'#E0E0E0'} w={'100%'} h={'1px'}></Box>
 			</Flex>
 		</>
 	)

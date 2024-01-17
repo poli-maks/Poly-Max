@@ -1,3 +1,5 @@
+'use client'
+
 import { i18n } from '@/i18n.config'
 import { Link, List, ListItem, useColorMode } from '@chakra-ui/react'
 import { usePathname } from 'next/navigation'
@@ -16,7 +18,7 @@ export const LocaleSwitcher = () => {
 	}
 
 	const linksStyle = (locale: string) => {
-		const isActive = pathName === `/${locale}`
+		const isActive = pathName.includes(locale)
 		if (isActive) {
 			return {
 				color: colorMode === 'light' ? '#0D1010' : '#FAFAFA',

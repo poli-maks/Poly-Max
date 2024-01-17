@@ -7,9 +7,15 @@ interface ISubmitButton {
 	children: React.ReactNode
 	variant: 'accent' | 'arrow' | 'accentAlt'
 	isSubmitting?: boolean
+	onClick?: () => void
 }
 
-const SubmitButton: React.FC<ISubmitButton> = ({ children, isSubmitting = false, variant }) => {
+const SubmitButton: React.FC<ISubmitButton> = ({
+	children,
+	isSubmitting = false,
+	variant,
+	onClick,
+}) => {
 	const { pending } = useFormStatus()
 
 	return (
@@ -19,6 +25,7 @@ const SubmitButton: React.FC<ISubmitButton> = ({ children, isSubmitting = false,
 			type="submit"
 			isLoading={pending || isSubmitting}
 			isDisabled={pending || isSubmitting}
+			onClick={onClick}
 		>
 			{children}
 		</Button>
