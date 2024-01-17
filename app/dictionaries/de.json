@@ -46,6 +46,31 @@
 				"text": "Insgesamt ist Dnepr ein einzigartiges Zusammenspiel aus Industrie, Kultur und Natur. Reichhaltiges historisches Erbe, die Produktion qualitativ hochwertiger Bauarmaturen und ein ansprechender städtischer Landschaftsgarten machen es zu einem interessanten Ort zum Besuchen, Arbeiten und Leben.",
 				"img": "/img/location5.jpg"
 			}
-		]
+		],
+		"manufacture": {
+			"title": "Modern Maschinen und Anlagen",
+			"descriptionUp": "Unsere Stahlprodukte werden auf modernen Maschinen und Anlagen im Schmiedeverfahren hergestellt.",
+			"descriptionUnder": "Poli-Maks ist ein junges Unternehmen, das im Jahr 2005 gegründet wurde. Trotz seiner Jugend hat es heutzutage den Ruf eines zuverlässigen Partners erworben, der stets das qualitativ hochwertige Produkt zum vereinbarten Termin liefert.",
+			"button": "Erfahren Sie mehr"
+		},
+		"benefits": {
+			"title": "Warum Poli-Maks",
+			"descriptionUp": "Die Firma wächst bei täglichen Verbesserungen in der Produktion, Logistik und Services.",
+			"descriptionUnder": "Das Unternehmen kennt sich gründlich in Gesetzgebung hinsichtlich auf Produktion und Lieferung seiner Produkte aus und vermeidet dadurch dilettantische Fehler in jeder Phase. Unternehmensakivitäten beruhen sich auf vier grundlegenden Prinzipien:",
+			"benefitsList": [
+				"Die Zusammenarbeit mit Poli-Maks bedeutet angenehmes Service, einfaches Bestellen, gute Preise.",
+				"Professionalität und Verantwortung in allen Tätigkeitsaspekten des Unternehmens.",
+				"Gut laufende Logistik in Schlüsselbereichen, schnelle und sichere Lieferungen.",
+				"Stabilität und Genauigkeit bei Verwirklichung von Tätigkeiten, Ziele und Aufgaben des Unternehmens jeglicher Art.",
+				"Respektierung von Kunden, Partnern, Mitarbeitern und staatlichen Behörden.",
+				"Unser Stahlprodukt wird auf den Paletten verpackt, kann auf Kundenwunsch markiert werden."
+			]
+		},
+		"forBuisness": {
+			"title": "Für Geschäfte",
+			"descriptionUp": "Anwendungsbereich und Qualität unserer Produkte gewährleisten hohe Nachfrage und jeweiliges Verkaufsniveau im ganzen Europa.",
+			"descriptionUnder1": "Verkaufen gemeinsam mit uns. Poli-Maks bietet günstige Konditionen für Großhändler. Für Sie bedeutet das – profitabler Verkauf Produkte vom Hersteller. Poli-Maks bedankt sich bei den Stammkunden für ihr Vertrauen.",
+			"descriptionUnder2": "Wir bemühen uns um höchste Zufriedenheit unserer Kunden mit Qualität unserer Produkte und ihre Entwicklung zu unseren Stammkunden nach einem ersten Einkauf."
+		}
 	}
 }
