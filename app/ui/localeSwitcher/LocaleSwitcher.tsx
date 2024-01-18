@@ -2,16 +2,19 @@
 
 import { i18n } from '@/i18n.config'
 import { Link, List, ListItem, useColorMode } from '@chakra-ui/react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import React from 'react'
 
 export const LocaleSwitcher = () => {
 	const pathName = usePathname()
 	const { colorMode } = useColorMode()
 
+	const searchParams = useSearchParams()
+
 	const redirectedPathName = (locale: string) => {
 		if (!pathName) return '/'
 		const segments = pathName.split('/')
+
 		segments[1] = locale
 
 		return segments.join('/')
@@ -41,7 +44,7 @@ export const LocaleSwitcher = () => {
 			{i18n.locales.map((locale) => (
 				<ListItem position="relative" key={locale}>
 					<Link
-						href={redirectedPathName(locale)}
+						href={`${redirectedPathName(locale)}?${searchParams}`}
 						{...linksStyle(locale)}
 						fontSize={'14px'}
 						fontWeight={'400'}
