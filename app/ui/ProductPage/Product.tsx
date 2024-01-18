@@ -1,6 +1,6 @@
 'use client'
 
-import { IProductProps } from '@/app/lib/interfaces'
+import { IProductDictionary, IProductProps } from '@/app/lib/interfaces'
 import { Flex } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 
@@ -14,14 +14,19 @@ const ImageSection = dynamic(
 	{ ssr: false }
 )
 
-const Product = ({ product }: { product: IProductProps[] }) => {
+interface IProps {
+	product: IProductProps[]
+	dictionary: IProductDictionary
+}
+
+const Product = ({ product, dictionary }: IProps) => {
 	const productImages = product[0].attributes.img.data
 
 	return (
 		<SectionWrapper>
 			<Flex flexDirection={{ base: 'column', lg: 'row' }}>
 				{productImages && <ImageSection productImages={productImages} />}
-				<ProductContent product={product} />
+				<ProductContent product={product} dictionary={dictionary} />
 			</Flex>
 		</SectionWrapper>
 	)
