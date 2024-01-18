@@ -7,7 +7,7 @@
 			},
 			{
 				"title": "Produkte",
-				"path": "/catalog?page=1"
+				"path": "/catalog"
 			},
 			{
 				"title": "Über uns",
@@ -20,9 +20,13 @@
 		]
 	},
 	"button": {
+		"seeMore": "Mehr",
 		"loadMore": "Zeige alle"
 	},
 	"homePage": {
+		"hero": {
+			"title": "Metallprodukte/nArtikel aus Kunststof/nElektrotechnisches Material"
+		},
 		"title": "Unser Standort",
 		"subTitle": "Die Lage der Stadt an den Ufern des Dnipro verleiht ihm einen besonderen Charme und macht ihn zu einem wichtigen Verkehrsknotenpunkt im Land.",
 		"locations": [
@@ -76,5 +80,9 @@
 			"descriptionUnder1": "Verkaufen gemeinsam mit uns. Poli-Maks bietet günstige Konditionen für Großhändler. Für Sie bedeutet das – profitabler Verkauf Produkte vom Hersteller. Poli-Maks bedankt sich bei den Stammkunden für ihr Vertrauen.",
 			"descriptionUnder2": "Wir bemühen uns um höchste Zufriedenheit unserer Kunden mit Qualität unserer Produkte und ihre Entwicklung zu unseren Stammkunden nach einem ersten Einkauf."
 		}
+	},
+	"catalog": {
+		"title": "producte",
+		"all_category": "Alle"
 	}
 }

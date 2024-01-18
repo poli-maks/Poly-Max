@@ -204,20 +204,23 @@ interface ImageFormat {
 	}
 }
 
+export type TitleSize = ['xl', 'lg', 'md', 'sm']
+export type TitleLevel = ['h1', 'h2', 'h3', 'h4']
+
 export interface ILocation {
 	img: string
 	text: string
 }
 
 export interface IContacts {
-	email: string
-	phone: string
-	address: string
-	officeEmail: string
-	createdAt: string
-	updatedAt: string
-	publishedAt: string
-	locale: string
+	email?: string
+	phone?: string
+	address?: string
+	officeEmail?: string
+	createdAt?: string
+	updatedAt?: string
+	publishedAt?: string
+	locale?: string
 }
 
 export enum SEARCH_PARAMS {

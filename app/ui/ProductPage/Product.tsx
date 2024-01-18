@@ -19,7 +19,7 @@ const Product = ({ product }: { product: IProductProps[] }) => {
 
 	return (
 		<SectionWrapper>
-			<Flex>
+			<Flex flexDirection={{ base: 'column', lg: 'row' }}>
 				{productImages && <ImageSection productImages={productImages} />}
 				<ProductContent product={product} />
 			</Flex>

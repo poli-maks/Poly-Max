@@ -32,7 +32,7 @@ const LoadMore = ({
 
 	return (
 		hasProducts && (
-			<Center>
+			<Center mt={'60px'}>
 				<Button
 					variant="arrow"
 					onClick={handleChangePage}

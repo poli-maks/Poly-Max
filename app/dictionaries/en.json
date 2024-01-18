@@ -7,7 +7,7 @@
 			},
 			{
 				"title": "Products",
-				"path": "/catalog?page=1"
+				"path": "/catalog"
 			},
 			{
 				"title": "About us",
@@ -20,9 +20,13 @@
 		]
 	},
 	"button": {
+		"seeMore": "More",
 		"loadMore": "Show all"
 	},
 	"homePage": {
+		"hero": {
+			"title": "Metal products/nArticles made of Plastic/nElectrical Material"
+		},
 		"title": "Our location",
 		"subTitle": "The city's location on the banks of the Dnipro gives it a special charm and makes it an important transport hub in the country.",
 		"locations": [
@@ -78,5 +82,9 @@
 			"descriptionUnder1": "Sell together with us. Poli-Maks offers favorable conditions for wholesalers. For you this means – profitable sales of products from the manufacturer. Poli-Maks would like to thank its regular customers for their trust.",
 			"descriptionUnder2": "We strive for the highest satisfaction of our customers with the quality of our products and their development into our regular customers after a first purchase."
 		}
+	},
+	"catalog": {
+		"title": "products",
+		"all_category": "All"
 	}
 }

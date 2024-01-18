@@ -49,7 +49,7 @@ export const NavBar: React.FC<NavBarProps> = ({
 					<Box as={'li'} key={idx} onClick={onClose} width={width}>
 						<Link
 							position={'relative'}
-							href={`/${lang}${item.path}`}
+							href={`/${lang}${item.path}${item.path === '/catalog' ? '?page=1' : ''}`}
 							color={color}
 							display={'inline'}
 							textDecor={'none'}
@@ -74,7 +74,8 @@ export const NavBar: React.FC<NavBarProps> = ({
 							}}
 							className={
 								pathname === '/' + lang + item.path ||
-								(pathname === `/${lang}` && item.path === '/')
+								(pathname === `/${lang}` && item.path === '/') ||
+								pathname === '/' + lang + item.path.includes('page')
 									? 'active'
 									: ''
 							}
