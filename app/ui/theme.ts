@@ -11,6 +11,7 @@ export const theme = extendTheme({
 	},
 	styles: {
 		global: {
+			body: { backgroundColor: 'base' },
 			h1: {
 				FontFace: 'Manrope',
 				fontSize: '50px',

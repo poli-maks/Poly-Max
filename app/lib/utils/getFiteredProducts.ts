@@ -4,7 +4,7 @@ import {
 	fetchAllProducts,
 	fetchProductsByCategory,
 	fetchProductsBySubCategory,
-	searchProductByTitle,
+	searchProductsByTitle,
 } from '../api/services'
 import { SEARCH_PARAMS } from '../interfaces'
 
@@ -21,7 +21,7 @@ export const getFiteredProducts = async (
 		return data
 	}
 	if (search && query) {
-		const data = await searchProductByTitle(lang, query, parseInt(page))
+		const data = await searchProductsByTitle(lang, query, parseInt(page))
 
 		return data
 	}
