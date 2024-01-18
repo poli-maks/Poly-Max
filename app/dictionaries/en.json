@@ -86,5 +86,33 @@
 	"catalog": {
 		"title": "products",
 		"all_category": "All"
+	},
+	"productPage": {
+		"btnOrder": "Order now",
+		"announcement": "To make more convenient for our customers, we ship on DDP delivery terms.",
+		"tableHeaders": {
+			"article": "Article",
+			"diameter": "Diameter (mm)",
+			"length": "Length (mm)",
+			"weight": "Weight (kg)"
+		}
+	},
+	"aboutUsPage": {
+		"title": "About us",
+		"subTitle": "The company's philosophy is to offer affordable, high-quality goods to our customers and long-term and mutually beneficial relationships to our partners.",
+		"sections": {
+			"first": {
+				"title": "Company profile",
+				"text": "Poli-Maks GmbH is a manufacturer and wholesaler of metal products for civil, civil engineering and road construction. Production takes place in the city of Dnipro (Ukraine). The latest systems in the production hall enable short-term production of products in larger quantities. Annual expansion of the sales area allows Poli-Maks to meet the needs of foreign customers for high-quality and affordable products."
+			},
+			"second": {
+				"title": "Our main strategic goal",
+				"text": "Development into a dynamically growing international brand company that supplies its products to European countries and is a worthy competitor to leading producers of similar products in terms of price and quality."
+			},
+			"third": {
+				"title": "For business",
+				"text": "Sell together with us. Poli-Maks offers favorable conditions for wholesalers. The scope and quality of our products ensure high demand and sales levels throughout Europe. For you this means profitable sales of products from the manufacturer Poli-Maks thanks its regular customers for their trust."
+			}
+		}
 	}
 }

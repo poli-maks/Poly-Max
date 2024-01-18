@@ -84,5 +84,33 @@
 	"catalog": {
 		"title": "producte",
 		"all_category": "Alle"
+	},
+	"productPage": {
+		"btnOrder": "Eine Bestellung aufgeben",
+		"announcement": "Um für unsere Kunden bequemer zu machen, liefern wir zu DDP-Lieferbedingungen.",
+		"tableHeaders": {
+			"article": "Artikel",
+			"diameter": "Durchmesser (mm)",
+			"length": "Länge (mm)",
+			"weight": "Gewicht (kg)"
+		}
+	},
+	"aboutUsPage": {
+		"title": "ÜBER UNS",
+		"subTitle": "Die Unternehmensphilosophie besteht aus im preiswerten Anbieten hochqualitativer Waren unseren Kunden und langfristiger und gegenseitig vorteilhafter Beziehungen unseren Partnern.",
+		"sections": {
+			"first": {
+				"title": "Firmenprofil",
+				"text": "Poli-Maks GmbH ist Hersteller und gleichzeitig Großhändler von Metallerzeugnissen für Zivil-, Tief- und Straßenbau. Die Fertigung erfolgt in der Stadt Dnipro (Ukraine). Die neusten Anlagen in der Produktionshalle ermöglichen kurzfristige Produktion von Erzeugnissen in größeren Mengen. Jährliche Erweiterung des Vertriebsbereiches lässt Poli-Maks den Bedarf von ausländischen Kunden an qualitativen und preisgünstigen Produkten decken."
+			},
+			"second": {
+				"title": "Unser strategischer Hauptziel",
+				"text": "Entwicklung zu einer dynamisch wachsenden internationalen Markenfirma, die ihre Erzeugnisse in europäische Länder liefert und würdiger Wettbewerber für führende Produzenten ähnlicher Produkte hinsichtlich Preis und Qualität ist."
+			},
+			"third": {
+				"title": "Für Geschäfte",
+				"text": "Verkaufen gemeinsam mit uns. Poli-Maks bietet günstige Konditionen für Großhändler. Anwendungsbereich und Qualität unserer Produkte gewährleisten hohe Nachfrage und jeweiliges Verkaufsniveau im ganzen Europa. Für Sie bedeutet das - profitabler Verkauf Produkte vom Hersteller Poli-Maks bedankt sich bei den Stammkunden für ihr Vertrauen."
+			}
+		}
 	}
 }

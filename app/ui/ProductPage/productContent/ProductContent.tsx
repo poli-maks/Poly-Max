@@ -1,6 +1,6 @@
 'use client'
 
-import { IProductProps, TitleLevel, TitleSize } from '@/app/lib/interfaces'
+import { IProductDictionary, IProductProps, TitleLevel, TitleSize } from '@/app/lib/interfaces'
 import boxIcon from '@/public/img/boxIcon.svg'
 import { Box, Button, Flex, Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react'
 import { nanoid } from 'nanoid'
@@ -9,7 +9,12 @@ import React from 'react'
 
 import { ProductTable } from '../productTable/ProductTable'
 
-export const ProductContent = ({ product }: { product: IProductProps[] }) => {
+interface IProps {
+	product: IProductProps[]
+	dictionary: IProductDictionary
+}
+
+export const ProductContent = ({ product, dictionary }: IProps) => {
 	const tableRows = product[0].attributes.tableRow
 	const markdown = product[0].attributes.markDawn
 	const title = product[0].attributes.title
@@ -37,7 +42,7 @@ export const ProductContent = ({ product }: { product: IProductProps[] }) => {
 			</Box>
 			<Box mb={{ base: '48px', lg: '120px' }}>
 				<Button variant={'accentAlt'} mb="20px">
-					Eine Bestellung aufgeben
+					{dictionary.btnOrder}
 				</Button>
 				<Flex display="flex" alignItems="center" gap="10px">
 					<Image
@@ -53,12 +58,12 @@ export const ProductContent = ({ product }: { product: IProductProps[] }) => {
 						}}
 					/>
 					<Text fontSize={{ base: '12px', lg: '14px' }} maxW={{ lg: '371px' }}>
-						Um für unsere Kunden bequemer zu machen, liefern wir zu DDP-Lieferbedingungen.
+						{dictionary.announcement}
 					</Text>
 				</Flex>
 			</Box>
 			<Box>
-				<ProductTable tableRows={tableRows} />
+				<ProductTable tableRows={tableRows} dictionary={dictionary} />
 			</Box>
 			<Box>
 				{markdown?.length > 0 &&
