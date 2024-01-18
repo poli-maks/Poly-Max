@@ -1,16 +1,36 @@
+'use client'
+
+import useCategorySearchString from '@/app/lib/hooks/useCategorySearchString'
 import { IProduct } from '@/app/lib/interfaces'
 import { Locale } from '@/i18n.config'
 import { Grid, Text } from '@chakra-ui/react'
-import React from 'react'
+import { useSearchParams } from 'next/navigation'
+import React, { useEffect } from 'react'
 
 import ProductItem from '../ProductItem/ProductItem'
 
 interface IProductList {
 	products: IProduct[]
 	lang: Locale
+	totalProducts?: number
 }
 
-const ProductList = ({ products, lang }: IProductList) => {
+const ProductList = ({ products, lang, totalProducts }: IProductList) => {
+	const { createString } = useCategorySearchString()
+
+	const searchParams = useSearchParams()
+	const params = new URLSearchParams(searchParams)
+
+	const search = params.get('search') || ''
+
+	useEffect(() => {
+		if (!search && totalProducts)
+			createString({
+				total: totalProducts,
+			})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [totalProducts])
+
 	return (
 		<Grid
 			as={'ul'}

@@ -42,6 +42,23 @@ interface ISectionWrapper {
 				xl: number | string
 		  }
 		| undefined
+	pb?:
+		| ResponsiveValue<
+				| number
+				| (string & object)
+				| '-moz-initial'
+				| 'inherit'
+				| 'initial'
+				| 'revert'
+				| 'revert-layer'
+				| 'unset'
+		  >
+		| {
+				base: number | string
+				lg: number | string
+				xl: number | string
+		  }
+		| undefined
 	headingAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 	borderTopRadius?: '0px' | '50px'
 	w?: string
@@ -63,6 +80,7 @@ const SectionWrapper: React.FC<ISectionWrapper> = ({
 	zIndex = '',
 	style = {},
 	pt = {},
+	pb = {},
 }) => {
 	return (
 		<Box
@@ -79,6 +97,7 @@ const SectionWrapper: React.FC<ISectionWrapper> = ({
 			zIndex={zIndex}
 			borderTopRadius={borderTopRadius}
 			pt={pt}
+			pb={pb}
 		>
 			<Container maxW={{ base: '744px', lg: '1000px', xl: '1300px' }} px="12px" height={'100%'}>
 				{heading && (
