@@ -5,7 +5,13 @@ import React, { ReactNode } from 'react'
 
 const TableTh = ({ children }: { children: ReactNode }): React.JSX.Element => {
 	return (
-		<Th fontSize="14px" fontWeight="500" textTransform="none" textAlign="center" color="hText">
+		<Th
+			fontSize={{ base: '12px', lg: '14px' }}
+			fontWeight="500"
+			textTransform="none"
+			textAlign="center"
+			color="hText"
+		>
 			{children}
 		</Th>
 	)
@@ -13,7 +19,7 @@ const TableTh = ({ children }: { children: ReactNode }): React.JSX.Element => {
 
 const TableTd = ({ children }: { children: ReactNode }): React.JSX.Element => {
 	return (
-		<Td py="14px" textAlign="center">
+		<Td fontSize={{ base: '12px', lg: '14px' }} py="14px" textAlign="center">
 			{children}
 		</Td>
 	)
@@ -23,7 +29,7 @@ export const ProductTable = ({ tableRows }: { tableRows: ITableRow[] }) => {
 	return (
 		<>
 			{tableRows?.length > 0 && (
-				<TableContainer mt={{ base: '48px', lg: '120px' }} mb={{ base: '41px', lg: '121px' }}>
+				<TableContainer mb={{ base: '41px', lg: '121px' }}>
 					<Table>
 						<Thead bg="tableRow">
 							<Tr>

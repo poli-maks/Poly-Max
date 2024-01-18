@@ -1,11 +1,12 @@
 'use client'
 
 import { IProductProps, TitleLevel, TitleSize } from '@/app/lib/interfaces'
+import boxIcon from '@/public/img/boxIcon.svg'
 import { Box, Button, Flex, Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react'
 import { nanoid } from 'nanoid'
+import Image from 'next/image'
 import React from 'react'
 
-import BoxIcon from '../../svg/Box'
 import { ProductTable } from '../productTable/ProductTable'
 
 export const ProductContent = ({ product }: { product: IProductProps[] }) => {
@@ -21,20 +22,37 @@ export const ProductContent = ({ product }: { product: IProductProps[] }) => {
 		<Flex flex="1" flexDirection="column" pl={{ base: 0, lg: '20px' }}>
 			<Box>
 				{title && (
-					<Heading size="lg" marginBottom="40px">
+					<Heading
+						fontSize={{ base: '24px', lg: '40px' }}
+						marginBottom={{ base: '20px', lg: '40px' }}
+					>
 						{title}
 					</Heading>
 				)}
-				{description && <Text mb="40px">{description}</Text>}
+				{description && (
+					<Text fontSize={{ base: '12px', lg: '18px' }} mb={{ base: '30px', lg: '40px' }}>
+						{description}
+					</Text>
+				)}
 			</Box>
-			<Box>
+			<Box mb={{ base: '48px', lg: '120px' }}>
 				<Button variant={'accentAlt'} mb="20px">
 					Eine Bestellung aufgeben
 				</Button>
 				<Flex display="flex" alignItems="center" gap="10px">
-					<BoxIcon />
-
-					<Text maxW={{ lg: '371px' }}>
+					<Image
+						src={boxIcon}
+						alt="delivery icon"
+						width="24"
+						height="24"
+						style={{
+							objectFit: 'cover',
+							width: 24,
+							height: 24,
+							display: 'block',
+						}}
+					/>
+					<Text fontSize={{ base: '12px', lg: '14px' }} maxW={{ lg: '371px' }}>
 						Um für unsere Kunden bequemer zu machen, liefern wir zu DDP-Lieferbedingungen.
 					</Text>
 				</Flex>
@@ -57,16 +75,20 @@ export const ProductContent = ({ product }: { product: IProductProps[] }) => {
 									<Heading
 										as={titleLevel[item.level - 1]}
 										size={titleSize[item.level - 1]}
-										marginBottom="40px"
+										marginBottom={{ base: '30px', lg: '40px' }}
 									>
 										{text}
 									</Heading>
 								)}
 								{item.type === 'paragraph' && text.length > 0 && (
-									<Text marginBottom="30px">{text}</Text>
+									<Text marginBottom={{ base: '20px', lg: '30px' }}>{text}</Text>
 								)}
 								{item.type === 'list' && item.children.length > 0 && (
-									<UnorderedList mt="20px" mb="20px" pl="20px" listStyleImage="">
+									<UnorderedList
+										mt={{ base: '20px', lg: '30px' }}
+										mb={{ base: '20px', lg: '30px' }}
+										pl="20px"
+									>
 										{item.children.map((el) => (
 											<ListItem key={nanoid()}>{el.children[0].text}</ListItem>
 										))}
