@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 
 import { SEARCH_PARAMS } from '../interfaces'
 
-const useSearchString = () => {
+const useCategorySearchString = () => {
 	const router = useRouter()
 	const searchParams = useSearchParams()
 	const pathname = usePathname()
@@ -16,6 +16,7 @@ const useSearchString = () => {
 				if (key === SEARCH_PARAMS.SEARCH || key === SEARCH_PARAMS.QUERY) {
 					params.delete(key)
 				}
+				key === SEARCH_PARAMS.PAGE && params.set('page', '1')
 			})
 
 			if (!queries.sub) {
@@ -34,7 +35,19 @@ const useSearchString = () => {
 		[pathname, router, searchParams]
 	)
 
-	return { searchParams, createString }
+	const resetSearchParams = useCallback(() => {
+		const params = new URLSearchParams(searchParams.toString())
+
+		params.forEach((_, key) => {
+			if (key === SEARCH_PARAMS.PAGE) {
+				return
+			}
+			params.delete(key)
+		})
+		router.replace(pathname + '?' + params.toString())
+	}, [pathname, router, searchParams])
+
+	return { searchParams, createString, resetSearchParams }
 }
 
-export default useSearchString
+export default useCategorySearchString

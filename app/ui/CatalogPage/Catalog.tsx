@@ -1,42 +1,32 @@
 import { fetchCategories } from '@/app/lib/api/services'
+import { getDictionary } from '@/app/lib/dictionary'
 import { IProduct } from '@/app/lib/interfaces'
 import { Locale } from '@/i18n.config'
-import { Grid, Heading, Text } from '@chakra-ui/react'
+import { Heading, Text } from '@chakra-ui/react'
 
 import SectionWrapper from '../sectionWrapper/SectionWrapper'
-import CategoryList from './CategoryList'
-import ProductItem from './ProductItem/ProductItem'
+import CategoryList from './CategoryList/CategoryList'
+import ProductList from './ProductList/ProductList'
 
 const Catalog = async ({ lang, products }: { lang: Locale; products: IProduct[] | string }) => {
 	const categories = await fetchCategories(lang)
+	const {
+		catalog: { title, all_category },
+	} = await getDictionary(lang)
 
 	return (
-		<SectionWrapper>
+		<SectionWrapper
+			py={{ base: '0', lg: '0', xl: '0' }}
+			pt={{ base: '43px', lg: '94px', xl: '94px' }}
+		>
 			<Heading as={'h1'} textTransform={'uppercase'} mb={'60px'}>
-				producte
+				{title}
 			</Heading>
-			<CategoryList categories={categories} />
-			{/* TEST PRODUCTS GRID */}
+			<CategoryList categories={categories} dictionary={all_category} />
 
-			{Array.isArray(products) && (
-				<Grid
-					as={'ul'}
-					maxW={'100%'}
-					gridTemplateColumns={'repeat(auto-fill, minmax(300px, 1fr))'}
-					gridGap={10}
-					m={'0 auto'}
-					padding={0}
-				>
-					{products?.length > 0 &&
-						products.map((product) => {
-							return <ProductItem key={product.attributes.uid} product={product} lang={lang} />
-						})}
-				</Grid>
-			)}
+			{Array.isArray(products) && <ProductList products={products} lang={lang} />}
 
 			{typeof products === 'string' && <Text color={'error'}>{products}</Text>}
-
-			{/* TEST PRODUCTS GRID */}
 		</SectionWrapper>
 	)
 }
