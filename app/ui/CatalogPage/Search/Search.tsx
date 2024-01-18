@@ -3,7 +3,7 @@
 import { Box, IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useSearchParams, useRouter } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 import SectionWrapper from '../../sectionWrapper/SectionWrapper'
@@ -29,23 +29,31 @@ const Search = ({
 	placeholder,
 	isQuery,
 	isSearch,
+	totalSearchProducts,
 }: {
 	placeholder: string
 	isQuery: boolean
 	isSearch: boolean
+	totalSearchProducts?: number
 }) => {
 	const searchParams = useSearchParams()
 	const { replace } = useRouter()
 	const pathname = usePathname()
 	const ref = useRef<HTMLFormElement | null>(null)
-	const [isSearchOpen, setIsSearchOpen] = useState<boolean>(isSearch)
+
+	useEffect(() => {
+		const params = new URLSearchParams(searchParams)
+		totalSearchProducts && params.set('total', totalSearchProducts.toString())
+		replace(`${pathname}?${params}`)
+	}, [pathname, replace, searchParams, totalSearchProducts])
 
 	const handleSearch = useDebouncedCallback((e) => {
 		const params = new URLSearchParams(searchParams)
+		totalSearchProducts && params.set('total', totalSearchProducts.toString())
 
 		params.set('page', '1')
-
 		if (e.target.value) {
+			params.delete('total')
 			e.target.value.length > 0 && params.set('query', e.target.value)
 		} else {
 			params.delete('query')
@@ -60,45 +68,7 @@ const Search = ({
 		replace(`${pathname}?${params}`)
 	}
 
-	useEffect(() => {
-		if (isSearch) {
-			setIsSearchOpen(true)
-		}
-	}, [isSearch])
-
-	// const closeSearch = () => {
-	// 	ref?.current?.reset()
-	// 	setIsSearchOpen(false)
-	// 	const params = new URLSearchParams(searchParams)
-	// 	params.delete('query')
-	// 	params.delete('search')
-	// 	replace(`${pathname}?${params}`)
-	// }
-
-	// useEffect(() => {
-	// 	const closeSearch = () => {
-	// 		ref?.current?.reset()
-	// 		setIsSearchOpen(false)
-	// 		const params = new URLSearchParams(searchParams)
-	// 		params.delete('query')
-	// 		params.delete('search')
-	// 		replace(`${pathname}?${params}`)
-	// 	}
-
-	// 	const handleClickOutside = (event: MouseEvent) => {
-	// 		if (ref.current && !ref.current.contains(event.target as Node)) {
-	// 			closeSearch()
-	// 		}
-	// 	}
-
-	// 	document.addEventListener('click', handleClickOutside)
-
-	// 	return () => {
-	// 		document.removeEventListener('click', handleClickOutside)
-	// 	}
-	// }, [pathname, replace, searchParams])
-
-	if (isSearchOpen)
+	if (isSearch)
 		return (
 			<AnimatePresence>
 				<Box

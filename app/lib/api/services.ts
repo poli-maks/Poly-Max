@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { cache } from 'react'
 
 import { instance } from '../instance'
-import { ICategory } from '../interfaces'
+import { ICategory, IProduct } from '../interfaces'
 
 const getCategories = async (lang: string): Promise<ICategory[]> => {
 	try {
@@ -31,10 +31,18 @@ const getCategories = async (lang: string): Promise<ICategory[]> => {
 
 export const fetchCategories = cache(getCategories)
 
-const getAllProducts = async (lang: string, page: number) => {
+const getAllProducts = async (
+	lang: string,
+	page: number
+): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
 	try {
 		const {
-			data: { data },
+			data: {
+				data,
+				meta: {
+					pagination: { total: count },
+				},
+			},
 		} = await instance.get(
 			`/api/products?locale=${lang}&populate=img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
@@ -42,7 +50,7 @@ const getAllProducts = async (lang: string, page: number) => {
 			return notFound()
 		}
 
-		return data
+		return { data, count }
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
@@ -89,18 +97,28 @@ const getProductByUid = async (lang: string, uid: number) => {
 
 export const fetchProductByUid = cache(getProductByUid)
 
-const getProductByTitle = async (lang: string, query: string, page: number) => {
+const getProductsByTitle = async (
+	lang: string,
+	query: string,
+	page: number
+): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
 	try {
 		const {
-			data: { data },
+			data: {
+				data,
+				meta: {
+					pagination: { total: count },
+				},
+			},
 		} = await instance.get(
 			`/api/products?locale=${lang}&filters[title][$containsi]=${query}&populate=img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
 		if (data.length === 0) {
 			return notFound()
 		}
+		const type = 'SEARCH'
 
-		return data
+		return { data, count, type }
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
@@ -117,23 +135,30 @@ const getProductByTitle = async (lang: string, query: string, page: number) => {
 	}
 }
 
-export const searchProductByTitle = cache(getProductByTitle)
+export const searchProductsByTitle = cache(getProductsByTitle)
 
-const getProductsByCategory = async (lang: string, catUid: string, page: number) => {
+const getProductsByCategory = async (
+	lang: string,
+	catUid: string,
+	page: number
+): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
 	try {
 		const {
-			data: { data },
+			data: {
+				data,
+				meta: {
+					pagination: { total: count },
+				},
+			},
 		} = await instance.get(
-			`/api/categories?locale=${lang}&populate=deep&filters[uid][$in][0]=${catUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+			`/api/products?locale=${lang}&populate=deep,2&filters[categories][uid][$eq]=${catUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
 
-		const products = data[0].attributes.products.data
-
-		if (products.length === 0) {
+		if (data.length === 0) {
 			return notFound()
 		}
 
-		return products
+		return { data, count }
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
@@ -152,21 +177,28 @@ const getProductsByCategory = async (lang: string, catUid: string, page: number)
 
 export const fetchProductsByCategory = cache(getProductsByCategory)
 
-const getProductsBySubCategory = async (lang: string, subCatUid: number, page: number) => {
+const getProductsBySubCategory = async (
+	lang: string,
+	subCatUid: number,
+	page: number
+): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
 	try {
 		const {
-			data: { data },
+			data: {
+				data,
+				meta: {
+					pagination: { total: count },
+				},
+			},
 		} = await instance.get(
-			`api/sub-categories?locale=${lang}&populate[0]=products&filters[uid][$in][0]=${subCatUid}&populate[1]=products.img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+			`api/products?locale=${lang}&populate=deep,2&filters[sub_categories][uid][$eq]=${subCatUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
 
-		const products = data[0].attributes.products.data
-
-		if (products.length === 0) {
+		if (data.length === 0) {
 			return notFound()
 		}
 
-		return products
+		return { data, count }
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
