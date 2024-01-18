@@ -20,9 +20,13 @@
 		]
 	},
 	"button": {
+		"seeMore": "More",
 		"loadMore": "Show all"
 	},
 	"homePage": {
+		"hero": {
+			"title": "Metal products/nArticles made of Plastic/nElectrical Material"
+		},
 		"title": "Our location",
 		"subTitle": "The city's location on the banks of the Dnipro gives it a special charm and makes it an important transport hub in the country.",
 		"locations": [

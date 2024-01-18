@@ -20,9 +20,13 @@
 		]
 	},
 	"button": {
+		"seeMore": "Mehr",
 		"loadMore": "Zeige alle"
 	},
 	"homePage": {
+		"hero": {
+			"title": "Metallprodukte/nArtikel aus Kunststof/nElektrotechnisches Material"
+		},
 		"title": "Unser Standort",
 		"subTitle": "Die Lage der Stadt an den Ufern des Dnipro verleiht ihm einen besonderen Charme und macht ihn zu einem wichtigen Verkehrsknotenpunkt im Land.",
 		"locations": [
