@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { cache } from 'react'
 
 import { instance } from '../instance'
-import { ICategory, IProduct } from '../interfaces'
+import { ICategory, IProduct, IContacts } from '../interfaces'
 
 const getCategories = async (lang: string): Promise<ICategory[]> => {
 	try {
@@ -217,20 +217,22 @@ const getProductsBySubCategory = async (
 
 export const fetchProductsBySubCategory = cache(getProductsBySubCategory)
 
-export const getContacts = async (lang: string) => {
+export const getContacts = async (lang: string): Promise<IContacts | undefined> => {
 	try {
-		const {
-			data: { data },
-		} = await instance.get(`/api/contacts?locale=${lang}`)
-		if (data.length === 0) return notFound()
+		const response = await instance.get(`/api/contacts?locale=${lang}`)
+		const { data } = response.data
+
+		if (!data || data.length === 0) {
+			return undefined
+		}
 
 		const [{ attributes }] = data
 
 		return attributes
 	} catch (error) {
-		if (axios.isAxiosError(error) === undefined) {
-			return notFound()
-		}
+		console.error('Error fetching contacts:', error)
+
+		return undefined
 	}
 }
 

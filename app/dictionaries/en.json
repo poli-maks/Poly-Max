@@ -7,7 +7,7 @@
 			},
 			{
 				"title": "Products",
-				"path": "/catalog?page=1"
+				"path": "/catalog"
 			},
 			{
 				"title": "About us",
