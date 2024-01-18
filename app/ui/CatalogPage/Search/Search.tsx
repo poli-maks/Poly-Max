@@ -80,57 +80,55 @@ const Search = ({
 					overflow={'hidden'}
 					p={0}
 					pos={'absolute'}
-					top={'110px'}
+					top={{ base: '140px', lg: '110px' }}
 					w={'100%'}
 				>
-					<Box>
-						<SectionWrapper bg="base" py={{ base: '35px', lg: '40px', xl: '40px' }}>
-							<InputGroup
-								as={'form'}
-								ref={ref}
-								size="md"
-								onSubmit={(e) => {
-									e.preventDefault()
+					<SectionWrapper bg="base" py={{ base: '35px', lg: '40px', xl: '40px' }}>
+						<InputGroup
+							as={'form'}
+							ref={ref}
+							size="md"
+							onSubmit={(e) => {
+								e.preventDefault()
+							}}
+						>
+							<Input
+								p={0}
+								pl={0}
+								fontSize={'20px'}
+								fontWeight={600}
+								lineHeight={1}
+								type="text"
+								placeholder={placeholder}
+								border={'none'}
+								bgColor={'base'}
+								onChange={handleSearch}
+								color={'hText'}
+								_placeholder={{ color: 'hText' }}
+								_active={{ outlineColor: 'transparent' }}
+								_focus={{
+									outlineColor: 'transparent',
 								}}
-							>
-								<Input
-									p={0}
-									pl={0}
-									fontSize={'20px'}
-									fontWeight={600}
-									lineHeight={1}
-									type="text"
-									placeholder={placeholder}
-									border={'none'}
-									bgColor={'base'}
-									onChange={handleSearch}
-									color={'hText'}
-									_placeholder={{ color: 'hText' }}
-									_active={{ outlineColor: 'transparent' }}
-									_focus={{
-										outlineColor: 'transparent',
-									}}
-									_focusVisible={{
-										borderColor: 'transparent',
-										boxShadow: 'none',
-									}}
-								/>
-								{isQuery && (
-									<InputRightElement width="4.5rem">
-										<IconButton
-											isRound={true}
-											variant="solid"
-											colorScheme="ghost"
-											aria-label="clear search"
-											icon={<CloseIcon />}
-											_hover={{ color: 'accent' }}
-											onClick={clearSearch}
-										/>
-									</InputRightElement>
-								)}
-							</InputGroup>
-						</SectionWrapper>
-					</Box>
+								_focusVisible={{
+									borderColor: 'transparent',
+									boxShadow: 'none',
+								}}
+							/>
+							{isQuery && (
+								<InputRightElement width="4.5rem">
+									<IconButton
+										isRound={true}
+										variant="solid"
+										colorScheme="ghost"
+										aria-label="clear search"
+										icon={<CloseIcon />}
+										_hover={{ color: 'accent' }}
+										onClick={clearSearch}
+									/>
+								</InputRightElement>
+							)}
+						</InputGroup>
+					</SectionWrapper>
 				</Box>
 			</AnimatePresence>
 		)
