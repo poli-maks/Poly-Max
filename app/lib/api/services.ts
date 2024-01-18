@@ -230,9 +230,16 @@ export const getContacts = async (lang: string): Promise<IContacts | undefined> 
 
 		return attributes
 	} catch (error) {
-		console.error('Error fetching contacts:', error)
+		if (axios.isAxiosError(error)) {
+			console.error(error.status)
+			console.error(error.response)
 
-		return undefined
+			return undefined
+		} else {
+			console.error(error)
+
+			return undefined
+		}
 	}
 }
 

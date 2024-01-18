@@ -16,7 +16,11 @@ const HeaderWrapper = ({ lang, navItems }: { lang: Locale; navItems: NavItem[] }
 	const { isOpen, onOpen, onClose } = useDisclosure()
 
 	return (
-		<Flex justifyContent={'space-between'} align={{ base: 'flex-start', lg: 'center' }} py={'20px'}>
+		<Flex
+			justifyContent={'space-between'}
+			align={{ base: 'flex-start', lg: 'center' }}
+			pt={{ base: '10px', lg: '20px' }}
+		>
 			<Flex
 				w={{ lg: '100%' }}
 				align={{ base: 'flex-start', lg: 'center' }}

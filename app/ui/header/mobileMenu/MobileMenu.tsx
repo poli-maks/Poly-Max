@@ -20,9 +20,9 @@ const MobileMenu = ({ onClose, isOpen, lang, navItems }: IMobileMenu) => {
 	const swipeHandlers = useSwipeable({ onSwipedUp: () => onClose() })
 
 	return (
-		<Drawer placement={'top'} onClose={onClose} isOpen={isOpen} isFullHeight blockScrollOnMount>
+		<Drawer placement={'top'} onClose={onClose} isOpen={isOpen} blockScrollOnMount>
 			<DrawerOverlay />
-			<DrawerContent bg={'#212121'} {...swipeHandlers}>
+			<DrawerContent bg={'#212121'} {...swipeHandlers} h={'100dvh'}>
 				<DrawerBody display={'flex'} flexDir={'column'} p={'20px'}>
 					<Button
 						bg={'transparent'}
