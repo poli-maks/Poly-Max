@@ -17,10 +17,10 @@ const Categories = async ({ dictionary, lang }: ICategoriesProps) => {
 	const categories = await fetchCategories(lang)
 
 	return (
-		<div>
+		<>
 			<CategoryList categories={categories} dictionary={dictionary.all_category} />
 			<MobileFilterMenu categories={categories} dictionary={dictionary} />
-		</div>
+		</>
 	)
 }
 

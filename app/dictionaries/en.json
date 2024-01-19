@@ -86,7 +86,8 @@
 	"catalog": {
 		"title": "products",
 		"all_category": "All",
-		"filter": "Filter"
+		"filter": "Filter",
+		"notFound": "0 products"
 	},
 	"productPage": {
 		"btnOrder": "Order now",

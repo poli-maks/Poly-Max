@@ -24,7 +24,7 @@ const LoadMore = ({
 	const params = new URLSearchParams(searchParams)
 
 	useEffect(() => {
-		if (total) {
+		if (total && hasProducts) {
 			params.set('total', total)
 			replace(`${pathname}?${params}`)
 		}
