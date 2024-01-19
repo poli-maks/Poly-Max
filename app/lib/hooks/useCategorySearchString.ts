@@ -12,11 +12,12 @@ const useCategorySearchString = () => {
 		(queries: { [key: string]: string | number }) => {
 			const params = new URLSearchParams(searchParams.toString())
 
-			params.forEach((_, key) => {
+			params.forEach((value, key) => {
 				if (key === SEARCH_PARAMS.SEARCH || key === SEARCH_PARAMS.QUERY) {
 					params.delete(key)
 				}
 				key === SEARCH_PARAMS.PAGE && params.set('page', '1')
+				key === SEARCH_PARAMS.TOTAL && params.set('total', value)
 			})
 
 			if (!queries.sub) {

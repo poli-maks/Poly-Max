@@ -11,8 +11,11 @@ export const theme = extendTheme({
 	},
 	styles: {
 		global: {
+			body: {
+				backgroundColor: 'base',
+				color: 'hText',
+			},
 			h1: {
-				FontFace: 'Manrope',
 				fontSize: '50px',
 				fontWeight: '600',
 			},
@@ -39,7 +42,6 @@ export const theme = extendTheme({
 	components: {
 		Heading: {
 			baseStyle: {
-				fontFace: 'Manrope',
 				fontWeight: '500',
 				lineHeight: 1,
 			},

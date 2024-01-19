@@ -1,8 +1,6 @@
 import { getDictionary } from '@/app/lib/dictionary'
 import { IParams, SEARCH_PARAMS } from '@/app/lib/interfaces'
-import { getFiteredProducts } from '@/app/lib/utils/getFiteredProducts'
 import Catalog from '@/app/ui/CatalogPage/Catalog'
-import LoadMore from '@/app/ui/CatalogPage/LoadMore/LoadMore'
 import Search from '@/app/ui/CatalogPage/Search/Search'
 import React from 'react'
 
@@ -17,7 +15,11 @@ const CatalogPage: React.FC<
 
 	const { query, search, total } = searchParams
 
-	const products = await getFiteredProducts(lang, searchParams)
+	let totalSearchProducts
+
+	if (search === 'true' && total) {
+		totalSearchProducts = total
+	}
 
 	return (
 		<>
@@ -25,11 +27,16 @@ const CatalogPage: React.FC<
 				placeholder="Geben Sie ein, wonach Sie suchen..."
 				isQuery={!!query}
 				isSearch={!!search}
+				totalSearchProducts={totalSearchProducts}
 			/>
-			<Catalog lang={lang} products={products} />
-			<LoadMore total={total} hasProducts={!!Array.isArray(products)}>
-				{dictionary.button.loadMore}
-			</LoadMore>
+			<Catalog
+				lang={lang}
+				searchParams={searchParams}
+				btnText={dictionary.button.loadMore}
+				title={dictionary.catalog.title}
+				all_category={dictionary.catalog.all_category}
+				filter={dictionary.catalog.filter}
+			/>
 		</>
 	)
 }

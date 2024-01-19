@@ -4,6 +4,7 @@ import { Locale } from '@/i18n.config'
 import closeIcon from '@/public/img/closeIcon.svg'
 import { Button, Drawer, DrawerBody, DrawerContent, DrawerOverlay, Spacer } from '@chakra-ui/react'
 import Image from 'next/image'
+import { useSwipeable } from 'react-swipeable'
 
 import { NavBar, NavItem } from '../../navBar/NavBar'
 import { theme } from '../../theme'
@@ -16,11 +17,12 @@ interface IMobileMenu {
 }
 
 const MobileMenu = ({ onClose, isOpen, lang, navItems }: IMobileMenu) => {
-	//заменить именйдж на компонент(крестик на закрытие)
+	const swipeHandlers = useSwipeable({ onSwipedUp: () => onClose() })
+
 	return (
-		<Drawer placement={'top'} onClose={onClose} isOpen={isOpen} isFullHeight blockScrollOnMount>
+		<Drawer placement={'top'} onClose={onClose} isOpen={isOpen} blockScrollOnMount>
 			<DrawerOverlay />
-			<DrawerContent bg={'#212121'}>
+			<DrawerContent bg={'#212121'} {...swipeHandlers} h={'100dvh'}>
 				<DrawerBody display={'flex'} flexDir={'column'} p={'20px'}>
 					<Button
 						bg={'transparent'}

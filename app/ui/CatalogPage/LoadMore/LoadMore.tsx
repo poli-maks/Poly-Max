@@ -2,6 +2,7 @@
 
 import { Button, Center } from '@chakra-ui/react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 
 import Arrow from '../../svg/Arrow'
 
@@ -22,6 +23,14 @@ const LoadMore = ({
 
 	const params = new URLSearchParams(searchParams)
 
+	useEffect(() => {
+		if (total) {
+			params.set('total', total)
+			replace(`${pathname}?${params}`)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [total])
+
 	const hasNext = limit * (parseInt(page) - 1) + limit < parseInt(total)
 
 	const handleChangePage = () => {
@@ -32,7 +41,7 @@ const LoadMore = ({
 
 	return (
 		hasProducts && (
-			<Center>
+			<Center mt={'60px'}>
 				<Button
 					variant="arrow"
 					onClick={handleChangePage}
