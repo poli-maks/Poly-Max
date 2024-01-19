@@ -11,7 +11,10 @@ export const theme = extendTheme({
 	},
 	styles: {
 		global: {
-			body: { backgroundColor: 'base' },
+			body: {
+				backgroundColor: 'base',
+				color: 'hText',
+			},
 			h1: {
 				fontSize: '50px',
 				fontWeight: '600',

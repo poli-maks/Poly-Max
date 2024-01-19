@@ -34,10 +34,11 @@ const ProductList = async ({ searchParams, lang, btnText }: IProductList) => {
 	return (
 		<>
 			<Grid
+				key={Math.random()}
 				as={'ul'}
 				maxW={'100%'}
 				gridTemplateColumns={'repeat(auto-fill, minmax(300px, 1fr))'}
-				gridGap={10}
+				gridGap={'20px'}
 				m={'0 auto'}
 				padding={0}
 			>
