@@ -80,5 +80,11 @@
 	"catalog": {
 		"title": "producte",
 		"all_category": "Alle"
+	},
+	"contactPage": {
+		"mainTitle": "Kontakte",
+		"title": "Fragen zu unserem Produkt?",
+		"description": "Unser Team von Experten steht Ihnen zur Verfügung, um Ihre Fragen zu beantworten, Ihnen weitere Informationen zu geben und Ihnen zu helfen.",
+		"position": "Geschäftsführer"
 	}
 }

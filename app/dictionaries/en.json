@@ -82,5 +82,11 @@
 	"catalog": {
 		"title": "products",
 		"all_category": "All"
+	},
+	"contactPage": {
+		"mainTitle": "Contacts",
+		"title": "Did we catch your eye?",
+		"description": "Our team of experts is available to answer your questions, provide you with more information and help you.",
+		"position": "Managing Director"
 	}
 }

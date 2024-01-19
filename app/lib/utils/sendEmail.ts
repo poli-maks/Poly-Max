@@ -2,7 +2,8 @@ import emailjs from 'emailjs-com'
 
 interface IEmailData {
 	name?: string
-	phone?: string
+	email?: string
+	userMessage?: string
 }
 
 interface IEmailjsRes {
@@ -13,13 +14,14 @@ interface IEmailjsRes {
 emailjs.init(process.env.NEXT_PUBLIC_EMAIL_JS_USER_ID as string)
 
 const sendEmail = async (data: IEmailData): Promise<IEmailjsRes | undefined> => {
-	const { name, phone } = data
+	const { name, email, userMessage } = data
 	const emailData = {
 		subject: `${name}`,
 		from_name: `${name}`,
 		message: `
     🙂 Name: ${name}
-    📞 Phone: ${phone}
+       Email: ${email}
+	   Message: ${userMessage}
     `,
 	}
 
