@@ -85,7 +85,8 @@
 	},
 	"catalog": {
 		"title": "products",
-		"all_category": "All"
+		"all_category": "All",
+		"filter": "Filter"
 	},
 	"productPage": {
 		"btnOrder": "Order now",

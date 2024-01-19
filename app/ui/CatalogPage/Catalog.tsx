@@ -14,12 +14,14 @@ const Catalog = ({
 	btnText,
 	title,
 	all_category,
+	filter,
 }: {
 	lang: Locale
 	searchParams: { [key in SEARCH_PARAMS]: string }
 	btnText: string
 	title: string
 	all_category: string
+	filter: string
 	total?: number
 }) => {
 	return (
@@ -32,7 +34,7 @@ const Catalog = ({
 				{title}
 			</Heading>
 			<Suspense fallback={<ProductListSkeleton />}>
-				<Categories dictionary={all_category} lang={lang} />
+				<Categories dictionary={{ all_category, filter }} lang={lang} />
 			</Suspense>
 			<Suspense fallback="LOADING CATALOG...">
 				<ProductList lang={lang} btnText={btnText} searchParams={searchParams} />
