@@ -1,10 +1,15 @@
+import { getDictionary } from '@/app/lib/dictionary'
 import Contact from '@/app/ui/ContactPage/Contact'
 import React from 'react'
 
-const ContactPage = () => {
+import { IParams } from '../../lib/interfaces'
+
+const ContactPage: React.FC<IParams> = async ({ params: { lang } }) => {
+	const dictionary = await getDictionary(lang)
+
 	return (
 		<>
-			<Contact />
+			<Contact dictionary={dictionary} lang={lang} />
 		</>
 	)
 }
