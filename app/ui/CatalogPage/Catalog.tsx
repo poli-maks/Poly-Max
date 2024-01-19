@@ -4,10 +4,11 @@ import { Heading } from '@chakra-ui/react'
 import { Suspense } from 'react'
 
 import SectionWrapper from '../sectionWrapper/SectionWrapper'
+import ProductListSkeleton from '../Skeletons/ProductListSkeleton'
 import Categories from './CategoryList/Categories'
 import ProductList from './ProductList/ProductList'
 
-const Catalog = async ({
+const Catalog = ({
 	lang,
 	searchParams,
 	btnText,
@@ -30,7 +31,7 @@ const Catalog = async ({
 			<Heading as={'h1'} textTransform={'uppercase'} mb={'60px'}>
 				{title}
 			</Heading>
-			<Suspense fallback="LOADING CATEGORIES...">
+			<Suspense fallback={<ProductListSkeleton />}>
 				<Categories dictionary={all_category} lang={lang} />
 			</Suspense>
 			<Suspense fallback="LOADING CATALOG...">
