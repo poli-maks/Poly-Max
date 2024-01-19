@@ -116,9 +116,8 @@ const getProductsByTitle = async (
 		if (data.length === 0) {
 			return notFound()
 		}
-		const type = 'SEARCH'
 
-		return { data, count, type }
+		return { data, count }
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
@@ -217,7 +216,7 @@ const getProductsBySubCategory = async (
 
 export const fetchProductsBySubCategory = cache(getProductsBySubCategory)
 
-export const getContacts = async (lang: string): Promise<IContacts | undefined> => {
+const getContacts = async (lang: string): Promise<IContacts | undefined> => {
 	try {
 		const response = await instance.get(`/api/contacts?locale=${lang}`)
 		const { data } = response.data

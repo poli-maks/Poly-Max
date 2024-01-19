@@ -34,7 +34,7 @@ const Search = ({
 	placeholder: string
 	isQuery: boolean
 	isSearch: boolean
-	totalSearchProducts?: number
+	totalSearchProducts?: string
 }) => {
 	const searchParams = useSearchParams()
 	const { replace } = useRouter()
@@ -43,13 +43,13 @@ const Search = ({
 
 	useEffect(() => {
 		const params = new URLSearchParams(searchParams)
-		totalSearchProducts && params.set('total', totalSearchProducts.toString())
+		totalSearchProducts && params.set('total', totalSearchProducts)
 		replace(`${pathname}?${params}`)
 	}, [pathname, replace, searchParams, totalSearchProducts])
 
 	const handleSearch = useDebouncedCallback((e) => {
 		const params = new URLSearchParams(searchParams)
-		totalSearchProducts && params.set('total', totalSearchProducts.toString())
+		totalSearchProducts && params.set('total', totalSearchProducts)
 
 		params.set('page', '1')
 		if (e.target.value) {
