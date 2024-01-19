@@ -28,7 +28,11 @@ const CategoryList = ({ categories, dictionary }: ICategoryList) => {
 				mb={'20px'}
 			>
 				<Box as={'li'} position={'relative'} pb={'20px'}>
-					<Button variant={'ghost'} onClick={() => resetSearchParams()}>
+					<Button
+						variant={'ghost'}
+						onClick={() => resetSearchParams()}
+						_hover={{ backgroundColor: 'transparent', opacity: 0.9 }}
+					>
 						{dictionary}
 					</Button>
 					{!choosedCategory && (
@@ -59,6 +63,7 @@ const CategoryList = ({ categories, dictionary }: ICategoryList) => {
 										position={'relative'}
 										as={Button}
 										variant={'ghost'}
+										_hover={{ backgroundColor: 'transparent', opacity: 0.9 }}
 										alignItems={'center'}
 										rightIcon={!isMenuOpen ? <MenuArrowClosed /> : <MenuArrowOpen />}
 									>
@@ -95,6 +100,7 @@ const CategoryList = ({ categories, dictionary }: ICategoryList) => {
 									<Button
 										onClick={() => createString({ [SEARCH_PARAMS.CATEGORY]: category.uid })}
 										variant={'ghost'}
+										_hover={{ backgroundColor: 'transparent', opacity: 0.9 }}
 									>
 										{category.title}
 									</Button>

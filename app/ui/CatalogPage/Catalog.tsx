@@ -4,6 +4,7 @@ import { Heading } from '@chakra-ui/react'
 import { Suspense } from 'react'
 
 import SectionWrapper from '../sectionWrapper/SectionWrapper'
+import CategoriesSkeleton from '../Skeletons/CategoriesSkeleton'
 import ProductListSkeleton from '../Skeletons/ProductListSkeleton'
 import Categories from './CategoryList/Categories'
 import ProductList from './ProductList/ProductList'
@@ -15,6 +16,7 @@ const Catalog = ({
 	title,
 	all_category,
 	filter,
+	notFound,
 }: {
 	lang: Locale
 	searchParams: { [key in SEARCH_PARAMS]: string }
@@ -23,6 +25,7 @@ const Catalog = ({
 	all_category: string
 	filter: string
 	total?: number
+	notFound: string
 }) => {
 	return (
 		<SectionWrapper
@@ -33,11 +36,16 @@ const Catalog = ({
 			<Heading as={'h1'} textTransform={'uppercase'} mb={'60px'}>
 				{title}
 			</Heading>
-			<Suspense fallback={<ProductListSkeleton />}>
+			<Suspense fallback={<CategoriesSkeleton />}>
 				<Categories dictionary={{ all_category, filter }} lang={lang} />
 			</Suspense>
-			<Suspense fallback="LOADING CATALOG...">
-				<ProductList lang={lang} btnText={btnText} searchParams={searchParams} />
+			<Suspense fallback={<ProductListSkeleton />}>
+				<ProductList
+					lang={lang}
+					btnText={btnText}
+					searchParams={searchParams}
+					notFound={notFound}
+				/>
 			</Suspense>
 		</SectionWrapper>
 	)
