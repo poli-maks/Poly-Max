@@ -20,7 +20,13 @@ const CategoryList = ({ categories, dictionary }: ICategoryList) => {
 
 	return (
 		<>
-			<Flex as={'ul'} gap={'45px'} borderBottom={'1px #E0E0E0 solid'} mb={'20px'}>
+			<Flex
+				as={'ul'}
+				display={{ base: 'none', lg: 'flex' }}
+				gap={'45px'}
+				borderBottom={'1px #E0E0E0 solid'}
+				mb={'20px'}
+			>
 				<Box as={'li'} position={'relative'} pb={'20px'}>
 					<Button variant={'ghost'} onClick={() => resetSearchParams()}>
 						{dictionary}

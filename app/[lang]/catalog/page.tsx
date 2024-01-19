@@ -35,6 +35,7 @@ const CatalogPage: React.FC<
 				btnText={dictionary.button.loadMore}
 				title={dictionary.catalog.title}
 				all_category={dictionary.catalog.all_category}
+				filter={dictionary.catalog.filter}
 			/>
 		</>
 	)

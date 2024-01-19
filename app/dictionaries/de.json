@@ -83,7 +83,8 @@
 	},
 	"catalog": {
 		"title": "producte",
-		"all_category": "Alle"
+		"all_category": "Alle",
+		"filter": "Filter"
 	},
 	"productPage": {
 		"btnOrder": "Eine Bestellung aufgeben",
