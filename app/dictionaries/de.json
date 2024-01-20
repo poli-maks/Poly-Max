@@ -84,7 +84,8 @@
 	"catalog": {
 		"title": "producte",
 		"all_category": "Alle",
-		"filter": "Filter"
+		"filter": "Filter",
+		"notFound": "0 produkte"
 	},
 	"productPage": {
 		"btnOrder": "Eine Bestellung aufgeben",

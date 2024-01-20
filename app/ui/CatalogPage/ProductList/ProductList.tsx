@@ -1,9 +1,8 @@
-// 'use client'
-
 import { SEARCH_PARAMS } from '@/app/lib/interfaces'
 import { getFiteredProducts } from '@/app/lib/utils/getFiteredProducts'
 import { Locale } from '@/i18n.config'
 import { Grid, Text } from '@chakra-ui/react'
+import { nanoid } from 'nanoid'
 import React from 'react'
 
 import LoadMore from '../LoadMore/LoadMore'
@@ -15,9 +14,10 @@ interface IProductList {
 	searchParams: { [key in SEARCH_PARAMS]: string }
 	lang: Locale
 	btnText: string
+	notFound: string
 }
 
-const ProductList = async ({ searchParams, lang, btnText }: IProductList) => {
+const ProductList = async ({ searchParams, lang, btnText, notFound }: IProductList) => {
 	const response = await getFiteredProducts(lang, searchParams)
 
 	let products
@@ -34,9 +34,9 @@ const ProductList = async ({ searchParams, lang, btnText }: IProductList) => {
 	return (
 		<>
 			<Grid
-				key={Math.random()}
+				key={nanoid()}
 				as={'ul'}
-				maxW={'100%'}
+				// maxW={'100%'}
 				gridTemplateColumns={'repeat(auto-fill, minmax(300px, 1fr))'}
 				gridGap={'20px'}
 				m={'0 auto'}
@@ -49,7 +49,11 @@ const ProductList = async ({ searchParams, lang, btnText }: IProductList) => {
 					))}
 			</Grid>
 
-			{typeof products === 'string' && <Text color={'error'}>{products}</Text>}
+			{typeof products === 'string' && (
+				<Text fontSize={'20px'} lineHeight={1} fontWeight={600}>
+					{notFound}
+				</Text>
+			)}
 
 			{totalProducts && (
 				<LoadMore total={totalProducts.toString()} hasProducts={!!Array.isArray(products)}>

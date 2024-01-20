@@ -33,6 +33,7 @@ const CatalogPage: React.FC<
 				lang={lang}
 				searchParams={searchParams}
 				btnText={dictionary.button.loadMore}
+				notFound={dictionary.catalog.notFound}
 				title={dictionary.catalog.title}
 				all_category={dictionary.catalog.all_category}
 				filter={dictionary.catalog.filter}
