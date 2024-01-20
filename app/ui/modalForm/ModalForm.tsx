@@ -1,11 +1,15 @@
-'use client'
-
+import { IDictionaryModal } from '@/app/lib/interfaces'
 import { Heading, Text } from '@chakra-ui/react'
 
 import ContactForm from '../contactForm/ContactForm'
 import { theme } from '../theme'
 
-const ModalForm = () => {
+interface ModalFormProps {
+	nameProduct?: string
+	dictionaryModal: IDictionaryModal
+}
+
+const ModalForm: React.FC<ModalFormProps> = ({ nameProduct, dictionaryModal }) => {
 	return (
 		<>
 			<Heading
@@ -16,7 +20,7 @@ const ModalForm = () => {
 				fontWeight="500"
 				marginBottom={{ base: '16px', lg: '24px' }}
 			>
-				Do you want to contact us, need help or more information about a product?
+				{dictionaryModal.title}
 			</Heading>
 			<Text
 				fontSize={{ base: '14px', lg: '18px' }}
@@ -24,10 +28,9 @@ const ModalForm = () => {
 				color={theme.colors.bodyText}
 				marginBottom={{ base: '16px', lg: '24px' }}
 			>
-				Please fill in the form below to contact us. We try our best to respond to an requests in
-				less than 24 hours.
+				{dictionaryModal.text}
 			</Text>
-			<ContactForm />
+			<ContactForm nameProduct={nameProduct} dictionaryModal={dictionaryModal} />
 		</>
 	)
 }

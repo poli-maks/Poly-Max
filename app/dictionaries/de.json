@@ -119,5 +119,14 @@
 		"title": "Fragen zu unserem Produkt?",
 		"description": "Unser Team von Experten steht Ihnen zur Verfügung, um Ihre Fragen zu beantworten, Ihnen weitere Informationen zu geben und Ihnen zu helfen.",
 		"position": "Geschäftsführer"
+	},
+	"modalForm": {
+		"title": "Fragen zu unserem Produkt?",
+		"text": "Unser Team von Experten steht Ihnen zur Verfügung, um Ihre Fragen zu beantworten, Ihnen weitere Informationen zu geben und Ihnen zu helfen.",
+		"nameField": "Vorname",
+		"emailField": "E-Mail",
+		"message": "Ihre Nachricht...",
+		"button": "Nachricht Senden",
+		"policy": "Ich habe die Verarbeitung personenbezogener Daten akzeptiert."
 	}
 }

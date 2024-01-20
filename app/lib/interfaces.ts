@@ -218,6 +218,16 @@ export interface IProductDictionary {
 	}
 }
 
+export interface IDictionaryModal {
+	title: string
+	text: string
+	nameField: string
+	emailField: string
+	message: string
+	button: string
+	policy: string
+}
+
 export interface IAboutUsDictionary {
 	title: string
 	subTitle: string

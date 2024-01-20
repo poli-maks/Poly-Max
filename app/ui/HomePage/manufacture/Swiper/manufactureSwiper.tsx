@@ -5,9 +5,21 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'
 import './styles.css'
-import Image1 from '../../../../../public/img/Image.png'
+import ManufactureImg1 from '../../../../../public/img/manufactureImg1.png'
+import ManufactureImg2 from '../../../../../public/img/manufactureImg2.png'
+import ManufactureImg3 from '../../../../../public/img/manufactureImg3.png'
+import ManufactureImg4 from '../../../../../public/img/manufactureImg4.png'
+import ManufactureImg5 from '../../../../../public/img/manufactureImg5.png'
+import ManufactureImg6 from '../../../../../public/img/manufactureImg6.png'
 
-const SliderImages = [Image1, Image1, Image1, Image1, Image1]
+const SliderImages = [
+	ManufactureImg1,
+	ManufactureImg2,
+	ManufactureImg3,
+	ManufactureImg4,
+	ManufactureImg5,
+	ManufactureImg6,
+]
 
 const manufactureSwiper = () => {
 	return (

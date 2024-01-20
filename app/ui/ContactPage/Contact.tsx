@@ -1,4 +1,5 @@
 import { fetchContacts } from '@/app/lib/api/services'
+import { IDictionaryModal } from '@/app/lib/interfaces'
 import { Locale } from '@/i18n.config'
 import { Heading, Flex, Box } from '@chakra-ui/react'
 
@@ -17,6 +18,7 @@ interface ContactProps {
 			description: string
 			position: string
 		}
+		modalForm: IDictionaryModal
 	}
 }
 
@@ -59,7 +61,7 @@ const Contact: React.FC<ContactProps> = async ({ lang, dictionary }) => {
 						>
 							{dictionary.contactPage.description}
 						</Heading>
-						<ContactForm />
+						<ContactForm dictionaryModal={dictionary.modalForm} />
 					</Box>
 				</Flex>
 			</SectionWrapper>

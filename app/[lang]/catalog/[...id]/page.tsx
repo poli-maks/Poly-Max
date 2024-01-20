@@ -12,7 +12,11 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 
 	return (
 		<>
-			<Product product={product} dictionary={dictionary.productPage} />
+			<Product
+				product={product}
+				dictionary={dictionary.productPage}
+				dictionaryModal={dictionary.modalForm}
+			/>
 		</>
 	)
 }

@@ -121,5 +121,14 @@
 		"title": "Did we catch your eye?",
 		"description": "Our team of experts is available to answer your questions, provide you with more information and help you.",
 		"position": "Managing Director"
+	},
+	"modalForm": {
+		"title": "Do you want to contact us, need help or more information about a product?",
+		"text": "Please fill in the form below to contact us. We try our best to respond to an requests in less than 24 hours.",
+		"nameField": "Name",
+		"emailField": "E-Mail",
+		"message": "Your message...",
+		"button": "Send",
+		"policy": "I accepted the processing of personal data"
 	}
 }

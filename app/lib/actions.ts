@@ -14,7 +14,7 @@ const schema = z
 			.trim()
 			.min(1, { message: 'required' })
 			.email({ message: 'invalid email format' }),
-		userMessage: z.string().trim().min(3, { message: 'required' }),
+		userMessage: z.string().trim(),
 		policy: z
 			.string()
 			.min(2, { message: 'invalid' })
