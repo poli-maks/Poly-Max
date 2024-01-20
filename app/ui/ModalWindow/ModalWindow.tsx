@@ -1,6 +1,6 @@
 'use client'
 
-import { Modal, ModalBody, ModalContent, ModalOverlay } from '@chakra-ui/react'
+import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalOverlay } from '@chakra-ui/react'
 import React, { FC, ReactNode } from 'react'
 
 interface ModalWindowProps {
@@ -20,7 +20,12 @@ const ModalWindow: FC<ModalWindowProps> = ({ onClose, isOpen, children }) => {
 				width={{ base: '360px', lg: '480px' }}
 				borderRadius={'2px'}
 			>
-				<ModalBody p={{ base: '30px 10px', lg: '35px 20px' }} borderRadius={2} overflowY={'auto'}>
+				<ModalCloseButton right={'4px'} />
+				<ModalBody
+					p={{ base: '45px 10px 30px 10px', lg: '35px 20px' }}
+					borderRadius={2}
+					overflowY={'auto'}
+				>
 					{children}
 				</ModalBody>
 			</ModalContent>

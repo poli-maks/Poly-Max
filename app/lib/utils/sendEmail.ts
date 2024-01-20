@@ -4,6 +4,7 @@ interface IEmailData {
 	name?: string
 	email?: string
 	userMessage?: string
+	nameProduct?: string
 }
 
 interface IEmailjsRes {
@@ -14,9 +15,9 @@ interface IEmailjsRes {
 emailjs.init(process.env.NEXT_PUBLIC_EMAIL_JS_USER_ID as string)
 
 const sendEmail = async (data: IEmailData): Promise<IEmailjsRes | undefined> => {
-	const { name, email, userMessage } = data
+	const { name, email, userMessage, nameProduct } = data
 	const emailData = {
-		subject: `${name}`,
+		subject: `${nameProduct ? nameProduct : name}`,
 		from_name: `${name}`,
 		message: `
     🙂 Name: ${name}
