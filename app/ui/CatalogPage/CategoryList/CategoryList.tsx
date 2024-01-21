@@ -64,6 +64,7 @@ const CategoryList = ({ categories, dictionary }: ICategoryList) => {
 										as={Button}
 										variant={'ghost'}
 										_hover={{ backgroundColor: 'transparent', opacity: 0.9 }}
+										_active={{ backgroundColor: 'transparent', opacity: 0.9 }}
 										alignItems={'center'}
 										rightIcon={!isMenuOpen ? <MenuArrowClosed /> : <MenuArrowOpen />}
 									>
@@ -79,9 +80,11 @@ const CategoryList = ({ categories, dictionary }: ICategoryList) => {
 											bgColor={'#000'}
 										></Box>
 									)}
-									<MenuList>
+									<MenuList bgColor={'#FAFAFA'}>
 										{subs.map(({ attributes: sub }) => (
 											<MenuItem
+												bgColor={'transparent'}
+												_hover={{ backgroundColor: 'transparent', opacity: 0.9 }}
 												onClick={() => {
 													createString({
 														[SEARCH_PARAMS.CATEGORY]: category.uid,

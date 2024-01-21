@@ -38,14 +38,9 @@ const useCategorySearchString = () => {
 
 	const resetSearchParams = useCallback(() => {
 		const params = new URLSearchParams(searchParams.toString())
+		const page = params.get('page')
 
-		params.forEach((_, key) => {
-			if (key === SEARCH_PARAMS.PAGE) {
-				return
-			}
-			params.delete(key)
-		})
-		router.replace(pathname + '?' + params.toString())
+		router.replace(pathname + '?' + `page=${page}`)
 	}, [pathname, router, searchParams])
 
 	return { searchParams, createString, resetSearchParams }
