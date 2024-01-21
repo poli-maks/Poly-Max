@@ -16,12 +16,14 @@ emailjs.init(process.env.NEXT_PUBLIC_EMAIL_JS_USER_ID as string)
 
 const sendEmail = async (data: IEmailData): Promise<IEmailjsRes | undefined> => {
 	const { name, email, userMessage, nameProduct } = data
+
 	const emailData = {
-		subject: `${nameProduct ? nameProduct : name}`,
+		subject: `${name}`,
 		from_name: `${name}`,
 		message: `
-    🙂 Name: ${name}
+       Name: ${name}
        Email: ${email}
+	   Product name: ${nameProduct}
 	   Message: ${userMessage}
     `,
 	}
