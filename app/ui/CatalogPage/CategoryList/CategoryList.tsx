@@ -1,12 +1,12 @@
 'use client'
 
 import useCategorySearchString from '@/app/lib/hooks/useCategorySearchString'
-import { ICategory, SEARCH_PARAMS } from '@/app/lib/interfaces'
-import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { ICategory } from '@/app/lib/interfaces'
+import { Box, Button, Flex } from '@chakra-ui/react'
+import React from 'react'
 
-import MenuArrowClosed from '../../svg/MenuArrowClosed'
-import MenuArrowOpen from '../../svg/MenuArrowOpen'
+import Category from './Category/Category'
+import MenuCategory from './MenuCategory/MenuCategory'
 
 interface ICategoryList {
 	categories: ICategory[]
@@ -15,7 +15,6 @@ interface ICategoryList {
 
 const CategoryList = ({ categories, dictionary }: ICategoryList) => {
 	const { searchParams, createString, resetSearchParams } = useCategorySearchString()
-	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const choosedCategory = searchParams.get('category')
 
 	return (
@@ -54,69 +53,22 @@ const CategoryList = ({ categories, dictionary }: ICategoryList) => {
 					return (
 						<Box as={'li'} position={'relative'} pb={'20px'} key={category.uid}>
 							{subs.length !== 0 ? (
-								<Menu
-									key={category.uid}
-									onOpen={() => setIsMenuOpen(true)}
-									onClose={() => setIsMenuOpen(false)}
-								>
-									<MenuButton
-										position={'relative'}
-										as={Button}
-										variant={'ghost'}
-										_hover={{ backgroundColor: 'transparent', opacity: 0.9 }}
-										_active={{ backgroundColor: 'transparent', opacity: 0.9 }}
-										alignItems={'center'}
-										rightIcon={!isMenuOpen ? <MenuArrowClosed /> : <MenuArrowOpen />}
-									>
-										{category.title}
-									</MenuButton>
-									{choosedCategory && choosedCategory === category.uid.toString() && (
-										<Box
-											position={'absolute'}
-											top={'100%'}
-											left={0}
-											w={'100%'}
-											h={'3px'}
-											bgColor={'#000'}
-										></Box>
-									)}
-									<MenuList bgColor={'#FAFAFA'}>
-										{subs.map(({ attributes: sub }) => (
-											<MenuItem
-												bgColor={'transparent'}
-												_hover={{ backgroundColor: 'transparent', opacity: 0.9 }}
-												onClick={() => {
-													createString({
-														[SEARCH_PARAMS.CATEGORY]: category.uid,
-														[SEARCH_PARAMS.SUB_CATEGORY]: sub.uid,
-													})
-												}}
-												key={sub.uid}
-											>
-												{sub.title}
-											</MenuItem>
-										))}
-									</MenuList>
-								</Menu>
+								<>
+									<MenuCategory
+										variant="menu"
+										category={category}
+										subs={subs}
+										onClick={createString}
+										choosedCategory={choosedCategory}
+									/>
+								</>
 							) : (
 								<>
-									<Button
-										onClick={() => createString({ [SEARCH_PARAMS.CATEGORY]: category.uid })}
-										variant={'ghost'}
-										_hover={{ backgroundColor: 'transparent', opacity: 0.9 }}
-									>
-										{category.title}
-									</Button>
-									{choosedCategory && choosedCategory === category.uid.toString() && (
-										<Box
-											position={'absolute'}
-											top={'100%'}
-											left={0}
-											w={'100%'}
-											h={'3px'}
-											bgColor={'#000'}
-										></Box>
-									)}
+									<Category
+										onClick={createString}
+										category={category}
+										choosedCategory={choosedCategory}
+									/>
 								</>
 							)}
 						</Box>
