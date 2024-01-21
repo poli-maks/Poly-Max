@@ -28,25 +28,26 @@ export const ProductSlider = ({ productImages }: { productImages: ImageAttribute
 				observeParents={true}
 				hidden={size !== 'sm' ? true : false}
 			>
-				{productImages.map((item) => (
+				{productImages?.map((item) => (
 					<SwiperSlide key={item.id}>
 						<Box
 							position="relative"
 							z-index="2"
-							maxW="768px"
-							minW="340px"
+							display="flex"
+							flex={1}
 							h={{ base: '255px', md: '480px', sm: '380px' }}
 							bgRepeat={'no-repeat'}
 							bgPos={'center'}
 							bgSize={'cover'}
+							width="100%"
 							paddingBottom="25px"
 						>
 							<Image
 								src={item.attributes.url}
 								alt=""
 								fill
-								//placeholder="blur"
-								//blurDataURL="/blur-product.jpg"
+								placeholder="blur"
+								blurDataURL="/blur-product.jpg"
 								sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 								style={{
 									display: 'block',
