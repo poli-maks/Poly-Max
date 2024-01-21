@@ -18,9 +18,9 @@ const HomePage: React.FC<IParams> = async ({ params: { lang } }) => {
 			<Manufacture dictionary={dictionary} lang={lang} />
 			<Benefits dictionary={dictionary} />
 			<Location
-				locations={dictionary.homePage.locations}
-				title={dictionary.homePage.title}
-				subTitle={dictionary.homePage.subTitle}
+				locations={dictionary.homePage.location.locations}
+				title={dictionary.homePage.location.title}
+				subTitle={dictionary.homePage.location.subTitle}
 			/>
 			<ForBuisness dictionary={dictionary} />
 		</>

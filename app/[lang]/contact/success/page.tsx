@@ -1,8 +1,12 @@
+import { getDictionary } from '@/app/lib/dictionary'
+import { IParams } from '@/app/lib/interfaces'
 import SectionWrapper from '@/app/ui/sectionWrapper/SectionWrapper'
 import { Button, Center, Heading, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 
-const SubmitSuccess = () => {
+const SubmitSuccess: React.FC<IParams> = async ({ params: { lang } }) => {
+	const disctionary = await getDictionary(lang)
+
 	return (
 		<SectionWrapper>
 			<Center flexDir={'column'} h={480}>
@@ -14,7 +18,7 @@ const SubmitSuccess = () => {
 					textAlign={'center'}
 					maxW={'440px'}
 				>
-					Vielen Dank, dass Sie Poli-Maks gewählt haben!
+					{disctionary.submitSuccess.title}
 				</Heading>
 				<Text
 					textAlign={'center'}
@@ -24,7 +28,7 @@ const SubmitSuccess = () => {
 					maxW={'440px'}
 					mb={'40px'}
 				>
-					Unsere Experten werden innerhalb von 24 Stunden Kontakt zu Ihnen aufnehmen.
+					{disctionary.submitSuccess.text}
 				</Text>
 
 				<Button as={Link} href="/" variant={'accentAlt'} maxW={'340px'}>
