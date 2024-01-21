@@ -32,29 +32,61 @@ const TableTd = ({ children }: { children: ReactNode }): React.JSX.Element => {
 	)
 }
 
+const isTableEmpty = (
+	arr: ITableRow[],
+	key: 'article' | 'diameter' | 'length' | 'weight'
+): boolean => {
+	return arr.every((el) => el[key] === null || !el[key].length)
+}
+
+const isNotSavedEmpty = (arr: ITableRow[]) => {
+	const keys: ['article', 'diameter', 'length', 'weight'] = [
+		'article',
+		'diameter',
+		'length',
+		'weight',
+	]
+
+	return arr.every((el) => {
+		return keys.some((key) => el[key] !== null)
+	})
+}
+
 export const ProductTable = ({ tableRows, dictionary }: IProps) => {
 	return (
 		<>
-			{tableRows?.length > 0 && (
+			{tableRows?.length > 0 && isNotSavedEmpty(tableRows) && (
 				<TableContainer mb={{ base: '41px', lg: '121px' }}>
 					<Table>
 						<Thead bg="tableRow">
 							<Tr>
-								<TableTh>{dictionary.tableHeaders.article}</TableTh>
-								<TableTh>{dictionary.tableHeaders.diameter}</TableTh>
-								<TableTh>{dictionary.tableHeaders.length}</TableTh>
-								<TableTh>{dictionary.tableHeaders.weight}</TableTh>
+								{!isTableEmpty(tableRows, 'article') && (
+									<TableTh>{dictionary.tableHeaders.article}</TableTh>
+								)}
+								{!isTableEmpty(tableRows, 'diameter') && (
+									<TableTh>{dictionary.tableHeaders.diameter}</TableTh>
+								)}
+								{!isTableEmpty(tableRows, 'length') && (
+									<TableTh>{dictionary.tableHeaders.length}</TableTh>
+								)}
+								{!isTableEmpty(tableRows, 'weight') && (
+									<TableTh>{dictionary.tableHeaders.weight}</TableTh>
+								)}
 							</Tr>
 						</Thead>
 						<Tbody>
-							{tableRows.map((row, index) => (
-								<Tr key={row.id} bg={index % 2 !== 0 ? 'tableRow' : 'transparent'}>
-									<TableTd>{row.article}</TableTd>
-									<TableTd>{row.diameter}</TableTd>
-									<TableTd>{row.length}</TableTd>
-									<TableTd>{row.weight}</TableTd>
-								</Tr>
-							))}
+							{tableRows.map((row, index) => {
+								const { id, article, diameter, length, weight } = row
+
+								return (
+									<Tr key={id} bg={index % 2 !== 0 ? 'tableRow' : 'transparent'}>
+										{article?.length > 0 && <TableTd>{article}</TableTd>}
+										{diameter?.length > 0 && <TableTd>{diameter}</TableTd>}
+										{length?.length > 0 && <TableTd>{length}</TableTd>}
+										{weight?.length > 0 && <TableTd>{weight}</TableTd>}
+									</Tr>
+								)
+							})}
 						</Tbody>
 					</Table>
 				</TableContainer>
