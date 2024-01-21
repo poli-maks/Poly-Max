@@ -4,7 +4,7 @@ import { submitData } from '@/app/lib/actions'
 import { IDictionaryModal } from '@/app/lib/interfaces'
 import sendEmail from '@/app/lib/utils/sendEmail'
 import { Flex, FormControl, Input, Textarea, Checkbox } from '@chakra-ui/react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormState } from 'react-dom'
 
@@ -25,6 +25,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ nameProduct, dictionaryModal 
 
 	const { lang } = useParams()
 
+	const pathname = usePathname()
+	const arr = pathname.split('/')
+
+	const contactPage = arr[2]
+
 	useEffect(() => {
 		;(async () => {
 			if (state?.message === 'success') {
@@ -33,7 +38,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ nameProduct, dictionaryModal 
 
 					const res = await sendEmail({ ...state, nameProduct })
 					if (res?.status === 200) {
-						router.push(`contact/success`)
+						const newPath = `/${lang}/contact/success`
+						router.push(newPath)
+
 						ref.current?.reset()
 					}
 				} catch (error) {
@@ -56,37 +63,41 @@ const ContactForm: React.FC<ContactFormProps> = ({ nameProduct, dictionaryModal 
 
 	return (
 		<Flex as="form" action={dispatch} ref={ref} flexDir={'column'} gap={'5px'}>
-			<FormControl>
-				<Input
-					name="name"
-					type="text"
-					borderRadius={'2px'}
-					p={'0 10px'}
-					placeholder={`${dictionaryModal?.nameField}`}
-					bgColor={theme.colors.tableRow}
-					focusBorderColor={'#9E9E9E'}
-					border={`1px solid ${nameError ? '#D30000' : 'transparent'}`}
-					_placeholder={{
-						color: emailError ? '#D30000' : '#9E9E9E',
-					}}
-				/>
-			</FormControl>
-			<FormControl>
-				<Input
-					name="email"
-					type="email"
-					borderRadius={'2px'}
-					p={'0 10px'}
-					placeholder={`${dictionaryModal?.emailField}`}
-					bgColor={theme.colors.tableRow}
-					focusBorderColor={'#9E9E9E'}
-					border={`1px solid ${emailError ? '#D30000' : 'transparent'}`}
-					_placeholder={{
-						color: emailError ? '#D30000' : '#9E9E9E',
-					}}
-				/>
-			</FormControl>
-
+			<Flex
+				flexDir={contactPage === 'contact' ? { base: 'column', md: 'row' } : 'column'}
+				gap={'5px'}
+			>
+				<FormControl>
+					<Input
+						name="name"
+						type="text"
+						borderRadius={'2px'}
+						p={'0 10px'}
+						placeholder={`${dictionaryModal?.nameField}`}
+						bgColor={theme.colors.tableRow}
+						focusBorderColor={'#9E9E9E'}
+						border={`1px solid ${nameError ? '#D30000' : 'transparent'}`}
+						_placeholder={{
+							color: emailError ? '#D30000' : '#9E9E9E',
+						}}
+					/>
+				</FormControl>
+				<FormControl>
+					<Input
+						name="email"
+						type="email"
+						borderRadius={'2px'}
+						p={'0 10px'}
+						placeholder={`${dictionaryModal?.emailField}`}
+						bgColor={theme.colors.tableRow}
+						focusBorderColor={'#9E9E9E'}
+						border={`1px solid ${emailError ? '#D30000' : 'transparent'}`}
+						_placeholder={{
+							color: emailError ? '#D30000' : '#9E9E9E',
+						}}
+					/>
+				</FormControl>
+			</Flex>
 			<FormControl>
 				<Textarea
 					name="userMessage"
