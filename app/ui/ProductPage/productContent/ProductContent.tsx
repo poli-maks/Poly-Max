@@ -83,9 +83,9 @@ export const ProductContent = ({ product, dictionary, dictionaryModal }: IProps)
 						</Text>
 					</Flex>
 				</Box>
-				<Box>
-					<ProductTable tableRows={tableRows} dictionary={dictionary} />
-				</Box>
+
+				<ProductTable tableRows={tableRows} dictionary={dictionary} />
+
 				<Box>
 					{markdown?.length > 0 &&
 						markdown.map((item) => {
