@@ -26,7 +26,7 @@ const NotFound = () => {
 				</Text>
 
 				<Button as={Link} href="/" variant={'accentAlt'} maxW={'340px'}>
-					Let&apos;s try again
+					Home
 				</Button>
 			</Center>
 		</SectionWrapper>
