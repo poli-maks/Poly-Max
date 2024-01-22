@@ -50,7 +50,14 @@ const manufactureSwiper = () => {
 			>
 				{SliderImages.map((image, index) => (
 					<SwiperSlide key={index}>
-						<Image src={image} alt={`Slide ${index + 1}`} width={530} />
+						<Image
+							src={image}
+							alt={`Slide ${index + 1}`}
+							width={530}
+							placeholder="blur"
+							blurDataURL="/img/blurPlaceholder.png"
+							loading="lazy"
+						/>
 					</SwiperSlide>
 				))}
 			</Swiper>

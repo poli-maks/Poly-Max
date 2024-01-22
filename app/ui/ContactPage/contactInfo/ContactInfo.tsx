@@ -23,7 +23,14 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ contacts, position }) => {
 	return (
 		<Box marginBottom={{ base: '30px', lg: '0' }}>
 			<Flex gap={{ base: '10px', lg: '40px' }} borderBottom={'1px solid #E0E0E0'} pb={'30px'}>
-				<Image src={Director} alt="Director" style={{ objectFit: 'cover' }} />
+				<Image
+					src={Director}
+					alt="Director"
+					style={{ objectFit: 'cover' }}
+					placeholder="blur"
+					blurDataURL="/img/blurPlaceholder.png"
+					loading="lazy"
+				/>
 
 				<Flex flexDir={'column'} style={textStyle} pt={{ base: '30px', lg: '50px' }}>
 					<Text fontSize={'20px'} fontWeight={'600'}>

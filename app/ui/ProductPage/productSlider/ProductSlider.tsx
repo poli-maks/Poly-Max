@@ -44,10 +44,11 @@ export const ProductSlider = ({ productImages }: { productImages: ImageAttribute
 						>
 							<Image
 								src={item.attributes.url}
-								alt=""
+								alt="product image"
 								fill
 								placeholder="blur"
-								blurDataURL="/blur-product.jpg"
+								blurDataURL="/img/blurPlaceholder.png"
+								loading="lazy"
 								sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 								style={{
 									display: 'block',

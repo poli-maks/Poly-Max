@@ -34,7 +34,13 @@ const About = ({ dictionary }: { dictionary: IAboutUsDictionary }) => {
 					<Text fontSize={{ base: '12px', lg: '18px' }} mb={{ base: '20px', lg: '55px' }}>
 						{dictionary.sections.first.text}
 					</Text>
-					<Image src={aboutUsImgFirstSection} alt={`For buisness section image`} />
+					<Image
+						src={aboutUsImgFirstSection || '/img/blurPlaceholder.png'}
+						alt={`For buisness section image`}
+						placeholder="blur"
+						blurDataURL="/img/blurPlaceholder.png"
+						loading="lazy"
+					/>
 				</Box>
 			</Flex>
 			<Flex
@@ -67,7 +73,13 @@ const About = ({ dictionary }: { dictionary: IAboutUsDictionary }) => {
 					<Text fontSize={{ base: '12px', lg: '18px' }} mb={{ base: '20px', lg: '55px' }}>
 						{dictionary.sections.third.text}
 					</Text>
-					<Image src={aboutUsImgSecondSection} alt={`For buisness section image`} />
+					<Image
+						src={aboutUsImgSecondSection || '/img/blurPlaceholder.png'}
+						alt={`For buisness section image`}
+						placeholder="blur"
+						blurDataURL="/img/blurPlaceholder.png"
+						loading="lazy"
+					/>
 				</Box>
 			</Flex>
 		</SectionWrapper>
