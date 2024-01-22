@@ -96,7 +96,23 @@
 			"article": "Artikel",
 			"diameter": "Durchmesser (mm)",
 			"length": "Länge (mm)",
-			"weight": "Gewicht (kg)"
+			"weight": "Gewicht (kg)",
+			"coating_thickness": "Wandstärke",
+			"cross_section": "Aderquerschnitt",
+			"volume": "Volume",
+			"wall_thickness": "Beschichtungsstärke"
+		},
+		"delivery": {
+			"title": "Wie liefern wir Materialien?",
+			"body": "<p>Wir schätzen jeden unserer Kunden. Um die Lieferung für Sie, unsere Kunden, komfortabler zu gestalten, haben wir daher auf DDP-Lieferbedingungen umgestellt. Mit anderen Worten, unser Unternehmen kooperiert direkt mit Spediteuren und Vermittlungsunternehmen sowie Lagerbeständen im Bereich Logistik.</p><p>Denken Sie auch daran, dass die Vorlaufzeit für die Lieferung und die Lieferung für Stammkunden die schnellste und günstigste ist.</p>"
+		},
+		"company": {
+			"title": "Wie ist unser Unternehmen?",
+			"body": "<p>Unsere Firma Poli-Maks GmbH gehört großen Großhändlern von Metallprodukten für den Tiefbau und den Straßenbau. Die Herstellung unserer Waren erfolgt in Dnepropetrowsk in der Ukraine. Und unsere letzten Objekte in der Produktionswerkstatt werden durch die Produktion von Produkten in großen Mengen gesteuert. Wir haben auch eine jährliche Verteilung der Verkaufsflächen. Und wir erfüllen immer alle Bedürfnisse der Kunden und stellen unsere Produkte von hoher Qualität und zu vernünftigen Preisen her und verkaufen sie, um so viele unserer Kunden wie möglich zufrieden zu stellen.<p>"
+		},
+		"contactUs": {
+			"title": "Wie können Sie mit uns kontaktieren? ",
+			"body": "<p>Unten können Sie Informationen darüber lesen und sehen, wo Sie uns finden und wie Sie jemanden aus unserem Unternehmen kontaktieren können.</p><p>Sie können mit ihn telefonisch unter <a href='tel:+380684777139'>+380-68-477-71-39</a> erreichen. </p><p>Oder Sie können uns auch an unsere E-Mail <a href='mailto:officepolimax@gmail.com'>officepolimax@gmail.com</a> schreiben, damit wir alle Ihre Fragen beantworten können.</p>"
 		}
 	},
 	"aboutUsPage": {
