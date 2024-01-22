@@ -87,11 +87,11 @@ const Products = ({ searchParams, btnText, lang, notFound }: IProducts) => {
 
 	return (
 		<>
-			{isLoading && page === 1 && <ProductListSkeleton page={page} />}
+			{isLoading && page === 1 && <ProductListSkeleton />}
 			{(!isLoading || page > 1) && Array.isArray(products) && (
 				<ProductList page={page} products={products} lang={lang} />
 			)}
-			{isLoading && page > 1 && <ProductListSkeleton page={page} />}
+			{isLoading && page > 1 && <ProductListSkeleton />}
 
 			{typeof products === 'string' && (
 				<Text fontSize={'20px'} lineHeight={1} fontWeight={600}>
