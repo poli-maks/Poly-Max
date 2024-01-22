@@ -2,7 +2,15 @@
 const nextConfig = {
 	reactStrictMode: false,
 	images: {
-		domains: ['s3-alpha-sig.figma.com', 'res.cloudinary.com'],
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'res.cloudinary.com',
+			},
+		],
+	},
+	experimental: {
+		missingSuspenseWithCSRBailout: false,
 	},
 }
 

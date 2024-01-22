@@ -1,7 +1,6 @@
 'use client'
 
 import { Button, Center } from '@chakra-ui/react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
 import Arrow from '../../svg/Arrow'
@@ -9,39 +8,34 @@ import Arrow from '../../svg/Arrow'
 const LoadMore = ({
 	children,
 	total,
+	page,
 	hasProducts,
+	setTotal,
+	setPage,
 }: {
+	page: number
 	children: React.ReactNode
-	total: string
+	total: number
 	hasProducts: boolean
+	setTotal: (total: number) => void
+	setPage: (page: number) => void
 }) => {
-	const searchParams = useSearchParams()
-	const { replace } = useRouter()
-	const pathname = usePathname()
-	const page = searchParams.get('page') || '1'
 	const limit = 8
-
-	const params = new URLSearchParams(searchParams)
 
 	useEffect(() => {
 		if (total && hasProducts) {
-			params.set('total', total)
-			replace(`${pathname}?${params}`)
-		}
-		const loadedPage = localStorage.getItem('page')
-		if (loadedPage === page) {
-			params.set('page', '1')
-			replace(`${pathname}?${params}`)
+			setTotal(total)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [total])
+	}, [hasProducts, total])
 
-	const hasNext = limit * (parseInt(page) - 1) + limit < parseInt(total)
+	let hasNext
+	if (page && total) {
+		hasNext = limit * (page - 1) + limit < total
+	}
 
 	const handleChangePage = () => {
-		params.set('page', (parseInt(page) + 1).toString())
-
-		replace(`${pathname}?${params}`)
+		setPage(page + 1)
 	}
 
 	return (
