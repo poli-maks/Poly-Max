@@ -55,7 +55,7 @@ const MobileFilterMenu = ({ categories, all_category, filter }: IMobileFilterMen
 						{filter}
 					</MenuButton>
 					<Text fontSize={'16px'}>
-						{choosedCategory?.attributes.title || 'Alle'}
+						{choosedCategory?.attributes.title || all_category}
 						{choosedSubCategory && (
 							<>
 								<Text as={'span'} mx={'4px'}>
@@ -70,6 +70,8 @@ const MobileFilterMenu = ({ categories, all_category, filter }: IMobileFilterMen
 					<MenuItem as={'li'} px={0} _hover={{ bgColor: 'transparent' }} bgColor="transparent">
 						<Button
 							variant={'ghost'}
+							w={'full'}
+							justifyContent={'start'}
 							_hover={{ bgColor: 'transparent' }}
 							onClick={() => resetSearchParams()}
 						>

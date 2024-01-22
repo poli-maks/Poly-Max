@@ -12,6 +12,8 @@ const Category = ({ category, onClick, choosedCategory }: ICategoryProps) => {
 	return (
 		<>
 			<Button
+				w={'full'}
+				justifyContent={'start'}
 				onClick={() => onClick({ [SEARCH_PARAMS.CATEGORY]: category.uid })}
 				variant={'ghost'}
 				_hover={{ backgroundColor: 'transparent', opacity: 0.9 }}
