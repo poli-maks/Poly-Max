@@ -38,6 +38,9 @@ const ProductItem = ({ product: { attributes }, lang }: { product: IProduct; lan
 							fill
 							sizes="(max-width: 768px) 100vw, (max-width: 1300px) 50vw, 33vw"
 							style={{ objectFit: 'cover', transition: 'all 300ms ease-in-out' }}
+							placeholder="blur"
+							blurDataURL="/img/blurPlaceholder.png"
+							loading="lazy"
 						/>
 					</Box>
 

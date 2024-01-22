@@ -29,7 +29,7 @@ const ProductItemSkeleton = () => {
 	)
 }
 
-const ProductListSkeleton = () => {
+const ProductListSkeleton = ({ page }: { page: number }) => {
 	return (
 		<Grid
 			as={'ul'}
@@ -39,7 +39,7 @@ const ProductListSkeleton = () => {
 			m={'0 auto'}
 			padding={0}
 		>
-			{Array.from({ length: 8 }, (v, i) => (
+			{Array.from({ length: 8 * page }, (v, i) => (
 				<ProductItemSkeleton key={i} />
 			))}
 		</Grid>

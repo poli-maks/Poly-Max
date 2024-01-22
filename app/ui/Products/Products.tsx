@@ -85,32 +85,32 @@ const Products = ({ searchParams, btnText, lang, notFound }: IProducts) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [lang, page, setTotal, searchParams])
 
-	if (isLoading) return <ProductListSkeleton />
+	return (
+		<>
+			{isLoading && page === 1 && <ProductListSkeleton page={page} />}
+			{(!isLoading || page > 1) && Array.isArray(products) && (
+				<ProductList page={page} products={products} lang={lang} />
+			)}
+			{isLoading && page > 1 && <ProductListSkeleton page={page} />}
 
-	if (!isLoading)
-		return (
-			<>
-				{Array.isArray(products) && <ProductList page={page} products={products} lang={lang} />}
-
-				{typeof products === 'string' && (
-					<Text fontSize={'20px'} lineHeight={1} fontWeight={600}>
-						{notFound}
-					</Text>
-				)}
-
-				{total && (
-					<LoadMore
-						hasProducts={!!Array.isArray(products)}
-						page={page}
-						total={total}
-						setPage={setPage}
-						setTotal={setTotal}
-					>
-						{btnText}
-					</LoadMore>
-				)}
-			</>
-		)
+			{typeof products === 'string' && (
+				<Text fontSize={'20px'} lineHeight={1} fontWeight={600}>
+					{notFound}
+				</Text>
+			)}
+			{total && (
+				<LoadMore
+					hasProducts={!!Array.isArray(products)}
+					page={page}
+					total={total}
+					setPage={setPage}
+					setTotal={setTotal}
+				>
+					{btnText}
+				</LoadMore>
+			)}
+		</>
+	)
 }
 
 export default Products

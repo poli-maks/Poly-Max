@@ -44,7 +44,10 @@ const LocationsSlider = ({ locations }: { locations: ILocation[] }) => {
 									h={'400px'}
 								>
 									<Image
-										src={img || '/img/productPlaceholder.jpg'}
+										placeholder="blur"
+										blurDataURL="/img/blurPlaceholder.png"
+										loading="lazy"
+										src={img || '/img/blurPlaceholder.png'}
 										alt={'location photo'}
 										fill
 										sizes="(max-width: 768px) 100vw, (max-width: 1300px) 50vw, 33vw"

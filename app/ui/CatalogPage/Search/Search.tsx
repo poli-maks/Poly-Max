@@ -93,6 +93,7 @@ const Search = ({
 							}}
 						>
 							<Input
+								autoFocus
 								p={0}
 								pl={0}
 								fontSize={'20px'}

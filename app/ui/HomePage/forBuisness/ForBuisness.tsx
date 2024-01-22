@@ -60,7 +60,13 @@ const ForBuisness: React.FC<ForBuisnessProps> = ({ dictionary }) => {
 					</Text>
 				</Box>
 			</Flex>
-			<Image src={forBuisnessImg} alt={`For buisness section image`} />
+			<Image
+				src={forBuisnessImg}
+				alt={`For buisness section image`}
+				placeholder="blur"
+				blurDataURL="/img/blurPlaceholder.png"
+				loading="lazy"
+			/>
 		</SectionWrapper>
 	)
 }
