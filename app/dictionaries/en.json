@@ -98,7 +98,23 @@
 			"article": "Article",
 			"diameter": "Diameter (mm)",
 			"length": "Length (mm)",
-			"weight": "Weight (kg)"
+			"weight": "Weight (kg)",
+			"coating_thickness": "Coating thickness",
+			"cross_section": "Wire cross section",
+			"volume": "Volume",
+			"wall_thickness": "Wall thickness"
+		},
+		"delivery": {
+			"title": "How do we deliver materials?",
+			"body": "<p>We value each of our customers. To make the delivery more convenient for you, our customers, we have therefore switched to DDP (Delivered Duty Paid) delivery terms. In other words, our company collaborates directly with carriers, intermediaries, as well as logistics warehouses.</p><p>Also, please note that the lead time for delivery and the delivery for regular customers is the fastest and most cost-effective.</p>"
+		},
+		"company": {
+			"title": "How is our company?",
+			"body": "<p>Our company, Poli-Maks GmbH, is among the major wholesalers of metal products for civil engineering and road construction. The manufacturing of our goods takes place in Dnipro, Ukraine. The final stages of our production workshop are managed through the production of items in large quantities. We also have an annual distribution of sales areas. We consistently meet all customer needs, producing high-quality products at reasonable prices, with the aim of satisfying as many customers as possible.<p>"
+		},
+		"contactUs": {
+			"title": "How can you contact us?",
+			"body": "<p>Below you can read information about where to find us and how to contact someone from our company.</p><p>You can reach him by phone at <a href='tel:+380684777139'>+380-68-477-71-39</a>.</p><p>Or you can also write to us at our email <a href='mailto:officepolimax@gmail.com'>officepolimax@gmail.com</a> so that we can answer all your questions.</p>"
 		}
 	},
 	"aboutUsPage": {

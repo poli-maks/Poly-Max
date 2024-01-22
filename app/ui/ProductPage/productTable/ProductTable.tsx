@@ -1,5 +1,5 @@
 'use client'
-import { IProductDictionary, ITableRow } from '@/app/lib/interfaces'
+import { IAllowedKeys, IProductDictionary, ITableRow } from '@/app/lib/interfaces'
 import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import React, { ReactNode } from 'react'
 
@@ -9,6 +9,17 @@ interface IProps {
 	tableRows: ITableRow[]
 	dictionary: tableHeaders
 }
+
+const TABLE_FIELDS: Array<keyof ITableRow> = [
+	'article',
+	'diameter',
+	'length',
+	'weight',
+	'coating_thickness',
+	'cross_section',
+	'volume',
+	'wall_thickness',
+]
 
 const TableTh = ({ children }: { children: ReactNode }): React.JSX.Element => {
 	return (
@@ -32,24 +43,22 @@ const TableTd = ({ children }: { children: ReactNode }): React.JSX.Element => {
 	)
 }
 
-const isTableEmpty = (
-	arr: ITableRow[],
-	key: 'article' | 'diameter' | 'length' | 'weight'
-): boolean => {
-	return arr.every((el) => el[key] === null || !el[key].length)
-}
-
 const isNotSavedEmpty = (arr: ITableRow[]) => {
-	const keys: ['article', 'diameter', 'length', 'weight'] = [
-		'article',
-		'diameter',
-		'length',
-		'weight',
-	]
+	const keys: Array<keyof ITableRow> = TABLE_FIELDS
 
 	return arr.every((el) => {
 		return keys.some((key) => el[key] !== null)
 	})
+}
+
+const tableHeading = (
+	arr: ITableRow[],
+	nameOfField: IAllowedKeys,
+	dictionary: tableHeaders
+): React.ReactElement<HTMLTableCellElement> | null => {
+	const res = arr.some((el) => el[nameOfField] !== null)
+
+	return res ? <TableTh>{dictionary.tableHeaders[nameOfField]}</TableTh> : null
 }
 
 export const ProductTable = ({ tableRows, dictionary }: IProps) => {
@@ -60,23 +69,26 @@ export const ProductTable = ({ tableRows, dictionary }: IProps) => {
 					<Table>
 						<Thead bg="tableRow">
 							<Tr>
-								{!isTableEmpty(tableRows, 'article') && (
-									<TableTh>{dictionary.tableHeaders.article}</TableTh>
-								)}
-								{!isTableEmpty(tableRows, 'diameter') && (
-									<TableTh>{dictionary.tableHeaders.diameter}</TableTh>
-								)}
-								{!isTableEmpty(tableRows, 'length') && (
-									<TableTh>{dictionary.tableHeaders.length}</TableTh>
-								)}
-								{!isTableEmpty(tableRows, 'weight') && (
-									<TableTh>{dictionary.tableHeaders.weight}</TableTh>
-								)}
+								{TABLE_FIELDS.map((el) => {
+									if (el === 'id') return
+
+									return tableHeading(tableRows, el, dictionary)
+								})}
 							</Tr>
 						</Thead>
 						<Tbody>
 							{tableRows.map((row, index) => {
-								const { id, article, diameter, length, weight } = row
+								const {
+									id,
+									article,
+									diameter,
+									length,
+									weight,
+									coating_thickness,
+									cross_section,
+									volume,
+									wall_thickness,
+								} = row
 
 								return (
 									<Tr key={id} bg={index % 2 !== 0 ? 'tableRow' : 'transparent'}>
@@ -84,6 +96,10 @@ export const ProductTable = ({ tableRows, dictionary }: IProps) => {
 										{diameter?.length > 0 && <TableTd>{diameter}</TableTd>}
 										{length?.length > 0 && <TableTd>{length}</TableTd>}
 										{weight?.length > 0 && <TableTd>{weight}</TableTd>}
+										{coating_thickness?.length > 0 && <TableTd>{coating_thickness}</TableTd>}
+										{cross_section?.length > 0 && <TableTd>{cross_section}</TableTd>}
+										{volume?.length > 0 && <TableTd>{volume}</TableTd>}
+										{wall_thickness?.length > 0 && <TableTd>{wall_thickness}</TableTd>}
 									</Tr>
 								)
 							})}

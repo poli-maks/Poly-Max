@@ -124,6 +124,29 @@ export const ProductContent = ({ product, dictionary, dictionaryModal }: IProps)
 							)
 						})}
 				</Box>
+				<Box>
+					<Heading as="h3" size="md" marginBottom={{ base: '30px', lg: '40px' }}>
+						{dictionary.delivery.title}
+					</Heading>
+					<Box
+						dangerouslySetInnerHTML={{ __html: dictionary.delivery.body }}
+						marginBottom={{ base: '20px', lg: '30px' }}
+					/>
+					<Heading as="h3" size="md" marginBottom={{ base: '30px', lg: '40px' }}>
+						{dictionary.company.title}
+					</Heading>
+					<Box
+						dangerouslySetInnerHTML={{ __html: dictionary.company.body }}
+						marginBottom={{ base: '20px', lg: '30px' }}
+					/>
+					<Heading as="h3" size="md" marginBottom={{ base: '30px', lg: '40px' }}>
+						{dictionary.contactUs.title}
+					</Heading>
+					<Box
+						dangerouslySetInnerHTML={{ __html: dictionary.contactUs.body }}
+						marginBottom={{ base: '20px', lg: '30px' }}
+					/>
+				</Box>
 			</Flex>
 			<ModalWindow isOpen={isOpen} onClose={onClose}>
 				<ModalForm nameProduct={title} dictionaryModal={dictionaryModal} />

@@ -90,11 +90,15 @@ export interface ImageAttributes {
 }
 
 export interface ITableRow {
+	id: number
 	article: string
 	diameter: string
-	id: number
 	length: string
 	weight: string
+	coating_thickness: string
+	cross_section: string
+	volume: string
+	wall_thickness: string
 }
 
 export interface IProductProps {
@@ -116,6 +120,16 @@ export interface IProductProps {
 		localizations: unknown[]
 	}
 }
+
+export type IAllowedKeys =
+	| 'article'
+	| 'diameter'
+	| 'length'
+	| 'weight'
+	| 'coating_thickness'
+	| 'cross_section'
+	| 'volume'
+	| 'wall_thickness'
 
 export interface ICategory {
 	id: number
@@ -215,6 +229,22 @@ export interface IProductDictionary {
 		diameter: string
 		length: string
 		weight: string
+		coating_thickness: string
+		cross_section: string
+		volume: string
+		wall_thickness: string
+	}
+	delivery: {
+		title: string
+		body: string
+	}
+	company: {
+		title: string
+		body: string
+	}
+	contactUs: {
+		title: string
+		body: string
 	}
 }
 
