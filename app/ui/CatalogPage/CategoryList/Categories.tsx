@@ -7,19 +7,17 @@ import CategoryList from './CategoryList'
 
 interface ICategoriesProps {
 	lang: Locale
-	dictionary: {
-		all_category: string
-		filter: string
-	}
+	all_category: string
+	filter: string
 }
 
-const Categories = async ({ dictionary, lang }: ICategoriesProps) => {
+const Categories = async ({ all_category, filter, lang }: ICategoriesProps) => {
 	const categories = await fetchCategories(lang)
 
 	return (
 		<>
-			<CategoryList categories={categories} dictionary={dictionary.all_category} />
-			<MobileFilterMenu categories={categories} dictionary={dictionary} />
+			<CategoryList categories={categories} dictionary={all_category} />
+			<MobileFilterMenu categories={categories} filter={filter} all_category={all_category} />
 		</>
 	)
 }

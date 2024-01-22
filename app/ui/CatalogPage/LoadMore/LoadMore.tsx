@@ -28,6 +28,11 @@ const LoadMore = ({
 			params.set('total', total)
 			replace(`${pathname}?${params}`)
 		}
+		const loadedPage = localStorage.getItem('page')
+		if (loadedPage === page) {
+			params.set('page', '1')
+			replace(`${pathname}?${params}`)
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [total])
 
@@ -44,6 +49,7 @@ const LoadMore = ({
 			<Center mt={'60px'}>
 				<Button
 					variant="arrow"
+					type="button"
 					onClick={handleChangePage}
 					rightIcon={<Arrow />}
 					isDisabled={!hasNext}
