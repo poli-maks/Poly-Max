@@ -3,11 +3,11 @@ import { Locale } from '@/i18n.config'
 import { Heading } from '@chakra-ui/react'
 import { Suspense } from 'react'
 
+import Products from '../Products/Products'
 import SectionWrapper from '../sectionWrapper/SectionWrapper'
 import CategoriesSkeleton from '../Skeletons/CategoriesSkeleton'
 import ProductListSkeleton from '../Skeletons/ProductListSkeleton'
 import Categories from './CategoryList/Categories'
-import ProductList from './ProductList/ProductList'
 
 const Catalog = ({
 	lang,
@@ -37,15 +37,10 @@ const Catalog = ({
 				{title}
 			</Heading>
 			<Suspense fallback={<CategoriesSkeleton />}>
-				<Categories dictionary={{ all_category, filter }} lang={lang} />
+				<Categories all_category={all_category} filter={filter} lang={lang} />
 			</Suspense>
 			<Suspense fallback={<ProductListSkeleton />}>
-				<ProductList
-					lang={lang}
-					btnText={btnText}
-					searchParams={searchParams}
-					notFound={notFound}
-				/>
+				<Products lang={lang} btnText={btnText} searchParams={searchParams} notFound={notFound} />
 			</Suspense>
 		</SectionWrapper>
 	)

@@ -12,13 +12,11 @@ import MenuCategory from '../CategoryList/MenuCategory/MenuCategory'
 
 interface IMobileFilterMenu {
 	categories: ICategory[]
-	dictionary: {
-		all_category: string
-		filter: string
-	}
+	all_category: string
+	filter: string
 }
 
-const MobileFilterMenu = ({ categories, dictionary }: IMobileFilterMenu) => {
+const MobileFilterMenu = ({ categories, all_category, filter }: IMobileFilterMenu) => {
 	const { searchParams, createString, resetSearchParams } = useCategorySearchString()
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -54,7 +52,7 @@ const MobileFilterMenu = ({ categories, dictionary }: IMobileFilterMenu) => {
 						_active={{ bgColor: 'transparent' }}
 						rightIcon={!isMenuOpen ? <MenuArrowClosed /> : <MenuArrowOpen />}
 					>
-						{dictionary.filter}
+						{filter}
 					</MenuButton>
 					<Text fontSize={'16px'}>
 						{choosedCategory?.attributes.title || 'Alle'}
@@ -75,7 +73,7 @@ const MobileFilterMenu = ({ categories, dictionary }: IMobileFilterMenu) => {
 							_hover={{ bgColor: 'transparent' }}
 							onClick={() => resetSearchParams()}
 						>
-							{dictionary.all_category}
+							{all_category}
 						</Button>
 					</MenuItem>
 					{categories.map(({ attributes: category }) => {

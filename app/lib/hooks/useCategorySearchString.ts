@@ -40,7 +40,13 @@ const useCategorySearchString = () => {
 		router.replace(pathname + '?' + 'page=1')
 	}, [pathname, router])
 
-	return { searchParams, createString, resetSearchParams }
+	const resetPage = useCallback(() => {
+		const params = new URLSearchParams(searchParams.toString())
+		params.set('page', '1')
+		router.replace(pathname + '?' + params.toString())
+	}, [pathname, router, searchParams])
+
+	return { searchParams, createString, resetSearchParams, resetPage }
 }
 
 export default useCategorySearchString
