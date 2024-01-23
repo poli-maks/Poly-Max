@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@chakra-ui/react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -50,14 +51,26 @@ const manufactureSwiper = () => {
 			>
 				{SliderImages.map((image, index) => (
 					<SwiperSlide key={index}>
-						<Image
-							src={image}
-							alt={`Slide ${index + 1}`}
-							width={530}
-							placeholder="blur"
-							blurDataURL="/img/blurPlaceholder.png"
-							loading="lazy"
-						/>
+						<Box
+							position="relative"
+							bgRepeat={'no-repeat'}
+							bgPos={'center'}
+							bgSize={'cover'}
+							backgroundImage={'/img/blurPlaceholder.png'}
+							className="sliderBox"
+						>
+							<Image
+								placeholder="blur"
+								blurDataURL="/img/blurPlaceholder.png"
+								loading="lazy"
+								src={image || '/img/blurPlaceholder.png'}
+								alt={`Manufacture slider image ${index + 1}`}
+								fill
+								style={{
+									objectFit: 'cover',
+								}}
+							/>
+						</Box>
 					</SwiperSlide>
 				))}
 			</Swiper>

@@ -1,7 +1,7 @@
 import { Box, Heading, Text, Flex } from '@chakra-ui/react'
 import Image from 'next/image'
 
-import forBuisnessImg from '../../../../public/img/forBuisnessImg.png'
+import forBusinessImg from '../../../../public/img/forBuisnessImg.png'
 import SectionWrapper from '../../sectionWrapper/SectionWrapper'
 import { theme } from '../../theme'
 
@@ -60,13 +60,16 @@ const ForBuisness: React.FC<ForBuisnessProps> = ({ dictionary }) => {
 					</Text>
 				</Box>
 			</Flex>
-			<Image
-				src={forBuisnessImg}
-				alt={`For buisness section image`}
-				placeholder="blur"
-				blurDataURL="/img/blurPlaceholder.png"
-				loading="lazy"
-			/>
+			<Box
+				position={'relative'}
+				h={{ base: '170px', sm: '340px', lg: '560px' }}
+				bgRepeat={'no-repeat'}
+				bgPos={'center'}
+				bgSize={'cover'}
+				backgroundImage={'/img/blurPlaceholder.png'}
+			>
+				<Image style={{ objectFit: 'cover' }} src={forBusinessImg} alt="For busines image" fill />
+			</Box>
 		</SectionWrapper>
 	)
 }

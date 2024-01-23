@@ -66,7 +66,11 @@ const Contact: React.FC<ContactProps> = async ({ lang, dictionary }) => {
 				</Flex>
 			</SectionWrapper>
 			<SectionWrapper style={{ paddingTop: '0' }}>
-				<Flex flexDir={{ base: 'column', lg: 'row' }} justifyContent={'space-between'}>
+				<Flex
+					flexDir={{ base: 'column', lg: 'row' }}
+					justifyContent={'space-between'}
+					alignItems={{ base: 'start', lg: 'center' }}
+				>
 					<ContactInfo contacts={contacts} position={dictionary.contactPage.position} />
 					<GoogleMap />
 				</Flex>
