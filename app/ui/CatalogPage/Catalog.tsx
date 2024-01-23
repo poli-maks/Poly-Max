@@ -1,9 +1,11 @@
 import { SEARCH_PARAMS } from '@/app/lib/interfaces'
 import { Locale } from '@/i18n.config'
 import { Heading } from '@chakra-ui/react'
+import { Suspense } from 'react'
 
 import Products from '../Products/Products'
 import SectionWrapper from '../sectionWrapper/SectionWrapper'
+import CategoriesSkeleton from '../Skeletons/CategoriesSkeleton'
 import Categories from './CategoryList/Categories'
 
 const Catalog = ({
@@ -32,9 +34,9 @@ const Catalog = ({
 			<Heading as={'h1'} textTransform={'uppercase'} mb={'60px'}>
 				{title}
 			</Heading>
-			{/* <Suspense fallback={<CategoriesSkeleton />}> */}
-			<Categories all_category={all_category} filter={filter} lang={lang} />
-			{/* </Suspense> */}
+			<Suspense fallback={<CategoriesSkeleton />}>
+				<Categories all_category={all_category} filter={filter} lang={lang} />
+			</Suspense>
 			<Products lang={lang} btnText={btnText} searchParams={searchParams} notFound={notFound} />
 		</SectionWrapper>
 	)

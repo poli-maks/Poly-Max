@@ -23,6 +23,9 @@ const ImagesSection = ({ productImages }: { productImages: ImageAttributes[] }) 
 							bgPos={'center'}
 							bgSize={'cover'}
 							paddingBottom="25px"
+							backgroundImage={
+								`url('${item.attributes.formats?.thumbnail.url}')` || '/img/blurPlaceholder.png'
+							}
 						>
 							<Image
 								src={item.attributes?.url || '/img/productPlaceholder.jpg'}

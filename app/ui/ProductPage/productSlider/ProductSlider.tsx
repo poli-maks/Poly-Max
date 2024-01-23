@@ -39,6 +39,7 @@ export const ProductSlider = ({ productImages }: { productImages: ImageAttribute
 							bgRepeat={'no-repeat'}
 							bgPos={'center'}
 							bgSize={'cover'}
+							backgroundImage={'/img/blurPlaceholder.png'}
 							width="100%"
 							paddingBottom="25px"
 						>
