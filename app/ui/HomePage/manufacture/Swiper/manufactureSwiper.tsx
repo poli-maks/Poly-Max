@@ -27,18 +27,18 @@ const manufactureSwiper = () => {
 			<Swiper
 				className="manufactureSwiper"
 				spaceBetween={20}
-				slidesPerView={3}
+				slidesPerView={1}
 				loop={true}
 				grabCursor
 				breakpoints={{
 					270: {
-						slidesPerView: 1,
-						spaceBetween: 20,
+						slidesPerView: 2,
+						spaceBetween: 10,
 						slidesPerGroup: 1,
 					},
-					420: {
+					360: {
 						slidesPerView: 2,
-						spaceBetween: 20,
+						spaceBetween: 10,
 						slidesPerGroup: 2,
 					},
 					1000: {
