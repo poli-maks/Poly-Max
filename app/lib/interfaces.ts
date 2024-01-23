@@ -291,6 +291,8 @@ export interface IContacts {
 	updatedAt?: string
 	publishedAt?: string
 	locale?: string
+	officePhone?: string
+	metartEmail?: string
 }
 
 export enum SEARCH_PARAMS {
