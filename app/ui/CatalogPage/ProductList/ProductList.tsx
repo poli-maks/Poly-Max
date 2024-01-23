@@ -6,8 +6,6 @@ import React from 'react'
 
 import ProductItem from '../ProductItem/ProductItem'
 
-export const dynamic = 'force-dynamic'
-
 interface IProductList {
 	products: IProduct[]
 	lang: Locale

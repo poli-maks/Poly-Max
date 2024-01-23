@@ -10,7 +10,7 @@ export const CategoriesSkeleton = () => {
 			borderBottom={'1px #E0E0E0 solid'}
 			mb={'20px'}
 			pt={'20px'}
-			pb={'20px'}
+			pb={'16px'}
 			ml="18px"
 		>
 			<SkeletonText

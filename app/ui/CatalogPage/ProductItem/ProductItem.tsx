@@ -27,6 +27,16 @@ const ProductItem = ({ product: { attributes }, lang }: { product: IProduct; lan
 						_hover={{
 							cursor: 'pointer',
 						}}
+						backgroundImage={
+							attributes.img.data
+								? `url('${
+										attributes.img && attributes.img?.data[0].attributes.formats?.thumbnail.url
+									}')`
+								: '/img/blurPlaceholder.png'
+						}
+						backgroundPosition={'center'}
+						backgroundRepeat={'no-repeat'}
+						backgroundSize={'cover'}
 					>
 						<Image
 							className="product_card"
