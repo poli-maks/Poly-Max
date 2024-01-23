@@ -10,7 +10,13 @@
 	object-fit: cover;
 }
 
-@media (max-width: 484px) {
+@media (max-width: 269px) {
+	.manufactureSwiper .swiper-slide img {
+		max-height: 200px;
+	}
+}
+
+@media (min-width: 270px) and (max-width: 484px) {
 	.manufactureSwiper .swiper-slide img {
 		max-height: 150px;
 	}
