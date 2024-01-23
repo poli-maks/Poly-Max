@@ -42,6 +42,10 @@ const LocationsSlider = ({ locations }: { locations: ILocation[] }) => {
 									maxW={{ base: '1000px', lg: '640px' }}
 									minW={'280'}
 									h={'400px'}
+									bgRepeat={'no-repeat'}
+									bgPos={'center'}
+									bgSize={'cover'}
+									backgroundImage={'/img/blurPlaceholder.png'}
 								>
 									<Image
 										placeholder="blur"

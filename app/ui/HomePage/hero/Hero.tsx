@@ -55,7 +55,14 @@ const Hero = ({ dictionary, lang }: IHero) => {
 				</Grid>
 			</SectionWrapper>
 			<Box as={'section'}>
-				<Box position={'relative'} h={{ base: '420px', lg: '650px' }}>
+				<Box
+					position={'relative'}
+					h={{ base: '420px', lg: '650px' }}
+					bgRepeat={'no-repeat'}
+					bgPos={'center'}
+					bgSize={'cover'}
+					backgroundImage={'/img/blurPlaceholder.png'}
+				>
 					<Image
 						style={{ position: 'absolute', objectFit: 'cover' }}
 						src={hero_bg}
