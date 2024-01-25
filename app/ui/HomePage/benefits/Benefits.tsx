@@ -69,7 +69,7 @@ const Benefits: React.FC<BenefitsProps> = ({ dictionary }) => {
 			>
 				{dictionary.homePage.benefits.benefitsList.map((item, idx) => {
 					return (
-						<GridItem key={idx} display={'flex'}>
+						<GridItem as={'li'} key={idx} display={'flex'}>
 							<Box as={'span'} width={'32px'}>
 								{icons[idx]()}
 							</Box>
