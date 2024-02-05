@@ -1,4 +1,4 @@
-# Poli-Maks Catalog App 
+# Poli-Maks Catalog App
 
 Welcome to the Poli-Maks Catalog App, where innovation meets quality in the world of metal products. This application serves as a digital storefront for Poli-Maks, a renowned company specializing in the manufacturing and sale of high-quality architectural hardware. Leveraging state-of-the-art technologies, this app seamlessly integrates the power of Next.js, TypeScript, Chakra UI, and Strapi to provide users with a dynamic and user-friendly experience.
 

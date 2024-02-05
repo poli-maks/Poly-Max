@@ -2,16 +2,22 @@
 
 import { Box } from '@chakra-ui/react'
 import Image from 'next/image'
+import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+
+import 'swiper/react'
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
+import 'swiper/css/thumbs'
 
 import 'swiper/css'
 import './styles.css'
 import ManufactureImg1 from '../../../../../public/img/manufactureImg1.png'
-import ManufactureImg2 from '../../../../../public/img/manufactureImg2.png'
+import ManufactureImg2 from '../../../../../public/img/manufactureImg2.jpg'
 import ManufactureImg3 from '../../../../../public/img/manufactureImg3.png'
-import ManufactureImg4 from '../../../../../public/img/manufactureImg4.png'
-import ManufactureImg5 from '../../../../../public/img/manufactureImg5.png'
-import ManufactureImg6 from '../../../../../public/img/manufactureImg6.png'
+import ManufactureImg4 from '../../../../../public/img/manufactureImg4.jpg'
+import ManufactureImg5 from '../../../../../public/img/manufactureImg5.jpg'
+import ManufactureImg6 from '../../../../../public/img/manufactureImg6.jpg'
 
 const SliderImages = [
 	ManufactureImg1,
@@ -27,8 +33,9 @@ const manufactureSwiper = () => {
 		<>
 			<Swiper
 				className="manufactureSwiper"
+				navigation
 				spaceBetween={20}
-				slidesPerView={1}
+				slidesPerView={'auto'}
 				loop={true}
 				grabCursor
 				breakpoints={{
@@ -48,6 +55,7 @@ const manufactureSwiper = () => {
 						slidesPerGroup: 1,
 					},
 				}}
+				modules={[Navigation]}
 			>
 				{SliderImages.map((image, index) => (
 					<SwiperSlide key={index}>
