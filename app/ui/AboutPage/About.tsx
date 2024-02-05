@@ -4,7 +4,7 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 
 import aboutImg1 from '../../../public/img/aboutPhoto1.jpg'
-import aboutImg2 from '../../../public/img/aboutPhoto2.png'
+import aboutImg2 from '../../../public/img/aboutPhoto2.jpg'
 import aboutUsImgFirstSection from '../../../public/img/aboutUs_first.jpg'
 import aboutUsImgSecondSection from '../../../public/img/aboutUs_second.jpg'
 import SectionWrapper from '../sectionWrapper/SectionWrapper'
