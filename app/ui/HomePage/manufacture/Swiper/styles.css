@@ -10,15 +10,39 @@
 	object-fit: cover;
 }
 
+.manufactureSwiper .swiper-button-prev,
+.manufactureSwiper .swiper-button-next {
+	color: rgba(255, 255, 255, 0.666);
+	transition: 250ms;
+}
+
+.manufactureSwiper .swiper-button-prev:hover,
+.manufactureSwiper .swiper-button-next:hover {
+	color: #fefefe;
+}
+
+.manufactureSwiper .swiper-button-prev:after,
+.manufactureSwiper .swiper-button-next:after {
+	font-weight: 600;
+}
+
 @media (max-width: 269px) {
 	.manufactureSwiper .swiper-slide .sliderBox {
 		height: 200px;
+	}
+	.manufactureSwiper .swiper-button-prev:after,
+	.manufactureSwiper .swiper-button-next:after {
+		font-size: 32px;
 	}
 }
 
 @media (min-width: 270px) and (max-width: 484px) {
 	.manufactureSwiper .swiper-slide .sliderBox {
 		height: 150px;
+	}
+	.manufactureSwiper .swiper-button-prev:after,
+	.manufactureSwiper .swiper-button-next:after {
+		font-size: 32px;
 	}
 }
 
