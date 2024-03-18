@@ -4,6 +4,17 @@ import Catalog from '@/app/ui/CatalogPage/Catalog'
 import Search from '@/app/ui/CatalogPage/Search/Search'
 import React from 'react'
 
+export const metadata = {
+	title: 'Catalog',
+	alternates: {
+		canonical: '/catalog',
+		languages: {
+			en: '/en/catalog',
+			de: '/de/catalog',
+		},
+	},
+}
+
 const CatalogPage: React.FC<
 	IParams & {
 		searchParams: {

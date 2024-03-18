@@ -33,7 +33,8 @@ export const fetchCategories = cache(getCategories)
 
 const getAllProducts = async (
 	lang: string,
-	page: number
+	page: number,
+	limit = 8
 ): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
 	try {
 		const {
@@ -44,7 +45,7 @@ const getAllProducts = async (
 				},
 			},
 		} = await instance.get(
-			`/api/products?locale=${lang}&populate=img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+			`/api/products?locale=${lang}&populate=img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=${limit}`
 		)
 		if (data.length === 0) {
 			return notFound()

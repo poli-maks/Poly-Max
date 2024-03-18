@@ -6,6 +6,18 @@ import Hero from '../ui/HomePage/hero/Hero'
 import Location from '../ui/HomePage/location/Location'
 import Manufacture from '../ui/HomePage/manufacture/Manufacture'
 
+export const generateMetadata = async () => {
+	return {
+		alternates: {
+			canonical: '/',
+			languages: {
+				de: '/de',
+				en: '/en',
+			},
+		},
+	}
+}
+
 const HomePage: React.FC<IParams> = async ({ params: { lang } }) => {
 	const dictionary = await getDictionary(lang)
 

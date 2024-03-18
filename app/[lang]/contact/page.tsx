@@ -4,6 +4,17 @@ import React from 'react'
 
 import { IParams } from '../../lib/interfaces'
 
+export const metadata = {
+	title: 'Contacts',
+	alternates: {
+		canonical: '/contact',
+		languages: {
+			en: '/en/contact',
+			de: '/de/contact',
+		},
+	},
+}
+
 const ContactPage: React.FC<IParams> = async ({ params: { lang } }) => {
 	const dictionary = await getDictionary(lang)
 
