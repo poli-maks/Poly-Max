@@ -31,7 +31,7 @@ const getCategories = async (lang: string): Promise<ICategory[]> => {
 
 export const fetchCategories = cache(getCategories)
 
-const getAllProducts = async (
+export const getAllProducts = async (
 	lang: string,
 	page: number,
 	limit = 8
@@ -45,7 +45,7 @@ const getAllProducts = async (
 				},
 			},
 		} = await instance.get(
-			`/api/products?locale=${lang}&populate=img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=${limit}`
+			`/api/products?locale=${lang}&populate=img&sort[0]=uid:asc&pagination[page]=${page}&pagination[pageSize]=${limit}`
 		)
 		if (data.length === 0) {
 			return notFound()
@@ -70,7 +70,7 @@ const getAllProducts = async (
 
 export const fetchAllProducts = cache(getAllProducts)
 
-const getProductByUid = async (lang: string, uid: number) => {
+export const getProductByUid = async (lang: string, uid: number) => {
 	try {
 		const {
 			data: { data },

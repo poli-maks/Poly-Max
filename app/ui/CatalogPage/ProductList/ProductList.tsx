@@ -1,7 +1,6 @@
 import { IProduct } from '@/app/lib/interfaces'
 import { Locale } from '@/i18n.config'
 import { Grid } from '@chakra-ui/react'
-import { nanoid } from 'nanoid'
 import React from 'react'
 
 import ProductItem from '../ProductItem/ProductItem'
@@ -16,7 +15,7 @@ const ProductList = ({ products, lang }: IProductList) => {
 	return (
 		<>
 			<Grid
-				key={nanoid()}
+				key={products.length}
 				as={'ul'}
 				gridTemplateColumns={'repeat(auto-fill, minmax(300px, 1fr))'}
 				gridGap={'20px'}

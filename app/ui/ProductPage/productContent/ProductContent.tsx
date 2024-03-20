@@ -18,7 +18,6 @@ import {
 	UnorderedList,
 	useDisclosure,
 } from '@chakra-ui/react'
-import { nanoid } from 'nanoid'
 import Image from 'next/image'
 import React from 'react'
 
@@ -88,7 +87,7 @@ export const ProductContent = ({ product, dictionary, dictionaryModal }: IProps)
 
 				<Box>
 					{markdown?.length > 0 &&
-						markdown.map((item) => {
+						markdown.map((item, index) => {
 							let text = ''
 
 							if (item.type === 'heading' || item.type === 'paragraph') {
@@ -96,7 +95,7 @@ export const ProductContent = ({ product, dictionary, dictionaryModal }: IProps)
 							}
 
 							return (
-								<Box key={nanoid()}>
+								<Box key={index}>
 									{item.type === 'heading' && text.length > 0 && (
 										<Heading
 											as={titleLevel[item.level - 1]}
@@ -115,8 +114,8 @@ export const ProductContent = ({ product, dictionary, dictionaryModal }: IProps)
 											mb={{ base: '20px', lg: '30px' }}
 											pl="20px"
 										>
-											{item.children.map((el) => (
-												<ListItem key={nanoid()}>{el.children[0].text}</ListItem>
+											{item.children.map((el, index) => (
+												<ListItem key={index}>{el.children[0].text}</ListItem>
 											))}
 										</UnorderedList>
 									)}

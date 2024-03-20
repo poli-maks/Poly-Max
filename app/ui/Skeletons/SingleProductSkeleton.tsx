@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
-const Loading = () => {
+const SingleProductSkeleton = () => {
 	return (
 		<SectionWrapper>
 			<Flex flexDirection={{ base: 'column', lg: 'row' }}>
@@ -132,4 +132,4 @@ const Loading = () => {
 	)
 }
 
-export default Loading
+export default SingleProductSkeleton
