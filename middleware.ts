@@ -19,7 +19,12 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
 	const pathname = request.nextUrl.pathname
 
-	if (pathname === '/sitemap.xml' || pathname === '/opengraph-image.png') return
+	if (
+		pathname === '/sitemap.xml' ||
+		pathname === '/opengraph-image.png' ||
+		pathname === '/robots.txt'
+	)
+		return
 
 	const pathnameIsMissingLocale = i18n.locales.every(
 		(locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
