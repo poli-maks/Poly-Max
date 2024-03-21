@@ -12,7 +12,10 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
 	const { attributes: product } = data[0]
 
-	const imgUrl = product.img.data[0].attributes.formats?.small?.url || '/img/productPlaceholder.jpg'
+	const imgUrl =
+		product.img.data !== null
+			? product.img.data[0].attributes.formats?.small?.url
+			: '/img/productPlaceholder.jpg'
 
 	return {
 		title: product.title,
