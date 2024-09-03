@@ -1,13 +1,8 @@
-// Correct import order: local imports first, then React and Next.js
-import { i18n } from '@/i18n.config';
 import React from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation'; // Correct import order
 
-// Ensure all variables are used or remove them if they are not needed
-const NavBar: React.FC = () => {
-  const pathname = usePathname();
+export const NavBar = () => {
+  const pathname = usePathname(); // Remove this line if `pathname` is not used
 
   return <nav>{/* Navigation items */}</nav>;
 };
-
-export default NavBar;
