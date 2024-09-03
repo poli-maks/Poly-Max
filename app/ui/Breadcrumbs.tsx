@@ -17,9 +17,7 @@ const Breadcrumbs = () => {
 					const isLast = index === pathnames.length - 1
 
 					return (
-						<li key={href}>
-							{isLast ? <span>{value}</span> : <Link href={href}>{value}</Link>}
-						</li>
+						<li key={href}>{isLast ? <span>{value}</span> : <Link href={href}>{value}</Link>}</li>
 					)
 				})}
 			</ul>
