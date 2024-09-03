@@ -1,11 +1,11 @@
-import React from 'react'; // Ensure React is imported first
-import { usePathname } from 'next/navigation'; // Next imports should follow React
-import { i18n } from '@/i18n.config'; // Local imports should come after external imports
+import { usePathname } from 'next/navigation'; // Next.js imports should come first
+import React from 'react'; // React imports should follow
+import { i18n } from '@/i18n.config'; // Local imports come last
 
 const NavBar: React.FC = () => {
-  const pathname = usePathname(); // Correctly use the pathname hook
+  const pathname = usePathname(); // Correctly use the hook and ensure it's used if necessary
 
-  return <nav>{/* Navigation items */}</nav>; // Properly format the return
+  return <nav>{/* Navigation items */}</nav>; // Ensure proper formatting of return statement
 };
 
-export default NavBar; // Correctly export the NavBar component
+export default NavBar; // Proper export
