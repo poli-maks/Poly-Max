@@ -1,38 +1,35 @@
-// File: ./app/ui/Breadcrumbs.tsx
+'use client'
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation'
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
 
-const Breadcrumbs = () => {
-  const [isClient, setIsClient] = useState(false); // To check if rendering is on client side
-  const pathname = isClient ? usePathname() : '';
+export const Breadcrumbs = () => {
+  const [isClient, setIsClient] = useState(false)
+  const pathname = isClient ? usePathname() : ''
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    setIsClient(true)
+  }, [])
 
-  const breadcrumbs = pathname ? pathname.split('/').filter((x) => x) : [];
+  const breadcrumbs = pathname ? pathname.split('/').filter((x) => x) : []
 
   return (
-    <nav>
+    <nav aria-label="breadcrumb">
       <ol>
         {breadcrumbs.map((crumb, index) => {
-          const href = `/${breadcrumbs.slice(0, index + 1).join('/')}`;
-          const isLast = index === breadcrumbs.length - 1;
+          const href = `/${breadcrumbs.slice(0, index + 1).join('/')}`
+          const isLast = index === breadcrumbs.length - 1
+          
           return (
             <li key={href}>
-              {isLast ? (
-                <span>{crumb}</span>
-              ) : (
-                <Link href={href}>{crumb}</Link>
-              )}
+              {isLast ? <span>{crumb}</span> : <Link href={href}>{crumb}</Link>}
             </li>
-          );
+          )
         })}
       </ol>
     </nav>
-  );
-};
+  )
+}
 
-export default Breadcrumbs;
+export default Breadcrumbs
