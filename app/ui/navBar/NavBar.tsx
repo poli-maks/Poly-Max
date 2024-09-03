@@ -1,12 +1,12 @@
-import React from 'react'; // Ensure you have React imported
-import { Box } from '@chakra-ui/react'; // Import the required components
+import React from 'react'; // Ensure React is imported
+import { Box } from '@chakra-ui/react'; // Import components from Chakra UI
 import { usePathname } from 'next/navigation';
-import { i18n } from '@/i18n.config';
+import { i18n } from '@/i18n.config'; // Import localization configuration
 
 const NavBar = () => {
-    const pathname = usePathname(); // Correct usage of pathname
+    const pathname = usePathname(); // Correctly use the pathname
 
-    return <nav>{/* Navigation items */}</nav>; // Ensure the component returns valid JSX
+    return <nav>{/* Navigation items */}</nav>; // Return valid JSX
 };
 
-export default NavBar; // Proper export of NavBar component
+export default NavBar; // Correctly export the NavBar component
