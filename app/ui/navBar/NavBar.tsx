@@ -91,3 +91,18 @@ export const NavBar: React.FC<NavBarProps> = ({
 		</Box>
 	)
 }
+
+
+import React from 'react';
+import Breadcrumbs from '../Breadcrumbs'; // Adjust the path as needed
+
+const NavBar = () => {
+  return (
+    <header>
+      {/* Your existing nav content */}
+      <Breadcrumbs />
+    </header>
+  );
+};
+
+export default NavBar;
