@@ -3,7 +3,6 @@
 import { Locale } from '@/i18n.config'
 import { Link } from '@chakra-ui/next-js'
 import { Box, ResponsiveValue } from '@chakra-ui/react'
-
 import { usePathname } from 'next/navigation'
 import React from 'react'
 import Breadcrumbs from '../Breadcrumbs'
