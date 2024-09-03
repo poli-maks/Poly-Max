@@ -1,31 +1,17 @@
-'use client'
+import { Box } from '@chakra-ui/react';
+import { usePathname } from 'next/navigation';
+import { i18n } from '@/i18n.config';
 
-import { usePathname } from 'next/navigation'
-import { Link } from '@chakra-ui/next-js'
-import { Box, ResponsiveValue } from '@chakra-ui/react'
+const NavBar = () => {
+    const pathname = usePathname(); // Used for navigation if necessary
 
-import { Locale } from '@/i18n.config'
-import './NavBar.css'
+    // Logic and JSX for NavBar component
 
-export type NavItem = {
-  title: string
-  path: string
-}
+    return (
+        <nav>
+            {/* Navigation items */}
+        </nav>
+    );
+};
 
-export interface NavBarProps {
-  navItems: NavItem[]
-  lang: Locale
-  displayLogo: ResponsiveValue<'flex' | 'none'>
-}
-
-const NavBar: React.FC<NavBarProps> = ({ navItems, lang, displayLogo }) => {
-  const pathname = usePathname()
-
-  return (
-    <Box as="nav" display={displayLogo}>
-      {/* Render navigation items */}
-    </Box>
-  )
-}
-
-export default NavBar
+export default NavBar;
