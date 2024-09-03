@@ -1,6 +1,6 @@
-import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import React from 'react';
 
 const Breadcrumbs = () => {
   const router = useRouter();
@@ -15,13 +15,10 @@ const Breadcrumbs = () => {
         {pathnames.map((value, index) => {
           const href = '/' + pathnames.slice(0, index + 1).join('/');
           const isLast = index === pathnames.length - 1;
+
           return (
             <li key={href}>
-              {isLast ? (
-                <span>{value}</span>
-              ) : (
-                <Link href={href}>{value}</Link>
-              )}
+              {isLast ? <span>{value}</span> : <Link href={href}>{value}</Link>}
             </li>
           );
         })}
