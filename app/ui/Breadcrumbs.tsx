@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 
 const Breadcrumbs = () => {
     const [isClient, setIsClient] = useState(false);
-    const pathname = usePathname();
+    const pathname = usePathname(); // Always call hooks at the top level
 
     useEffect(() => {
         setIsClient(true);
