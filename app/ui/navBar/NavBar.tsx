@@ -4,7 +4,7 @@ import { Locale } from '@/i18n.config'
 import { Link } from '@chakra-ui/next-js'
 import { Box, ResponsiveValue } from '@chakra-ui/react'
 import { usePathname } from 'next/navigation'
-
+import Breadcrumbs from '../Breadcrumbs' // Correct import path for Breadcrumbs component
 import { theme } from '../theme'
 
 import './NavBar.css'
@@ -44,6 +44,10 @@ export const NavBar: React.FC<NavBarProps> = ({
 
 	return (
 		<Box display={display} as="nav" gap={10}>
+			{/* Breadcrumbs Component */}
+			<Breadcrumbs /> 
+
+			{/* Navigation items */}
 			<Box as={'ul'} display={'flex'} flexDirection={flexDir} gap={gap} flexWrap={'wrap'}>
 				{navItems.map((item, idx) => (
 					<Box as={'li'} key={idx} onClick={onClose} width={width}>
@@ -65,10 +69,10 @@ export const NavBar: React.FC<NavBarProps> = ({
 									height: '1px',
 									background: 'black',
 									opacity: '.6',
-									transition: ' transform .7s cubic-bezier(.19,1,.22,1) .2s',
+									transition: 'transform .7s cubic-bezier(.19,1,.22,1) .2s',
 								},
 								'&:hover::after': {
-									transform: ' scaleX(1)',
+									transform: 'scaleX(1)',
 									transformOrigin: 'left',
 								},
 							}}
@@ -92,17 +96,4 @@ export const NavBar: React.FC<NavBarProps> = ({
 	)
 }
 
-
-import React from 'react';
-import Breadcrumbs from '../Breadcrumbs'; // Adjust the path as needed
-
-const NavBar = () => {
-  return (
-    <header>
-      {/* Your existing nav content */}
-      <Breadcrumbs />
-    </header>
-  );
-};
-
-export default NavBar;
+export default NavBar
