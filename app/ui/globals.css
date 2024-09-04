@@ -204,10 +204,14 @@ svg {
 /* Breadcrumb Styles */
 .breadcrumb {
 	display: flex;
-	align-items: center;
-	gap: 8px; /* Space between breadcrumb items */
-	font-size: 12px; /* Slightly smaller than the base font size */
-	color: inherit;
+align-items: center;
+gap: 2px;
+font-size: 12px;
+color: inherit;
+max-width: 1275px;
+margin-left: auto;
+margin-top: 20px;
+margin-right: auto;
 }
 
 .breadcrumb-item {
@@ -216,7 +220,7 @@ svg {
 
 .breadcrumb-item::after {
 	content: '/'; /* Separator between breadcrumb items */
-	margin: 0 8px;
+	margin: 0 2px;
 	color: inherit; /* Use current text color */
 }
 
