@@ -4,11 +4,11 @@ import { Suspense } from 'react';
 import { IParams, IProduct } from '@/app/lib/interfaces';
 
 export const generateMetadata = async ({ params: { productName, lang } }: IParams) => {
-  // Ensure productName is defined and of type 'string'
   if (!productName) return notFound();
 
-  const product: IProduct = await getProductByName(lang, productName);
+  const product: IProduct | null = await getProductByName(lang, productName);
 
+  // Check if product is null
   if (!product) return notFound();
 
   // Extract the first two words from the product title, or just the one word if that's all there is
@@ -17,9 +17,9 @@ export const generateMetadata = async ({ params: { productName, lang } }: IParam
 
   // Create a URL-friendly slug
   const slug = titleWords
-    .toLowerCase() // Convert to lowercase
-    .replace(/[^a-z0-9\s]/g, '') // Remove any special characters
-    .replace(/\s+/g, '-'); // Replace spaces with hyphens
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, '-');
 
   return {
     title: product.attributes.title,
@@ -34,8 +34,12 @@ export const generateMetadata = async ({ params: { productName, lang } }: IParam
   };
 };
 
-const ProductPage: React.FC<IParams> = ({ params: { lang, productName } }) => {
+const ProductPage: React.FC<IParams> = async ({ params: { lang, productName } }) => {
   if (!productName) return notFound();
+
+  const product: IProduct | null = await getProductByName(lang, productName);
+
+  if (!product) return notFound();
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
