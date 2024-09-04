@@ -15,13 +15,6 @@ module.exports = {
     "eslint-plugin-import-helpers",
     // 'testing-library'
   ],
-  // overrides: [
-  // Only uses Testing Library lint rules in test files
-  // {
-  //   files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
-  //   extends: ['plugin:testing-library/react']
-  // }
-  // ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
@@ -86,4 +79,21 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      // Disable ESLint and Prettier for all files in the specified directory
+      files: ["path/to/your/files/**"],
+      rules: {
+        "prettier/prettier": "off",
+        "react-hooks/rules-of-hooks": "off",
+        "react-hooks/exhaustive-deps": "off",
+        "newline-before-return": "off",
+        "react/prop-types": "off",
+        "react/react-in-jsx-scope": "off",
+        "import-helpers/order-imports": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "no-console": "off",
+      },
+    },
+  ],
 };
