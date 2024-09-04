@@ -12,9 +12,9 @@ const Breadcrumbs = () => {
   const pathParts = pathname.split('/').filter(Boolean)
 
   return (
-    <Breadcrumb separator="/" mt={4} mb={4}>
-      <BreadcrumbItem>
-        <BreadcrumbLink as={Link} href="/">
+    <Breadcrumb className="breadcrumb" separator="">
+      <BreadcrumbItem className="breadcrumb-item">
+        <BreadcrumbLink as={Link} href="/" className="breadcrumb-link">
           Home
         </BreadcrumbLink>
       </BreadcrumbItem>
@@ -22,8 +22,8 @@ const Breadcrumbs = () => {
         const href = '/' + pathParts.slice(0, index + 1).join('/')
 
         return (
-          <BreadcrumbItem key={index}>
-            <BreadcrumbLink as={Link} href={href}>
+          <BreadcrumbItem key={index} className="breadcrumb-item">
+            <BreadcrumbLink as={Link} href={href} className="breadcrumb-link">
               {decodeURIComponent(part)}
             </BreadcrumbLink>
           </BreadcrumbItem>
