@@ -1,8 +1,8 @@
 // app/ui/Breadcrumbs.tsx
 'use client' // Ensures this is a Client Component
 
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react' // Correct order: @chakra-ui/react first
-import Link from 'next/link' // Import after @chakra-ui/react
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const Breadcrumbs = () => {
