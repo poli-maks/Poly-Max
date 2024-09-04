@@ -1,44 +1,35 @@
-import { GetServerSideProps } from 'next';
-import { getProductByName, getProductByUid } from '@/app/lib/api/services';
-import { IProduct } from '@/app/lib/interfaces';
 import { notFound } from 'next/navigation';
+import { getProductByUid, getProductByName } from '@/app/lib/api/services'; // Ensure paths are correct
+import { IParams } from '@/app/lib/interfaces';
 
 interface ProductPageProps {
-  product: IProduct;
-  lang: string;
+  params: IParams['params'];
 }
 
-const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
-  if (!product) return notFound();
-  
-  return (
-    <div>
-      {/* Render your product details */}
-      <h1>{product.attributes.title}</h1>
-      {/* Add more fields as needed */}
-    </div>
-  );
-};
+// Server component
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { lang, id } = params;
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { lang, id } = params as { lang: string; id: string };
+  let product = null;
 
-  let product: IProduct | null = null;
-
-  // Try fetching by slug (new URL)
-  if (isNaN(Number(id))) {
-    product = await getProductByName(lang, id);
-  } else {
-    // Try fetching by ID (old URL)
-    const products = await getProductByUid(lang, Number(id));
-    product = products ? products[0] : null; // Assume it returns an array, take the first item
+  // Check if `id` is a number, then fetch by UID; otherwise, fetch by name (slug)
+  if (id) {
+    if (isNaN(Number(id))) {
+      product = await getProductByName(lang, id);
+    } else {
+      product = await getProductByUid(lang, Number(id));
+    }
   }
 
-  if (!product) return { notFound: true };
+  if (!product) {
+    return notFound();
+  }
 
-  return {
-    props: { product, lang },
-  };
-};
-
-export default ProductPage;
+  return (
+    // Replace with your actual component rendering logic
+    <div>
+      <h1>{product.title}</h1>
+      {/* Render other product details */}
+    </div>
+  );
+}
