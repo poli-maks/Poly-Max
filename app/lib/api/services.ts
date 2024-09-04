@@ -108,15 +108,15 @@ export const getProductByName = async (lang: string, name: string): Promise<IPro
 		)
 
 		if (data.length === 0) {
-			return null; // Return null instead of notFound() to match the function signature
+			return null // Return null instead of notFound() to match the function signature
 		}
 
-		return data[0] as IProduct; // Assuming that the slug is unique, so only one product is returned
+		return data[0] as IProduct // Assuming that the slug is unique, so only one product is returned
 	} catch (error) {
-		console.error(error); // Log the error for debugging
+		console.error(error) // Log the error for debugging
 
 		// Return null in case of any error
-		return null;
+		return null
 	}
 }
 
