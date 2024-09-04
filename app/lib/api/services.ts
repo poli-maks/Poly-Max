@@ -98,6 +98,38 @@ export const getProductByUid = async (lang: string, uid: number) => {
 
 export const fetchProductByUid = cache(getProductByUid)
 
+// New Function to Fetch Product by Name (Slug)
+export const getProductByName = async (lang: string, name: string): Promise<IProduct | null> => {
+	try {
+		const {
+			data: { data },
+		} = await instance.get(
+			`/api/products?locale=${lang}&filters[slug][$eq]=${encodeURIComponent(name)}&populate=deep`
+		)
+
+		if (data.length === 0) {
+			return notFound()
+		}
+
+		return data[0] // Assuming that the slug is unique, so only one product is returned
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			console.error(error.status)
+			console.error(error.response)
+
+			return notFound()
+		} else {
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
+		}
+	}
+}
+
+export const fetchProductByName = cache(getProductByName)
+
 const getProductsByTitle = async (
 	lang: string,
 	query: string,
@@ -191,7 +223,7 @@ const getProductsBySubCategory = async (
 				},
 			},
 		} = await instance.get(
-			`api/products?locale=${lang}&populate=deep,2&filters[sub_categories][uid][$eq]=${subCatUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+			`/api/products?locale=${lang}&populate=deep,2&filters[sub_categories][uid][$eq]=${subCatUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
 
 		if (data.length === 0) {

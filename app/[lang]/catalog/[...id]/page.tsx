@@ -1,4 +1,4 @@
-import { getProductByUid } from '@/app/lib/api/services'
+import { getProductByName } from '@/app/lib/api/services'
 import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
@@ -6,27 +6,26 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
-export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-	let data
-	if (id) data = await getProductByUid(lang, parseInt(id))
+export const generateMetadata = async ({ params: { productName, lang } }: IParams) => {
+	const product = await getProductByName(lang, productName) // Fetch product by name
 
-	const { attributes: product } = data[0]
+	if (!product) return notFound()
 
 	const imgUrl =
-		product.img.data !== null
-			? product.img.data[0].attributes.formats?.small?.url
+		product.attributes.img.data !== null
+			? product.attributes.img.data[0].attributes.formats?.small?.url
 			: '/img/productPlaceholder.jpg'
 
 	return {
-		title: product.title,
+		title: product.attributes.title,
 		alternates: {
-			canonical: `/catalog/${id}`,
+			canonical: `/catalog/${productName}`,
 			languages: {
-				en: `/en/catalog/${id}`,
-				de: `/de/catalog/${id}`,
+				en: `/en/catalog/${productName}`,
+				de: `/de/catalog/${productName}`,
 			},
 		},
-		description: product.descShort,
+		description: product.attributes.descShort,
 		openGraph: {
 			images: [
 				{
@@ -37,8 +36,12 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 	}
 }
 
-const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-	if (!id) return notFound()
+const ProductPage: React.FC<IParams> = async ({ params: { lang, productName } }) => {
+	if (!productName) return notFound()
+
+	const product = await getProductByName(lang, productName) // Fetch product by name
+
+	if (!product) return notFound()
 
 	const dictionary = await getDictionary(lang)
 
@@ -47,8 +50,8 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 			<Suspense fallback={<SingleProductSkeleton />}>
 				<Product
 					lang={lang}
-					id={id}
-					//product={product}
+					id={product.id}
+					product={product}
 					dictionary={dictionary.productPage}
 					dictionaryModal={dictionary.modalForm}
 				/>
