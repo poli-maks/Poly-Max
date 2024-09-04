@@ -1,31 +1,40 @@
 import { getProductByName } from '@/app/lib/api/services';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
-import { IParams } from '@/app/lib/interfaces';
+import { IParams, IProduct } from '@/app/lib/interfaces';
 
 export const generateMetadata = async ({ params: { productName, lang } }: IParams) => {
   // Ensure productName is defined and of type 'string'
-  if (!productName) return notFound(); // Handle the case where productName is undefined
+  if (!productName) return notFound();
 
-  const product = await getProductByName(lang, productName);
+  const product: IProduct = await getProductByName(lang, productName);
 
   if (!product) return notFound();
 
+  // Extract the first two words from the product title, or just the one word if that's all there is
+  const titleWordsArray = product.attributes.title.split(' ');
+  const titleWords = titleWordsArray.slice(0, 2).join(' '); // Get up to two words
+
+  // Create a URL-friendly slug
+  const slug = titleWords
+    .toLowerCase() // Convert to lowercase
+    .replace(/[^a-z0-9\s]/g, '') // Remove any special characters
+    .replace(/\s+/g, '-'); // Replace spaces with hyphens
+
   return {
-    title: product.title,
-    description: product.descShort,
+    title: product.attributes.title,
+    description: product.attributes.descShort,
     alternates: {
-      canonical: `/catalog/${productName}`,
+      canonical: `/catalog/${slug}`,
       languages: {
-        en: `/en/catalog/${productName}`,
-        de: `/de/catalog/${productName}`,
+        en: `/en/catalog/${slug}`,
+        de: `/de/catalog/${slug}`,
       },
     },
   };
 };
 
 const ProductPage: React.FC<IParams> = ({ params: { lang, productName } }) => {
-  // Ensure productName is defined and of type 'string'
   if (!productName) return notFound();
 
   return (
