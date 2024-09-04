@@ -18,3 +18,5 @@ coverage
 
 # Ignore all Handlebars template files
 *.hbs
+
+app/ui/Breadcrumbs.tsx
