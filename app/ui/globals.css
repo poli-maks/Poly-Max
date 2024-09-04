@@ -217,7 +217,7 @@ margin-right: auto;
 .breadcrumb-item {
 	position: relative;
 }
-.breadcrumb-link span {
+.breadcrumb-item span {
 	display: none;
 }
 .breadcrumb-item::after {
