@@ -11,6 +11,7 @@ import BurgerIcon from '../../svg/BurgerIcon'
 import SearchIcon from '../../svg/SearchIcon'
 import { theme } from '../../theme'
 import MobileMenu from '../mobileMenu/MobileMenu'
+import Breadcrumbs from '@/app/ui/Breadcrumbs' // Import Breadcrumbs component
 
 const HeaderWrapper = ({ lang, navItems }: { lang: Locale; navItems: NavItem[] }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -35,6 +36,7 @@ const HeaderWrapper = ({ lang, navItems }: { lang: Locale; navItems: NavItem[] }
 				>
 					<BrandLogo />
 				</Box>
+				<Breadcrumbs /> {/* Breadcrumbs component added here */}
 				<Flex
 					gap={{ base: '0', md: '113px' }}
 					ml={{ lg: 'auto' }}
