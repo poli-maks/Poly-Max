@@ -200,23 +200,3 @@ a:hover {
 svg {
 	stroke: currentColor;
 }
-/* breadcrumbs */
-.breadcrumb {
-	display: flex;
-	list-style: none;
-	padding: 0;
-	margin: 10px 0;
-}
-
-.breadcrumb li {
-	margin-right: 5px;
-}
-
-.breadcrumb li::after {
-	content: '/';
-	margin-left: 5px;
-}
-
-.breadcrumb li:last-child::after {
-	content: '';
-}

@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import { IContacts } from '@/app/lib/interfaces';
-import { formatPhoneNumber } from '@/app/lib/utils/formatPhoneNumber';
-import { Link } from '@chakra-ui/next-js';
-import { Box, Flex, Text, Heading } from '@chakra-ui/react';
-import Image from 'next/image';
+import { IContacts } from '@/app/lib/interfaces'
+import { formatPhoneNumber } from '@/app/lib/utils/formatPhoneNumber'
+import { Link } from '@chakra-ui/next-js'
+import { Box, Flex, Text, Heading } from '@chakra-ui/react'
+import Image from 'next/image'
 
-import Director from '../../../../public/img/Director.png';
-import { theme } from '../../theme';
+import Director from '../../../../public/img/Director.png'
+import { theme } from '../../theme'
 
 interface ContactInfoProps {
-	contacts: IContacts | undefined;
-	position: string;
+	contacts: IContacts | undefined
+	position: string
 }
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ contacts, position }) => {
 	const textStyle = {
 		fontSize: '24px',
 		fontWeight: '500',
-	};
+	}
 
 	return (
 		<Box marginBottom={{ base: '30px', lg: '0' }}>
@@ -161,7 +161,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ contacts, position }) => {
 				</Box>
 			</Flex>
 		</Box>
-	);
-};
+	)
+}
 
-export default ContactInfo;
+export default ContactInfo

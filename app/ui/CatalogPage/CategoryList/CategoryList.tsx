@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import useCategorySearchString from '@/app/lib/hooks/useCategorySearchString';
-import { ICategory } from '@/app/lib/interfaces';
-import { Box, Button, Flex } from '@chakra-ui/react';
-import React from 'react';
+import useCategorySearchString from '@/app/lib/hooks/useCategorySearchString'
+import { ICategory } from '@/app/lib/interfaces'
+import { Box, Button, Flex } from '@chakra-ui/react'
+import React from 'react'
 
-import Category from './Category/Category';
-import MenuCategory from './MenuCategory/MenuCategory';
+import Category from './Category/Category'
+import MenuCategory from './MenuCategory/MenuCategory'
 
 interface ICategoryList {
-	categories: ICategory[];
-	dictionary: string;
+	categories: ICategory[]
+	dictionary: string
 }
 
 const CategoryList = ({ categories, dictionary }: ICategoryList) => {
-	const { searchParams, createString, resetSearchParams } = useCategorySearchString();
-	const choosedCategory = searchParams.get('category');
+	const { searchParams, createString, resetSearchParams } = useCategorySearchString()
+	const choosedCategory = searchParams.get('category')
 
 	return (
 		<>
@@ -48,7 +48,7 @@ const CategoryList = ({ categories, dictionary }: ICategoryList) => {
 				{categories.map(({ attributes: category }) => {
 					const {
 						sub_categories: { data: subs },
-					} = category;
+					} = category
 
 					return (
 						<Box as={'li'} position={'relative'} pb={'20px'} key={category.uid}>
@@ -72,11 +72,11 @@ const CategoryList = ({ categories, dictionary }: ICategoryList) => {
 								</>
 							)}
 						</Box>
-					);
+					)
 				})}
 			</Flex>
 		</>
-	);
-};
+	)
+}
 
-export default CategoryList;
+export default CategoryList

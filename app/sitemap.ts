@@ -1,40 +1,40 @@
-import { fetchAllProducts } from './lib/api/services';
-import { IProduct } from './lib/interfaces';
+import { fetchAllProducts } from './lib/api/services'
+import { IProduct } from './lib/interfaces'
 
 async function sitemap() {
-	const data = await fetchAllProducts('de', 1);
+	const data = await fetchAllProducts('de', 1)
 
-	let products: IProduct[] = [];
+	let products: IProduct[] = []
 
 	if (typeof data === 'object') {
-		const { count } = data;
+		const { count } = data
 
-		const pageCount = Math.ceil(count / 25);
+		const pageCount = Math.ceil(count / 25)
 
 		for (let i = 1; i <= pageCount; i += 1) {
-			const res = await fetchAllProducts('de', i, 25);
+			const res = await fetchAllProducts('de', i, 25)
 
 			{
 				if (typeof res === 'object') {
-					const { data } = res;
-					products = [...products, ...data];
+					const { data } = res
+					products = [...products, ...data]
 				}
 			}
 		}
 	}
 
 	if (typeof data === 'object') {
-		const { count } = data;
+		const { count } = data
 
-		const pageCount = Math.ceil(count / 25);
+		const pageCount = Math.ceil(count / 25)
 
 		for (let i = 1; i <= pageCount; i += 1) {
-			const res = await fetchAllProducts('en', i, 25);
+			const res = await fetchAllProducts('en', i, 25)
 
 			{
 				if (typeof res === 'object') {
-					const { data } = res;
-					products = [...products, ...data];
+					const { data } = res
+					products = [...products, ...data]
 				}
 			}
 		}
@@ -45,14 +45,14 @@ async function sitemap() {
 		lastModified: new Date(attributes.updatedAt),
 		changeFrequency: 'monthly',
 		priority: 1,
-	}));
+	}))
 
 	const productEntriesEn = products.map(({ attributes }) => ({
 		url: `${process.env.NEXT_PUBLIC_URL}/en/catalog/${attributes.uid}`,
 		lastModified: new Date(attributes.updatedAt),
 		changeFrequency: 'monthly',
 		priority: 1,
-	}));
+	}))
 
 	return [
 		{
@@ -111,7 +111,7 @@ async function sitemap() {
 		},
 		...productEntriesDe,
 		...productEntriesEn,
-	];
+	]
 }
 
-export default sitemap;
+export default sitemap

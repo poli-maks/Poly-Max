@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { ILocation } from '@/app/lib/interfaces';
-import { Flex, Heading } from '@chakra-ui/react';
+import { ILocation } from '@/app/lib/interfaces'
+import { Flex, Heading } from '@chakra-ui/react'
 
-import SectionWrapper from '../../sectionWrapper/SectionWrapper';
-import LocationsSlider from './locationsSlider/LocationsSlider';
+import SectionWrapper from '../../sectionWrapper/SectionWrapper'
+import LocationsSlider from './locationsSlider/LocationsSlider'
 
 const Location = ({
 	title,
 	subTitle,
 	locations,
 }: {
-	title: string;
-	subTitle: string;
-	locations: ILocation[];
+	title: string
+	subTitle: string
+	locations: ILocation[]
 }) => {
 	return (
 		<SectionWrapper bg={'accent'}>
@@ -33,7 +33,7 @@ const Location = ({
 			</Flex>
 			<LocationsSlider locations={locations} />
 		</SectionWrapper>
-	);
-};
+	)
+}
 
-export default Location;
+export default Location

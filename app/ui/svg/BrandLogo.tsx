@@ -25,7 +25,7 @@ const BrandLogo = () => {
 				</clipPath>
 			</defs>
 		</svg>
-	);
-};
+	)
+}
 
-export default BrandLogo;
+export default BrandLogo

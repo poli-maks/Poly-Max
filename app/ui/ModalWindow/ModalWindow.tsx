@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalOverlay } from '@chakra-ui/react';
-import React, { FC, ReactNode } from 'react';
+import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalOverlay } from '@chakra-ui/react'
+import React, { FC, ReactNode } from 'react'
 
 interface ModalWindowProps {
-	onClose: () => void;
-	isOpen: boolean;
-	children: ReactNode;
+	onClose: () => void
+	isOpen: boolean
+	children: ReactNode
 }
 
 const ModalWindow: FC<ModalWindowProps> = ({ onClose, isOpen, children }) => {
@@ -30,7 +30,7 @@ const ModalWindow: FC<ModalWindowProps> = ({ onClose, isOpen, children }) => {
 				</ModalBody>
 			</ModalContent>
 		</Modal>
-	);
-};
+	)
+}
 
-export default ModalWindow;
+export default ModalWindow

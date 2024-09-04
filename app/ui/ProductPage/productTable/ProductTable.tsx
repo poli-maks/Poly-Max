@@ -1,13 +1,13 @@
-'use client';
-import { IAllowedKeys, IProductDictionary, ITableRow } from '@/app/lib/interfaces';
-import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
-import React, { ReactNode } from 'react';
+'use client'
+import { IAllowedKeys, IProductDictionary, ITableRow } from '@/app/lib/interfaces'
+import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import React, { ReactNode } from 'react'
 
-type tableHeaders = Pick<IProductDictionary, 'tableHeaders'>;
+type tableHeaders = Pick<IProductDictionary, 'tableHeaders'>
 
 interface IProps {
-	tableRows: ITableRow[];
-	dictionary: tableHeaders;
+	tableRows: ITableRow[]
+	dictionary: tableHeaders
 }
 
 const TABLE_FIELDS: Array<keyof ITableRow> = [
@@ -19,7 +19,7 @@ const TABLE_FIELDS: Array<keyof ITableRow> = [
 	'cross_section',
 	'volume',
 	'wall_thickness',
-];
+]
 
 const TableTh = ({ children }: { children: ReactNode }): React.JSX.Element => {
 	return (
@@ -32,34 +32,34 @@ const TableTh = ({ children }: { children: ReactNode }): React.JSX.Element => {
 		>
 			{children}
 		</Th>
-	);
-};
+	)
+}
 
 const TableTd = ({ children }: { children: ReactNode }): React.JSX.Element => {
 	return (
 		<Td fontSize={{ base: '12px', lg: '14px' }} py="14px" textAlign="center">
 			{children}
 		</Td>
-	);
-};
+	)
+}
 
 const isNotSavedEmpty = (arr: ITableRow[]) => {
-	const keys: Array<keyof ITableRow> = TABLE_FIELDS;
+	const keys: Array<keyof ITableRow> = TABLE_FIELDS
 
 	return arr.every((el) => {
-		return keys.some((key) => el[key] !== null);
-	});
-};
+		return keys.some((key) => el[key] !== null)
+	})
+}
 
 const tableHeading = (
 	arr: ITableRow[],
 	nameOfField: IAllowedKeys,
 	dictionary: tableHeaders
 ): React.ReactElement<HTMLTableCellElement> | null => {
-	const res = arr.some((el) => el[nameOfField] !== null);
+	const res = arr.some((el) => el[nameOfField] !== null)
 
-	return res ? <TableTh>{dictionary.tableHeaders[nameOfField]}</TableTh> : null;
-};
+	return res ? <TableTh>{dictionary.tableHeaders[nameOfField]}</TableTh> : null
+}
 
 export const ProductTable = ({ tableRows, dictionary }: IProps) => {
 	return (
@@ -70,9 +70,9 @@ export const ProductTable = ({ tableRows, dictionary }: IProps) => {
 						<Thead bg="tableRow">
 							<Tr>
 								{TABLE_FIELDS.map((el) => {
-									if (el === 'id') return;
+									if (el === 'id') return
 
-									return tableHeading(tableRows, el, dictionary);
+									return tableHeading(tableRows, el, dictionary)
 								})}
 							</Tr>
 						</Thead>
@@ -88,7 +88,7 @@ export const ProductTable = ({ tableRows, dictionary }: IProps) => {
 									cross_section,
 									volume,
 									wall_thickness,
-								} = row;
+								} = row
 
 								return (
 									<Tr key={id} bg={index % 2 !== 0 ? 'tableRow' : 'transparent'}>
@@ -101,12 +101,12 @@ export const ProductTable = ({ tableRows, dictionary }: IProps) => {
 										{volume?.length > 0 && <TableTd>{volume}</TableTd>}
 										{wall_thickness?.length > 0 && <TableTd>{wall_thickness}</TableTd>}
 									</Tr>
-								);
+								)
 							})}
 						</Tbody>
 					</Table>
 				</TableContainer>
 			)}
 		</>
-	);
-};
+	)
+}

@@ -1,30 +1,30 @@
-'use client';
+'use client'
 
-import useCategorySearchString from '@/app/lib/hooks/useCategorySearchString';
-import { ICategory } from '@/app/lib/interfaces';
-import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
-import React, { useMemo, useState } from 'react';
+import useCategorySearchString from '@/app/lib/hooks/useCategorySearchString'
+import { ICategory } from '@/app/lib/interfaces'
+import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import React, { useMemo, useState } from 'react'
 
-import MenuArrowClosed from '../../svg/MenuArrowClosed';
-import MenuArrowOpen from '../../svg/MenuArrowOpen';
-import Category from '../CategoryList/Category/Category';
-import MenuCategory from '../CategoryList/MenuCategory/MenuCategory';
+import MenuArrowClosed from '../../svg/MenuArrowClosed'
+import MenuArrowOpen from '../../svg/MenuArrowOpen'
+import Category from '../CategoryList/Category/Category'
+import MenuCategory from '../CategoryList/MenuCategory/MenuCategory'
 
 interface IMobileFilterMenu {
-	categories: ICategory[];
-	all_category: string;
-	filter: string;
+	categories: ICategory[]
+	all_category: string
+	filter: string
 }
 
 const MobileFilterMenu = ({ categories, all_category, filter }: IMobileFilterMenu) => {
-	const { searchParams, createString, resetSearchParams } = useCategorySearchString();
+	const { searchParams, createString, resetSearchParams } = useCategorySearchString()
 
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	const [choosedCategory, choosedSubCategory] = useMemo(() => {
 		const category = categories.find(
 			({ attributes: category }) => category.uid.toString() === searchParams.get('category')
-		);
+		)
 
 		const subCategory = categories
 			.map(({ attributes: category }) =>
@@ -32,10 +32,10 @@ const MobileFilterMenu = ({ categories, all_category, filter }: IMobileFilterMen
 					({ attributes: sub }) => sub.uid.toString() === searchParams.get('sub')
 				)
 			)
-			.find((subCategory) => subCategory !== undefined);
+			.find((subCategory) => subCategory !== undefined)
 
-		return [category, subCategory];
-	}, [categories, searchParams]);
+		return [category, subCategory]
+	}, [categories, searchParams])
 
 	return (
 		<Box display={{ base: 'block', lg: 'none' }}>
@@ -81,7 +81,7 @@ const MobileFilterMenu = ({ categories, all_category, filter }: IMobileFilterMen
 					{categories.map(({ attributes: category }) => {
 						const {
 							sub_categories: { data: subs },
-						} = category;
+						} = category
 
 						return (
 							<Box as={'li'} position={'relative'} key={category.uid}>
@@ -104,12 +104,12 @@ const MobileFilterMenu = ({ categories, all_category, filter }: IMobileFilterMen
 									</MenuItem>
 								)}
 							</Box>
-						);
+						)
 					})}
 				</MenuList>
 			</Menu>
 		</Box>
-	);
-};
+	)
+}
 
-export default MobileFilterMenu;
+export default MobileFilterMenu

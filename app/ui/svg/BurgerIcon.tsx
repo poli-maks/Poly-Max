@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const BurgerIcon = () => {
 	return (
@@ -6,7 +6,7 @@ const BurgerIcon = () => {
 			<line x1="1" y1="8.25" x2="21" y2="8.25" stroke="#212121" strokeWidth="1.5" />
 			<line x1="1" y1="14.25" x2="21" y2="14.25" stroke="#212121" strokeWidth="1.5" />
 		</svg>
-	);
-};
+	)
+}
 
-export default BurgerIcon;
+export default BurgerIcon

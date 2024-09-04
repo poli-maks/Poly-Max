@@ -1,29 +1,29 @@
-import { fetchContacts } from '@/app/lib/api/services';
-import { IDictionaryModal } from '@/app/lib/interfaces';
-import { Locale } from '@/i18n.config';
-import { Heading, Flex, Box } from '@chakra-ui/react';
+import { fetchContacts } from '@/app/lib/api/services'
+import { IDictionaryModal } from '@/app/lib/interfaces'
+import { Locale } from '@/i18n.config'
+import { Heading, Flex, Box } from '@chakra-ui/react'
 
-import ContactForm from '../contactForm/ContactForm';
-import GoogleMap from '../googleMap/GoogleMap';
-import SectionWrapper from '../sectionWrapper/SectionWrapper';
-import { theme } from '../theme';
-import ContactInfo from './contactInfo/ContactInfo';
+import ContactForm from '../contactForm/ContactForm'
+import GoogleMap from '../googleMap/GoogleMap'
+import SectionWrapper from '../sectionWrapper/SectionWrapper'
+import { theme } from '../theme'
+import ContactInfo from './contactInfo/ContactInfo'
 
 interface ContactProps {
-	lang: Locale;
+	lang: Locale
 	dictionary: {
 		contactPage: {
-			title: string;
-			mainTitle: string;
-			description: string;
-			position: string;
-		};
-		modalForm: IDictionaryModal;
-	};
+			title: string
+			mainTitle: string
+			description: string
+			position: string
+		}
+		modalForm: IDictionaryModal
+	}
 }
 
 const Contact: React.FC<ContactProps> = async ({ lang, dictionary }) => {
-	const contacts = await fetchContacts(lang);
+	const contacts = await fetchContacts(lang)
 
 	return (
 		<>
@@ -76,7 +76,7 @@ const Contact: React.FC<ContactProps> = async ({ lang, dictionary }) => {
 				</Flex>
 			</SectionWrapper>
 		</>
-	);
-};
+	)
+}
 
-export default Contact;
+export default Contact

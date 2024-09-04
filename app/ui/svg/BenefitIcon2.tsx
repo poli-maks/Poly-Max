@@ -9,7 +9,7 @@ const BenefitIcon2 = () => {
 				strokeLinejoin="round"
 			/>
 		</svg>
-	);
-};
+	)
+}
 
-export default BenefitIcon2;
+export default BenefitIcon2

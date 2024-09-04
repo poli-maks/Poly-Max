@@ -1,12 +1,12 @@
-import { SEARCH_PARAMS } from '@/app/lib/interfaces';
-import { Locale } from '@/i18n.config';
-import { Heading } from '@chakra-ui/react';
-import { Suspense } from 'react';
+import { SEARCH_PARAMS } from '@/app/lib/interfaces'
+import { Locale } from '@/i18n.config'
+import { Heading } from '@chakra-ui/react'
+import { Suspense } from 'react'
 
-import Products from '../Products/Products';
-import SectionWrapper from '../sectionWrapper/SectionWrapper';
-import CategoriesSkeleton from '../Skeletons/CategoriesSkeleton';
-import Categories from './CategoryList/Categories';
+import Products from '../Products/Products'
+import SectionWrapper from '../sectionWrapper/SectionWrapper'
+import CategoriesSkeleton from '../Skeletons/CategoriesSkeleton'
+import Categories from './CategoryList/Categories'
 
 const Catalog = ({
 	lang,
@@ -17,13 +17,13 @@ const Catalog = ({
 	filter,
 	notFound,
 }: {
-	lang: Locale;
-	searchParams: { [key in SEARCH_PARAMS]: string };
-	btnText: string;
-	title: string;
-	all_category: string;
-	filter: string;
-	notFound: string;
+	lang: Locale
+	searchParams: { [key in SEARCH_PARAMS]: string }
+	btnText: string
+	title: string
+	all_category: string
+	filter: string
+	notFound: string
 }) => {
 	return (
 		<SectionWrapper
@@ -39,7 +39,7 @@ const Catalog = ({
 			</Suspense>
 			<Products lang={lang} btnText={btnText} searchParams={searchParams} notFound={notFound} />
 		</SectionWrapper>
-	);
-};
+	)
+}
 
-export default Catalog;
+export default Catalog

@@ -1,7 +1,7 @@
-import { IProduct } from '@/app/lib/interfaces';
-import { Box, Heading } from '@chakra-ui/react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { IProduct } from '@/app/lib/interfaces'
+import { Box, Heading } from '@chakra-ui/react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const ProductItem = ({ product: { attributes }, lang }: { product: IProduct; lang: string }) => {
 	return (
@@ -66,7 +66,7 @@ const ProductItem = ({ product: { attributes }, lang }: { product: IProduct; lan
 				</article>
 			</Link>
 		</Box>
-	);
-};
+	)
+}
 
-export default ProductItem;
+export default ProductItem

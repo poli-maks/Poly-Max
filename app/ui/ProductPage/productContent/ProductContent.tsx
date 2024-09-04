@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import {
 	IDictionaryModal,
@@ -6,8 +6,8 @@ import {
 	IProductProps,
 	TitleLevel,
 	TitleSize,
-} from '@/app/lib/interfaces';
-import boxIcon from '@/public/img/boxIcon.svg';
+} from '@/app/lib/interfaces'
+import boxIcon from '@/public/img/boxIcon.svg'
 import {
 	Box,
 	Button,
@@ -17,30 +17,30 @@ import {
 	Text,
 	UnorderedList,
 	useDisclosure,
-} from '@chakra-ui/react';
-import Image from 'next/image';
-import React from 'react';
+} from '@chakra-ui/react'
+import Image from 'next/image'
+import React from 'react'
 
-import ModalForm from '../../modalForm/ModalForm';
-import ModalWindow from '../../ModalWindow/ModalWindow';
-import { ProductTable } from '../productTable/ProductTable';
+import ModalForm from '../../modalForm/ModalForm'
+import ModalWindow from '../../ModalWindow/ModalWindow'
+import { ProductTable } from '../productTable/ProductTable'
 
 interface IProps {
-	product: IProductProps[];
-	dictionary: IProductDictionary;
-	dictionaryModal: IDictionaryModal;
+	product: IProductProps[]
+	dictionary: IProductDictionary
+	dictionaryModal: IDictionaryModal
 }
 
 export const ProductContent = ({ product, dictionary, dictionaryModal }: IProps) => {
-	const tableRows = product[0].attributes.tableRow;
-	const markdown = product[0].attributes.markDawn;
-	const title = product[0].attributes.title;
-	const description = product[0].attributes.descShort;
+	const tableRows = product[0].attributes.tableRow
+	const markdown = product[0].attributes.markDawn
+	const title = product[0].attributes.title
+	const description = product[0].attributes.descShort
 
-	const titleSize: TitleSize = ['xl', 'lg', 'md', 'sm'];
-	const titleLevel: TitleLevel = ['h1', 'h2', 'h3', 'h4'];
+	const titleSize: TitleSize = ['xl', 'lg', 'md', 'sm']
+	const titleLevel: TitleLevel = ['h1', 'h2', 'h3', 'h4']
 
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { isOpen, onOpen, onClose } = useDisclosure()
 
 	return (
 		<>
@@ -88,10 +88,10 @@ export const ProductContent = ({ product, dictionary, dictionaryModal }: IProps)
 				<Box>
 					{markdown?.length > 0 &&
 						markdown.map((item, index) => {
-							let text = '';
+							let text = ''
 
 							if (item.type === 'heading' || item.type === 'paragraph') {
-								text = item.children[0].text;
+								text = item.children[0].text
 							}
 
 							return (
@@ -120,7 +120,7 @@ export const ProductContent = ({ product, dictionary, dictionaryModal }: IProps)
 										</UnorderedList>
 									)}
 								</Box>
-							);
+							)
 						})}
 				</Box>
 				<Box>
@@ -151,5 +151,5 @@ export const ProductContent = ({ product, dictionary, dictionaryModal }: IProps)
 				<ModalForm nameProduct={title} dictionaryModal={dictionaryModal} />
 			</ModalWindow>
 		</>
-	);
-};
+	)
+}

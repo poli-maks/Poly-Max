@@ -8,7 +8,7 @@ const Arrow = () => {
 				strokeLinejoin="round"
 			/>
 		</svg>
-	);
-};
+	)
+}
 
-export default Arrow;
+export default Arrow

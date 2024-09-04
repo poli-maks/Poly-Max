@@ -20,7 +20,7 @@ const BoxIcon = () => {
 				strokeLinejoin="round"
 			/>
 		</svg>
-	);
-};
+	)
+}
 
-export default BoxIcon;
+export default BoxIcon

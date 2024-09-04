@@ -1,8 +1,8 @@
-import { getDictionary } from '@/app/lib/dictionary';
-import { IParams, SEARCH_PARAMS } from '@/app/lib/interfaces';
-import Catalog from '@/app/ui/CatalogPage/Catalog';
-import Search from '@/app/ui/CatalogPage/Search/Search';
-import React from 'react';
+import { getDictionary } from '@/app/lib/dictionary'
+import { IParams, SEARCH_PARAMS } from '@/app/lib/interfaces'
+import Catalog from '@/app/ui/CatalogPage/Catalog'
+import Search from '@/app/ui/CatalogPage/Search/Search'
+import React from 'react'
 
 export const metadata = {
 	title: 'Catalog',
@@ -13,23 +13,23 @@ export const metadata = {
 			de: '/de/catalog',
 		},
 	},
-};
+}
 
 const CatalogPage: React.FC<
 	IParams & {
 		searchParams: {
-			[key in SEARCH_PARAMS]: string;
-		};
+			[key in SEARCH_PARAMS]: string
+		}
 	}
 > = async ({ params: { lang }, searchParams }) => {
-	const dictionary = await getDictionary(lang);
+	const dictionary = await getDictionary(lang)
 
-	const { query, search, total } = searchParams;
+	const { query, search, total } = searchParams
 
-	let totalSearchProducts;
+	let totalSearchProducts
 
 	if (search === 'true' && total) {
-		totalSearchProducts = total;
+		totalSearchProducts = total
 	}
 
 	return (
@@ -50,7 +50,7 @@ const CatalogPage: React.FC<
 				filter={dictionary.catalog.filter}
 			/>
 		</>
-	);
-};
+	)
+}
 
-export default CatalogPage;
+export default CatalogPage

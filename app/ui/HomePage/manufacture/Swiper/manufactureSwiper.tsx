@@ -1,23 +1,23 @@
-'use client';
+'use client'
 
-import { Box } from '@chakra-ui/react';
-import Image from 'next/image';
-import { Navigation } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Box } from '@chakra-ui/react'
+import Image from 'next/image'
+import { Navigation } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
-import 'swiper/react';
-import 'swiper/css/free-mode';
-import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
+import 'swiper/react'
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
+import 'swiper/css/thumbs'
 
-import 'swiper/css';
-import './styles.css';
-import ManufactureImg1 from '../../../../../public/img/manufactureImg1.png';
-import ManufactureImg2 from '../../../../../public/img/manufactureImg2.jpg';
-import ManufactureImg3 from '../../../../../public/img/manufactureImg3.png';
-import ManufactureImg4 from '../../../../../public/img/manufactureImg4.jpg';
-import ManufactureImg5 from '../../../../../public/img/manufactureImg5.jpg';
-import ManufactureImg6 from '../../../../../public/img/manufactureImg6.jpg';
+import 'swiper/css'
+import './styles.css'
+import ManufactureImg1 from '../../../../../public/img/manufactureImg1.png'
+import ManufactureImg2 from '../../../../../public/img/manufactureImg2.jpg'
+import ManufactureImg3 from '../../../../../public/img/manufactureImg3.png'
+import ManufactureImg4 from '../../../../../public/img/manufactureImg4.jpg'
+import ManufactureImg5 from '../../../../../public/img/manufactureImg5.jpg'
+import ManufactureImg6 from '../../../../../public/img/manufactureImg6.jpg'
 
 const SliderImages = [
 	ManufactureImg1,
@@ -26,7 +26,7 @@ const SliderImages = [
 	ManufactureImg4,
 	ManufactureImg5,
 	ManufactureImg6,
-];
+]
 
 const manufactureSwiper = () => {
 	return (
@@ -83,7 +83,7 @@ const manufactureSwiper = () => {
 				))}
 			</Swiper>
 		</>
-	);
-};
+	)
+}
 
-export default manufactureSwiper;
+export default manufactureSwiper

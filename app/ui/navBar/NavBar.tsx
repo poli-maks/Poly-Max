@@ -1,31 +1,31 @@
-'use client';
+'use client'
 
-import { Locale } from '@/i18n.config';
-import { Link } from '@chakra-ui/next-js';
-import { Box, ResponsiveValue } from '@chakra-ui/react';
-import { usePathname } from 'next/navigation';
+import { Locale } from '@/i18n.config'
+import { Link } from '@chakra-ui/next-js'
+import { Box, ResponsiveValue } from '@chakra-ui/react'
+import { usePathname } from 'next/navigation'
 
-import { theme } from '../theme';
+import { theme } from '../theme'
 
-import './NavBar.css';
+import './NavBar.css'
 
 export type NavItem = {
-	title: string;
-	path: string;
-};
+	title: string
+	path: string
+}
 
 export interface NavBarProps {
-	navItems: NavItem[];
-	lang: Locale;
-	displayLogo: ResponsiveValue<'flex' | 'none'>;
-	flexDir?: ResponsiveValue<'row' | 'column'>;
-	color: string;
-	fontSize: string;
-	fontWeight: string;
-	gap: string;
-	onClose?: () => void;
-	display?: { base: string; md: string } | string;
-	width?: { base?: string; lg?: string } | string;
+	navItems: NavItem[]
+	lang: Locale
+	displayLogo: ResponsiveValue<'flex' | 'none'>
+	flexDir?: ResponsiveValue<'row' | 'column'>
+	color: string
+	fontSize: string
+	fontWeight: string
+	gap: string
+	onClose?: () => void
+	display?: { base: string; md: string } | string
+	width?: { base?: string; lg?: string } | string
 }
 
 export const NavBar: React.FC<NavBarProps> = ({
@@ -40,7 +40,7 @@ export const NavBar: React.FC<NavBarProps> = ({
 	display,
 	width,
 }) => {
-	const pathname = usePathname();
+	const pathname = usePathname()
 
 	return (
 		<Box display={display} as="nav" gap={10}>
@@ -89,5 +89,5 @@ export const NavBar: React.FC<NavBarProps> = ({
 				))}
 			</Box>
 		</Box>
-	);
-};
+	)
+}

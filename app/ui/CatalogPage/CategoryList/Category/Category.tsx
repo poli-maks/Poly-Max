@@ -1,11 +1,11 @@
-import { ICategory, SEARCH_PARAMS } from '@/app/lib/interfaces';
-import { Box, Button } from '@chakra-ui/react';
-import React from 'react';
+import { ICategory, SEARCH_PARAMS } from '@/app/lib/interfaces'
+import { Box, Button } from '@chakra-ui/react'
+import React from 'react'
 
 interface ICategoryProps {
-	category: ICategory['attributes'];
-	onClick: (queries: { [key: string]: string | number }) => void;
-	choosedCategory?: string | null;
+	category: ICategory['attributes']
+	onClick: (queries: { [key: string]: string | number }) => void
+	choosedCategory?: string | null
 }
 
 const Category = ({ category, onClick, choosedCategory }: ICategoryProps) => {
@@ -31,7 +31,7 @@ const Category = ({ category, onClick, choosedCategory }: ICategoryProps) => {
 				></Box>
 			)}
 		</>
-	);
-};
+	)
+}
 
-export default Category;
+export default Category

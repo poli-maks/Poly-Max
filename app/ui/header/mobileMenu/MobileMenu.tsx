@@ -1,23 +1,23 @@
-'use client';
+'use client'
 
-import { Locale } from '@/i18n.config';
-import closeIcon from '@/public/img/closeIcon.svg';
-import { Button, Drawer, DrawerBody, DrawerContent, DrawerOverlay, Spacer } from '@chakra-ui/react';
-import Image from 'next/image';
-import { useSwipeable } from 'react-swipeable';
+import { Locale } from '@/i18n.config'
+import closeIcon from '@/public/img/closeIcon.svg'
+import { Button, Drawer, DrawerBody, DrawerContent, DrawerOverlay, Spacer } from '@chakra-ui/react'
+import Image from 'next/image'
+import { useSwipeable } from 'react-swipeable'
 
-import { NavBar, NavItem } from '../../navBar/NavBar';
-import { theme } from '../../theme';
+import { NavBar, NavItem } from '../../navBar/NavBar'
+import { theme } from '../../theme'
 
 interface IMobileMenu {
-	onClose: () => void;
-	isOpen: boolean;
-	lang: Locale;
-	navItems: NavItem[];
+	onClose: () => void
+	isOpen: boolean
+	lang: Locale
+	navItems: NavItem[]
 }
 
 const MobileMenu = ({ onClose, isOpen, lang, navItems }: IMobileMenu) => {
-	const swipeHandlers = useSwipeable({ onSwipedUp: () => onClose() });
+	const swipeHandlers = useSwipeable({ onSwipedUp: () => onClose() })
 
 	return (
 		<Drawer placement={'top'} onClose={onClose} isOpen={isOpen} blockScrollOnMount>
@@ -58,7 +58,7 @@ const MobileMenu = ({ onClose, isOpen, lang, navItems }: IMobileMenu) => {
 				</DrawerBody>
 			</DrawerContent>
 		</Drawer>
-	);
-};
+	)
+}
 
-export default MobileMenu;
+export default MobileMenu

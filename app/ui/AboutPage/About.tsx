@@ -1,13 +1,13 @@
-'use client';
-import { IAboutUsDictionary } from '@/app/lib/interfaces';
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+'use client'
+import { IAboutUsDictionary } from '@/app/lib/interfaces'
+import { Box, Flex, Heading, Text } from '@chakra-ui/react'
+import Image from 'next/image'
 
-import aboutImg1 from '../../../public/img/aboutPhoto1.jpg';
-import aboutImg2 from '../../../public/img/aboutPhoto2.jpg';
-import aboutUsImgFirstSection from '../../../public/img/aboutUs_first.jpg';
-import aboutUsImgSecondSection from '../../../public/img/aboutUs_second.jpg';
-import SectionWrapper from '../sectionWrapper/SectionWrapper';
+import aboutImg1 from '../../../public/img/aboutPhoto1.jpg'
+import aboutImg2 from '../../../public/img/aboutPhoto2.jpg'
+import aboutUsImgFirstSection from '../../../public/img/aboutUs_first.jpg'
+import aboutUsImgSecondSection from '../../../public/img/aboutUs_second.jpg'
+import SectionWrapper from '../sectionWrapper/SectionWrapper'
 
 const About = ({ dictionary }: { dictionary: IAboutUsDictionary }) => {
 	return (
@@ -140,7 +140,7 @@ const About = ({ dictionary }: { dictionary: IAboutUsDictionary }) => {
 				</Box>
 			</Flex>
 		</SectionWrapper>
-	);
-};
+	)
+}
 
-export default About;
+export default About

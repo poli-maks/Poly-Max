@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const MenuArrowClosed = () => {
 	return (
@@ -11,7 +11,7 @@ const MenuArrowClosed = () => {
 				strokeLinejoin="round"
 			/>
 		</svg>
-	);
-};
+	)
+}
 
-export default MenuArrowClosed;
+export default MenuArrowClosed

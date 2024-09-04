@@ -1,28 +1,28 @@
-import { Locale } from '@/i18n.config';
-import { Box, Heading, Button, Text, Flex } from '@chakra-ui/react';
-import Link from 'next/link';
+import { Locale } from '@/i18n.config'
+import { Box, Heading, Button, Text, Flex } from '@chakra-ui/react'
+import Link from 'next/link'
 
-import SectionWrapper from '../../sectionWrapper/SectionWrapper';
-import Arrow from '../../svg/Arrow';
-import { theme } from '../../theme';
-import Swiper from './Swiper/manufactureSwiper';
+import SectionWrapper from '../../sectionWrapper/SectionWrapper'
+import Arrow from '../../svg/Arrow'
+import { theme } from '../../theme'
+import Swiper from './Swiper/manufactureSwiper'
 
 interface ManufactureProps {
-	lang: Locale;
+	lang: Locale
 	dictionary: {
 		homePage: {
 			manufacture: {
-				title: string;
-				descriptionUp: string;
-				descriptionUnder: string;
-				button: string;
-				aboutPoliMaksTitle: string;
-				aboutPoliMaks: string;
-				deliveryTitle: string;
-				delivery: string;
-			};
-		};
-	};
+				title: string
+				descriptionUp: string
+				descriptionUnder: string
+				button: string
+				aboutPoliMaksTitle: string
+				aboutPoliMaks: string
+				deliveryTitle: string
+				delivery: string
+			}
+		}
+	}
 }
 
 const Manufacture: React.FC<ManufactureProps> = ({ lang, dictionary }) => {
@@ -107,7 +107,7 @@ const Manufacture: React.FC<ManufactureProps> = ({ lang, dictionary }) => {
 				</Box>
 			</Flex>
 		</SectionWrapper>
-	);
-};
+	)
+}
 
-export default Manufacture;
+export default Manufacture
