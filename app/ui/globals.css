@@ -200,3 +200,37 @@ a:hover {
 svg {
 	stroke: currentColor;
 }
+
+/* Breadcrumb Styles */
+.breadcrumb {
+	display: flex;
+	align-items: center;
+	gap: 8px; /* Space between breadcrumb items */
+	font-size: 12px; /* Slightly smaller than the base font size */
+	color: inherit;
+}
+
+.breadcrumb-item {
+	position: relative;
+}
+
+.breadcrumb-item::after {
+	content: '/'; /* Separator between breadcrumb items */
+	margin: 0 8px;
+	color: inherit; /* Use current text color */
+}
+
+.breadcrumb-item:last-child::after {
+	content: ''; /* No separator after the last breadcrumb item */
+}
+
+.breadcrumb-link {
+	color: inherit;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.breadcrumb-link:hover {
+	color: #212121; /* Darker color on hover */
+	text-decoration: underline; /* Underline on hover for emphasis */
+}
