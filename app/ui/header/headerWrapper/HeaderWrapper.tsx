@@ -1,5 +1,6 @@
 'use client'
 
+import Breadcrumbs from '@/app/ui/Breadcrumbs' // Correct order: Import Breadcrumbs first
 import { Locale } from '@/i18n.config'
 import { Box, Flex, IconButton, useDisclosure } from '@chakra-ui/react'
 import Link from 'next/link'
@@ -11,7 +12,6 @@ import BurgerIcon from '../../svg/BurgerIcon'
 import SearchIcon from '../../svg/SearchIcon'
 import { theme } from '../../theme'
 import MobileMenu from '../mobileMenu/MobileMenu'
-import Breadcrumbs from '@/app/ui/Breadcrumbs' // Import Breadcrumbs component
 
 const HeaderWrapper = ({ lang, navItems }: { lang: Locale; navItems: NavItem[] }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
