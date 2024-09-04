@@ -35,6 +35,7 @@ const HeaderWrapper = ({ lang, navItems }: { lang: Locale; navItems: NavItem[] }
 					height={{ base: '60px', md: '76px' }}
 				>
 					<BrandLogo />
+					<Breadcrumbs /> {/* Breadcrumbs component added here */}
 				</Box>
 				<Flex
 					gap={{ base: '0', md: '113px' }}
@@ -81,7 +82,6 @@ const HeaderWrapper = ({ lang, navItems }: { lang: Locale; navItems: NavItem[] }
 				/>
 			</Box>
 			<MobileMenu lang={lang} navItems={navItems} isOpen={isOpen} onClose={onClose} />
-			<Breadcrumbs /> {/* Breadcrumbs component added here */}
 		</Flex>
 	)
 }
