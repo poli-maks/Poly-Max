@@ -1,51 +1,44 @@
-import { getProductByName } from '@/app/lib/api/services';
+import { GetServerSideProps } from 'next';
+import { getProductByName, getProductByUid } from '@/app/lib/api/services';
+import { IProduct } from '@/app/lib/interfaces';
 import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
-import { IParams, IProduct } from '@/app/lib/interfaces';
 
-export const generateMetadata = async ({ params: { productName, lang } }: IParams) => {
-  if (!productName) return notFound();
+interface ProductPageProps {
+  product: IProduct;
+  lang: string;
+}
 
-  const product: IProduct | null = await getProductByName(lang, productName);
-
-  // Check if product is null
+const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
   if (!product) return notFound();
-
-  // Extract the first two words from the product title, or just the one word if that's all there is
-  const titleWordsArray = product.attributes.title.split(' ');
-  const titleWords = titleWordsArray.slice(0, 2).join(' '); // Get up to two words
-
-  // Create a URL-friendly slug
-  const slug = titleWords
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, '')
-    .replace(/\s+/g, '-');
-
-  return {
-    title: product.attributes.title,
-    description: product.attributes.descShort,
-    alternates: {
-      canonical: `/catalog/${slug}`,
-      languages: {
-        en: `/en/catalog/${slug}`,
-        de: `/de/catalog/${slug}`,
-      },
-    },
-  };
+  
+  return (
+    <div>
+      {/* Render your product details */}
+      <h1>{product.attributes.title}</h1>
+      {/* Add more fields as needed */}
+    </div>
+  );
 };
 
-const ProductPage: React.FC<IParams> = async ({ params: { lang, productName } }) => {
-  if (!productName) return notFound();
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { lang, id } = params as { lang: string; id: string };
 
-  const product: IProduct | null = await getProductByName(lang, productName);
+  let product: IProduct | null = null;
 
-  if (!product) return notFound();
+  // Try fetching by slug (new URL)
+  if (isNaN(Number(id))) {
+    product = await getProductByName(lang, id);
+  } else {
+    // Try fetching by ID (old URL)
+    const products = await getProductByUid(lang, Number(id));
+    product = products ? products[0] : null; // Assume it returns an array, take the first item
+  }
 
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      {/* Your Product component here */}
-    </Suspense>
-  );
+  if (!product) return { notFound: true };
+
+  return {
+    props: { product, lang },
+  };
 };
 
 export default ProductPage;

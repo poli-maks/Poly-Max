@@ -19,11 +19,9 @@ const getCategories = async (lang: string): Promise<ICategory[]> => {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
-
 			return notFound()
 		} else {
 			console.error(error)
-
 			return notFound()
 		}
 	}
@@ -56,7 +54,6 @@ export const getAllProducts = async (
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
-
 			return notFound()
 		} else {
 			if (typeof error === 'object' && error !== null && 'digest' in error) {
@@ -84,7 +81,6 @@ export const getProductByUid = async (lang: string, uid: number) => {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
-
 			return notFound()
 		} else {
 			if (typeof error === 'object' && error !== null && 'digest' in error) {
@@ -147,7 +143,6 @@ const getProductsByTitle = async (
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
-
 			return notFound()
 		} else {
 			if (typeof error === 'object' && error !== null && 'digest' in error) {
@@ -187,7 +182,6 @@ const getProductsByCategory = async (
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
-
 			return notFound()
 		} else {
 			if (typeof error === 'object' && error !== null && 'digest' in error) {
@@ -227,7 +221,6 @@ const getProductsBySubCategory = async (
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
-
 			return notFound()
 		} else {
 			if (typeof error === 'object' && error !== null && 'digest' in error) {
@@ -257,11 +250,9 @@ const getContacts = async (lang: string): Promise<IContacts | undefined> => {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
-
 			return undefined
 		} else {
 			console.error(error)
-
 			return undefined
 		}
 	}
