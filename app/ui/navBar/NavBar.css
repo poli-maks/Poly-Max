@@ -1,13 +1,13 @@
 a.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(1);
-  opacity: 0.6;
-  transform-origin: left;
-  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	background: currentColor;
+	transform: scaleX(1);
+	opacity: 0.6;
+	transform-origin: left;
+	transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
 }

@@ -1,19 +1,19 @@
-import { getDictionary } from "@/app/lib/dictionary";
-import { Locale } from "@/i18n.config";
+import { getDictionary } from '@/app/lib/dictionary'
+import { Locale } from '@/i18n.config'
 
-import SectionWrapper from "../sectionWrapper/SectionWrapper";
-import HeaderWrapper from "./headerWrapper/HeaderWrapper";
+import SectionWrapper from '../sectionWrapper/SectionWrapper'
+import HeaderWrapper from './headerWrapper/HeaderWrapper'
 
 const Header = async ({ lang }: { lang: Locale }) => {
-  const {
-    navigation: { navItems },
-  } = await getDictionary(lang);
+	const {
+		navigation: { navItems },
+	} = await getDictionary(lang)
 
-  return (
-    <SectionWrapper as={"header"} py={{ base: "0", lg: "0", xl: "0" }}>
-      <HeaderWrapper lang={lang} navItems={navItems} />
-    </SectionWrapper>
-  );
-};
+	return (
+		<SectionWrapper as={'header'} py={{ base: '0', lg: '0', xl: '0' }}>
+			<HeaderWrapper lang={lang} navItems={navItems} />
+		</SectionWrapper>
+	)
+}
 
-export default Header;
+export default Header

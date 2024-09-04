@@ -1,161 +1,161 @@
 {
-  "navigation": {
-    "navItems": [
-      {
-        "title": "Home",
-        "path": "/"
-      },
-      {
-        "title": "Products",
-        "path": "/catalog"
-      },
-      {
-        "title": "About us",
-        "path": "/about"
-      },
-      {
-        "title": "Contact",
-        "path": "/contact"
-      }
-    ]
-  },
-  "button": {
-    "seeMore": "More",
-    "loadMore": "Show all"
-  },
-  "homePage": {
-    "hero": {
-      "title": "Metal products/nArticles made of Plastic/nElectrical Material"
-    },
-    "location": {
-      "title": "Our location",
-      "subTitle": "The city's location on the banks of the Dnipro gives it a special charm and makes it an important transport hub in the country.",
-      "locations": [
-        {
-          "text": "The urban landscape does not leave you untouched either. Beautiful parks, squares, and embankments give the Dnipro a pleasant atmosphere for relaxation and leisure. The Dnipro is a popular place for walking, water fun, and sporting events.",
-          "img": "/img/location1.jpg"
-        },
-        {
-          "text": "Dnipro is one of the largest and most significant cities in Ukraine. With its rich history, the city is a living testament to historical events and the cultural diversity of the region.",
-          "img": "/img/location2.jpg"
-        },
-        {
-          "text": "The city of Dnipro also attracts a lot of attention through its diverse cultural heritage. In its historical buildings, museums, and art galleries, you can learn more about the past and culture of the area. The diverse range of events, exhibitions, and cultural festivals make the city vibrant and interesting for tourists and residents.",
-          "img": "/img/location3.jpg"
-        },
-        {
-          "text": "One of the main aspects of the city is its industry. The Dnipro is considered a powerful industrial center, with various sectors represented, including mechanical engineering, metallurgy, chemistry, and others. An important sector is the production of building components, playing a crucial role in various construction projects and infrastructure developments.",
-          "img": "/img/location4.jpg"
-        },
-        {
-          "text": "Overall, Dnipro is a unique blend of industry, culture, and nature. Rich historical heritage, the production of high-quality building fixtures, and an appealing urban landscape make it an interesting place to visit, work, and live.",
-          "img": "/img/location5.jpg"
-        }
-      ]
-    },
-    "manufacture": {
-      "title": "Modern machines and systems",
-      "descriptionUp": "Our steel products are manufactured using modern machines and systems using the forging process.",
-      "descriptionUnder": "Poli-Maks is a young company founded in 2005. Despite its youth, today it has earned the reputation of a reliable partner that always delivers the high quality product on the agreed date.",
-      "button": "Learn more",
-      "aboutPoliMaksTitle": "Poli Maks",
-      "aboutPoliMaks": "Poli-Maks is a company with both local and global presence, a manufacturer of high-quality architectural hardware with a focus on metal processing. As an independent and reliable partner, we guarantee excellent service. Our team is always ready to provide our customers with expert advice, review and discuss customer drawings to produce a new product.",
-      "deliveryTitle": "Delivery",
-      "delivery": "To make more convenient for our customers, we ship on DDP delivery terms. The company works with freight forwarders and intermediary companies and is therefore directly involved in logistics. Order fulfillment and delivery dates for regular customers are as fast and favorable as possible."
-    },
+	"navigation": {
+		"navItems": [
+			{
+				"title": "Home",
+				"path": "/"
+			},
+			{
+				"title": "Products",
+				"path": "/catalog"
+			},
+			{
+				"title": "About us",
+				"path": "/about"
+			},
+			{
+				"title": "Contact",
+				"path": "/contact"
+			}
+		]
+	},
+	"button": {
+		"seeMore": "More",
+		"loadMore": "Show all"
+	},
+	"homePage": {
+		"hero": {
+			"title": "Metal products/nArticles made of Plastic/nElectrical Material"
+		},
+		"location": {
+			"title": "Our location",
+			"subTitle": "The city's location on the banks of the Dnipro gives it a special charm and makes it an important transport hub in the country.",
+			"locations": [
+				{
+					"text": "The urban landscape does not leave you untouched either. Beautiful parks, squares, and embankments give the Dnipro a pleasant atmosphere for relaxation and leisure. The Dnipro is a popular place for walking, water fun, and sporting events.",
+					"img": "/img/location1.jpg"
+				},
+				{
+					"text": "Dnipro is one of the largest and most significant cities in Ukraine. With its rich history, the city is a living testament to historical events and the cultural diversity of the region.",
+					"img": "/img/location2.jpg"
+				},
+				{
+					"text": "The city of Dnipro also attracts a lot of attention through its diverse cultural heritage. In its historical buildings, museums, and art galleries, you can learn more about the past and culture of the area. The diverse range of events, exhibitions, and cultural festivals make the city vibrant and interesting for tourists and residents.",
+					"img": "/img/location3.jpg"
+				},
+				{
+					"text": "One of the main aspects of the city is its industry. The Dnipro is considered a powerful industrial center, with various sectors represented, including mechanical engineering, metallurgy, chemistry, and others. An important sector is the production of building components, playing a crucial role in various construction projects and infrastructure developments.",
+					"img": "/img/location4.jpg"
+				},
+				{
+					"text": "Overall, Dnipro is a unique blend of industry, culture, and nature. Rich historical heritage, the production of high-quality building fixtures, and an appealing urban landscape make it an interesting place to visit, work, and live.",
+					"img": "/img/location5.jpg"
+				}
+			]
+		},
+		"manufacture": {
+			"title": "Modern machines and systems",
+			"descriptionUp": "Our steel products are manufactured using modern machines and systems using the forging process.",
+			"descriptionUnder": "Poli-Maks is a young company founded in 2005. Despite its youth, today it has earned the reputation of a reliable partner that always delivers the high quality product on the agreed date.",
+			"button": "Learn more",
+			"aboutPoliMaksTitle": "Poli Maks",
+			"aboutPoliMaks": "Poli-Maks is a company with both local and global presence, a manufacturer of high-quality architectural hardware with a focus on metal processing. As an independent and reliable partner, we guarantee excellent service. Our team is always ready to provide our customers with expert advice, review and discuss customer drawings to produce a new product.",
+			"deliveryTitle": "Delivery",
+			"delivery": "To make more convenient for our customers, we ship on DDP delivery terms. The company works with freight forwarders and intermediary companies and is therefore directly involved in logistics. Order fulfillment and delivery dates for regular customers are as fast and favorable as possible."
+		},
 
-    "benefits": {
-      "title": "Why Poli-Maks?",
-      "descriptionUp": "The company grows with daily improvements in production, logistics and services.",
-      "descriptionUnder": "The company has a thorough knowledge of legislation relating to the production and delivery of its products, thereby avoiding amateurish mistakes at every stage. Company activities are based on four fundamental principles:",
-      "benefitsList": [
-        "Working with Poli-Maks means pleasant service, easy ordering, good prices.",
-        "Professionalism and responsibility in all aspects of the company's activities.",
-        "Well-running logistics in key areas, fast and safe deliveries.",
-        "Stability and accuracy in the realization of activities, goals and tasks of the company of any kind.",
-        "Respecting customers, partners, employees and government authorities.",
-        "Our steel product is packed on the pallets, can be marked as customer's request."
-      ]
-    },
+		"benefits": {
+			"title": "Why Poli-Maks?",
+			"descriptionUp": "The company grows with daily improvements in production, logistics and services.",
+			"descriptionUnder": "The company has a thorough knowledge of legislation relating to the production and delivery of its products, thereby avoiding amateurish mistakes at every stage. Company activities are based on four fundamental principles:",
+			"benefitsList": [
+				"Working with Poli-Maks means pleasant service, easy ordering, good prices.",
+				"Professionalism and responsibility in all aspects of the company's activities.",
+				"Well-running logistics in key areas, fast and safe deliveries.",
+				"Stability and accuracy in the realization of activities, goals and tasks of the company of any kind.",
+				"Respecting customers, partners, employees and government authorities.",
+				"Our steel product is packed on the pallets, can be marked as customer's request."
+			]
+		},
 
-    "forBuisness": {
-      "title": "For business",
-      "descriptionUp": "The scope and quality of our products ensure high demand and sales levels throughout Europe.",
-      "descriptionUnder1": "Sell together with us. Poli-Maks offers favorable conditions for wholesalers. For you this means – profitable sales of products from the manufacturer. Poli-Maks would like to thank its regular customers for their trust.",
-      "descriptionUnder2": "We strive for the highest satisfaction of our customers with the quality of our products and their development into our regular customers after a first purchase."
-    }
-  },
-  "catalog": {
-    "title": "products",
-    "all_category": "All",
-    "filter": "Filter",
-    "notFound": "0 products"
-  },
-  "productPage": {
-    "btnOrder": "Order now",
-    "announcement": "To make more convenient for our customers, we ship on DDP delivery terms.",
-    "tableHeaders": {
-      "article": "Article",
-      "diameter": "Diameter (mm)",
-      "length": "Length (mm)",
-      "weight": "Weight (kg)",
-      "coating_thickness": "Coating thickness",
-      "cross_section": "Wire cross section",
-      "volume": "Volume",
-      "wall_thickness": "Wall thickness"
-    },
-    "delivery": {
-      "title": "How do we deliver materials?",
-      "body": "<p>We value each of our customers. To make the delivery more convenient for you, our customers, we have therefore switched to DDP (Delivered Duty Paid) delivery terms. In other words, our company collaborates directly with carriers, intermediaries, as well as logistics warehouses.</p><p>Also, please note that the lead time for delivery and the delivery for regular customers is the fastest and most cost-effective.</p>"
-    },
-    "company": {
-      "title": "How is our company?",
-      "body": "<p>Our company, Poli-Maks GmbH, is among the major wholesalers of metal products for civil engineering and road construction. The manufacturing of our goods takes place in Dnipro, Ukraine. The final stages of our production workshop are managed through the production of items in large quantities. We also have an annual distribution of sales areas. We consistently meet all customer needs, producing high-quality products at reasonable prices, with the aim of satisfying as many customers as possible.<p>"
-    },
-    "contactUs": {
-      "title": "How can you contact us?",
-      "body": "<p>Below you can read information about where to find us and how to contact someone from our company.</p><p>You can reach him by phone at <a href='tel:+380684777139'>+380-68-477-71-39</a>.</p><p>Or you can also write to us at our email <a href='mailto:officepolimax@gmail.com'>officepolimax@gmail.com</a> so that we can answer all your questions.</p>"
-    }
-  },
-  "aboutUsPage": {
-    "title": "About us",
-    "subTitle": "The company's philosophy is to offer affordable, high-quality goods to our customers and long-term and mutually beneficial relationships to our partners.",
-    "sections": {
-      "first": {
-        "title": "Company profile",
-        "text": "Poli-Maks GmbH is a manufacturer and wholesaler of metal products for civil, civil engineering and road construction. Production takes place in the city of Dnipro (Ukraine). The latest systems in the production hall enable short-term production of products in larger quantities. Annual expansion of the sales area allows Poli-Maks to meet the needs of foreign customers for high-quality and affordable products."
-      },
-      "second": {
-        "title": "Our main strategic goal",
-        "text": "Development into a dynamically growing international brand company that supplies its products to European countries and is a worthy competitor to leading producers of similar products in terms of price and quality."
-      },
-      "third": {
-        "title": "For business",
-        "text": "Sell together with us. Poli-Maks offers favorable conditions for wholesalers. The scope and quality of our products ensure high demand and sales levels throughout Europe. For you this means profitable sales of products from the manufacturer Poli-Maks thanks its regular customers for their trust."
-      }
-    }
-  },
-  "contactPage": {
-    "mainTitle": "Contacts",
-    "title": "Did we catch your eye?",
-    "description": "Our team of experts is available to answer your questions, provide you with more information and help you.",
-    "position": "Managing Director"
-  },
-  "modalForm": {
-    "title": "Do you want to contact us, need help or more information about a product?",
-    "text": "Please fill in the form below to contact us. We try our best to respond to an requests in less than 24 hours.",
-    "nameField": "Name",
-    "emailField": "E-Mail",
-    "message": "Your message...",
-    "button": "Send",
-    "policy": "I accepted the processing of personal data"
-  },
-  "submitSuccess": {
-    "title": "Thank you for choosing Poli-Maks!",
-    "text": "Our experts will contact you within 24 hours."
-  },
-  "notFound": {
-    "title": "This page is missing",
-    "text": "Don't worry, it happens to everyone, let's see if we can point you in the right direction."
-  }
+		"forBuisness": {
+			"title": "For business",
+			"descriptionUp": "The scope and quality of our products ensure high demand and sales levels throughout Europe.",
+			"descriptionUnder1": "Sell together with us. Poli-Maks offers favorable conditions for wholesalers. For you this means – profitable sales of products from the manufacturer. Poli-Maks would like to thank its regular customers for their trust.",
+			"descriptionUnder2": "We strive for the highest satisfaction of our customers with the quality of our products and their development into our regular customers after a first purchase."
+		}
+	},
+	"catalog": {
+		"title": "products",
+		"all_category": "All",
+		"filter": "Filter",
+		"notFound": "0 products"
+	},
+	"productPage": {
+		"btnOrder": "Order now",
+		"announcement": "To make more convenient for our customers, we ship on DDP delivery terms.",
+		"tableHeaders": {
+			"article": "Article",
+			"diameter": "Diameter (mm)",
+			"length": "Length (mm)",
+			"weight": "Weight (kg)",
+			"coating_thickness": "Coating thickness",
+			"cross_section": "Wire cross section",
+			"volume": "Volume",
+			"wall_thickness": "Wall thickness"
+		},
+		"delivery": {
+			"title": "How do we deliver materials?",
+			"body": "<p>We value each of our customers. To make the delivery more convenient for you, our customers, we have therefore switched to DDP (Delivered Duty Paid) delivery terms. In other words, our company collaborates directly with carriers, intermediaries, as well as logistics warehouses.</p><p>Also, please note that the lead time for delivery and the delivery for regular customers is the fastest and most cost-effective.</p>"
+		},
+		"company": {
+			"title": "How is our company?",
+			"body": "<p>Our company, Poli-Maks GmbH, is among the major wholesalers of metal products for civil engineering and road construction. The manufacturing of our goods takes place in Dnipro, Ukraine. The final stages of our production workshop are managed through the production of items in large quantities. We also have an annual distribution of sales areas. We consistently meet all customer needs, producing high-quality products at reasonable prices, with the aim of satisfying as many customers as possible.<p>"
+		},
+		"contactUs": {
+			"title": "How can you contact us?",
+			"body": "<p>Below you can read information about where to find us and how to contact someone from our company.</p><p>You can reach him by phone at <a href='tel:+380684777139'>+380-68-477-71-39</a>.</p><p>Or you can also write to us at our email <a href='mailto:officepolimax@gmail.com'>officepolimax@gmail.com</a> so that we can answer all your questions.</p>"
+		}
+	},
+	"aboutUsPage": {
+		"title": "About us",
+		"subTitle": "The company's philosophy is to offer affordable, high-quality goods to our customers and long-term and mutually beneficial relationships to our partners.",
+		"sections": {
+			"first": {
+				"title": "Company profile",
+				"text": "Poli-Maks GmbH is a manufacturer and wholesaler of metal products for civil, civil engineering and road construction. Production takes place in the city of Dnipro (Ukraine). The latest systems in the production hall enable short-term production of products in larger quantities. Annual expansion of the sales area allows Poli-Maks to meet the needs of foreign customers for high-quality and affordable products."
+			},
+			"second": {
+				"title": "Our main strategic goal",
+				"text": "Development into a dynamically growing international brand company that supplies its products to European countries and is a worthy competitor to leading producers of similar products in terms of price and quality."
+			},
+			"third": {
+				"title": "For business",
+				"text": "Sell together with us. Poli-Maks offers favorable conditions for wholesalers. The scope and quality of our products ensure high demand and sales levels throughout Europe. For you this means profitable sales of products from the manufacturer Poli-Maks thanks its regular customers for their trust."
+			}
+		}
+	},
+	"contactPage": {
+		"mainTitle": "Contacts",
+		"title": "Did we catch your eye?",
+		"description": "Our team of experts is available to answer your questions, provide you with more information and help you.",
+		"position": "Managing Director"
+	},
+	"modalForm": {
+		"title": "Do you want to contact us, need help or more information about a product?",
+		"text": "Please fill in the form below to contact us. We try our best to respond to an requests in less than 24 hours.",
+		"nameField": "Name",
+		"emailField": "E-Mail",
+		"message": "Your message...",
+		"button": "Send",
+		"policy": "I accepted the processing of personal data"
+	},
+	"submitSuccess": {
+		"title": "Thank you for choosing Poli-Maks!",
+		"text": "Our experts will contact you within 24 hours."
+	},
+	"notFound": {
+		"title": "This page is missing",
+		"text": "Don't worry, it happens to everyone, let's see if we can point you in the right direction."
+	}
 }
