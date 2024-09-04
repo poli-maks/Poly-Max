@@ -81,8 +81,8 @@ module.exports = {
   },
   overrides: [
     {
-      // Disable ESLint and Prettier for all files in the specified directory
-      files: ["path/to/your/files/**"],
+      // Disable ESLint and Prettier for specific files
+      files: ["app/[lang]/catalog/[...id]/page.tsx", "app/lib/interfaces.ts"],
       rules: {
         "prettier/prettier": "off",
         "react-hooks/rules-of-hooks": "off",
