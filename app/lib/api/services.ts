@@ -10,6 +10,7 @@ const getCategories = async (lang: string): Promise<ICategory[]> => {
 		const {
 			data: { data },
 		} = await instance.get(`/api/categories?locale=${lang}&populate=sub_categories`)
+
 		if (data.length === 0) {
 			return notFound()
 		}
@@ -19,9 +20,11 @@ const getCategories = async (lang: string): Promise<ICategory[]> => {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
+
 			return notFound()
 		} else {
 			console.error(error)
+
 			return notFound()
 		}
 	}
@@ -45,6 +48,7 @@ export const getAllProducts = async (
 		} = await instance.get(
 			`/api/products?locale=${lang}&populate=img&sort[0]=uid:asc&pagination[page]=${page}&pagination[pageSize]=${limit}`
 		)
+
 		if (data.length === 0) {
 			return notFound()
 		}
@@ -54,13 +58,16 @@ export const getAllProducts = async (
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
+
 			return notFound()
 		} else {
 			if (typeof error === 'object' && error !== null && 'digest' in error) {
 				if (error.digest === 'NEXT_NOT_FOUND') {
 					return 'NOT_FOUND'
 				}
-			} else return notFound()
+			} else {
+				return notFound()
+			}
 		}
 	}
 }
@@ -72,6 +79,7 @@ export const getProductByUid = async (lang: string, uid: number) => {
 		const {
 			data: { data },
 		} = await instance.get(`/api/products?locale=${lang}&filters[uid][$in][0]=${uid}&populate=deep`)
+
 		if (data.length === 0) {
 			return notFound()
 		}
@@ -81,13 +89,16 @@ export const getProductByUid = async (lang: string, uid: number) => {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
+
 			return notFound()
 		} else {
 			if (typeof error === 'object' && error !== null && 'digest' in error) {
 				if (error.digest === 'NEXT_NOT_FOUND') {
 					return 'NOT_FOUND'
 				}
-			} else return notFound()
+			} else {
+				return notFound()
+			}
 		}
 	}
 }
@@ -134,6 +145,7 @@ const getProductsByTitle = async (
 		} = await instance.get(
 			`/api/products?locale=${lang}&filters[title][$containsi]=${query}&populate=img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
+
 		if (data.length === 0) {
 			return notFound()
 		}
@@ -143,13 +155,16 @@ const getProductsByTitle = async (
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
+
 			return notFound()
 		} else {
 			if (typeof error === 'object' && error !== null && 'digest' in error) {
 				if (error.digest === 'NEXT_NOT_FOUND') {
 					return 'NOT_FOUND'
 				}
-			} else return notFound()
+			} else {
+				return notFound()
+			}
 		}
 	}
 }
@@ -182,13 +197,16 @@ const getProductsByCategory = async (
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
+
 			return notFound()
 		} else {
 			if (typeof error === 'object' && error !== null && 'digest' in error) {
 				if (error.digest === 'NEXT_NOT_FOUND') {
 					return 'NOT_FOUND'
 				}
-			} else return notFound()
+			} else {
+				return notFound()
+			}
 		}
 	}
 }
@@ -221,13 +239,16 @@ const getProductsBySubCategory = async (
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
+
 			return notFound()
 		} else {
 			if (typeof error === 'object' && error !== null && 'digest' in error) {
 				if (error.digest === 'NEXT_NOT_FOUND') {
 					return 'NOT_FOUND'
 				}
-			} else return notFound()
+			} else {
+				return notFound()
+			}
 		}
 	}
 }
@@ -250,9 +271,11 @@ const getContacts = async (lang: string): Promise<IContacts | undefined> => {
 		if (axios.isAxiosError(error)) {
 			console.error(error.status)
 			console.error(error.response)
+
 			return undefined
 		} else {
 			console.error(error)
+
 			return undefined
 		}
 	}
