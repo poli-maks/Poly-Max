@@ -1,45 +1,50 @@
-import { SEARCH_PARAMS } from '@/app/lib/interfaces'
-import { Locale } from '@/i18n.config'
-import { Heading } from '@chakra-ui/react'
-import { Suspense } from 'react'
+import { SEARCH_PARAMS } from "@/app/lib/interfaces";
+import { Locale } from "@/i18n.config";
+import { Heading } from "@chakra-ui/react";
+import { Suspense } from "react";
 
-import Products from '../Products/Products'
-import SectionWrapper from '../sectionWrapper/SectionWrapper'
-import CategoriesSkeleton from '../Skeletons/CategoriesSkeleton'
-import Categories from './CategoryList/Categories'
+import Products from "../Products/Products";
+import SectionWrapper from "../sectionWrapper/SectionWrapper";
+import CategoriesSkeleton from "../Skeletons/CategoriesSkeleton";
+import Categories from "./CategoryList/Categories";
 
 const Catalog = ({
-	lang,
-	searchParams,
-	btnText,
-	title,
-	all_category,
-	filter,
-	notFound,
+  lang,
+  searchParams,
+  btnText,
+  title,
+  all_category,
+  filter,
+  notFound,
 }: {
-	lang: Locale
-	searchParams: { [key in SEARCH_PARAMS]: string }
-	btnText: string
-	title: string
-	all_category: string
-	filter: string
-	notFound: string
+  lang: Locale;
+  searchParams: { [key in SEARCH_PARAMS]: string };
+  btnText: string;
+  title: string;
+  all_category: string;
+  filter: string;
+  notFound: string;
 }) => {
-	return (
-		<SectionWrapper
-			py={{ base: '0', lg: '0', xl: '0' }}
-			pt={{ base: '40px', lg: '60px', xl: '60px' }}
-			pb={{ base: '40px', lg: '120px', xl: '120px' }}
-		>
-			<Heading as={'h1'} textTransform={'uppercase'} mb={'60px'}>
-				{title}
-			</Heading>
-			<Suspense fallback={<CategoriesSkeleton />}>
-				<Categories all_category={all_category} filter={filter} lang={lang} />
-			</Suspense>
-			<Products lang={lang} btnText={btnText} searchParams={searchParams} notFound={notFound} />
-		</SectionWrapper>
-	)
-}
+  return (
+    <SectionWrapper
+      py={{ base: "0", lg: "0", xl: "0" }}
+      pt={{ base: "40px", lg: "60px", xl: "60px" }}
+      pb={{ base: "40px", lg: "120px", xl: "120px" }}
+    >
+      <Heading as={"h1"} textTransform={"uppercase"} mb={"60px"}>
+        {title}
+      </Heading>
+      <Suspense fallback={<CategoriesSkeleton />}>
+        <Categories all_category={all_category} filter={filter} lang={lang} />
+      </Suspense>
+      <Products
+        lang={lang}
+        btnText={btnText}
+        searchParams={searchParams}
+        notFound={notFound}
+      />
+    </SectionWrapper>
+  );
+};
 
-export default Catalog
+export default Catalog;

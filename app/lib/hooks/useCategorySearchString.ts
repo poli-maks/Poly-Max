@@ -1,52 +1,54 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback } from 'react'
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 
-import { SEARCH_PARAMS } from '../interfaces'
+import { SEARCH_PARAMS } from "../interfaces";
 
 const useCategorySearchString = () => {
-	const router = useRouter()
-	const searchParams = useSearchParams()
-	const pathname = usePathname()
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
-	const createString = useCallback(
-		(queries: { [key: string]: string | number }) => {
-			const params = new URLSearchParams(searchParams.toString())
+  const createString = useCallback(
+    (queries: { [key: string]: string | number }) => {
+      const params = new URLSearchParams(searchParams.toString());
 
-			params.forEach((value, key) => {
-				if (key === SEARCH_PARAMS.SEARCH || key === SEARCH_PARAMS.QUERY) {
-					params.delete(key)
-				}
-				key === SEARCH_PARAMS.PAGE && params.set('page', '1')
-				key === SEARCH_PARAMS.TOTAL && params.set('total', value)
-			})
+      params.forEach((value, key) => {
+        if (key === SEARCH_PARAMS.SEARCH || key === SEARCH_PARAMS.QUERY) {
+          params.delete(key);
+        }
+        key === SEARCH_PARAMS.PAGE && params.set("page", "1");
+        key === SEARCH_PARAMS.TOTAL && params.set("total", value);
+      });
 
-			if (!queries.sub) {
-				params.delete(SEARCH_PARAMS.SUB_CATEGORY)
-			}
+      if (!queries.sub) {
+        params.delete(SEARCH_PARAMS.SUB_CATEGORY);
+      }
 
-			const queriesEntries = Object.entries(queries).map(([key, value]) => `${key}=${value}`)
+      const queriesEntries = Object.entries(queries).map(
+        ([key, value]) => `${key}=${value}`,
+      );
 
-			queriesEntries.forEach((param) => {
-				const [paramKey, paramValue] = param.split('=')
-				params.set(paramKey, paramValue)
-			})
+      queriesEntries.forEach((param) => {
+        const [paramKey, paramValue] = param.split("=");
+        params.set(paramKey, paramValue);
+      });
 
-			router.replace(pathname + '?' + params.toString())
-		},
-		[pathname, router, searchParams]
-	)
+      router.replace(pathname + "?" + params.toString());
+    },
+    [pathname, router, searchParams],
+  );
 
-	const resetSearchParams = useCallback(() => {
-		router.replace(pathname + '?' + 'page=1')
-	}, [pathname, router])
+  const resetSearchParams = useCallback(() => {
+    router.replace(pathname + "?" + "page=1");
+  }, [pathname, router]);
 
-	const resetPage = useCallback(() => {
-		const params = new URLSearchParams(searchParams.toString())
-		params.set('page', '1')
-		router.replace(pathname + '?' + params.toString())
-	}, [pathname, router, searchParams])
+  const resetPage = useCallback(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", "1");
+    router.replace(pathname + "?" + params.toString());
+  }, [pathname, router, searchParams]);
 
-	return { searchParams, createString, resetSearchParams, resetPage }
-}
+  return { searchParams, createString, resetSearchParams, resetPage };
+};
 
-export default useCategorySearchString
+export default useCategorySearchString;

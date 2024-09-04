@@ -1,10 +1,10 @@
 .locationSlider > .swiper-wrapper .swiper-horizontal > .swiper-scrollbar,
 .swiper-scrollbar.swiper-scrollbar-horizontal {
-	bottom: 0;
+  bottom: 0;
 }
 
 @media (min-width: 1000px) {
-	.locationSlider .swiper-scrollbar {
-		display: none !important;
-	}
+  .locationSlider .swiper-scrollbar {
+    display: none !important;
+  }
 }

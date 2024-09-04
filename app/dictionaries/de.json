@@ -1,159 +1,159 @@
 {
-	"navigation": {
-		"navItems": [
-			{
-				"title": "Home",
-				"path": "/"
-			},
-			{
-				"title": "Produkte",
-				"path": "/catalog"
-			},
-			{
-				"title": "Über uns",
-				"path": "/about"
-			},
-			{
-				"title": "Kontakt",
-				"path": "/contact"
-			}
-		]
-	},
-	"button": {
-		"seeMore": "Mehr",
-		"loadMore": "Zeige alle"
-	},
-	"homePage": {
-		"hero": {
-			"title": "Metallprodukte/nArtikel aus Kunststof/nElektrotechnisches Material"
-		},
-		"location": {
-			"title": "Unser Standort",
-			"subTitle": "Die Lage der Stadt an den Ufern des Dnipro verleiht ihm einen besonderen Charme und macht ihn zu einem wichtigen Verkehrsknotenpunkt im Land.",
-			"locations": [
-				{
-					"text": "Die Stadtlandschaft lässt einen ebenfalls nicht unberührt. Schöne Parks, Plätze und Uferböschungen geben der Dnipro eine angenehme Atmosphäre zum Entspannen und Relaxen. Der Dnipro ist ein beliebter Ort zum Spazierengehen, zum Wasservergnügen und zu sportlichen Veranstaltungen,",
-					"img": "/img/location1.jpg"
-				},
-				{
-					"text": "Dnipro ist eine der größten und bedeutendsten Städte in Ukraine. Mit seiner reichen Geschichte ist die Stadt ein lebendiges Zeugnis für historische Ereignisse und die kulturelle Vielfalt der Region.",
-					"img": "/img/location2.jpg"
-				},
-				{
-					"text": "Der Stadt Dnepr zieht auch viel Aufmerksamkeit auf sich durch sein vielfältiges kulturelles Erbe. In seinen historischen Gebäuden, Museen und Kunstgalerien können Sie mehr über die Vergangenheit und Kultur des Gebiets erfahren. Das vielfältige Angebot an Veranstaltungen, Ausstellungen und Kulturfestivals machen die Stadt lebendig und interessant für Touristen und Einwohner.",
-					"img": "/img/location3.jpg"
-				},
-				{
-					"text": "Einer der Hauptaspekte der Stadt ist ihre Industrie. Der Dnipro gilt als ein leistungsstarkes industrielles Zentrum, in dem verschiedene Industriebereiche wie Maschinenbau, Metallurgie, Chemie und andere vertreten sind. Ein wichtiger Sektor stellt die Herstellung von Bauteilen dar, die eine wichtige Rolle bei verschiedenen Bauprojekten und Infrastrukturentwicklungen spielt.",
-					"img": "/img/location4.jpg"
-				},
-				{
-					"text": "Insgesamt ist Dnepr ein einzigartiges Zusammenspiel aus Industrie, Kultur und Natur. Reichhaltiges historisches Erbe, die Produktion qualitativ hochwertiger Bauarmaturen und ein ansprechender städtischer Landschaftsgarten machen es zu einem interessanten Ort zum Besuchen, Arbeiten und Leben.",
-					"img": "/img/location5.jpg"
-				}
-			]
-		},
-		"manufacture": {
-			"title": "Modern Maschinen und Anlagen",
-			"descriptionUp": "Unsere Stahlprodukte werden auf modernen Maschinen und Anlagen im Schmiedeverfahren hergestellt.",
-			"descriptionUnder": "Poli-Maks ist ein junges Unternehmen, das im Jahr 2005 gegründet wurde. Trotz seiner Jugend hat es heutzutage den Ruf eines zuverlässigen Partners erworben, der stets das qualitativ hochwertige Produkt zum vereinbarten Termin liefert.",
-			"button": "Erfahren Sie mehr",
-			"aboutPoliMaksTitle": "Poli Maks",
-			"aboutPoliMaks": "Poli-Maks ist ein Unternehmen mit sowohl lokaler als auch globaler Präsenz, ein Hersteller von hochwertigen Baubeschlägen mit Schwerpunkt auf der Metallverarbeitung. Als unabhängiger und zuverlässiger Partner garantieren wir einen exzellenten Service. Unser Team ist immer bereit, unsere Kunden kompetent zu beraten, Kundenzeichnungen zu prüfen und zu besprechen, um ein neues Produkt herzustellen.",
-			"deliveryTitle": "Lieferung",
-			"delivery": "Um für unsere Kunden bequemer zu machen, liefern wir zu DDP-Lieferbedingungen. Die Firma arbeitet mit Speditionen und Vermittlungsgesellschaften und wirkt dadurch in Logistik direkt mit. Die Auftragserfüllung und Liefertermine für Stammkunden sind maximal schnell und favorabel."
-		},
-		"benefits": {
-			"title": "Warum Poli-Maks",
-			"descriptionUp": "Die Firma wächst bei täglichen Verbesserungen in der Produktion, Logistik und Services.",
-			"descriptionUnder": "Das Unternehmen kennt sich gründlich in Gesetzgebung hinsichtlich auf Produktion und Lieferung seiner Produkte aus und vermeidet dadurch dilettantische Fehler in jeder Phase. Unternehmensakivitäten beruhen sich auf vier grundlegenden Prinzipien:",
-			"benefitsList": [
-				"Die Zusammenarbeit mit Poli-Maks bedeutet angenehmes Service, einfaches Bestellen, gute Preise.",
-				"Professionalität und Verantwortung in allen Tätigkeitsaspekten des Unternehmens.",
-				"Gut laufende Logistik in Schlüsselbereichen, schnelle und sichere Lieferungen.",
-				"Stabilität und Genauigkeit bei Verwirklichung von Tätigkeiten, Ziele und Aufgaben des Unternehmens jeglicher Art.",
-				"Respektierung von Kunden, Partnern, Mitarbeitern und staatlichen Behörden.",
-				"Unser Stahlprodukt wird auf den Paletten verpackt, kann auf Kundenwunsch markiert werden."
-			]
-		},
-		"forBuisness": {
-			"title": "Für Geschäfte",
-			"descriptionUp": "Anwendungsbereich und Qualität unserer Produkte gewährleisten hohe Nachfrage und jeweiliges Verkaufsniveau im ganzen Europa.",
-			"descriptionUnder1": "Verkaufen gemeinsam mit uns. Poli-Maks bietet günstige Konditionen für Großhändler. Für Sie bedeutet das – profitabler Verkauf Produkte vom Hersteller. Poli-Maks bedankt sich bei den Stammkunden für ihr Vertrauen.",
-			"descriptionUnder2": "Wir bemühen uns um höchste Zufriedenheit unserer Kunden mit Qualität unserer Produkte und ihre Entwicklung zu unseren Stammkunden nach einem ersten Einkauf."
-		}
-	},
-	"catalog": {
-		"title": "producte",
-		"all_category": "Alle",
-		"filter": "Filter",
-		"notFound": "0 produkte"
-	},
-	"productPage": {
-		"btnOrder": "Eine Bestellung aufgeben",
-		"announcement": "Um für unsere Kunden bequemer zu machen, liefern wir zu DDP-Lieferbedingungen.",
-		"tableHeaders": {
-			"article": "Artikel",
-			"diameter": "Durchmesser (mm)",
-			"length": "Länge (mm)",
-			"weight": "Gewicht (kg)",
-			"coating_thickness": "Wandstärke",
-			"cross_section": "Aderquerschnitt",
-			"volume": "Volume",
-			"wall_thickness": "Beschichtungsstärke"
-		},
-		"delivery": {
-			"title": "Wie liefern wir Materialien?",
-			"body": "<p>Wir schätzen jeden unserer Kunden. Um die Lieferung für Sie, unsere Kunden, komfortabler zu gestalten, haben wir daher auf DDP-Lieferbedingungen umgestellt. Mit anderen Worten, unser Unternehmen kooperiert direkt mit Spediteuren und Vermittlungsunternehmen sowie Lagerbeständen im Bereich Logistik.</p><p>Denken Sie auch daran, dass die Vorlaufzeit für die Lieferung und die Lieferung für Stammkunden die schnellste und günstigste ist.</p>"
-		},
-		"company": {
-			"title": "Wie ist unser Unternehmen?",
-			"body": "<p>Unsere Firma Poli-Maks GmbH gehört großen Großhändlern von Metallprodukten für den Tiefbau und den Straßenbau. Die Herstellung unserer Waren erfolgt in Dnepropetrowsk in der Ukraine. Und unsere letzten Objekte in der Produktionswerkstatt werden durch die Produktion von Produkten in großen Mengen gesteuert. Wir haben auch eine jährliche Verteilung der Verkaufsflächen. Und wir erfüllen immer alle Bedürfnisse der Kunden und stellen unsere Produkte von hoher Qualität und zu vernünftigen Preisen her und verkaufen sie, um so viele unserer Kunden wie möglich zufrieden zu stellen.<p>"
-		},
-		"contactUs": {
-			"title": "Wie können Sie mit uns kontaktieren? ",
-			"body": "<p>Unten können Sie Informationen darüber lesen und sehen, wo Sie uns finden und wie Sie jemanden aus unserem Unternehmen kontaktieren können.</p><p>Sie können mit ihn telefonisch unter <a href='tel:+380684777139'>+380-68-477-71-39</a> erreichen. </p><p>Oder Sie können uns auch an unsere E-Mail <a href='mailto:officepolimax@gmail.com'>officepolimax@gmail.com</a> schreiben, damit wir alle Ihre Fragen beantworten können.</p>"
-		}
-	},
-	"aboutUsPage": {
-		"title": "ÜBER UNS",
-		"subTitle": "Die Unternehmensphilosophie besteht aus im preiswerten Anbieten hochqualitativer Waren unseren Kunden und langfristiger und gegenseitig vorteilhafter Beziehungen unseren Partnern.",
-		"sections": {
-			"first": {
-				"title": "Firmenprofil",
-				"text": "Poli-Maks GmbH ist Hersteller und gleichzeitig Großhändler von Metallerzeugnissen für Zivil-, Tief- und Straßenbau. Die Fertigung erfolgt in der Stadt Dnipro (Ukraine). Die neusten Anlagen in der Produktionshalle ermöglichen kurzfristige Produktion von Erzeugnissen in größeren Mengen. Jährliche Erweiterung des Vertriebsbereiches lässt Poli-Maks den Bedarf von ausländischen Kunden an qualitativen und preisgünstigen Produkten decken."
-			},
-			"second": {
-				"title": "Unser strategischer Hauptziel",
-				"text": "Entwicklung zu einer dynamisch wachsenden internationalen Markenfirma, die ihre Erzeugnisse in europäische Länder liefert und würdiger Wettbewerber für führende Produzenten ähnlicher Produkte hinsichtlich Preis und Qualität ist."
-			},
-			"third": {
-				"title": "Für Geschäfte",
-				"text": "Verkaufen gemeinsam mit uns. Poli-Maks bietet günstige Konditionen für Großhändler. Anwendungsbereich und Qualität unserer Produkte gewährleisten hohe Nachfrage und jeweiliges Verkaufsniveau im ganzen Europa. Für Sie bedeutet das - profitabler Verkauf Produkte vom Hersteller Poli-Maks bedankt sich bei den Stammkunden für ihr Vertrauen."
-			}
-		}
-	},
-	"contactPage": {
-		"mainTitle": "Kontakte",
-		"title": "Fragen zu unserem Produkt?",
-		"description": "Unser Team von Experten steht Ihnen zur Verfügung, um Ihre Fragen zu beantworten, Ihnen weitere Informationen zu geben und Ihnen zu helfen.",
-		"position": "Geschäftsführer"
-	},
-	"modalForm": {
-		"title": "Fragen zu unserem Produkt?",
-		"text": "Unser Team von Experten steht Ihnen zur Verfügung, um Ihre Fragen zu beantworten, Ihnen weitere Informationen zu geben und Ihnen zu helfen.",
-		"nameField": "Vorname",
-		"emailField": "E-Mail",
-		"message": "Ihre Nachricht...",
-		"button": "Nachricht Senden",
-		"policy": "Ich habe die Verarbeitung personenbezogener Daten akzeptiert."
-	},
-	"submitSuccess": {
-		"title": "Vielen Dank, dass Sie Poli-Maks gewählt haben!",
-		"text": "Unsere Experten werden innerhalb von 24 Stunden Kontakt zu Ihnen aufnehmen."
-	},
-	"notFound": {
-		"title": "Diese Seite fehlt",
-		"text": "Keine Sorge, es passiert jedem, lass uns sehen, ob wir Sie in die richtige Richtung lenken können."
-	}
+  "navigation": {
+    "navItems": [
+      {
+        "title": "Home",
+        "path": "/"
+      },
+      {
+        "title": "Produkte",
+        "path": "/catalog"
+      },
+      {
+        "title": "Über uns",
+        "path": "/about"
+      },
+      {
+        "title": "Kontakt",
+        "path": "/contact"
+      }
+    ]
+  },
+  "button": {
+    "seeMore": "Mehr",
+    "loadMore": "Zeige alle"
+  },
+  "homePage": {
+    "hero": {
+      "title": "Metallprodukte/nArtikel aus Kunststof/nElektrotechnisches Material"
+    },
+    "location": {
+      "title": "Unser Standort",
+      "subTitle": "Die Lage der Stadt an den Ufern des Dnipro verleiht ihm einen besonderen Charme und macht ihn zu einem wichtigen Verkehrsknotenpunkt im Land.",
+      "locations": [
+        {
+          "text": "Die Stadtlandschaft lässt einen ebenfalls nicht unberührt. Schöne Parks, Plätze und Uferböschungen geben der Dnipro eine angenehme Atmosphäre zum Entspannen und Relaxen. Der Dnipro ist ein beliebter Ort zum Spazierengehen, zum Wasservergnügen und zu sportlichen Veranstaltungen,",
+          "img": "/img/location1.jpg"
+        },
+        {
+          "text": "Dnipro ist eine der größten und bedeutendsten Städte in Ukraine. Mit seiner reichen Geschichte ist die Stadt ein lebendiges Zeugnis für historische Ereignisse und die kulturelle Vielfalt der Region.",
+          "img": "/img/location2.jpg"
+        },
+        {
+          "text": "Der Stadt Dnepr zieht auch viel Aufmerksamkeit auf sich durch sein vielfältiges kulturelles Erbe. In seinen historischen Gebäuden, Museen und Kunstgalerien können Sie mehr über die Vergangenheit und Kultur des Gebiets erfahren. Das vielfältige Angebot an Veranstaltungen, Ausstellungen und Kulturfestivals machen die Stadt lebendig und interessant für Touristen und Einwohner.",
+          "img": "/img/location3.jpg"
+        },
+        {
+          "text": "Einer der Hauptaspekte der Stadt ist ihre Industrie. Der Dnipro gilt als ein leistungsstarkes industrielles Zentrum, in dem verschiedene Industriebereiche wie Maschinenbau, Metallurgie, Chemie und andere vertreten sind. Ein wichtiger Sektor stellt die Herstellung von Bauteilen dar, die eine wichtige Rolle bei verschiedenen Bauprojekten und Infrastrukturentwicklungen spielt.",
+          "img": "/img/location4.jpg"
+        },
+        {
+          "text": "Insgesamt ist Dnepr ein einzigartiges Zusammenspiel aus Industrie, Kultur und Natur. Reichhaltiges historisches Erbe, die Produktion qualitativ hochwertiger Bauarmaturen und ein ansprechender städtischer Landschaftsgarten machen es zu einem interessanten Ort zum Besuchen, Arbeiten und Leben.",
+          "img": "/img/location5.jpg"
+        }
+      ]
+    },
+    "manufacture": {
+      "title": "Modern Maschinen und Anlagen",
+      "descriptionUp": "Unsere Stahlprodukte werden auf modernen Maschinen und Anlagen im Schmiedeverfahren hergestellt.",
+      "descriptionUnder": "Poli-Maks ist ein junges Unternehmen, das im Jahr 2005 gegründet wurde. Trotz seiner Jugend hat es heutzutage den Ruf eines zuverlässigen Partners erworben, der stets das qualitativ hochwertige Produkt zum vereinbarten Termin liefert.",
+      "button": "Erfahren Sie mehr",
+      "aboutPoliMaksTitle": "Poli Maks",
+      "aboutPoliMaks": "Poli-Maks ist ein Unternehmen mit sowohl lokaler als auch globaler Präsenz, ein Hersteller von hochwertigen Baubeschlägen mit Schwerpunkt auf der Metallverarbeitung. Als unabhängiger und zuverlässiger Partner garantieren wir einen exzellenten Service. Unser Team ist immer bereit, unsere Kunden kompetent zu beraten, Kundenzeichnungen zu prüfen und zu besprechen, um ein neues Produkt herzustellen.",
+      "deliveryTitle": "Lieferung",
+      "delivery": "Um für unsere Kunden bequemer zu machen, liefern wir zu DDP-Lieferbedingungen. Die Firma arbeitet mit Speditionen und Vermittlungsgesellschaften und wirkt dadurch in Logistik direkt mit. Die Auftragserfüllung und Liefertermine für Stammkunden sind maximal schnell und favorabel."
+    },
+    "benefits": {
+      "title": "Warum Poli-Maks",
+      "descriptionUp": "Die Firma wächst bei täglichen Verbesserungen in der Produktion, Logistik und Services.",
+      "descriptionUnder": "Das Unternehmen kennt sich gründlich in Gesetzgebung hinsichtlich auf Produktion und Lieferung seiner Produkte aus und vermeidet dadurch dilettantische Fehler in jeder Phase. Unternehmensakivitäten beruhen sich auf vier grundlegenden Prinzipien:",
+      "benefitsList": [
+        "Die Zusammenarbeit mit Poli-Maks bedeutet angenehmes Service, einfaches Bestellen, gute Preise.",
+        "Professionalität und Verantwortung in allen Tätigkeitsaspekten des Unternehmens.",
+        "Gut laufende Logistik in Schlüsselbereichen, schnelle und sichere Lieferungen.",
+        "Stabilität und Genauigkeit bei Verwirklichung von Tätigkeiten, Ziele und Aufgaben des Unternehmens jeglicher Art.",
+        "Respektierung von Kunden, Partnern, Mitarbeitern und staatlichen Behörden.",
+        "Unser Stahlprodukt wird auf den Paletten verpackt, kann auf Kundenwunsch markiert werden."
+      ]
+    },
+    "forBuisness": {
+      "title": "Für Geschäfte",
+      "descriptionUp": "Anwendungsbereich und Qualität unserer Produkte gewährleisten hohe Nachfrage und jeweiliges Verkaufsniveau im ganzen Europa.",
+      "descriptionUnder1": "Verkaufen gemeinsam mit uns. Poli-Maks bietet günstige Konditionen für Großhändler. Für Sie bedeutet das – profitabler Verkauf Produkte vom Hersteller. Poli-Maks bedankt sich bei den Stammkunden für ihr Vertrauen.",
+      "descriptionUnder2": "Wir bemühen uns um höchste Zufriedenheit unserer Kunden mit Qualität unserer Produkte und ihre Entwicklung zu unseren Stammkunden nach einem ersten Einkauf."
+    }
+  },
+  "catalog": {
+    "title": "producte",
+    "all_category": "Alle",
+    "filter": "Filter",
+    "notFound": "0 produkte"
+  },
+  "productPage": {
+    "btnOrder": "Eine Bestellung aufgeben",
+    "announcement": "Um für unsere Kunden bequemer zu machen, liefern wir zu DDP-Lieferbedingungen.",
+    "tableHeaders": {
+      "article": "Artikel",
+      "diameter": "Durchmesser (mm)",
+      "length": "Länge (mm)",
+      "weight": "Gewicht (kg)",
+      "coating_thickness": "Wandstärke",
+      "cross_section": "Aderquerschnitt",
+      "volume": "Volume",
+      "wall_thickness": "Beschichtungsstärke"
+    },
+    "delivery": {
+      "title": "Wie liefern wir Materialien?",
+      "body": "<p>Wir schätzen jeden unserer Kunden. Um die Lieferung für Sie, unsere Kunden, komfortabler zu gestalten, haben wir daher auf DDP-Lieferbedingungen umgestellt. Mit anderen Worten, unser Unternehmen kooperiert direkt mit Spediteuren und Vermittlungsunternehmen sowie Lagerbeständen im Bereich Logistik.</p><p>Denken Sie auch daran, dass die Vorlaufzeit für die Lieferung und die Lieferung für Stammkunden die schnellste und günstigste ist.</p>"
+    },
+    "company": {
+      "title": "Wie ist unser Unternehmen?",
+      "body": "<p>Unsere Firma Poli-Maks GmbH gehört großen Großhändlern von Metallprodukten für den Tiefbau und den Straßenbau. Die Herstellung unserer Waren erfolgt in Dnepropetrowsk in der Ukraine. Und unsere letzten Objekte in der Produktionswerkstatt werden durch die Produktion von Produkten in großen Mengen gesteuert. Wir haben auch eine jährliche Verteilung der Verkaufsflächen. Und wir erfüllen immer alle Bedürfnisse der Kunden und stellen unsere Produkte von hoher Qualität und zu vernünftigen Preisen her und verkaufen sie, um so viele unserer Kunden wie möglich zufrieden zu stellen.<p>"
+    },
+    "contactUs": {
+      "title": "Wie können Sie mit uns kontaktieren? ",
+      "body": "<p>Unten können Sie Informationen darüber lesen und sehen, wo Sie uns finden und wie Sie jemanden aus unserem Unternehmen kontaktieren können.</p><p>Sie können mit ihn telefonisch unter <a href='tel:+380684777139'>+380-68-477-71-39</a> erreichen. </p><p>Oder Sie können uns auch an unsere E-Mail <a href='mailto:officepolimax@gmail.com'>officepolimax@gmail.com</a> schreiben, damit wir alle Ihre Fragen beantworten können.</p>"
+    }
+  },
+  "aboutUsPage": {
+    "title": "ÜBER UNS",
+    "subTitle": "Die Unternehmensphilosophie besteht aus im preiswerten Anbieten hochqualitativer Waren unseren Kunden und langfristiger und gegenseitig vorteilhafter Beziehungen unseren Partnern.",
+    "sections": {
+      "first": {
+        "title": "Firmenprofil",
+        "text": "Poli-Maks GmbH ist Hersteller und gleichzeitig Großhändler von Metallerzeugnissen für Zivil-, Tief- und Straßenbau. Die Fertigung erfolgt in der Stadt Dnipro (Ukraine). Die neusten Anlagen in der Produktionshalle ermöglichen kurzfristige Produktion von Erzeugnissen in größeren Mengen. Jährliche Erweiterung des Vertriebsbereiches lässt Poli-Maks den Bedarf von ausländischen Kunden an qualitativen und preisgünstigen Produkten decken."
+      },
+      "second": {
+        "title": "Unser strategischer Hauptziel",
+        "text": "Entwicklung zu einer dynamisch wachsenden internationalen Markenfirma, die ihre Erzeugnisse in europäische Länder liefert und würdiger Wettbewerber für führende Produzenten ähnlicher Produkte hinsichtlich Preis und Qualität ist."
+      },
+      "third": {
+        "title": "Für Geschäfte",
+        "text": "Verkaufen gemeinsam mit uns. Poli-Maks bietet günstige Konditionen für Großhändler. Anwendungsbereich und Qualität unserer Produkte gewährleisten hohe Nachfrage und jeweiliges Verkaufsniveau im ganzen Europa. Für Sie bedeutet das - profitabler Verkauf Produkte vom Hersteller Poli-Maks bedankt sich bei den Stammkunden für ihr Vertrauen."
+      }
+    }
+  },
+  "contactPage": {
+    "mainTitle": "Kontakte",
+    "title": "Fragen zu unserem Produkt?",
+    "description": "Unser Team von Experten steht Ihnen zur Verfügung, um Ihre Fragen zu beantworten, Ihnen weitere Informationen zu geben und Ihnen zu helfen.",
+    "position": "Geschäftsführer"
+  },
+  "modalForm": {
+    "title": "Fragen zu unserem Produkt?",
+    "text": "Unser Team von Experten steht Ihnen zur Verfügung, um Ihre Fragen zu beantworten, Ihnen weitere Informationen zu geben und Ihnen zu helfen.",
+    "nameField": "Vorname",
+    "emailField": "E-Mail",
+    "message": "Ihre Nachricht...",
+    "button": "Nachricht Senden",
+    "policy": "Ich habe die Verarbeitung personenbezogener Daten akzeptiert."
+  },
+  "submitSuccess": {
+    "title": "Vielen Dank, dass Sie Poli-Maks gewählt haben!",
+    "text": "Unsere Experten werden innerhalb von 24 Stunden Kontakt zu Ihnen aufnehmen."
+  },
+  "notFound": {
+    "title": "Diese Seite fehlt",
+    "text": "Keine Sorge, es passiert jedem, lass uns sehen, ob wir Sie in die richtige Richtung lenken können."
+  }
 }
