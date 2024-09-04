@@ -1,6 +1,6 @@
+import Breadcrumbs from '@/app/ui/Breadcrumbs' // Correct order: Import Breadcrumbs first
 import Footer from '@/app/ui/footer/Footer'
 import Header from '@/app/ui/header/Header'
-import Breadcrumbs from '@/app/ui/Breadcrumbs' // Import Breadcrumbs
 import { Locale, i18n } from '@/i18n.config'
 import { Manrope } from 'next/font/google'
 
@@ -11,52 +11,52 @@ import { Providers } from '../providers'
 const manrope = Manrope({ subsets: ['latin'] })
 
 export const generateMetadata = async ({ params: { lang } }: IParams) => {
-  return {
-    keywords: process.env?.NEXT_PUBLIC_KEYWORDS?.replaceAll(' ', '').split(','),
-    title: {
-      default:
-        lang === 'en'
-          ? process.env.NEXT_PUBLIC_MAIN_TITLE_EN || 'Poli-Maks'
-          : process.env.NEXT_PUBLIC_MAIN_TITLE_DE || 'Poli-Maks',
-      template: `%s - ${
-        lang === 'en'
-          ? process.env.NEXT_PUBLIC_MAIN_TITLE_EN || 'Best metallic production. German quality'
-          : process.env.NEXT_PUBLIC_MAIN_TITLE_DE || 'Best metallic production. German quality'
-      }`,
-    },
-    description:
-      lang === 'en' ? process.env.NEXT_PUBLIC_MAIN_DESC_EN : process.env.NEXT_PUBLIC_MAIN_DESC_DE,
-    twitter: {
-      card: 'summary_large_image',
-    },
-    metadataBase: new URL(process.env.NEXT_PUBLIC_URL as string),
-    openGraph: {
-      images: '/opengraph-image.png',
-    },
-  }
+	return {
+		keywords: process.env?.NEXT_PUBLIC_KEYWORDS?.replaceAll(' ', '').split(','),
+		title: {
+			default:
+				lang === 'en'
+					? process.env.NEXT_PUBLIC_MAIN_TITLE_EN || 'Poli-Maks'
+					: process.env.NEXT_PUBLIC_MAIN_TITLE_DE || 'Poli-Maks',
+			template: `%s - ${
+				lang === 'en'
+					? process.env.NEXT_PUBLIC_MAIN_TITLE_EN || 'Best metallic production. German quality'
+					: process.env.NEXT_PUBLIC_MAIN_TITLE_DE || 'Best metallic production. German quality'
+			}`,
+		},
+		description:
+			lang === 'en' ? process.env.NEXT_PUBLIC_MAIN_DESC_EN : process.env.NEXT_PUBLIC_MAIN_DESC_DE,
+		twitter: {
+			card: 'summary_large_image',
+		},
+		metadataBase: new URL(process.env.NEXT_PUBLIC_URL as string),
+		openGraph: {
+			images: '/opengraph-image.png',
+		},
+	}
 }
 
 export async function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }))
+	return i18n.locales.map((locale) => ({ lang: locale }))
 }
 
 export default function RootLayout({
-  children,
-  params: { lang },
+	children,
+	params: { lang },
 }: {
-  children: React.ReactNode
-  params: { lang: Locale }
+	children: React.ReactNode
+	params: { lang: Locale }
 }) {
-  return (
-    <html lang={lang}>
-      <body className={manrope.className}>
-        <Providers>
-          <Header lang={lang} />
-          <Breadcrumbs /> {/* Add Breadcrumbs Component Here */}
-          <main>{children}</main>
-          <Footer lang={lang} />
-        </Providers>
-      </body>
-    </html>
-  )
+	return (
+		<html lang={lang}>
+			<body className={manrope.className}>
+				<Providers>
+					<Header lang={lang} />
+					<Breadcrumbs /> {/* Correct usage here */}
+					<main>{children}</main>
+					<Footer lang={lang} />
+				</Providers>
+			</body>
+		</html>
+	)
 }
