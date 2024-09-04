@@ -2,10 +2,10 @@ import { Locale } from '@/i18n.config'
 
 export interface IParams {
   params: {
-    lang: Locale
-    id?: string // Keep this if you need it elsewhere
-    productName?: string // Add this to support SEO-friendly URLs
-  }
+    lang: "de" | "en";
+    id?: string;
+    productName?: string;
+  };
 }
 
 interface Heading {

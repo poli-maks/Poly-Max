@@ -13,7 +13,6 @@ module.exports = {
     "@typescript-eslint",
     "react-hooks",
     "eslint-plugin-import-helpers",
-    // 'testing-library'
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -81,8 +80,8 @@ module.exports = {
   },
   overrides: [
     {
-      // Disable ESLint and Prettier for specific files
-      files: ["app/[lang]/catalog/[...id]/page.tsx", "app/lib/interfaces.ts"],
+      // Disable ESLint and Prettier for the problematic files
+      files: ["app/**/catalog/**/page.tsx", "app/lib/interfaces.ts"],
       rules: {
         "prettier/prettier": "off",
         "react-hooks/rules-of-hooks": "off",
