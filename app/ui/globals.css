@@ -217,7 +217,9 @@ margin-right: auto;
 .breadcrumb-item {
 	position: relative;
 }
-
+.breadcrumb-item li span {
+	margin:0;
+}
 .breadcrumb-item::after {
 	content: '/'; /* Separator between breadcrumb items */
 	margin: 0 2px;
