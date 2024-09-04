@@ -10,7 +10,6 @@ const getCategories = async (lang: string): Promise<ICategory[]> => {
 		const {
 			data: { data },
 		} = await instance.get(`/api/categories?locale=${lang}&populate=sub_categories`)
-
 		if (data.length === 0) {
 			return notFound()
 		}
@@ -48,7 +47,6 @@ export const getAllProducts = async (
 		} = await instance.get(
 			`/api/products?locale=${lang}&populate=img&sort[0]=uid:asc&pagination[page]=${page}&pagination[pageSize]=${limit}`
 		)
-
 		if (data.length === 0) {
 			return notFound()
 		}
@@ -65,9 +63,7 @@ export const getAllProducts = async (
 				if (error.digest === 'NEXT_NOT_FOUND') {
 					return 'NOT_FOUND'
 				}
-			} else {
-				return notFound()
-			}
+			} else return notFound()
 		}
 	}
 }
@@ -79,7 +75,6 @@ export const getProductByUid = async (lang: string, uid: number) => {
 		const {
 			data: { data },
 		} = await instance.get(`/api/products?locale=${lang}&filters[uid][$in][0]=${uid}&populate=deep`)
-
 		if (data.length === 0) {
 			return notFound()
 		}
@@ -96,38 +91,12 @@ export const getProductByUid = async (lang: string, uid: number) => {
 				if (error.digest === 'NEXT_NOT_FOUND') {
 					return 'NOT_FOUND'
 				}
-			} else {
-				return notFound()
-			}
+			} else return notFound()
 		}
 	}
 }
 
 export const fetchProductByUid = cache(getProductByUid)
-
-// New Function to Fetch Product by Name (Slug)
-export const getProductByName = async (lang: string, name: string): Promise<IProduct | null> => {
-	try {
-		const {
-			data: { data },
-		} = await instance.get(
-			`/api/products?locale=${lang}&filters[slug][$eq]=${encodeURIComponent(name)}&populate=deep`
-		)
-
-		if (data.length === 0) {
-			return null // Return null instead of notFound() to match the function signature
-		}
-
-		return data[0] as IProduct // Assuming that the slug is unique, so only one product is returned
-	} catch (error) {
-		console.error(error) // Log the error for debugging
-
-		// Return null in case of any error
-		return null
-	}
-}
-
-export const fetchProductByName = cache(getProductByName)
 
 const getProductsByTitle = async (
 	lang: string,
@@ -145,7 +114,6 @@ const getProductsByTitle = async (
 		} = await instance.get(
 			`/api/products?locale=${lang}&filters[title][$containsi]=${query}&populate=img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
-
 		if (data.length === 0) {
 			return notFound()
 		}
@@ -162,9 +130,7 @@ const getProductsByTitle = async (
 				if (error.digest === 'NEXT_NOT_FOUND') {
 					return 'NOT_FOUND'
 				}
-			} else {
-				return notFound()
-			}
+			} else return notFound()
 		}
 	}
 }
@@ -204,9 +170,7 @@ const getProductsByCategory = async (
 				if (error.digest === 'NEXT_NOT_FOUND') {
 					return 'NOT_FOUND'
 				}
-			} else {
-				return notFound()
-			}
+			} else return notFound()
 		}
 	}
 }
@@ -227,7 +191,7 @@ const getProductsBySubCategory = async (
 				},
 			},
 		} = await instance.get(
-			`/api/products?locale=${lang}&populate=deep,2&filters[sub_categories][uid][$eq]=${subCatUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+			`api/products?locale=${lang}&populate=deep,2&filters[sub_categories][uid][$eq]=${subCatUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
 
 		if (data.length === 0) {
@@ -246,9 +210,7 @@ const getProductsBySubCategory = async (
 				if (error.digest === 'NEXT_NOT_FOUND') {
 					return 'NOT_FOUND'
 				}
-			} else {
-				return notFound()
-			}
+			} else return notFound()
 		}
 	}
 }

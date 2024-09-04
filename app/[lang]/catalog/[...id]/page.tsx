@@ -1,35 +1,60 @@
-import { notFound } from 'next/navigation';
-import { getProductByUid, getProductByName } from '@/app/lib/api/services'; // Ensure paths are correct
-import { IParams } from '@/app/lib/interfaces';
+import { getProductByUid } from '@/app/lib/api/services'
+import { getDictionary } from '@/app/lib/dictionary'
+import { IParams } from '@/app/lib/interfaces'
+import Product from '@/app/ui/ProductPage/Product'
+import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
+import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 
-interface ProductPageProps {
-  params: IParams['params'];
+export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
+	let data
+	if (id) data = await getProductByUid(lang, parseInt(id))
+
+	const { attributes: product } = data[0]
+
+	const imgUrl =
+		product.img.data !== null
+			? product.img.data[0].attributes.formats?.small?.url
+			: '/img/productPlaceholder.jpg'
+
+	return {
+		title: product.title,
+		alternates: {
+			canonical: `/catalog/${id}`,
+			languages: {
+				en: `/en/catalog/${id}`,
+				de: `/de/catalog/${id}`,
+			},
+		},
+		description: product.descShort,
+		openGraph: {
+			images: [
+				{
+					url: imgUrl,
+				},
+			],
+		},
+	}
 }
 
-// Server component
-export default async function ProductPage({ params }: ProductPageProps) {
-  const { lang, id } = params;
+const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
+	if (!id) return notFound()
 
-  let product = null;
+	const dictionary = await getDictionary(lang)
 
-  // Check if `id` is a number, then fetch by UID; otherwise, fetch by name (slug)
-  if (id) {
-    if (isNaN(Number(id))) {
-      product = await getProductByName(lang, id);
-    } else {
-      product = await getProductByUid(lang, Number(id));
-    }
-  }
-
-  if (!product) {
-    return notFound();
-  }
-
-  return (
-    // Replace with your actual component rendering logic
-    <div>
-      <h1>{product.title}</h1>
-      {/* Render other product details */}
-    </div>
-  );
+	return (
+		<>
+			<Suspense fallback={<SingleProductSkeleton />}>
+				<Product
+					lang={lang}
+					id={id}
+					//product={product}
+					dictionary={dictionary.productPage}
+					dictionaryModal={dictionary.modalForm}
+				/>
+			</Suspense>
+		</>
+	)
 }
+
+export default ProductPage
