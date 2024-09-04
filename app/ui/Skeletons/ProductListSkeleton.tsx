@@ -1,5 +1,5 @@
-import { Box, Grid, Skeleton, SkeletonText } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Grid, Skeleton, SkeletonText } from '@chakra-ui/react';
+import React from 'react';
 
 const ProductItemSkeleton = () => {
 	return (
@@ -26,8 +26,8 @@ const ProductItemSkeleton = () => {
 				endColor="grey"
 			/>
 		</Box>
-	)
-}
+	);
+};
 
 const ProductListSkeleton = () => {
 	return (
@@ -43,7 +43,7 @@ const ProductListSkeleton = () => {
 				<ProductItemSkeleton key={i} />
 			))}
 		</Grid>
-	)
-}
+	);
+};
 
-export default ProductListSkeleton
+export default ProductListSkeleton;

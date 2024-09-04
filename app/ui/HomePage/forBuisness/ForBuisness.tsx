@@ -1,21 +1,21 @@
-import { Box, Heading, Text, Flex } from '@chakra-ui/react'
-import Image from 'next/image'
+import { Box, Heading, Text, Flex } from '@chakra-ui/react';
+import Image from 'next/image';
 
-import forBusinessImg from '../../../../public/img/forBuisnessImg.png'
-import SectionWrapper from '../../sectionWrapper/SectionWrapper'
-import { theme } from '../../theme'
+import forBusinessImg from '../../../../public/img/forBuisnessImg.png';
+import SectionWrapper from '../../sectionWrapper/SectionWrapper';
+import { theme } from '../../theme';
 
 interface ForBuisnessProps {
 	dictionary: {
 		homePage: {
 			forBuisness: {
-				title: string
-				descriptionUp: string
-				descriptionUnder1: string
-				descriptionUnder2: string
-			}
-		}
-	}
+				title: string;
+				descriptionUp: string;
+				descriptionUnder1: string;
+				descriptionUnder2: string;
+			};
+		};
+	};
 }
 
 const ForBuisness: React.FC<ForBuisnessProps> = ({ dictionary }) => {
@@ -71,7 +71,7 @@ const ForBuisness: React.FC<ForBuisnessProps> = ({ dictionary }) => {
 				<Image style={{ objectFit: 'cover' }} src={forBusinessImg} alt="For busines image" fill />
 			</Box>
 		</SectionWrapper>
-	)
-}
+	);
+};
 
-export default ForBuisness
+export default ForBuisness;

@@ -1,21 +1,21 @@
-import { getProductByUid } from '@/app/lib/api/services'
-import { getDictionary } from '@/app/lib/dictionary'
-import { IParams } from '@/app/lib/interfaces'
-import Product from '@/app/ui/ProductPage/Product'
-import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
+import { getProductByUid } from '@/app/lib/api/services';
+import { getDictionary } from '@/app/lib/dictionary';
+import { IParams } from '@/app/lib/interfaces';
+import Product from '@/app/ui/ProductPage/Product';
+import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton';
+import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-	let data
-	if (id) data = await getProductByUid(lang, parseInt(id))
+	let data;
+	if (id) data = await getProductByUid(lang, parseInt(id));
 
-	const { attributes: product } = data[0]
+	const { attributes: product } = data[0];
 
 	const imgUrl =
 		product.img.data !== null
 			? product.img.data[0].attributes.formats?.small?.url
-			: '/img/productPlaceholder.jpg'
+			: '/img/productPlaceholder.jpg';
 
 	return {
 		title: product.title,
@@ -34,13 +34,13 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 				},
 			],
 		},
-	}
-}
+	};
+};
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-	if (!id) return notFound()
+	if (!id) return notFound();
 
-	const dictionary = await getDictionary(lang)
+	const dictionary = await getDictionary(lang);
 
 	return (
 		<>
@@ -54,7 +54,7 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 				/>
 			</Suspense>
 		</>
-	)
-}
+	);
+};
 
-export default ProductPage
+export default ProductPage;

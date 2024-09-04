@@ -1,7 +1,7 @@
-import { Box, Container, Text } from '@chakra-ui/react'
-import Link from 'next/link'
+import { Box, Container, Text } from '@chakra-ui/react';
+import Link from 'next/link';
 
-import { theme } from '../../theme'
+import { theme } from '../../theme';
 
 const UnderFooter = () => {
 	const textStyle = {
@@ -9,7 +9,7 @@ const UnderFooter = () => {
 		fontSize: '14px',
 		fontWeight: '400',
 		lineHeight: 1.2,
-	}
+	};
 
 	return (
 		<Box bgColor={'#212121'} py={'20px'}>
@@ -30,7 +30,7 @@ const UnderFooter = () => {
 				<Text>Impressum | Fehler gefunden</Text>
 			</Container>
 		</Box>
-	)
-}
+	);
+};
 
-export default UnderFooter
+export default UnderFooter;

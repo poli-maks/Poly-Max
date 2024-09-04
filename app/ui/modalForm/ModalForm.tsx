@@ -1,12 +1,12 @@
-import { IDictionaryModal } from '@/app/lib/interfaces'
-import { Heading, Text } from '@chakra-ui/react'
+import { IDictionaryModal } from '@/app/lib/interfaces';
+import { Heading, Text } from '@chakra-ui/react';
 
-import ContactForm from '../contactForm/ContactForm'
-import { theme } from '../theme'
+import ContactForm from '../contactForm/ContactForm';
+import { theme } from '../theme';
 
 interface ModalFormProps {
-	nameProduct?: string
-	dictionaryModal: IDictionaryModal
+	nameProduct?: string;
+	dictionaryModal: IDictionaryModal;
 }
 
 const ModalForm: React.FC<ModalFormProps> = ({ nameProduct, dictionaryModal }) => {
@@ -32,7 +32,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ nameProduct, dictionaryModal }) =
 			</Text>
 			<ContactForm nameProduct={nameProduct} dictionaryModal={dictionaryModal} />
 		</>
-	)
-}
+	);
+};
 
-export default ModalForm
+export default ModalForm;

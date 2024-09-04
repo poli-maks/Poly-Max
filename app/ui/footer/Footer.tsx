@@ -1,23 +1,23 @@
-import { fetchContacts } from '@/app/lib/api/services'
-import { getDictionary } from '@/app/lib/dictionary'
-import { Locale } from '@/i18n.config'
-import { Box, Flex } from '@chakra-ui/react'
-import Link from 'next/link'
+import { fetchContacts } from '@/app/lib/api/services';
+import { getDictionary } from '@/app/lib/dictionary';
+import { Locale } from '@/i18n.config';
+import { Box, Flex } from '@chakra-ui/react';
+import Link from 'next/link';
 
-import { LocaleSwitcher } from '../localeSwitcher/LocaleSwitcher'
-import { NavBar } from '../navBar/NavBar'
-import SectionWrapper from '../sectionWrapper/SectionWrapper'
-import BrandLogo from '../svg/BrandLogo'
-import { theme } from '../theme'
-import FooterContacts from './footerContacts/FooterContacts'
-import UnderFooter from './underFooter/UnderFooter'
+import { LocaleSwitcher } from '../localeSwitcher/LocaleSwitcher';
+import { NavBar } from '../navBar/NavBar';
+import SectionWrapper from '../sectionWrapper/SectionWrapper';
+import BrandLogo from '../svg/BrandLogo';
+import { theme } from '../theme';
+import FooterContacts from './footerContacts/FooterContacts';
+import UnderFooter from './underFooter/UnderFooter';
 
 const Footer = async ({ lang }: { lang: Locale }) => {
-	const contacts = await fetchContacts(lang)
+	const contacts = await fetchContacts(lang);
 
 	const {
 		navigation: { navItems },
-	} = await getDictionary(lang)
+	} = await getDictionary(lang);
 
 	return (
 		<>
@@ -59,7 +59,7 @@ const Footer = async ({ lang }: { lang: Locale }) => {
 			</SectionWrapper>
 			<UnderFooter />
 		</>
-	)
-}
+	);
+};
 
-export default Footer
+export default Footer;

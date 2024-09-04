@@ -1,6 +1,6 @@
-import { ICategory, ISubCategory, SEARCH_PARAMS } from '@/app/lib/interfaces'
-import MenuArrowClosed from '@/app/ui/svg/MenuArrowClosed'
-import MenuArrowOpen from '@/app/ui/svg/MenuArrowOpen'
+import { ICategory, ISubCategory, SEARCH_PARAMS } from '@/app/lib/interfaces';
+import MenuArrowClosed from '@/app/ui/svg/MenuArrowClosed';
+import MenuArrowOpen from '@/app/ui/svg/MenuArrowOpen';
 import {
 	Accordion,
 	AccordionButton,
@@ -12,15 +12,15 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
-} from '@chakra-ui/react'
-import React, { useState } from 'react'
+} from '@chakra-ui/react';
+import React, { useState } from 'react';
 
 interface IMenuCategory {
-	category: ICategory['attributes']
-	subs: ISubCategory[]
-	onClick: (queries: { [key: string]: string | number }) => void
-	choosedCategory?: string | null
-	variant: 'menu' | 'accordion'
+	category: ICategory['attributes'];
+	subs: ISubCategory[];
+	onClick: (queries: { [key: string]: string | number }) => void;
+	choosedCategory?: string | null;
+	variant: 'menu' | 'accordion';
 }
 
 const MenuCategory: React.FC<IMenuCategory> = ({
@@ -30,7 +30,7 @@ const MenuCategory: React.FC<IMenuCategory> = ({
 	choosedCategory,
 	variant,
 }: IMenuCategory) => {
-	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	return (
 		<>
@@ -62,7 +62,7 @@ const MenuCategory: React.FC<IMenuCategory> = ({
 										onClick({
 											[SEARCH_PARAMS.CATEGORY]: category.uid,
 											[SEARCH_PARAMS.SUB_CATEGORY]: sub.uid,
-										})
+										});
 									}}
 									key={sub.uid}
 								>
@@ -111,7 +111,7 @@ const MenuCategory: React.FC<IMenuCategory> = ({
 										onClick({
 											[SEARCH_PARAMS.CATEGORY]: category.uid,
 											[SEARCH_PARAMS.SUB_CATEGORY]: sub.uid,
-										})
+										});
 									}}
 									key={sub.uid}
 								>
@@ -123,7 +123,7 @@ const MenuCategory: React.FC<IMenuCategory> = ({
 				</Accordion>
 			)}
 		</>
-	)
-}
+	);
+};
 
-export default MenuCategory
+export default MenuCategory;

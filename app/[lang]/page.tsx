@@ -1,10 +1,10 @@
-import { getDictionary } from '../lib/dictionary'
-import { IParams } from '../lib/interfaces'
-import Benefits from '../ui/HomePage/benefits/Benefits'
-import ForBuisness from '../ui/HomePage/forBuisness/ForBuisness'
-import Hero from '../ui/HomePage/hero/Hero'
-import Location from '../ui/HomePage/location/Location'
-import Manufacture from '../ui/HomePage/manufacture/Manufacture'
+import { getDictionary } from '../lib/dictionary';
+import { IParams } from '../lib/interfaces';
+import Benefits from '../ui/HomePage/benefits/Benefits';
+import ForBuisness from '../ui/HomePage/forBuisness/ForBuisness';
+import Hero from '../ui/HomePage/hero/Hero';
+import Location from '../ui/HomePage/location/Location';
+import Manufacture from '../ui/HomePage/manufacture/Manufacture';
 
 export const generateMetadata = async () => {
 	return {
@@ -15,11 +15,11 @@ export const generateMetadata = async () => {
 				en: '/en',
 			},
 		},
-	}
-}
+	};
+};
 
 const HomePage: React.FC<IParams> = async ({ params: { lang } }) => {
-	const dictionary = await getDictionary(lang)
+	const dictionary = await getDictionary(lang);
 
 	return (
 		<>
@@ -36,7 +36,7 @@ const HomePage: React.FC<IParams> = async ({ params: { lang } }) => {
 			/>
 			<ForBuisness dictionary={dictionary} />
 		</>
-	)
-}
+	);
+};
 
-export default HomePage
+export default HomePage;

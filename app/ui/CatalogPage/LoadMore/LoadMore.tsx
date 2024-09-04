@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import { Button, Center } from '@chakra-ui/react'
-import { useEffect } from 'react'
+import { Button, Center } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
-import Arrow from '../../svg/Arrow'
+import Arrow from '../../svg/Arrow';
 
 const LoadMore = ({
 	children,
@@ -13,30 +13,30 @@ const LoadMore = ({
 	setTotal,
 	setPage,
 }: {
-	page: number
-	children: React.ReactNode
-	total: number
-	hasProducts: boolean
-	setTotal: (total: number) => void
-	setPage: (page: number) => void
+	page: number;
+	children: React.ReactNode;
+	total: number;
+	hasProducts: boolean;
+	setTotal: (total: number) => void;
+	setPage: (page: number) => void;
 }) => {
-	const limit = 8
+	const limit = 8;
 
 	useEffect(() => {
 		if (total && hasProducts) {
-			setTotal(total)
+			setTotal(total);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [hasProducts, total])
+	}, [hasProducts, total]);
 
-	let hasNext
+	let hasNext;
 	if (page && total) {
-		hasNext = limit * (page - 1) + limit < total
+		hasNext = limit * (page - 1) + limit < total;
 	}
 
 	const handleChangePage = () => {
-		setPage(page + 1)
-	}
+		setPage(page + 1);
+	};
 
 	return (
 		hasProducts && (
@@ -52,7 +52,7 @@ const LoadMore = ({
 				</Button>
 			</Center>
 		)
-	)
-}
+	);
+};
 
-export default LoadMore
+export default LoadMore;

@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { AspectRatio, Box } from '@chakra-ui/react'
+import { AspectRatio, Box } from '@chakra-ui/react';
 
 const GoogleMap = () => {
 	return (
@@ -15,6 +15,6 @@ const GoogleMap = () => {
 				></iframe>
 			</AspectRatio>
 		</Box>
-	)
-}
-export default GoogleMap
+	);
+};
+export default GoogleMap;

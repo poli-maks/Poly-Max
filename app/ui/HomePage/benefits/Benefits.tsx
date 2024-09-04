@@ -1,29 +1,29 @@
-'use client'
+'use client';
 
-import { Grid, Text, GridItem, Box, Heading, Flex } from '@chakra-ui/react'
+import { Grid, Text, GridItem, Box, Heading, Flex } from '@chakra-ui/react';
 
-import SectionWrapper from '../../sectionWrapper/SectionWrapper'
-import BenefitIcon1 from '../../svg/BenefitIcon1'
-import BenefitIcon2 from '../../svg/BenefitIcon2'
-import BenefitIcon3 from '../../svg/BenefitIcon3'
-import BenefitIcon4 from '../../svg/BenefitIcon4'
-import BenefitIcon5 from '../../svg/BenefitIcon5'
-import BenefitIcon6 from '../../svg/BenefitIcon6'
-import { theme } from '../../theme'
+import SectionWrapper from '../../sectionWrapper/SectionWrapper';
+import BenefitIcon1 from '../../svg/BenefitIcon1';
+import BenefitIcon2 from '../../svg/BenefitIcon2';
+import BenefitIcon3 from '../../svg/BenefitIcon3';
+import BenefitIcon4 from '../../svg/BenefitIcon4';
+import BenefitIcon5 from '../../svg/BenefitIcon5';
+import BenefitIcon6 from '../../svg/BenefitIcon6';
+import { theme } from '../../theme';
 
-const icons = [BenefitIcon1, BenefitIcon2, BenefitIcon3, BenefitIcon4, BenefitIcon5, BenefitIcon6]
+const icons = [BenefitIcon1, BenefitIcon2, BenefitIcon3, BenefitIcon4, BenefitIcon5, BenefitIcon6];
 
 interface BenefitsProps {
 	dictionary: {
 		homePage: {
 			benefits: {
-				title: string
-				descriptionUp: string
-				descriptionUnder: string
-				benefitsList: string[]
-			}
-		}
-	}
+				title: string;
+				descriptionUp: string;
+				descriptionUnder: string;
+				benefitsList: string[];
+			};
+		};
+	};
 }
 
 const Benefits: React.FC<BenefitsProps> = ({ dictionary }) => {
@@ -80,11 +80,11 @@ const Benefits: React.FC<BenefitsProps> = ({ dictionary }) => {
 								{item}
 							</Text>
 						</GridItem>
-					)
+					);
 				})}
 			</Grid>
 		</SectionWrapper>
-	)
-}
+	);
+};
 
-export default Benefits
+export default Benefits;

@@ -1,7 +1,7 @@
-import { Button, Center, Heading, Text } from '@chakra-ui/react'
-import Link from 'next/link'
+import { Button, Center, Heading, Text } from '@chakra-ui/react';
+import Link from 'next/link';
 
-import SectionWrapper from '../ui/sectionWrapper/SectionWrapper'
+import SectionWrapper from '../ui/sectionWrapper/SectionWrapper';
 
 const NotFound = () => {
 	return (
@@ -30,7 +30,7 @@ const NotFound = () => {
 				</Button>
 			</Center>
 		</SectionWrapper>
-	)
-}
+	);
+};
 
-export default NotFound
+export default NotFound;

@@ -1,9 +1,9 @@
-'use client'
-import { ImageAttributes } from '@/app/lib/interfaces'
-import { Box, List, ListItem } from '@chakra-ui/react'
-import Image from 'next/image'
+'use client';
+import { ImageAttributes } from '@/app/lib/interfaces';
+import { Box, List, ListItem } from '@chakra-ui/react';
+import Image from 'next/image';
 
-import { ProductSlider } from './ProductSlider'
+import { ProductSlider } from './ProductSlider';
 
 const ImagesSection = ({ productImages }: { productImages: ImageAttributes[] }) => {
 	return (
@@ -50,7 +50,7 @@ const ImagesSection = ({ productImages }: { productImages: ImageAttributes[] }) 
 
 			<ProductSlider productImages={productImages} />
 		</Box>
-	)
-}
+	);
+};
 
-export default ImagesSection
+export default ImagesSection;

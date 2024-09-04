@@ -1,13 +1,13 @@
-import { Button } from '@chakra-ui/react'
-import { useFormStatus } from 'react-dom'
+import { Button } from '@chakra-ui/react';
+import { useFormStatus } from 'react-dom';
 
-import Arrow from '../svg/Arrow'
+import Arrow from '../svg/Arrow';
 
 interface ISubmitButton {
-	children: React.ReactNode
-	variant: 'accent' | 'arrow' | 'accentAlt'
-	isSubmitting?: boolean
-	onClick?: () => void
+	children: React.ReactNode;
+	variant: 'accent' | 'arrow' | 'accentAlt';
+	isSubmitting?: boolean;
+	onClick?: () => void;
 }
 
 const SubmitButton: React.FC<ISubmitButton> = ({
@@ -16,7 +16,7 @@ const SubmitButton: React.FC<ISubmitButton> = ({
 	variant,
 	onClick,
 }) => {
-	const { pending } = useFormStatus()
+	const { pending } = useFormStatus();
 
 	return (
 		<Button
@@ -29,6 +29,6 @@ const SubmitButton: React.FC<ISubmitButton> = ({
 		>
 			{children}
 		</Button>
-	)
-}
-export default SubmitButton
+	);
+};
+export default SubmitButton;

@@ -1,14 +1,14 @@
-import { IProduct } from '@/app/lib/interfaces'
-import { Locale } from '@/i18n.config'
-import { Grid } from '@chakra-ui/react'
-import React from 'react'
+import { IProduct } from '@/app/lib/interfaces';
+import { Locale } from '@/i18n.config';
+import { Grid } from '@chakra-ui/react';
+import React from 'react';
 
-import ProductItem from '../ProductItem/ProductItem'
+import ProductItem from '../ProductItem/ProductItem';
 
 interface IProductList {
-	products: IProduct[]
-	lang: Locale
-	page: number
+	products: IProduct[];
+	lang: Locale;
+	page: number;
 }
 
 const ProductList = ({ products, lang }: IProductList) => {
@@ -29,7 +29,7 @@ const ProductList = ({ products, lang }: IProductList) => {
 					))}
 			</Grid>
 		</>
-	)
-}
+	);
+};
 
-export default ProductList
+export default ProductList;

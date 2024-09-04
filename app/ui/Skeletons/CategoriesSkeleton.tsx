@@ -1,5 +1,5 @@
-import { Flex, SkeletonText } from '@chakra-ui/react'
-import React from 'react'
+import { Flex, SkeletonText } from '@chakra-ui/react';
+import React from 'react';
 
 export const CategoriesSkeleton = () => {
 	return (
@@ -58,7 +58,7 @@ export const CategoriesSkeleton = () => {
 				display={{ base: 'none', lg: 'block' }}
 			/>
 		</Flex>
-	)
-}
+	);
+};
 
-export default CategoriesSkeleton
+export default CategoriesSkeleton;

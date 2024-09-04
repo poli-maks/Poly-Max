@@ -1,19 +1,19 @@
-import { IContacts } from '@/app/lib/interfaces'
-import { formatPhoneNumber } from '@/app/lib/utils/formatPhoneNumber'
-import { Box, Flex, Text } from '@chakra-ui/react'
-import Link from 'next/link'
+import { IContacts } from '@/app/lib/interfaces';
+import { formatPhoneNumber } from '@/app/lib/utils/formatPhoneNumber';
+import { Box, Flex, Text } from '@chakra-ui/react';
+import Link from 'next/link';
 
 const FooterContacts = ({ contacts }: { contacts?: IContacts }) => {
 	if (!contacts) {
-		return null
+		return null;
 	}
 
-	const { address, phone, email, officePhone, metartEmail } = contacts
+	const { address, phone, email, officePhone, metartEmail } = contacts;
 
 	const textStyle = {
 		fontSize: '24px',
 		fontWeight: '500',
-	}
+	};
 
 	const createLink = (href: string, children: React.ReactNode) => (
 		<Box
@@ -45,7 +45,7 @@ const FooterContacts = ({ contacts }: { contacts?: IContacts }) => {
 		>
 			{children}
 		</Box>
-	)
+	);
 
 	return (
 		<Flex
@@ -63,7 +63,7 @@ const FooterContacts = ({ contacts }: { contacts?: IContacts }) => {
 			{email && createLink(`mailto:${email}`, email)}
 			{metartEmail && createLink(`mailto:${metartEmail}`, metartEmail)}
 		</Flex>
-	)
-}
+	);
+};
 
-export default FooterContacts
+export default FooterContacts;

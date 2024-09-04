@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const ArrowLeftIcon = () => {
 	return (
@@ -10,7 +10,7 @@ const ArrowLeftIcon = () => {
 				strokeLinejoin="round"
 			/>
 		</svg>
-	)
-}
+	);
+};
 
-export default ArrowLeftIcon
+export default ArrowLeftIcon;

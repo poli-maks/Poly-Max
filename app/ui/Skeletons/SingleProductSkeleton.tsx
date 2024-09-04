@@ -1,4 +1,4 @@
-import SectionWrapper from '@/app/ui/sectionWrapper/SectionWrapper'
+import SectionWrapper from '@/app/ui/sectionWrapper/SectionWrapper';
 import {
 	Box,
 	Flex,
@@ -14,8 +14,8 @@ import {
 	Th,
 	Thead,
 	Tr,
-} from '@chakra-ui/react'
-import React from 'react'
+} from '@chakra-ui/react';
+import React from 'react';
 
 const SingleProductSkeleton = () => {
 	return (
@@ -103,7 +103,7 @@ const SingleProductSkeleton = () => {
 													endColor="grey"
 												/>
 											</Th>
-										)
+										);
 									})}
 								</Tr>
 							</Thead>
@@ -129,7 +129,7 @@ const SingleProductSkeleton = () => {
 				</Flex>
 			</Flex>
 		</SectionWrapper>
-	)
-}
+	);
+};
 
-export default SingleProductSkeleton
+export default SingleProductSkeleton;

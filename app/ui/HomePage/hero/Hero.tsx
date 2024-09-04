@@ -1,21 +1,21 @@
-import SectionWrapper from '@/app/ui/sectionWrapper/SectionWrapper'
-import { Locale } from '@/i18n.config'
-import { Box, Button, Grid, Heading } from '@chakra-ui/react'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import SectionWrapper from '@/app/ui/sectionWrapper/SectionWrapper';
+import { Locale } from '@/i18n.config';
+import { Box, Button, Grid, Heading } from '@chakra-ui/react';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
-import hero_bg from '../../../../public/img/hero_bg.jpg'
+import hero_bg from '../../../../public/img/hero_bg.jpg';
 interface IHero {
 	dictionary: {
-		hero: { title: string }
-		button: string
-	}
-	lang: Locale
+		hero: { title: string };
+		button: string;
+	};
+	lang: Locale;
 }
 
 const Hero = ({ dictionary, lang }: IHero) => {
-	const { hero, button } = dictionary
+	const { hero, button } = dictionary;
 
 	return (
 		<>
@@ -72,7 +72,7 @@ const Hero = ({ dictionary, lang }: IHero) => {
 				</Box>
 			</Box>
 		</>
-	)
-}
+	);
+};
 
-export default Hero
+export default Hero;

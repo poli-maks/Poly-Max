@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
-import { ImageAttributes } from '@/app/lib/interfaces'
-import { Box, useBreakpointValue } from '@chakra-ui/react'
-import Image from 'next/image'
-import React from 'react'
-import { Scrollbar } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { ImageAttributes } from '@/app/lib/interfaces';
+import { Box, useBreakpointValue } from '@chakra-ui/react';
+import Image from 'next/image';
+import React from 'react';
+import { Scrollbar } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/scrollbar'
-import './SwiperProducts.css'
+import 'swiper/css';
+import 'swiper/css/scrollbar';
+import './SwiperProducts.css';
 
 export const ProductSlider = ({ productImages }: { productImages: ImageAttributes[] }) => {
-	const size = useBreakpointValue({ base: 'sm', lg: 'md' }, { ssr: false })
+	const size = useBreakpointValue({ base: 'sm', lg: 'md' }, { ssr: false });
 
 	return (
 		<Box mb="41px" display={{ base: 'block', lg: 'none' }}>
@@ -63,5 +63,5 @@ export const ProductSlider = ({ productImages }: { productImages: ImageAttribute
 				))}
 			</Swiper>
 		</Box>
-	)
-}
+	);
+};

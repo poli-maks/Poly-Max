@@ -1,18 +1,18 @@
-'use client'
+'use client';
 
-import { ILocation } from '@/app/lib/interfaces'
-import Arrow from '@/app/ui/svg/Arrow'
-import ArrowLeftIcon from '@/app/ui/svg/ArrowLeftIcon'
-import { Box, Flex, IconButton, Text } from '@chakra-ui/react'
-import Image from 'next/image'
-import React from 'react'
-import { Scrollbar } from 'swiper/modules'
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
+import { ILocation } from '@/app/lib/interfaces';
+import Arrow from '@/app/ui/svg/Arrow';
+import ArrowLeftIcon from '@/app/ui/svg/ArrowLeftIcon';
+import { Box, Flex, IconButton, Text } from '@chakra-ui/react';
+import Image from 'next/image';
+import React from 'react';
+import { Scrollbar } from 'swiper/modules';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 
-import 'swiper/css'
-import 'swiper/css/scrollbar'
-import 'swiper/css/free-mode'
-import './location.css'
+import 'swiper/css';
+import 'swiper/css/scrollbar';
+import 'swiper/css/free-mode';
+import './location.css';
 
 const LocationsSlider = ({ locations }: { locations: ILocation[] }) => {
 	return (
@@ -31,7 +31,7 @@ const LocationsSlider = ({ locations }: { locations: ILocation[] }) => {
 		>
 			{locations.length > 0 &&
 				locations.map((location, idx) => {
-					const { text, img } = location
+					const { text, img } = location;
 
 					return (
 						<SwiperSlide key={idx}>
@@ -75,13 +75,13 @@ const LocationsSlider = ({ locations }: { locations: ILocation[] }) => {
 								</Flex>
 							</Flex>
 						</SwiperSlide>
-					)
+					);
 				})}
 		</Swiper>
-	)
-}
+	);
+};
 
-export default LocationsSlider
+export default LocationsSlider;
 
 const SwiperNavigation = ({
 	order,
@@ -89,12 +89,12 @@ const SwiperNavigation = ({
 	isLastSlide,
 	isFirstSlide,
 }: {
-	order: string
-	length: string
-	isLastSlide: boolean
-	isFirstSlide: boolean
+	order: string;
+	length: string;
+	isLastSlide: boolean;
+	isFirstSlide: boolean;
 }) => {
-	const swiper = useSwiper()
+	const swiper = useSwiper();
 
 	return (
 		<Flex align={'center'}>
@@ -126,5 +126,5 @@ const SwiperNavigation = ({
 				icon={<Arrow />}
 			/>
 		</Flex>
-	)
-}
+	);
+};

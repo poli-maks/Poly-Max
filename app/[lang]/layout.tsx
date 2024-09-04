@@ -1,15 +1,15 @@
-import Footer from '@/app/ui/footer/Footer'
-import Header from '@/app/ui/header/Header'
-import { Locale, i18n } from '@/i18n.config'
+import Footer from '@/app/ui/footer/Footer';
+import Header from '@/app/ui/header/Header';
+import { Locale, i18n } from '@/i18n.config';
 // import type { Metadata } from 'next'
-import { Manrope } from 'next/font/google'
+import { Manrope } from 'next/font/google';
 
-import '@/app/ui/globals.css'
+import '@/app/ui/globals.css';
 
-import { IParams } from '../lib/interfaces'
-import { Providers } from '../providers'
+import { IParams } from '../lib/interfaces';
+import { Providers } from '../providers';
 
-const manrope = Manrope({ subsets: ['latin'] })
+const manrope = Manrope({ subsets: ['latin'] });
 
 export const generateMetadata = async ({ params: { lang } }: IParams) => {
 	return {
@@ -35,19 +35,19 @@ export const generateMetadata = async ({ params: { lang } }: IParams) => {
 		openGraph: {
 			images: '/opengraph-image.png',
 		},
-	}
-}
+	};
+};
 
 export async function generateStaticParams() {
-	return i18n.locales.map((locale) => ({ lang: locale }))
+	return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
 export default function RootLayout({
 	children,
 	params: { lang },
 }: {
-	children: React.ReactNode
-	params: { lang: Locale }
+	children: React.ReactNode;
+	params: { lang: Locale };
 }) {
 	return (
 		<html lang={lang}>
@@ -59,5 +59,5 @@ export default function RootLayout({
 				</Providers>
 			</body>
 		</html>
-	)
+	);
 }

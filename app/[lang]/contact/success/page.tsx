@@ -1,11 +1,11 @@
-import { getDictionary } from '@/app/lib/dictionary'
-import { IParams } from '@/app/lib/interfaces'
-import SectionWrapper from '@/app/ui/sectionWrapper/SectionWrapper'
-import { Button, Center, Heading, Text } from '@chakra-ui/react'
-import Link from 'next/link'
+import { getDictionary } from '@/app/lib/dictionary';
+import { IParams } from '@/app/lib/interfaces';
+import SectionWrapper from '@/app/ui/sectionWrapper/SectionWrapper';
+import { Button, Center, Heading, Text } from '@chakra-ui/react';
+import Link from 'next/link';
 
 const SubmitSuccess: React.FC<IParams> = async ({ params: { lang } }) => {
-	const disctionary = await getDictionary(lang)
+	const disctionary = await getDictionary(lang);
 
 	return (
 		<SectionWrapper>
@@ -36,7 +36,7 @@ const SubmitSuccess: React.FC<IParams> = async ({ params: { lang } }) => {
 				</Button>
 			</Center>
 		</SectionWrapper>
-	)
-}
+	);
+};
 
-export default SubmitSuccess
+export default SubmitSuccess;

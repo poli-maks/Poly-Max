@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import { Box, IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { usePathname, useSearchParams, useRouter } from 'next/navigation'
-import React, { useEffect, useRef } from 'react'
-import { useDebouncedCallback } from 'use-debounce'
+import { Box, IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import React, { useEffect, useRef } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
-import SectionWrapper from '../../sectionWrapper/SectionWrapper'
-import CloseIcon from '../../svg/CloseIcon'
+import SectionWrapper from '../../sectionWrapper/SectionWrapper';
+import CloseIcon from '../../svg/CloseIcon';
 
 const searchAnimation = {
 	hidden: {
@@ -23,7 +23,7 @@ const searchAnimation = {
 			duration: 0.5,
 		},
 	},
-}
+};
 
 const Search = ({
 	placeholder,
@@ -31,42 +31,42 @@ const Search = ({
 	isSearch,
 	totalSearchProducts,
 }: {
-	placeholder: string
-	isQuery: boolean
-	isSearch: boolean
-	totalSearchProducts?: string
+	placeholder: string;
+	isQuery: boolean;
+	isSearch: boolean;
+	totalSearchProducts?: string;
 }) => {
-	const searchParams = useSearchParams()
-	const { replace } = useRouter()
-	const pathname = usePathname()
-	const ref = useRef<HTMLFormElement | null>(null)
+	const searchParams = useSearchParams();
+	const { replace } = useRouter();
+	const pathname = usePathname();
+	const ref = useRef<HTMLFormElement | null>(null);
 
 	useEffect(() => {
-		const params = new URLSearchParams(searchParams)
-		totalSearchProducts && params.set('total', totalSearchProducts)
-		replace(`${pathname}?${params}`)
-	}, [pathname, replace, searchParams, totalSearchProducts])
+		const params = new URLSearchParams(searchParams);
+		totalSearchProducts && params.set('total', totalSearchProducts);
+		replace(`${pathname}?${params}`);
+	}, [pathname, replace, searchParams, totalSearchProducts]);
 
 	const handleSearch = useDebouncedCallback((e) => {
-		const params = new URLSearchParams(searchParams)
-		totalSearchProducts && params.set('total', totalSearchProducts)
+		const params = new URLSearchParams(searchParams);
+		totalSearchProducts && params.set('total', totalSearchProducts);
 
-		params.set('page', '1')
+		params.set('page', '1');
 		if (e.target.value) {
-			params.delete('total')
-			e.target.value.length > 0 && params.set('query', e.target.value)
+			params.delete('total');
+			e.target.value.length > 0 && params.set('query', e.target.value);
 		} else {
-			params.delete('query')
+			params.delete('query');
 		}
-		replace(`${pathname}?${params}`)
-	}, 300)
+		replace(`${pathname}?${params}`);
+	}, 300);
 
 	const clearSearch = () => {
-		ref?.current?.reset()
-		const params = new URLSearchParams(searchParams)
-		params.delete('query')
-		replace(`${pathname}?${params}`)
-	}
+		ref?.current?.reset();
+		const params = new URLSearchParams(searchParams);
+		params.delete('query');
+		replace(`${pathname}?${params}`);
+	};
 
 	if (isSearch)
 		return (
@@ -89,7 +89,7 @@ const Search = ({
 							ref={ref}
 							size="md"
 							onSubmit={(e) => {
-								e.preventDefault()
+								e.preventDefault();
 							}}
 						>
 							<Input
@@ -132,7 +132,7 @@ const Search = ({
 					</SectionWrapper>
 				</Box>
 			</AnimatePresence>
-		)
-}
+		);
+};
 
-export default Search
+export default Search;

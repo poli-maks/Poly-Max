@@ -1,13 +1,13 @@
-import { Box, Container, Heading, ResponsiveValue } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Container, Heading, ResponsiveValue } from '@chakra-ui/react';
+import React from 'react';
 
 interface ISectionWrapper {
-	id?: string
-	position?: 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
-	children: React.ReactNode
-	bg?: string
-	as?: 'header' | 'section' | 'footer'
-	heading?: string
+	id?: string;
+	position?: 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky';
+	children: React.ReactNode;
+	bg?: string;
+	as?: 'header' | 'section' | 'footer';
+	heading?: string;
 	py?:
 		| ResponsiveValue<
 				| number
@@ -20,11 +20,11 @@ interface ISectionWrapper {
 				| 'unset'
 		  >
 		| {
-				base: number | string
-				lg: number | string
-				xl: number | string
+				base: number | string;
+				lg: number | string;
+				xl: number | string;
 		  }
-		| undefined
+		| undefined;
 	pt?:
 		| ResponsiveValue<
 				| number
@@ -37,11 +37,11 @@ interface ISectionWrapper {
 				| 'unset'
 		  >
 		| {
-				base: number | string
-				lg: number | string
-				xl: number | string
+				base: number | string;
+				lg: number | string;
+				xl: number | string;
 		  }
-		| undefined
+		| undefined;
 	pb?:
 		| ResponsiveValue<
 				| number
@@ -54,16 +54,16 @@ interface ISectionWrapper {
 				| 'unset'
 		  >
 		| {
-				base: number | string
-				lg: number | string
-				xl: number | string
+				base: number | string;
+				lg: number | string;
+				xl: number | string;
 		  }
-		| undefined
-	headingAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-	borderTopRadius?: '0px' | '50px'
-	w?: string
-	zIndex?: string
-	style?: React.CSSProperties
+		| undefined;
+	headingAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+	borderTopRadius?: '0px' | '50px';
+	w?: string;
+	zIndex?: string;
+	style?: React.CSSProperties;
 }
 
 const SectionWrapper: React.FC<ISectionWrapper> = ({
@@ -113,7 +113,7 @@ const SectionWrapper: React.FC<ISectionWrapper> = ({
 				{children}
 			</Container>
 		</Box>
-	)
-}
+	);
+};
 
-export default SectionWrapper
+export default SectionWrapper;

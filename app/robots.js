@@ -8,5 +8,5 @@ export default function robots() {
 			},
 		],
 		sitemap: `${process.env.NEXT_PUBLIC_URL}/sitemap.xml`,
-	}
+	};
 }

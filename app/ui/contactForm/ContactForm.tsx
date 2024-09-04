@@ -1,65 +1,65 @@
-'use client'
+'use client';
 
-import { submitData } from '@/app/lib/actions'
-import { IDictionaryModal } from '@/app/lib/interfaces'
-import sendEmail from '@/app/lib/utils/sendEmail'
-import { Flex, FormControl, Input, Textarea, Checkbox } from '@chakra-ui/react'
-import { useParams, usePathname, useRouter } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
-import { useFormState } from 'react-dom'
+import { submitData } from '@/app/lib/actions';
+import { IDictionaryModal } from '@/app/lib/interfaces';
+import sendEmail from '@/app/lib/utils/sendEmail';
+import { Flex, FormControl, Input, Textarea, Checkbox } from '@chakra-ui/react';
+import { useParams, usePathname, useRouter } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react';
+import { useFormState } from 'react-dom';
 
-import SubmitButton from '../submitButton/SubmitButton'
-import { theme } from '../theme'
+import SubmitButton from '../submitButton/SubmitButton';
+import { theme } from '../theme';
 
 interface ContactFormProps {
-	nameProduct?: string
-	dictionaryModal?: IDictionaryModal
+	nameProduct?: string;
+	dictionaryModal?: IDictionaryModal;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ nameProduct, dictionaryModal }) => {
-	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-	const [state, dispatch] = useFormState(submitData, undefined)
-	const ref = useRef<HTMLFormElement | null>(null)
+	const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+	const [state, dispatch] = useFormState(submitData, undefined);
+	const ref = useRef<HTMLFormElement | null>(null);
 
-	const router = useRouter()
+	const router = useRouter();
 
-	const { lang } = useParams()
+	const { lang } = useParams();
 
-	const pathname = usePathname()
-	const arr = pathname.split('/')
+	const pathname = usePathname();
+	const arr = pathname.split('/');
 
-	const contactPage = arr[2]
+	const contactPage = arr[2];
 
 	useEffect(() => {
-		;(async () => {
+		(async () => {
 			if (state?.message === 'success') {
 				try {
-					setIsSubmitting(true)
+					setIsSubmitting(true);
 
-					const res = await sendEmail({ ...state, nameProduct })
+					const res = await sendEmail({ ...state, nameProduct });
 					if (res?.status === 200) {
-						const newPath = `/${lang}/contact/success`
-						router.push(newPath)
+						const newPath = `/${lang}/contact/success`;
+						router.push(newPath);
 
-						ref.current?.reset()
+						ref.current?.reset();
 					}
 				} catch (error) {
-					console.error(error)
+					console.error(error);
 				} finally {
-					setIsSubmitting(false)
+					setIsSubmitting(false);
 				}
 			}
-		})()
-	}, [state, nameProduct, router, lang])
+		})();
+	}, [state, nameProduct, router, lang]);
 
 	const nameError =
-		state?.errors?.name && state?.errors?.name.length > 0 ? state.errors.name[0] : null
+		state?.errors?.name && state?.errors?.name.length > 0 ? state.errors.name[0] : null;
 
 	const emailError =
-		state?.errors?.email && state?.errors?.email.length > 0 ? state.errors.email[0] : null
+		state?.errors?.email && state?.errors?.email.length > 0 ? state.errors.email[0] : null;
 
 	const policyError =
-		state?.errors?.policy && state?.errors?.policy.length > 0 ? state.errors.policy[0] : null
+		state?.errors?.policy && state?.errors?.policy.length > 0 ? state.errors.policy[0] : null;
 
 	return (
 		<Flex as="form" action={dispatch} ref={ref} flexDir={'column'} gap={'5px'}>
@@ -150,7 +150,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ nameProduct, dictionaryModal 
 				</Checkbox>
 			</FormControl>
 		</Flex>
-	)
-}
+	);
+};
 
-export default ContactForm
+export default ContactForm;
