@@ -1,11 +1,12 @@
 // app/ui/Breadcrumbs.tsx
+'use client' // Ensures this is a Client Component
+
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
 const Breadcrumbs = () => {
-  const router = useRouter()
-  const { pathname } = router
+  const pathname = usePathname()
 
   // Split pathname into parts for breadcrumb links
   const pathParts = pathname.split('/').filter(Boolean) // Filters out empty strings
