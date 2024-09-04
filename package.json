@@ -4,10 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "ESLINT_NO_DEV_ERRORS=true next build",
+    "build": "next build",
     "start": "next start",
-    "prettier:format": "prettier --write .",
-    "prettier:check": "prettier --check \"**/*.{ts,tsx,json}\"",
     "lint": "next lint",
     "eslint:format": "eslint app --fix",
     "prepare": "husky install"
@@ -44,12 +42,10 @@
     "eslint-plugin-prettier": "^5.1.2",
     "husky": "^8.0.3",
     "negotiator": "^0.6.3",
-    "prettier": "^3.1.1",
     "typescript": "^5"
   },
   "lint-staged": {
     "**/*.{js,ts,tsx}": [
-      "npm run prettier:format",
       "npm run eslint:format"
     ]
   }
