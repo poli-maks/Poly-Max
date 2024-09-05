@@ -17,7 +17,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   const numericId = extractIdFromPrefixedUrl(id || '');
   if (!numericId) return notFound();
 
-  let data = await getProductByUid(lang, numericId);
+  const data = await getProductByUid(lang, numericId); // Changed from 'let' to 'const'
   if (!data || data.length === 0) return notFound();
 
   const { attributes: product } = data[0];
