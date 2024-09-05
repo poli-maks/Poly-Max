@@ -8,11 +8,14 @@ import { Suspense } from 'react';
 
 // Generate metadata for SEO and open graph
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
+	// Check if the ID is defined
+	if (!id) return notFound();
+
 	// Remove the 'poli-product-' prefix from the ID
 	const productId = id.replace('poli-product-', '');
 
 	// Fetch the product data using the updated ID
-	const data = productId ? await getProductByUid(lang, parseInt(productId)) : null;
+	const data = await getProductByUid(lang, parseInt(productId));
 
 	// If no product data is found, return a 404
 	if (!data || data.length === 0) return notFound();
@@ -48,14 +51,14 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
 // Main product page component
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-	// Return a 404 if the ID is not provided
+	// Check if the ID is defined
 	if (!id) return notFound();
 
 	// Remove the 'poli-product-' prefix from the ID
 	const productId = id.replace('poli-product-', '');
 
 	// Fetch the product data
-	const data = productId ? await getProductByUid(lang, parseInt(productId)) : null;
+	const data = await getProductByUid(lang, parseInt(productId));
 
 	// Return a 404 if no data is found
 	if (!data || data.length === 0) return notFound();
