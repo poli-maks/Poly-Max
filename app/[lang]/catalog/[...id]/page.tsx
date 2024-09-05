@@ -6,14 +6,21 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
+// Generate metadata for SEO and open graph
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-	let data;
-	if (id) data = await getProductByUid(lang, parseInt(id.replace('poli-product-', '')));
+	// Remove the 'poli-product-' prefix from the ID
+	const productId = id.replace('poli-product-', '');
 
+	// Fetch the product data using the updated ID
+	const data = productId ? await getProductByUid(lang, parseInt(productId)) : null;
+
+	// If no product data is found, return a 404
 	if (!data || data.length === 0) return notFound();
 
+	// Extract product attributes
 	const { attributes: product } = data[0];
 
+	// Determine the image URL
 	const imgUrl =
 		product.img.data !== null
 			? product.img.data[0].attributes.formats?.small?.url
@@ -22,10 +29,10 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 	return {
 		title: product.title,
 		alternates: {
-			canonical: `/catalog/poli-product-${id}`,
+			canonical: `/catalog/${id}`,
 			languages: {
-				en: `/en/catalog/poli-product-${id}`,
-				de: `/de/catalog/poli-product-${id}`,
+				en: `/en/catalog/${id}`,
+				de: `/de/catalog/${id}`,
 			},
 		},
 		description: product.descShort,
@@ -39,9 +46,21 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 	};
 };
 
+// Main product page component
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
+	// Return a 404 if the ID is not provided
 	if (!id) return notFound();
 
+	// Remove the 'poli-product-' prefix from the ID
+	const productId = id.replace('poli-product-', '');
+
+	// Fetch the product data
+	const data = productId ? await getProductByUid(lang, parseInt(productId)) : null;
+
+	// Return a 404 if no data is found
+	if (!data || data.length === 0) return notFound();
+
+	// Fetch the dictionary data for language support
 	const dictionary = await getDictionary(lang);
 
 	return (
