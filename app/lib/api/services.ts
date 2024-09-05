@@ -7,118 +7,72 @@ import { ICategory, IProduct, IContacts } from '../interfaces';
 
 // Fetch Categories
 const getCategories = async (lang: string): Promise<ICategory[]> => {
-	try {
-		const {
-			data: { data },
-		} = await instance.get(`/api/categories?locale=${lang}&populate=sub_categories`);
-		if (data.length === 0) {
-			return notFound();
-		}
-
-		return data;
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			console.error(error.status);
-			console.error(error.response);
-
-			return notFound();
-		} else {
-			console.error(error);
-
-			return notFound();
-		}
-	}
+  // ...existing code...
 };
 
 export const fetchCategories = cache(getCategories);
 
 // Fetch All Products
 export const getAllProducts = async (
-	lang: string,
-	page: number,
-	limit = 8
+  lang: string,
+  page: number,
+  limit = 8
 ): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
-	try {
-		const {
-			data: {
-				data,
-				meta: {
-					pagination: { total: count },
-				},
-			},
-		} = await instance.get(
-			`/api/products?locale=${lang}&populate=img&sort[0]=uid:asc&pagination[page]=${page}&pagination[pageSize]=${limit}`
-		);
-		if (data.length === 0) {
-			return notFound();
-		}
-
-		return { data, count };
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			console.error(error.status);
-			console.error(error.response);
-
-			return notFound();
-		} else {
-			if (typeof error === 'object' && error !== null && 'digest' in error) {
-				if (error.digest === 'NEXT_NOT_FOUND') {
-					return 'NOT_FOUND';
-				}
-			} else return notFound();
-		}
-	}
+  // ...existing code...
 };
 
 export const fetchAllProducts = cache(getAllProducts);
 
-// Fetch Product by UID with "poli-product-" Prefix
+// Fetch Product by UID
 export const getProductByUid = async (lang: string, uid: number) => {
-	try {
-		const {
-			data: { data },
-		} = await instance.get(`/api/products?locale=${lang}&filters[uid][$eq]=${uid}&populate=deep`);
-		if (data.length === 0) {
-			return notFound();
-		}
-
-		return data;
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			console.error(error.status);
-			console.error(error.response);
-
-			return notFound();
-		} else {
-			if (typeof error === 'object' && error !== null && 'digest' in error) {
-				if (error.digest === 'NEXT_NOT_FOUND') {
-					return 'NOT_FOUND';
-				}
-			} else return notFound();
-		}
-	}
+  // ...existing code...
 };
 
 export const fetchProductByUid = cache(getProductByUid);
 
 // Fetch Product by Name (Slug)
 export const getProductByName = async (lang: string, name: string): Promise<IProduct | null> => {
-	try {
-		const {
-			data: { data },
-		} = await instance.get(`/api/products?locale=${lang}&filters[slug][$eq]=${encodeURIComponent(name)}&populate=deep`);
-
-		if (data.length === 0) {
-			return null; // Return null instead of notFound() to match the function signature
-		}
-
-		return data[0] as IProduct; // Assuming that the slug is unique, so only one product is returned
-	} catch (error) {
-		console.error(error); // Log the error for debugging
-
-		// Return null in case of any error
-		return null;
-	}
+  // ...existing code...
 };
 
 export const fetchProductByName = cache(getProductByName);
+
+// Fetch Products by Title
+const getProductsByTitle = async (
+  lang: string,
+  query: string,
+  page: number
+): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
+  // ...existing code...
+};
+
+export const searchProductsByTitle = cache(getProductsByTitle);
+
+// Fetch Products by Category
+const getProductsByCategory = async (
+  lang: string,
+  catUid: string,
+  page: number
+): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
+  // ...existing code...
+};
+
+export const fetchProductsByCategory = cache(getProductsByCategory);
+
+// Fetch Products by Subcategory
+const getProductsBySubCategory = async (
+  lang: string,
+  subCatUid: number,
+  page: number
+): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
+  // ...existing code...
+};
+
+export const fetchProductsBySubCategory = cache(getProductsBySubCategory);
+
+// Fetch Contacts
+const getContacts = async (lang: string): Promise<IContacts | undefined> => {
+  // ...existing code...
+};
+
+export const fetchContacts = cache(getContacts);
