@@ -8,7 +8,7 @@ import { ICategory, IProduct, IContacts } from '../interfaces'
 const getCategories = async (lang: string): Promise<ICategory[]> => {
 	try {
 		const {
-			data: { data }
+			data: { data },
 		} = await instance.get(`/api/categories?locale=${lang}&populate=sub_categories`)
 		if (data.length === 0) {
 			return notFound()
@@ -41,9 +41,9 @@ export const getAllProducts = async (
 			data: {
 				data,
 				meta: {
-					pagination: { total: count }
-				}
-			}
+					pagination: { total: count },
+				},
+			},
 		} = await instance.get(
 			`/api/products?locale=${lang}&populate=img&sort[0]=uid:asc&pagination[page]=${page}&pagination[pageSize]=${limit}`
 		)
@@ -73,7 +73,7 @@ export const fetchAllProducts = cache(getAllProducts)
 export const getProductByUid = async (lang: string, uid: number) => {
 	try {
 		const {
-			data: { data }
+			data: { data },
 		} = await instance.get(`/api/products?locale=${lang}&filters[uid][$in][0]=${uid}&populate=deep`)
 		if (data.length === 0) {
 			return notFound()
@@ -108,9 +108,9 @@ const getProductsByTitle = async (
 			data: {
 				data,
 				meta: {
-					pagination: { total: count }
-				}
-			}
+					pagination: { total: count },
+				},
+			},
 		} = await instance.get(
 			`/api/products?locale=${lang}&filters[title][$containsi]=${query}&populate=img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
@@ -147,9 +147,9 @@ const getProductsByCategory = async (
 			data: {
 				data,
 				meta: {
-					pagination: { total: count }
-				}
-			}
+					pagination: { total: count },
+				},
+			},
 		} = await instance.get(
 			`/api/products?locale=${lang}&populate=deep,2&filters[categories][uid][$eq]=${catUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
@@ -187,11 +187,11 @@ const getProductsBySubCategory = async (
 			data: {
 				data,
 				meta: {
-					pagination: { total: count }
-				}
-			}
+					pagination: { total: count },
+				},
+			},
 		} = await instance.get(
-			`/api/products?locale=${lang}&populate=deep,2&filters[sub_categories][uid][$eq]=${subCatUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+			`api/products?locale=${lang}&populate=deep,2&filters[sub_categories][uid][$eq]=${subCatUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
 		)
 
 		if (data.length === 0) {

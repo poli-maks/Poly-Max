@@ -1,33 +1,21 @@
-import { getProductByUid } from '@/app/lib/api/services';
-import { getDictionary } from '@/app/lib/dictionary';
-import { IParams } from '@/app/lib/interfaces';
-import Product from '@/app/ui/ProductPage/Product';
-import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton';
-import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
+import { getProductByUid } from '@/app/lib/api/services'
+import { getDictionary } from '@/app/lib/dictionary'
+import { IParams } from '@/app/lib/interfaces'
+import Product from '@/app/ui/ProductPage/Product'
+import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
+import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 
-// Generate metadata for SEO and open graph
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-	// Check if the ID is defined
-	if (!id) return notFound();
+	let data
+	if (id) data = await getProductByUid(lang, parseInt(id))
 
-	// Remove the 'poli-product-' prefix from the ID
-	const productId = id.replace('poli-product-', '');
+	const { attributes: product } = data[0]
 
-	// Fetch the product data using the updated ID
-	const data = await getProductByUid(lang, parseInt(productId));
-
-	// If no product data is found, return a 404
-	if (!data || data.length === 0) return notFound();
-
-	// Extract product attributes
-	const { attributes: product } = data[0];
-
-	// Determine the image URL
 	const imgUrl =
 		product.img.data !== null
 			? product.img.data[0].attributes.formats?.small?.url
-			: '/img/productPlaceholder.jpg';
+			: '/img/productPlaceholder.jpg'
 
 	return {
 		title: product.title,
@@ -46,25 +34,13 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 				},
 			],
 		},
-	};
-};
+	}
+}
 
-// Main product page component
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-	// Check if the ID is defined
-	if (!id) return notFound();
+	if (!id) return notFound()
 
-	// Remove the 'poli-product-' prefix from the ID
-	const productId = id.replace('poli-product-', '');
-
-	// Fetch the product data
-	const data = await getProductByUid(lang, parseInt(productId));
-
-	// Return a 404 if no data is found
-	if (!data || data.length === 0) return notFound();
-
-	// Fetch the dictionary data for language support
-	const dictionary = await getDictionary(lang);
+	const dictionary = await getDictionary(lang)
 
 	return (
 		<>
@@ -72,12 +48,13 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 				<Product
 					lang={lang}
 					id={id}
+					//product={product}
 					dictionary={dictionary.productPage}
 					dictionaryModal={dictionary.modalForm}
 				/>
 			</Suspense>
 		</>
-	);
-};
+	)
+}
 
-export default ProductPage;
+export default ProductPage
