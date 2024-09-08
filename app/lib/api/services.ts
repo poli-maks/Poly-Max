@@ -98,6 +98,34 @@ export const getProductByUid = async (lang: string, uid: number) => {
 
 export const fetchProductByUid = cache(getProductByUid)
 
+export const getProductBySlug = async (lang: string, slug: string) => {
+	try {
+		const {
+			data: { data },
+		} = await instance.get(`/api/products?locale=${lang}&filters[slug][$eq]=${slug}&populate=deep`)
+		if (data.length === 0) {
+			return notFound()
+		}
+
+		return data
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			console.error(error.status)
+			console.error(error.response)
+
+			return notFound()
+		} else {
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
+		}
+	}
+}
+
+export const fetchProductBySlug = cache(getProductBySlug)
+
 const getProductsByTitle = async (
 	lang: string,
 	query: string,
