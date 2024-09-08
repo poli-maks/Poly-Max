@@ -1,4 +1,4 @@
-import { fetchProductBySlug } from '@/app/lib/api/services'
+import { fetchProductByUid } from '@/app/lib/api/services'
 import { IDictionaryModal, IProductDictionary } from '@/app/lib/interfaces'
 import { Locale } from '@/i18n.config'
 import { Flex } from '@chakra-ui/react'
@@ -15,7 +15,7 @@ const ImageSection = dynamic(
 )
 
 interface IProps {
-	// product: IProductProps[]
+	//product: IProductProps[]
 	id: string
 	lang: Locale
 	dictionary: IProductDictionary
@@ -23,8 +23,7 @@ interface IProps {
 }
 
 const Product = async ({ dictionary, dictionaryModal, lang, id }: IProps) => {
-	// Replace `fetchProductByUid` with `fetchProductBySlug`
-	const product = await fetchProductBySlug(lang, parseInt(id))
+	const product = await fetchProductByUid(lang, parseInt(id))
 	const productImages = product[0].attributes.img.data
 
 	return (
