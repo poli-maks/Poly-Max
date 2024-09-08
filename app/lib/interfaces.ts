@@ -1,7 +1,7 @@
 import { Locale } from '@/i18n.config'
 
 export interface IParams {
-	params: { lang: Locale; slug?: string } // Updated to use slug instead of id
+	params: { lang: Locale; id?: string }
 }
 
 interface Heading {
@@ -34,7 +34,7 @@ interface TextElement {
 type ElementType = Heading | Paragraph | List
 
 export interface ImageAttributes {
-	id: number // Corrected from "id: 5" to "id: number"
+	id: 5
 	attributes: {
 		name: string
 		alternativeText: string | null
@@ -111,7 +111,6 @@ export interface IProductProps {
 		publishedAt: string
 		locale: string
 		uid: number
-		slug: string // New field added for slug
 		markDawn: ElementType[]
 		img: {
 			data: ImageAttributes[]
@@ -163,7 +162,6 @@ export interface IProduct {
 		publishedAt: string
 		locale: string
 		uid: number
-		slug: string // New field added for slug
 		markDawn: Array<{
 			type: string
 			level: number
