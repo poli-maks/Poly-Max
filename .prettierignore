@@ -22,3 +22,4 @@ coverage
 app/ui/Breadcrumbs.tsx
 app/[lang]/catalog/[...id]/page.tsx
 app/lib/interfaces.ts
+app/lib/api/services.ts
