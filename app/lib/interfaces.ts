@@ -1,7 +1,11 @@
 import { Locale } from '@/i18n.config'
 
 export interface IParams {
-	params: { lang: Locale; id?: string }
+  params: {
+    lang: Locale
+    id?: string
+    slug?: string // Add slug as an optional property
+  }
 }
 
 interface Heading {

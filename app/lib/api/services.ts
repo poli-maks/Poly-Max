@@ -5,7 +5,7 @@ import { cache } from 'react'
 import { instance } from '../instance'
 import { ICategory, IProduct, IContacts } from '../interfaces'
 
-// Fetch all categories
+// Fetch categories
 const getCategories = async (lang: string): Promise<ICategory[]> => {
 	try {
 		const {
@@ -30,7 +30,7 @@ const getCategories = async (lang: string): Promise<ICategory[]> => {
 	}
 }
 
-// Cache the categories fetching function
+// Cache categories fetching
 export const fetchCategories = cache(getCategories)
 
 // Fetch all products
@@ -130,3 +130,154 @@ export const getProductBySlug = async (lang: string, slug: string) => {
 }
 
 export const fetchProductBySlug = cache(getProductBySlug)
+
+// Fetch products by category
+const getProductsByCategory = async (
+	lang: string,
+	catUid: string,
+	page: number
+): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
+	try {
+		const {
+			data: {
+				data,
+				meta: {
+					pagination: { total: count },
+				},
+			},
+		} = await instance.get(
+			`/api/products?locale=${lang}&populate=deep,2&filters[categories][uid][$eq]=${catUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+		)
+
+		if (data.length === 0) {
+			return notFound()
+		}
+
+		return { data, count }
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			console.error(error.status)
+			console.error(error.response)
+
+			return notFound()
+		} else {
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
+		}
+	}
+}
+
+export const fetchProductsByCategory = cache(getProductsByCategory)
+
+// Fetch products by subcategory
+const getProductsBySubCategory = async (
+	lang: string,
+	subCatUid: number,
+	page: number
+): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
+	try {
+		const {
+			data: {
+				data,
+				meta: {
+					pagination: { total: count },
+				},
+			},
+		} = await instance.get(
+			`/api/products?locale=${lang}&populate=deep,2&filters[sub_categories][uid][$eq]=${subCatUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+		)
+
+		if (data.length === 0) {
+			return notFound()
+		}
+
+		return { data, count }
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			console.error(error.status)
+			console.error(error.response)
+
+			return notFound()
+		} else {
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
+		}
+	}
+}
+
+export const fetchProductsBySubCategory = cache(getProductsBySubCategory)
+
+// Search products by title
+const getProductsByTitle = async (
+	lang: string,
+	query: string,
+	page: number
+): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
+	try {
+		const {
+			data: {
+				data,
+				meta: {
+					pagination: { total: count },
+				},
+			},
+		} = await instance.get(
+			`/api/products?locale=${lang}&filters[title][$containsi]=${query}&populate=img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+		)
+		if (data.length === 0) {
+			return notFound()
+		}
+
+		return { data, count }
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			console.error(error.status)
+			console.error(error.response)
+
+			return notFound()
+		} else {
+			if (typeof error === 'object' && error !== null && 'digest' in error) {
+				if (error.digest === 'NEXT_NOT_FOUND') {
+					return 'NOT_FOUND'
+				}
+			} else return notFound()
+		}
+	}
+}
+
+export const searchProductsByTitle = cache(getProductsByTitle)
+
+// Fetch contacts
+const getContacts = async (lang: string): Promise<IContacts | undefined> => {
+	try {
+		const response = await instance.get(`/api/contacts?locale=${lang}`)
+		const { data } = response.data
+
+		if (!data || data.length === 0) {
+			return undefined
+		}
+
+		const [{ attributes }] = data
+
+		return attributes
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			console.error(error.status)
+			console.error(error.response)
+
+			return undefined
+		} else {
+			console.error(error)
+
+			return undefined
+		}
+	}
+}
+
+export const fetchContacts = cache(getContacts)
