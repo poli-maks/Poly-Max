@@ -7,50 +7,49 @@ import dynamic from 'next/dynamic'
 import SectionWrapper from '../sectionWrapper/SectionWrapper'
 import { ProductContent } from './productContent/ProductContent'
 
-const ImageSection = dynamic(
-  () => import('./productSlider/ImagesSection'),
-  { ssr: false }
-)
+const ImageSection = dynamic(() => import('./productSlider/ImagesSection'), {
+	ssr: false
+})
 
 interface IProps {
-  slug: string
-  lang: Locale
-  dictionary: IProductDictionary
-  dictionaryModal: IDictionaryModal
+	slug: string
+	lang: Locale
+	dictionary: IProductDictionary
+	dictionaryModal: IDictionaryModal
 }
 
 const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
-  try {
-    const product = await fetchProductBySlug(lang, slug)
+	try {
+		const product = await fetchProductBySlug(lang, slug)
 
-    if (!product || product.length === 0) {
-      return <div>Error: No product found.</div>
-    }
+		if (!product || product.length === 0) {
+			return <div>Error: No product found.</div>
+		}
 
-    const productImages = product[0]?.attributes?.img?.data || []
+		const productImages = product[0]?.attributes?.img?.data || []
 
-    if (!productImages.length) {
-      return <div>Error: No product images found.</div>
-    }
+		if (!productImages.length) {
+			return <div>Error: No product images found.</div>
+		}
 
-    return (
-      <SectionWrapper>
-        <Flex flexDirection={{ base: 'column', lg: 'row' }}>
-          <Flex w={{ base: '100%', xl: '530px', lg: '330px' }}>
-            <ImageSection productImages={productImages} />
-          </Flex>
+		return (
+			<SectionWrapper>
+				<Flex flexDirection={{ base: 'column', lg: 'row' }}>
+					<Flex w={{ base: '100%', xl: '530px', lg: '330px' }}>
+						<ImageSection productImages={productImages} />
+					</Flex>
 
-          <ProductContent
-            product={product}
-            dictionary={dictionary}
-            dictionaryModal={dictionaryModal}
-          />
-        </Flex>
-      </SectionWrapper>
-    )
-  } catch (error) {
-    return <div>Application error: Please check logs for more details.</div>
-  }
+					<ProductContent
+						product={product}
+						dictionary={dictionary}
+						dictionaryModal={dictionaryModal}
+					/>
+				</Flex>
+			</SectionWrapper>
+		)
+	} catch (error) {
+		return <div>Application error: Please check logs for more details.</div>
+	}
 }
 
 export default Product
