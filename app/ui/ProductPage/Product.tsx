@@ -8,9 +8,7 @@ import SectionWrapper from '../sectionWrapper/SectionWrapper'
 import { ProductContent } from './productContent/ProductContent'
 
 const ImageSection = dynamic(
-	() => {
-		return import('./productSlider/ImagesSection')
-	},
+	() => import('./productSlider/ImagesSection'),
 	{ ssr: false }
 )
 
