@@ -131,7 +131,6 @@ const getProductsByTitle = async (
           return 'NOT_FOUND';
         }
       } else {
-        // Added the missing return statement here
         return notFound();
       }
     }
