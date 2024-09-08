@@ -1,51 +1,67 @@
-import { fetchProductBySlug } from '@/app/lib/api/services';
-import { IDictionaryModal, IProductDictionary, IParams } from '@/app/lib/interfaces';
-import { Flex } from '@chakra-ui/react';
-import dynamic from 'next/dynamic';
-import SectionWrapper from '@/app/ui/sectionWrapper/SectionWrapper';
-import { ProductContent } from '@/app/ui/ProductPage/productContent/ProductContent';
+import { getProductByUid } from '@/app/lib/api/services'
+import { getDictionary } from '@/app/lib/dictionary'
+import { IParams } from '@/app/lib/interfaces'
+import Product from '@/app/ui/ProductPage/Product'
+import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
+import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 
-// Dynamically imported components for client-side rendering
-const ImageSection = dynamic(() => import('@/app/ui/ProductPage/productSlider/ImagesSection'), {
-  ssr: false,
-});
+// Ensure IParams interface matches expected types
+export const generateMetadata = async ({ params }: IParams) => {
+	const { slug, lang } = params
+	if (!slug) return {}
 
-// Correct type definition for Next.js page component props
-interface PageProps {
-  params: {
-    lang: IParams['params']['lang']; // Ensuring the type matches your IParams interface
-    slug: IParams['params']['slug'];
-  };
-  dictionary: IProductDictionary;
-  dictionaryModal: IDictionaryModal;
+	let data
+	if (slug) data = await getProductByUid(lang, parseInt(slug))
+
+	const { attributes: product } = data[0]
+
+	const imgUrl =
+		product.img.data !== null
+			? product.img.data[0].attributes.formats?.small?.url
+			: '/img/productPlaceholder.jpg'
+
+	return {
+		title: product.title,
+		alternates: {
+			canonical: `/catalog/${slug}`,
+			languages: {
+				en: `/en/catalog/${slug}`,
+				de: `/de/catalog/${slug}`,
+			},
+		},
+		description: product.descShort,
+		openGraph: {
+			images: [
+				{
+					url: imgUrl,
+				},
+			],
+		},
+	}
 }
 
-const ProductPage = async ({ params, dictionary, dictionaryModal }: PageProps) => {
-  const { lang, slug } = params;
-  const product = await fetchProductBySlug(lang, slug);
+// Define the props explicitly
+interface ProductPageProps extends IParams {}
 
-  if (!product || product.length === 0) {
-    // Handle the case where the product is not found
-    return <div>Product not found</div>;
-  }
+const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
+	const { lang, slug } = params
+	if (!slug) return notFound()
 
-  const productImages = product[0].attributes.img.data;
+	const dictionary = await getDictionary(lang)
 
-  return (
-    <SectionWrapper>
-      <Flex flexDirection={{ base: 'column', lg: 'row' }}>
-        <Flex w={{ base: '100%', xl: '530px', lg: '330px' }}>
-          <ImageSection productImages={productImages} />
-        </Flex>
+	return (
+		<>
+			<Suspense fallback={<SingleProductSkeleton />}>
+				<Product
+					lang={lang}
+					id={slug} // use slug here
+					dictionary={dictionary.productPage}
+					dictionaryModal={dictionary.modalForm}
+				/>
+			</Suspense>
+		</>
+	)
+}
 
-        <ProductContent
-          product={product[0]}
-          dictionary={dictionary}
-          dictionaryModal={dictionaryModal}
-        />
-      </Flex>
-    </SectionWrapper>
-  );
-};
-
-export default ProductPage;
+export default ProductPage
