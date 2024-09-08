@@ -1,43 +1,47 @@
-import { fetchProductByUid } from '@/app/lib/api/services';
-import { IDictionaryModal, IProductDictionary } from '@/app/lib/interfaces';
-import { Locale } from '@/i18n.config';
-import { Flex } from '@chakra-ui/react';
-import dynamic from 'next/dynamic';
+import { fetchProductBySlug } from '@/app/lib/api/services'
+import { IDictionaryModal, IProductDictionary } from '@/app/lib/interfaces'
+import { Locale } from '@/i18n.config'
+import { Flex } from '@chakra-ui/react'
+import dynamic from 'next/dynamic'
 
-import SectionWrapper from '../sectionWrapper/SectionWrapper';
-import { ProductContent } from './productContent/ProductContent';
+import SectionWrapper from '../sectionWrapper/SectionWrapper'
+import { ProductContent } from './productContent/ProductContent'
 
 const ImageSection = dynamic(
-  () => import('./productSlider/ImagesSection'),
-  { ssr: false }
-);
+	() => {
+		return import('./productSlider/ImagesSection')
+	},
+	{ ssr: false }
+)
 
 interface IProps {
-  id: string;
-  lang: Locale;
-  dictionary: IProductDictionary;
-  dictionaryModal: IDictionaryModal;
+	slug: string
+	lang: Locale
+	dictionary: IProductDictionary
+	dictionaryModal: IDictionaryModal
 }
 
-const Product = async ({ dictionary, dictionaryModal, lang, id }: IProps) => {
-  const product = await fetchProductByUid(lang, parseInt(id));
-  const productImages = product[0].attributes.img.data;
+const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
+	const product = await fetchProductBySlug(lang, slug)
+	if (!product) return null
 
-  return (
-    <SectionWrapper>
-      <Flex flexDirection={{ base: 'column', lg: 'row' }}>
-        <Flex w={{ base: '100%', xl: '530px', lg: '330px' }}>
-          <ImageSection productImages={productImages} />
-        </Flex>
+	const productImages = product[0].attributes.img.data
 
-        <ProductContent
-          product={product}
-          dictionary={dictionary}
-          dictionaryModal={dictionaryModal}
-        />
-      </Flex>
-    </SectionWrapper>
-  );
-};
+	return (
+		<SectionWrapper>
+			<Flex flexDirection={{ base: 'column', lg: 'row' }}>
+				<Flex w={{ base: '100%', xl: '530px', lg: '330px' }}>
+					<ImageSection productImages={productImages} />
+				</Flex>
 
-export default Product;
+				<ProductContent
+					product={product}
+					dictionary={dictionary}
+					dictionaryModal={dictionaryModal}
+				/>
+			</Flex>
+		</SectionWrapper>
+	)
+}
+
+export default Product

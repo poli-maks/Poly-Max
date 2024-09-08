@@ -1,31 +1,31 @@
-// File: /app/[lang]/catalog/[...slug]/page.tsx
+import { fetchProductBySlug } from '@/app/lib/api/services'
+import { getDictionary } from '@/app/lib/dictionary'
+import { IParams } from '@/app/lib/interfaces'
+import Product from '@/app/ui/ProductPage/Product'
+import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
+import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 
-import { fetchProductByUid } from '@/app/lib/api/services'; // Corrected import
-import { getDictionary } from '@/app/lib/dictionary';
-import { IParams } from '@/app/lib/interfaces';
-import Product from '@/app/ui/ProductPage/Product';
-import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'; // Import SingleProductSkeleton
-import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
+export const generateMetadata = async ({ params: { slug, lang } }: IParams) => {
+	let data
+	if (slug) data = await fetchProductBySlug(lang, slug)
 
-export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-	let data;
-	if (id) data = await fetchProductByUid(lang, parseInt(id));
+	if (!data || data.length === 0) return notFound()
 
-	const { attributes: product } = data[0];
+	const { attributes: product } = data[0]
 
 	const imgUrl =
 		product.img.data !== null
 			? product.img.data[0].attributes.formats?.small?.url
-			: '/img/productPlaceholder.jpg';
+			: '/img/productPlaceholder.jpg'
 
 	return {
 		title: product.title,
 		alternates: {
-			canonical: `/catalog/${id}`,
+			canonical: `/catalog/${slug}`,
 			languages: {
-				en: `/en/catalog/${id}`,
-				de: `/de/catalog/${id}`,
+				en: `/en/catalog/${slug}`,
+				de: `/de/catalog/${slug}`,
 			},
 		},
 		description: product.descShort,
@@ -36,26 +36,26 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 				},
 			],
 		},
-	};
-};
+	}
+}
 
-const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-	if (!id) return notFound();
+const ProductPage: React.FC<IParams> = async ({ params: { lang, slug } }) => {
+	if (!slug) return notFound()
 
-	const dictionary = await getDictionary(lang);
+	const dictionary = await getDictionary(lang)
 
 	return (
 		<>
 			<Suspense fallback={<SingleProductSkeleton />}>
 				<Product
 					lang={lang}
-					id={id}
+					slug={slug}
 					dictionary={dictionary.productPage}
 					dictionaryModal={dictionary.modalForm}
 				/>
 			</Suspense>
 		</>
-	);
-};
+	)
+}
 
-export default ProductPage;
+export default ProductPage
