@@ -13,6 +13,7 @@ const ImageSection = dynamic(
   { ssr: false }
 );
 
+// Define the IProps interface to match the component's expected props
 interface IProps {
   slug: string;
   lang: Locale;
@@ -22,6 +23,10 @@ interface IProps {
 
 const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
   const product = await fetchProductBySlug(lang, slug);
+  if (!product || !product[0]) {
+    // Handle cases where the product is not found
+    return null; // or return a 404 component/page
+  }
   const productImages = product[0].attributes.img.data;
 
   return (
