@@ -1,6 +1,4 @@
-// File: /app/ui/ProductPage/Product.tsx
-
-import { fetchProductBySlug } from '@/app/lib/api/services'
+import { fetchProductByUid } from '@/app/lib/api/services'  // Corrected import
 import { IDictionaryModal, IProductDictionary } from '@/app/lib/interfaces'
 import { Locale } from '@/i18n.config'
 import { Flex } from '@chakra-ui/react'
@@ -17,14 +15,14 @@ const ImageSection = dynamic(
 )
 
 interface IProps {
-	slug: string // Use slug instead of ID
+	id: string
 	lang: Locale
 	dictionary: IProductDictionary
 	dictionaryModal: IDictionaryModal
 }
 
-const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
-	const product = await fetchProductBySlug(lang, slug)
+const Product = async ({ dictionary, dictionaryModal, lang, id }: IProps) => {
+	const product = await fetchProductByUid(lang, parseInt(id))
 	const productImages = product[0].attributes.img.data
 
 	return (
