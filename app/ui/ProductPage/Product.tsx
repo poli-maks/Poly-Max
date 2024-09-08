@@ -23,8 +23,6 @@ interface IProps {
 
 const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
 	const product = await fetchProductBySlug(lang, slug)
-	if (!product) return null
-
 	const productImages = product[0].attributes.img.data
 
 	return (

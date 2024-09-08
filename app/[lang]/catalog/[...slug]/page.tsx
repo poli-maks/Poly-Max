@@ -10,7 +10,9 @@ export const generateMetadata = async ({ params: { slug, lang } }: IParams) => {
 	let data
 	if (slug) data = await fetchProductBySlug(lang, slug)
 
-	if (!data || data.length === 0) return notFound()
+	if (!data || data.length === 0) {
+		return notFound()
+	}
 
 	const { attributes: product } = data[0]
 
