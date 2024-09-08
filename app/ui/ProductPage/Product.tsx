@@ -7,8 +7,9 @@ import dynamic from 'next/dynamic'
 import SectionWrapper from '../sectionWrapper/SectionWrapper'
 import { ProductContent } from './productContent/ProductContent'
 
+// Corrected dynamic import with comma added after the first argument
 const ImageSection = dynamic(() => import('./productSlider/ImagesSection'), {
-	ssr: false
+	ssr: false,
 })
 
 interface IProps {
