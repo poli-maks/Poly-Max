@@ -15,7 +15,7 @@ const ImageSection = dynamic(
 )
 
 interface IProps {
-	slug: string // Changed id to slug
+	slug: string
 	lang: Locale
 	dictionary: IProductDictionary
 	dictionaryModal: IDictionaryModal
@@ -23,16 +23,24 @@ interface IProps {
 
 const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
 	try {
-		const product = await fetchProductBySlug(lang, slug) // Fetch product by slug
-		if (!product) {
+		// Fetch product data by slug
+		const product = await fetchProductBySlug(lang, slug)
+
+		// Check if product data exists
+		if (!product || product.length === 0) {
+			console.error(`No product found for slug: ${slug}`)
 			return <div>Error: No product found.</div>
 		}
 
 		const productImages = product[0]?.attributes?.img?.data || []
+		
+		// Check if images exist
 		if (!productImages.length) {
+			console.error(`No product images found for slug: ${slug}`)
 			return <div>Error: No product images found.</div>
 		}
 
+		// Render product information
 		return (
 			<SectionWrapper>
 				<Flex flexDirection={{ base: 'column', lg: 'row' }}>
@@ -49,6 +57,8 @@ const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
 			</SectionWrapper>
 		)
 	} catch (error) {
+		// Log detailed error message
+		console.error('Error fetching product data:', error)
 		return <div>Application error: Please check logs for more details.</div>
 	}
 }
