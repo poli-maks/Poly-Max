@@ -55,7 +55,7 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
 			<Suspense fallback={<SingleProductSkeleton />}>
 				<Product
 					lang={lang}
-					id={slug} // use slug here
+					slug={slug} // Corrected to use slug instead of id
 					dictionary={dictionary.productPage}
 					dictionaryModal={dictionary.modalForm}
 				/>
