@@ -11,9 +11,8 @@ const ImageSection = dynamic(() => import('@/app/ui/ProductPage/productSlider/Im
   ssr: false,
 });
 
-// Use the correct type for Next.js page props
-interface PageProps {
-  params: IParams['params'];  // { lang: string; slug: string }
+// Correct type definition for Next.js page component
+interface PageProps extends IParams {
   dictionary: IProductDictionary;
   dictionaryModal: IDictionaryModal;
 }
