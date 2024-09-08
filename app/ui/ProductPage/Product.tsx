@@ -16,11 +16,12 @@ const ImageSection = dynamic(
 interface IProps {
 	slug: string
 	lang: Locale
+	id: string // Add id property here
 	dictionary: IProductDictionary
 	dictionaryModal: IDictionaryModal
 }
 
-const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
+const Product = async ({ dictionary, dictionaryModal, lang, slug, id }: IProps) => {
 	try {
 		// Fetch product by slug
 		const product = await fetchProductBySlug(lang, slug)
