@@ -1,10 +1,9 @@
 import { fetchProductBySlug } from '@/app/lib/api/services';
-import { IDictionaryModal, IProductDictionary } from '@/app/lib/interfaces';
+import { IDictionaryModal, IProductDictionary, IParams } from '@/app/lib/interfaces';
 import { Locale } from '@/i18n.config';
 import { Flex } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 
-// Corrected imports with absolute paths
 import SectionWrapper from '@/app/ui/sectionWrapper/SectionWrapper';
 import { ProductContent } from '@/app/ui/ProductPage/productContent/ProductContent';
 
@@ -13,15 +12,17 @@ const ImageSection = dynamic(
   { ssr: false }
 );
 
-// Define the IProps interface to match the component's expected props
+// Correct IProps interface
 interface IProps {
-  slug: string;
-  lang: Locale;
+  params: {
+    slug: string;
+    lang: Locale;
+  };
   dictionary: IProductDictionary;
   dictionaryModal: IDictionaryModal;
 }
 
-const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
+const ProductPage = async ({ params: { lang, slug }, dictionary, dictionaryModal }: IProps) => {
   const product = await fetchProductBySlug(lang, slug);
   if (!product || !product[0]) {
     // Handle cases where the product is not found
@@ -44,6 +45,6 @@ const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
       </Flex>
     </SectionWrapper>
   );
-}
+};
 
-export default Product;
+export default ProductPage;
