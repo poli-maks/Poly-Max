@@ -29,14 +29,16 @@ const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
 		// Check if product data exists
 		if (!product || product.length === 0) {
 			console.error(`No product found for slug: ${slug}`)
+
 			return <div>Error: No product found.</div>
 		}
 
 		const productImages = product[0]?.attributes?.img?.data || []
-		
+
 		// Check if images exist
 		if (!productImages.length) {
 			console.error(`No product images found for slug: ${slug}`)
+
 			return <div>Error: No product images found.</div>
 		}
 
@@ -57,8 +59,8 @@ const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
 			</SectionWrapper>
 		)
 	} catch (error) {
-		// Log detailed error message
 		console.error('Error fetching product data:', error)
+
 		return <div>Application error: Please check logs for more details.</div>
 	}
 }
