@@ -1,13 +1,14 @@
-import { fetchProductBySlug } from '@/app/lib/api/services'
-import { getDictionary } from '@/app/lib/dictionary'
-import { IProductDictionary, IDictionaryModal, IParams } from '@/app/lib/interfaces'
-import { notFound } from 'next/navigation'
-import Product from '@/app/ui/ProductPage/Product'
+import React, { Suspense } from 'react'; // Added React and Suspense import
+import { fetchProductBySlug } from '@/app/lib/api/services';
+import { getDictionary } from '@/app/lib/dictionary';
+import { IProductDictionary, IDictionaryModal, IParams } from '@/app/lib/interfaces';
+import { notFound } from 'next/navigation';
+import Product from '@/app/ui/ProductPage/Product';
 
 export const generateMetadata = async ({ params }: { params: IParams['params'] }) => {
   const { slug, lang } = params;
   // Your metadata generation logic (if any)
-}
+};
 
 const ProductPage = async ({ params }: { params: IParams['params'] }) => {
   const { slug, lang } = params;
@@ -37,6 +38,6 @@ const ProductPage = async ({ params }: { params: IParams['params'] }) => {
     console.error("Error in ProductPage:", error);
     return notFound();
   }
-}
+};
 
 export default ProductPage;

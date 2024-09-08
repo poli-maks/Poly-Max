@@ -5,7 +5,6 @@ import { cache } from 'react';
 import { instance } from '../instance';
 import { ICategory, IProduct, IContacts } from '../interfaces';
 
-// Fetch categories
 const getCategories = async (lang: string): Promise<ICategory[]> => {
     try {
         const {
@@ -21,9 +20,11 @@ const getCategories = async (lang: string): Promise<ICategory[]> => {
         if (axios.isAxiosError(error)) {
             console.error(error.status);
             console.error(error.response);
+
             return notFound();
         } else {
             console.error(error);
+
             return notFound();
         }
     }
@@ -31,7 +32,6 @@ const getCategories = async (lang: string): Promise<ICategory[]> => {
 
 export const fetchCategories = cache(getCategories);
 
-// Fetch all products
 export const getAllProducts = async (
     lang: string,
     page: number,
@@ -58,6 +58,7 @@ export const getAllProducts = async (
         if (axios.isAxiosError(error)) {
             console.error(error.status);
             console.error(error.response);
+
             return notFound();
         } else {
             if (typeof error === 'object' && error !== null && 'digest' in error) {
@@ -73,7 +74,6 @@ export const getAllProducts = async (
 
 export const fetchAllProducts = cache(getAllProducts);
 
-// Fetch product by UID
 export const getProductByUid = async (lang: string, uid: number) => {
     try {
         const {
@@ -89,6 +89,7 @@ export const getProductByUid = async (lang: string, uid: number) => {
         if (axios.isAxiosError(error)) {
             console.error(error.status);
             console.error(error.response);
+
             return notFound();
         } else {
             if (typeof error === 'object' && error !== null && 'digest' in error) {
@@ -104,7 +105,6 @@ export const getProductByUid = async (lang: string, uid: number) => {
 
 export const fetchProductByUid = cache(getProductByUid);
 
-// Fetch product by Slug
 export const fetchProductBySlug = async (lang: string, slug: string) => {
     try {
         const {
@@ -120,15 +120,16 @@ export const fetchProductBySlug = async (lang: string, slug: string) => {
         if (axios.isAxiosError(error)) {
             console.error(error.status);
             console.error(error.response);
+
             return notFound();
         } else {
             console.error(error);
+
             return notFound();
         }
     }
 };
 
-// Search products by title
 const getProductsByTitle = async (
     lang: string,
     query: string,
@@ -155,6 +156,7 @@ const getProductsByTitle = async (
         if (axios.isAxiosError(error)) {
             console.error(error.status);
             console.error(error.response);
+
             return notFound();
         } else {
             if (typeof error === 'object' && error !== null && 'digest' in error) {
@@ -170,7 +172,6 @@ const getProductsByTitle = async (
 
 export const searchProductsByTitle = cache(getProductsByTitle);
 
-// Fetch products by category
 const getProductsByCategory = async (
     lang: string,
     catUid: string,
@@ -197,6 +198,7 @@ const getProductsByCategory = async (
         if (axios.isAxiosError(error)) {
             console.error(error.status);
             console.error(error.response);
+
             return notFound();
         } else {
             if (typeof error === 'object' && error !== null && 'digest' in error) {
@@ -212,7 +214,6 @@ const getProductsByCategory = async (
 
 export const fetchProductsByCategory = cache(getProductsByCategory);
 
-// Fetch products by sub-category
 const getProductsBySubCategory = async (
     lang: string,
     subCatUid: number,
@@ -239,6 +240,7 @@ const getProductsBySubCategory = async (
         if (axios.isAxiosError(error)) {
             console.error(error.status);
             console.error(error.response);
+
             return notFound();
         } else {
             if (typeof error === 'object' && error !== null && 'digest' in error) {
@@ -254,7 +256,6 @@ const getProductsBySubCategory = async (
 
 export const fetchProductsBySubCategory = cache(getProductsBySubCategory);
 
-// Fetch contacts
 const getContacts = async (lang: string): Promise<IContacts | undefined> => {
     try {
         const response = await instance.get(`/api/contacts?locale=${lang}`);
@@ -265,14 +266,17 @@ const getContacts = async (lang: string): Promise<IContacts | undefined> => {
         }
 
         const [{ attributes }] = data;
+
         return attributes;
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error(error.status);
             console.error(error.response);
+
             return undefined;
         } else {
             console.error(error);
+
             return undefined;
         }
     }
