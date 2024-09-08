@@ -1,60 +1,50 @@
-import { getProductByUid } from '@/app/lib/api/services'
-import { getDictionary } from '@/app/lib/dictionary'
-import { IParams } from '@/app/lib/interfaces'
-import Product from '@/app/ui/ProductPage/Product'
-import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
+import { fetchProductBySlug, fetchProductByUid } from '@/app/lib/api/services';
+import { IDictionaryModal, IProductDictionary } from '@/app/lib/interfaces';
+import { Locale } from '@/i18n.config';
+import { Flex } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
 
-export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-	let data
-	if (id) data = await getProductByUid(lang, parseInt(id))
+import SectionWrapper from '../sectionWrapper/SectionWrapper';
+import { ProductContent } from './productContent/ProductContent';
 
-	const { attributes: product } = data[0]
+const ImageSection = dynamic(() => import('./productSlider/ImagesSection'), { ssr: false });
 
-	const imgUrl =
-		product.img.data !== null
-			? product.img.data[0].attributes.formats?.small?.url
-			: '/img/productPlaceholder.jpg'
-
-	return {
-		title: product.title,
-		alternates: {
-			canonical: `/catalog/${id}`,
-			languages: {
-				en: `/en/catalog/${id}`,
-				de: `/de/catalog/${id}`,
-			},
-		},
-		description: product.descShort,
-		openGraph: {
-			images: [
-				{
-					url: imgUrl,
-				},
-			],
-		},
-	}
+interface IProps {
+	params: { slug: string; lang: Locale };
+	dictionary: IProductDictionary;
+	dictionaryModal: IDictionaryModal;
 }
 
-const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-	if (!id) return notFound()
+const ProductPage = async ({ params, dictionary, dictionaryModal }: IProps) => {
+	const { lang, slug } = params;
 
-	const dictionary = await getDictionary(lang)
+	// Check if the slug is actually an ID
+	const isNumericId = /^\d+$/.test(slug);
+	const product = isNumericId
+		? await fetchProductByUid(lang, parseInt(slug))
+		: await fetchProductBySlug(lang, slug);
+
+	if (!product || product.length === 0) {
+		return <div>Error: No product found.</div>;
+	}
+
+	const productImages = product[0]?.attributes?.img?.data || [];
+
+	if (!productImages.length) {
+		return <div>Error: No product images found.</div>;
+	}
 
 	return (
-		<>
-			<Suspense fallback={<SingleProductSkeleton />}>
-				<Product
-					lang={lang}
-					id={id}
-					//product={product}
-					dictionary={dictionary.productPage}
-					dictionaryModal={dictionary.modalForm}
-				/>
-			</Suspense>
-		</>
-	)
-}
+		<SectionWrapper>
+			<Flex flexDirection={{ base: 'column', lg: 'row' }}>
+				<Flex w={{ base: '100%', xl: '530px', lg: '330px' }}>
+					<ImageSection productImages={productImages} />
+				</Flex>
 
-export default ProductPage
+				<ProductContent product={product} dictionary={dictionary} dictionaryModal={dictionaryModal} />
+			</Flex>
+		</SectionWrapper>
+	);
+};
+
+export default ProductPage;
