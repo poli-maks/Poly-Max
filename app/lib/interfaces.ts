@@ -1,7 +1,11 @@
 import { Locale } from '@/i18n.config'
 
+// Update this in your interfaces file (e.g., /app/lib/interfaces.ts)
 export interface IParams {
-    params: { lang: Locale; slug?: string };
+  params: {
+    lang: string; // or Locale if you have a type defined for languages
+    slug: string; // Add slug property to IParams
+  };
 }
 
 
