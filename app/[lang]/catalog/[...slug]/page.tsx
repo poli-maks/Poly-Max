@@ -1,43 +1,44 @@
-import React, { Suspense } from 'react'; // Added React and Suspense import
-import { fetchProductBySlug } from '@/app/lib/api/services';
-import { getDictionary } from '@/app/lib/dictionary';
-import { IProductDictionary, IDictionaryModal, IParams } from '@/app/lib/interfaces';
-import { notFound } from 'next/navigation';
-import Product from '@/app/ui/ProductPage/Product';
+import { fetchProductBySlug } from '@/app/lib/api/services'
+import { IDictionaryModal, IProductDictionary } from '@/app/lib/interfaces'
+import { Locale } from '@/i18n.config'
+import { Flex, Spinner } from '@chakra-ui/react'
+import dynamic from 'next/dynamic'
+import SectionWrapper from '../sectionWrapper/SectionWrapper'
+import { ProductContent } from './productContent/ProductContent'
 
-export const generateMetadata = async ({ params }: { params: IParams['params'] }) => {
-  const { slug, lang } = params;
-  // Your metadata generation logic (if any)
-};
+const ImageSection = dynamic(
+  () => {
+    return import('./productSlider/ImagesSection')
+  },
+  { ssr: false }
+)
 
-const ProductPage = async ({ params }: { params: IParams['params'] }) => {
-  const { slug, lang } = params;
+interface IProps {
+  slug: string
+  lang: Locale
+  dictionary: IProductDictionary
+  dictionaryModal: IDictionaryModal
+}
 
-  try {
-    const product = await fetchProductBySlug(lang, slug);
-    if (!product || product.length === 0) {
-      return notFound();
-    }
+const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
+  const product = await fetchProductBySlug(lang, slug)
+  const productImages = product[0].attributes.img.data
 
-    const dictionary: IProductDictionary = await getDictionary(lang);
-    const dictionaryModal: IDictionaryModal = {/* Your dictionaryModal data */};
+  return (
+    <SectionWrapper>
+      <Flex flexDirection={{ base: 'column', lg: 'row' }}>
+        <Flex w={{ base: '100%', xl: '530px', lg: '330px' }}>
+          <ImageSection productImages={productImages} />
+        </Flex>
 
-    return (
-      <>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Product
-            lang={lang}
-            slug={slug}
-            dictionary={dictionary}
-            dictionaryModal={dictionaryModal}
-          />
-        </Suspense>
-      </>
-    );
-  } catch (error) {
-    console.error("Error in ProductPage:", error);
-    return notFound();
-  }
-};
+        <ProductContent
+          product={product}
+          dictionary={dictionary}
+          dictionaryModal={dictionaryModal}
+        />
+      </Flex>
+    </SectionWrapper>
+  )
+}
 
-export default ProductPage;
+export default Product
