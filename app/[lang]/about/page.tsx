@@ -16,7 +16,7 @@ export const metadata = {
 
 const AboutPage: React.FC<IParams> = async ({ params: { lang } }) => {
 	// Cast lang to the specific Locale type
-	const locale = lang as Locale; // Ensure lang is of type 'de' | 'en'
+	const locale = lang as Locale // Ensure lang is of type 'de' | 'en'
 	const dictionary = await getDictionary(locale)
 
 	return <About dictionary={dictionary.aboutUsPage} />
