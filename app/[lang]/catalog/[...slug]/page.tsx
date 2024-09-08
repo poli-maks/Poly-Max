@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { fetchProductBySlug } from '@/app/lib/api/services';
 import { getDictionary } from '@/app/lib/dictionary';
-import { IParams } from '@/app/lib/interfaces';
+import { IParams, IProductDictionary } from '@/app/lib/interfaces';
 import Product from '@/app/ui/ProductPage/Product';
 import { Suspense } from 'react';
 
@@ -20,15 +20,27 @@ export const generateMetadata = async ({ params: { slug, lang } }: IParams) => {
 };
 
 const ProductPage = async ({ params: { slug, lang } }: IParams) => {
-    // Ensure slug is defined and of type string
     if (!slug) {
         return notFound();
     }
 
-    const product = await fetchProductBySlug(lang, slug as string); // Use type assertion
+    const product = await fetchProductBySlug(lang, slug as string);
     if (!product) return notFound();
 
-    const dictionary = await getDictionary(lang);
+    // Ensure the dictionary contains all required fields
+    const dictionary: IProductDictionary = await getDictionary(lang) as IProductDictionary;
+
+    // Check if the dictionary object has the required properties
+    if (
+        !dictionary.btnOrder ||
+        !dictionary.announcement ||
+        !dictionary.tableHeaders ||
+        !dictionary.delivery ||
+        !dictionary.company ||
+        !dictionary.contactUs
+    ) {
+        return notFound();
+    }
 
     return (
         <>
