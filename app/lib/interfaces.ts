@@ -1,13 +1,8 @@
 import { Locale } from '@/i18n.config'
 
 export interface IParams {
-  params: {
-    lang: Locale; // Use Locale for type safety
-    slug: string; 
-  };
+	params: { lang: Locale; id?: string }
 }
-
-
 
 interface Heading {
 	type: 'heading'

@@ -6,13 +6,9 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Ensure IParams interface matches expected types
-export const generateMetadata = async ({ params }: IParams) => {
-	const { slug, lang } = params
-	if (!slug) return {}
-
+export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 	let data
-	if (slug) data = await getProductByUid(lang, parseInt(slug))
+	if (id) data = await getProductByUid(lang, parseInt(id))
 
 	const { attributes: product } = data[0]
 
@@ -24,10 +20,10 @@ export const generateMetadata = async ({ params }: IParams) => {
 	return {
 		title: product.title,
 		alternates: {
-			canonical: `/catalog/${slug}`,
+			canonical: `/catalog/${id}`,
 			languages: {
-				en: `/en/catalog/${slug}`,
-				de: `/de/catalog/${slug}`,
+				en: `/en/catalog/${id}`,
+				de: `/de/catalog/${id}`,
 			},
 		},
 		description: product.descShort,
@@ -41,12 +37,8 @@ export const generateMetadata = async ({ params }: IParams) => {
 	}
 }
 
-// Define the props explicitly
-interface ProductPageProps extends IParams {}
-
-const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
-	const { lang, slug } = params
-	if (!slug) return notFound()
+const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
+	if (!id) return notFound()
 
 	const dictionary = await getDictionary(lang)
 
@@ -55,7 +47,8 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
 			<Suspense fallback={<SingleProductSkeleton />}>
 				<Product
 					lang={lang}
-					slug={slug} // Corrected to use slug instead of id
+					id={id}
+					//product={product}
 					dictionary={dictionary.productPage}
 					dictionaryModal={dictionary.modalForm}
 				/>
