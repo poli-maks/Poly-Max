@@ -1,3 +1,5 @@
+// File: /app/ui/ProductPage/Product.tsx
+
 import { fetchProductBySlug } from '@/app/lib/api/services'
 import { IDictionaryModal, IProductDictionary } from '@/app/lib/interfaces'
 import { Locale } from '@/i18n.config'
