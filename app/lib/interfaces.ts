@@ -34,7 +34,7 @@ interface TextElement {
 type ElementType = Heading | Paragraph | List
 
 export interface ImageAttributes {
-	id: 5
+	id: number // Corrected from "id: 5" to "id: number"
 	attributes: {
 		name: string
 		alternativeText: string | null
@@ -178,4 +178,130 @@ export interface IProduct {
 				attributes: {
 					name: string
 					alternativeText: string | null
-					caption: string | nu
+					caption: string | null
+					width: number
+					height: number
+					formats: {
+						small: ImageFormat
+						thumbnail: ImageFormat
+					}
+					hash: string
+					ext: string
+					mime: string
+					size: number
+					url: string
+					previewUrl: string | null
+					provider: string
+					provider_metadata: {
+						public_id: string
+						resource_type: string
+					}
+					createdAt: string
+					updatedAt: string
+				}
+			}>
+		}
+	}
+}
+
+interface ImageFormat {
+	ext: string
+	url: string
+	hash: string
+	mime: string
+	name: string
+	path: string | null
+	size: number
+	width: number
+	height: number
+	provider_metadata: {
+		public_id: string
+		resource_type: string
+	}
+}
+
+export type TitleSize = ['xl', 'lg', 'md', 'sm']
+export type TitleLevel = ['h1', 'h2', 'h3', 'h4']
+
+export interface IProductDictionary {
+	btnOrder: string
+	announcement: string
+	tableHeaders: {
+		article: string
+		diameter: string
+		length: string
+		weight: string
+		coating_thickness: string
+		cross_section: string
+		volume: string
+		wall_thickness: string
+	}
+	delivery: {
+		title: string
+		body: string
+	}
+	company: {
+		title: string
+		body: string
+	}
+	contactUs: {
+		title: string
+		body: string
+	}
+}
+
+export interface IDictionaryModal {
+	title: string
+	text: string
+	nameField: string
+	emailField: string
+	message: string
+	button: string
+	policy: string
+}
+
+export interface IAboutUsDictionary {
+	title: string
+	subTitle: string
+	sections: {
+		first: {
+			title: string
+			text: string
+		}
+		second: {
+			title: string
+			text: string
+		}
+		third: {
+			title: string
+			text: string
+		}
+	}
+}
+
+export interface ILocation {
+	img: string
+	text: string
+}
+
+export interface IContacts {
+	email?: string
+	phone?: string
+	address?: string
+	officeEmail?: string
+	createdAt?: string
+	updatedAt?: string
+	publishedAt?: string
+	locale?: string
+	officePhone?: string
+	metartEmail?: string
+}
+
+export enum SEARCH_PARAMS {
+	CATEGORY = 'category',
+	SUB_CATEGORY = 'sub',
+	SEARCH = 'search',
+	QUERY = 'query',
+	PAGE = 'page',
+	TOTAL = 'total',
+}
