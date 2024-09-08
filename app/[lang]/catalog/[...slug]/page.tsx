@@ -18,6 +18,9 @@ export const generateMetadata = async ({ params: { slug, lang } }: IParams) => {
 }
 
 const ProductPage = async ({ params: { slug, lang } }: IParams) => {
+    // Ensure slug is a string before using it
+    if (!slug) return notFound()
+
     const product = await fetchProductBySlug(lang, slug)
 
     if (!product) return notFound()
