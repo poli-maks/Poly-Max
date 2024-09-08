@@ -1,28 +1,28 @@
-import { fetchProductBySlug } from '@/app/lib/api/services'
-import { IDictionaryModal, IProductDictionary } from '@/app/lib/interfaces'
-import { Locale } from '@/i18n.config'
-import { Flex, Spinner } from '@chakra-ui/react'
-import dynamic from 'next/dynamic'
-import SectionWrapper from '../sectionWrapper/SectionWrapper'
-import { ProductContent } from './productContent/ProductContent'
+import { fetchProductBySlug } from '@/app/lib/api/services';
+import { IDictionaryModal, IProductDictionary } from '@/app/lib/interfaces';
+import { Locale } from '@/i18n.config';
+import { Flex } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
+
+// Corrected imports with absolute paths
+import SectionWrapper from '@/app/ui/sectionWrapper/SectionWrapper';
+import { ProductContent } from '@/app/ui/ProductPage/productContent/ProductContent';
 
 const ImageSection = dynamic(
-  () => {
-    return import('./productSlider/ImagesSection')
-  },
+  () => import('@/app/ui/ProductPage/productSlider/ImagesSection'),
   { ssr: false }
-)
+);
 
 interface IProps {
-  slug: string
-  lang: Locale
-  dictionary: IProductDictionary
-  dictionaryModal: IDictionaryModal
+  slug: string;
+  lang: Locale;
+  dictionary: IProductDictionary;
+  dictionaryModal: IDictionaryModal;
 }
 
 const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
-  const product = await fetchProductBySlug(lang, slug)
-  const productImages = product[0].attributes.img.data
+  const product = await fetchProductBySlug(lang, slug);
+  const productImages = product[0].attributes.img.data;
 
   return (
     <SectionWrapper>
@@ -38,7 +38,7 @@ const Product = async ({ dictionary, dictionaryModal, lang, slug }: IProps) => {
         />
       </Flex>
     </SectionWrapper>
-  )
+  );
 }
 
-export default Product
+export default Product;
