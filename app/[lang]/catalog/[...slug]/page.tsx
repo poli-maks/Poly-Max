@@ -11,18 +11,19 @@ const ImageSection = dynamic(() => import('@/app/ui/ProductPage/productSlider/Im
   ssr: false,
 });
 
-interface Props {
-  params: IParams['params'];
+// Use the correct type for Next.js page props
+interface PageProps {
+  params: IParams['params'];  // { lang: string; slug: string }
   dictionary: IProductDictionary;
   dictionaryModal: IDictionaryModal;
 }
 
-const ProductPage = async ({ params, dictionary, dictionaryModal }: Props) => {
+const ProductPage = async ({ params, dictionary, dictionaryModal }: PageProps) => {
   const { lang, slug } = params;
   const product = await fetchProductBySlug(lang, slug);
 
   if (!product || product.length === 0) {
-    return null; // Returning null in case of no product found
+    return null; // Handle the case where the product is not found
   }
 
   const productImages = product[0].attributes.img.data;
