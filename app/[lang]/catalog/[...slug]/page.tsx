@@ -12,15 +12,20 @@ const ImageSection = dynamic(
   { ssr: false }
 );
 
-// Corrected type usage without IProps
-const ProductPage = async ({ params }: IParams & { dictionary: IProductDictionary; dictionaryModal: IDictionaryModal }) => {
+interface ProductPageProps {
+  params: IParams['params']; // Type for dynamic route params
+  dictionary: IProductDictionary;
+  dictionaryModal: IDictionaryModal;
+}
+
+const ProductPage = async ({ params, dictionary, dictionaryModal }: ProductPageProps) => {
   const { lang, slug } = params;
-  
+
   const product = await fetchProductBySlug(lang, slug);
   if (!product || product.length === 0) {
-    return null; // or handle a 404 page not found scenario
+    return null; // Return null or use notFound() for a 404 page
   }
-  
+
   const productImages = product[0].attributes.img.data;
 
   return (
