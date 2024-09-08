@@ -1,4 +1,4 @@
-import { getProductBySlug } from '@/app/lib/api/services'
+import { getProductByUid } from '@/app/lib/api/services'
 import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
@@ -8,8 +8,7 @@ import { Suspense } from 'react'
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 	let data
-	// No need to parse id to an integer, pass it directly as a string
-	if (id) data = await getProductBySlug(lang, id)
+	if (id) data = await getProductByUid(lang, parseInt(id))
 
 	const { attributes: product } = data[0]
 
