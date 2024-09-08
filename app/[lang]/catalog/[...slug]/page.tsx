@@ -12,7 +12,7 @@ const ImageSection = dynamic(
   { ssr: false }
 );
 
-// Correct IProps interface
+// Correct the type definition
 interface IProps {
   params: {
     slug: string;
@@ -22,12 +22,12 @@ interface IProps {
   dictionaryModal: IDictionaryModal;
 }
 
-const ProductPage = async ({ params: { lang, slug }, dictionary, dictionaryModal }: IProps) => {
+const ProductPage = async ({ params: { lang, slug } }: IProps) => {
   const product = await fetchProductBySlug(lang, slug);
-  if (!product || !product[0]) {
-    // Handle cases where the product is not found
-    return null; // or return a 404 component/page
+  if (!product || product.length === 0) {
+    return null; // or handle a 404 page not found scenario
   }
+  
   const productImages = product[0].attributes.img.data;
 
   return (
@@ -38,7 +38,7 @@ const ProductPage = async ({ params: { lang, slug }, dictionary, dictionaryModal
         </Flex>
 
         <ProductContent
-          product={product}
+          product={product[0]} // Ensure we're passing the correct product data
           dictionary={dictionary}
           dictionaryModal={dictionaryModal}
         />
