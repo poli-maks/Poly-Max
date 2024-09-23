@@ -1,60 +1,75 @@
-import { getProductByUid } from '@/app/lib/api/services'
-import { getDictionary } from '@/app/lib/dictionary'
-import { IParams } from '@/app/lib/interfaces'
-import Product from '@/app/ui/ProductPage/Product'
-import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
+import { getProductBySlug, getProductByUid } from '@/app/lib/api/services';
+import { getDictionary } from '@/app/lib/dictionary';
+import { IParams } from '@/app/lib/interfaces';
+import Product from '@/app/ui/ProductPage/Product';
+import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton';
+import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-	let data
-	if (id) data = await getProductByUid(lang, parseInt(id))
+  let data;
+  if (id) {
+    data = await getProductBySlug(lang, id); // Attempt to fetch by slug
+    if (!data) {
+      data = await getProductByUid(lang, parseInt(id)); // Fallback to UID fetch if slug is not found
+    }
+  }
 
-	const { attributes: product } = data[0]
+  if (!data || data.length === 0) {
+    return notFound();
+  }
 
-	const imgUrl =
-		product.img.data !== null
-			? product.img.data[0].attributes.formats?.small?.url
-			: '/img/productPlaceholder.jpg'
+  const { attributes: product } = data[0];
 
-	return {
-		title: product.title,
-		alternates: {
-			canonical: `/catalog/${id}`,
-			languages: {
-				en: `/en/catalog/${id}`,
-				de: `/de/catalog/${id}`,
-			},
-		},
-		description: product.descShort,
-		openGraph: {
-			images: [
-				{
-					url: imgUrl,
-				},
-			],
-		},
-	}
-}
+  const imgUrl =
+    product.img.data !== null
+      ? product.img.data[0].attributes.formats?.small?.url
+      : '/img/productPlaceholder.jpg';
+
+  return {
+    title: product.title,
+    alternates: {
+      canonical: `/catalog/${id}`,
+      languages: {
+        en: `/en/catalog/${id}`,
+        de: `/de/catalog/${id}`,
+      },
+    },
+    description: product.descShort,
+    openGraph: {
+      images: [
+        {
+          url: imgUrl,
+        },
+      ],
+    },
+  };
+};
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-	if (!id) return notFound()
+  if (!id) return notFound();
 
-	const dictionary = await getDictionary(lang)
+  const dictionary = await getDictionary(lang);
+  let productData = await getProductBySlug(lang, id); // Fetch by slug
 
-	return (
-		<>
-			<Suspense fallback={<SingleProductSkeleton />}>
-				<Product
-					lang={lang}
-					id={id}
-					//product={product}
-					dictionary={dictionary.productPage}
-					dictionaryModal={dictionary.modalForm}
-				/>
-			</Suspense>
-		</>
-	)
-}
+  if (!productData) {
+    productData = await getProductByUid(lang, parseInt(id)); // Fallback to UID fetch
+  }
 
-export default ProductPage
+  if (!productData) return notFound();
+
+  return (
+    <>
+      <Suspense fallback={<SingleProductSkeleton />}>
+        <Product
+          lang={lang}
+          id={id}
+          dictionary={dictionary.productPage}
+          dictionaryModal={dictionary.modalForm}
+        />
+      </Suspense>
+    </>
+  );
+};
+
+export default ProductPage;

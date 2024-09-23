@@ -5,6 +5,44 @@ import { cache } from 'react'
 import { instance } from '../instance'
 import { ICategory, IProduct, IContacts } from '../interfaces'
 
+// Fetch product by slug
+export const getProductBySlug = async (lang: string, slug: string) => {
+  try {
+    const { data } = await instance.get(`/api/products?locale=${lang}&filters[slug][$eq]=${slug}&populate=deep`);
+    if (data.length === 0) {
+      return notFound();
+    }
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(error.status);
+      console.error(error.response);
+      return notFound();
+    }
+    return notFound();
+  }
+}
+
+export const fetchProductBySlug = cache(getProductBySlug);
+
+// Fetch product by UID (legacy support)
+export const getProductByUid = async (lang: string, uid: number) => {
+  try {
+    const { data } = await instance.get(`/api/products?locale=${lang}&filters[uid][$in][0]=${uid}&populate=deep`);
+    if (data.length === 0) {
+      return notFound();
+    }
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(error.status);
+      console.error(error.response);
+      return notFound();
+    }
+    return notFound();
+  }
+}
+
 const getCategories = async (lang: string): Promise<ICategory[]> => {
 	try {
 		const {
