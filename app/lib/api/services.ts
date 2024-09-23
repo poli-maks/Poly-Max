@@ -1,11 +1,9 @@
 import axios from 'axios'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
-
 import { instance } from '../instance'
 import { ICategory, IProduct, IContacts } from '../interfaces'
 
-// Fetch product by slug
 export const getProductBySlug = async (lang: string, slug: string) => {
   try {
     const { data } = await instance.get(`/api/products?locale=${lang}&filters[slug][$eq]=${slug}&populate=deep`);
