@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { notFound } from 'next/navigation';
 import { cache } from 'react';
-
 import { instance } from '../instance';
-import { ICategory, IProduct } from '../interfaces'; // Removed IContacts since it's not being used
+import { ICategory, IProduct } from '../interfaces';
 
 // Fetch categories
 const getCategories = async (lang: string): Promise<ICategory[]> => {
