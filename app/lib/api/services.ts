@@ -4,12 +4,15 @@ import { cache } from 'react'
 import { instance } from '../instance'
 import { ICategory, IProduct, IContacts } from '../interfaces'
 
+// Fetch product by slug
 export const getProductBySlug = async (lang: string, slug: string) => {
   try {
     const { data } = await instance.get(`/api/products?locale=${lang}&filters[slug][$eq]=${slug}&populate=deep`);
+    
     if (data.length === 0) {
       return notFound();
     }
+
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -21,15 +24,15 @@ export const getProductBySlug = async (lang: string, slug: string) => {
   }
 }
 
-export const fetchProductBySlug = cache(getProductBySlug);
-
-// Fetch product by UID (legacy support)
+// Fetch product by UID (for legacy support)
 export const getProductByUid = async (lang: string, uid: number) => {
   try {
     const { data } = await instance.get(`/api/products?locale=${lang}&filters[uid][$in][0]=${uid}&populate=deep`);
+    
     if (data.length === 0) {
       return notFound();
     }
+
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

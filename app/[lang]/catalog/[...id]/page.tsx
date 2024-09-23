@@ -8,11 +8,13 @@ import { Suspense } from 'react';
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   let data;
-  if (id) {
-    data = await getProductBySlug(lang, id); // Attempt to fetch by slug
-    if (!data) {
-      data = await getProductByUid(lang, parseInt(id)); // Fallback to UID fetch if slug is not found
-    }
+  
+  // Try fetching by slug first
+  data = await getProductBySlug(lang, id);
+  
+  // If not found by slug, fallback to UID
+  if (!data || data.length === 0) {
+    data = await getProductByUid(lang, parseInt(id));
   }
 
   if (!data || data.length === 0) {
@@ -22,9 +24,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   const { attributes: product } = data[0];
 
   const imgUrl =
-    product.img.data !== null
-      ? product.img.data[0].attributes.formats?.small?.url
-      : '/img/productPlaceholder.jpg';
+    product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg';
 
   return {
     title: product.title,
@@ -50,10 +50,13 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   if (!id) return notFound();
 
   const dictionary = await getDictionary(lang);
-  let productData = await getProductBySlug(lang, id); // Fetch by slug
+  
+  // Try fetching the product by slug first
+  let productData = await getProductBySlug(lang, id);
 
-  if (!productData) {
-    productData = await getProductByUid(lang, parseInt(id)); // Fallback to UID fetch
+  // Fallback to fetching by UID if no slug match
+  if (!productData || productData.length === 0) {
+    productData = await getProductByUid(lang, parseInt(id));
   }
 
   if (!productData) return notFound();
@@ -64,6 +67,7 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
         <Product
           lang={lang}
           id={id}
+          // Pass product data if required
           dictionary={dictionary.productPage}
           dictionaryModal={dictionary.modalForm}
         />
