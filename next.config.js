@@ -15,9 +15,9 @@ const nextConfig = {
 	async redirects() {
     return [
       {
-        source: '/:lang/catalog/:id', // Old URL pattern with UID
-        destination: '/:lang/catalog/:slug', // New URL pattern with slug
-        permanent: true, // Redirect permanently
+        source: '/:lang/catalog/:id(\\d+)', // Match only numeric IDs
+        destination: '/:lang/catalog/:slug', // Redirect to slug URL
+        permanent: true,
       },
     ]
   },
