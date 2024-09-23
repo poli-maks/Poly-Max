@@ -20,4 +20,3 @@ coverage
 *.hbs
 
 app/ui/Breadcrumbs.tsx
-app/lib/api/services.ts
