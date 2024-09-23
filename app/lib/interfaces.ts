@@ -1,7 +1,8 @@
 import { Locale } from '@/i18n.config'
 
 export interface IParams {
-	params: { lang: Locale; id?: string }
+    lang: "de" | "en";
+    slug?: string; // Change from id to slug
 }
 
 interface Heading {

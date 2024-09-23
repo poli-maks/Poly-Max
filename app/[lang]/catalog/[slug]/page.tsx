@@ -6,7 +6,7 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
-// This function generates metadata for SEO based on the product's slug
+// Update the IParams interface to reflect that we are using slug instead of id
 export const generateMetadata = async ({ params: { slug, lang } }: IParams) => {
     let data;
     if (slug) data = await getProductBySlug(lang, slug); // Fetch by slug
