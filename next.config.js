@@ -13,13 +13,12 @@ const nextConfig = {
 		missingSuspenseWithCSRBailout: false,
 	},
 
-	// Add the redirects function
+	// Redirects without dynamic slug/id
 	async redirects() {
 		return [
 			{
-				// Redirect from old URL using product ID to new URL using slug
-				source: '/:lang/catalog/:id', // Old URL format (with id)
-				destination: '/:lang/catalog/:slug', // New URL format (with slug)
+				source: '/:lang/catalog/:id', // Old URL with id
+				destination: '/:lang/catalog', // Redirect to catalog listing (or another page)
 				permanent: true, // HTTP 301 Permanent Redirect
 			},
 		]
