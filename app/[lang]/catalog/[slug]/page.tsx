@@ -1,4 +1,4 @@
-import { getProductBySlug } from '@/app/lib/api/services'; // Updated to use slug-based fetch
+import { getProductBySlug } from '@/app/lib/api/services'; // Import the correct slug-based fetching function
 import { getDictionary } from '@/app/lib/dictionary';
 import { IParams } from '@/app/lib/interfaces';
 import Product from '@/app/ui/ProductPage/Product';
@@ -6,26 +6,27 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
-// Update the IParams interface to reflect that we are using slug instead of id
+// Metadata generation function
 export const generateMetadata = async ({ params: { slug, lang } }: IParams) => {
     let data;
-    if (slug) data = await getProductBySlug(lang, slug); // Fetch by slug
+    if (slug) {
+        data = await getProductBySlug(lang, slug); // Fetch by slug
+    }
 
     if (!data || data.length === 0) {
-        return notFound(); // Handle case where product isn't found
+        return notFound(); // Handle product not found case
     }
 
     const { attributes: product } = data[0];
 
-    const imgUrl =
-        product.img?.data !== null
-            ? product.img.data[0].attributes.formats?.small?.url
-            : '/img/productPlaceholder.jpg';
+    const imgUrl = product.img?.data !== null
+        ? product.img.data[0].attributes.formats?.small?.url
+        : '/img/productPlaceholder.jpg';
 
     return {
         title: product.title,
         alternates: {
-            canonical: `/catalog/${slug}`, // Use slug for canonical URL
+            canonical: `/catalog/${slug}`,
             languages: {
                 en: `/en/catalog/${slug}`,
                 de: `/de/catalog/${slug}`,
@@ -42,6 +43,7 @@ export const generateMetadata = async ({ params: { slug, lang } }: IParams) => {
     };
 };
 
+// Product page component
 const ProductPage: React.FC<IParams> = async ({ params: { lang, slug } }) => {
     if (!slug) return notFound(); // Ensure slug is present
 
@@ -49,9 +51,9 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, slug } }) => {
 
     let productData;
     try {
-        productData = await getProductBySlug(lang, slug); // Fetch product data by slug
+        productData = await getProductBySlug(lang, slug); // Fetch product by slug
     } catch (error) {
-        return notFound(); // Handle errors and not found cases
+        return notFound(); // Handle errors gracefully
     }
 
     if (!productData || productData.length === 0) {
@@ -65,7 +67,7 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, slug } }) => {
             <Suspense fallback={<SingleProductSkeleton />}>
                 <Product
                     lang={lang}
-                    product={product} // Pass the product data to the Product component
+                    product={product} // Pass the fetched product data
                     dictionary={dictionary.productPage}
                     dictionaryModal={dictionary.modalForm}
                 />
