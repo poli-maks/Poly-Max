@@ -45,7 +45,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   return {
     title: product.title,
     alternates: {
-      canonical: `/catalog/${id}`, // Preserve the original structure for the canonical URL
+      canonical: `/catalog/${id}`, // Maintain original structure
       languages: {
         en: `/en/catalog/${id}`, // English alternate
         de: `/de/catalog/${id}`, // German alternate
@@ -86,9 +86,9 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
 
-  // Check if the URL is valid, only allow /id or /id-title
+  // Allow only /id or /id-title formats
   if (id !== `${productId}` && id !== `${productId}-${slug}`) {
-    return notFound() // Return 404 for any format other than /id or /id-title
+    return notFound() // 404 for any format that isn't /id or /id-title
   }
 
   return (
