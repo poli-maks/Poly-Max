@@ -15,8 +15,8 @@ const nextConfig = {
 	async redirects() {
     return [
       {
-        source: 'https://www.poli-maks.com/en/catalog/4)', // Match only numeric IDs
-        destination: 'https://www.poli-maks.com/en/catalog/4-barrage-post', // Redirect to the URL with the slug
+        source: '/en/catalog/4)', // Match only numeric IDs
+        destination: '/en/catalog/4-barrage-post', // Redirect to the URL with the slug
         permanent: true, // This makes the redirect permanent (301)
       },
       
