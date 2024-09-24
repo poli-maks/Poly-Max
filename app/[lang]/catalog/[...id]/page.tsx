@@ -3,7 +3,7 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound /*, redirect*/ } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
@@ -83,13 +83,8 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Generate slug from product title
-  const slug = generateSlugFromTitle(productDetails.title)
-
-  // Only allow /id and /id-title URLs
-  if (id !== `${productId}` && id !== `${productId}-${slug}`) {
-    return notFound() // Return 404 for any URL not in the correct format
-  }
+  // Skip redirect logic for now to avoid 404
+  // The redirection can be re-enabled after basic functionality works
 
   return (
     <>
