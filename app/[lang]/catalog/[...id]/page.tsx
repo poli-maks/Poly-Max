@@ -9,10 +9,10 @@ import { Suspense } from 'react';
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   let data;
   
-  // Try fetching by slug first
+  // Fetch product by slug first
   data = await getProductBySlug(lang, id);
   
-  // If not found by slug, fallback to UID
+  // Fallback to fetching by UID if slug isn't found
   if (!data || data.length === 0) {
     data = await getProductByUid(lang, parseInt(id));
   }
@@ -51,10 +51,10 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 
   const dictionary = await getDictionary(lang);
   
-  // Try fetching the product by slug first
+  // Try fetching by slug first
   let productData = await getProductBySlug(lang, id);
 
-  // Fallback to fetching by UID if no slug match
+  // Fallback to fetching by UID
   if (!productData || productData.length === 0) {
     productData = await getProductByUid(lang, parseInt(id));
   }
@@ -67,7 +67,6 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
         <Product
           lang={lang}
           id={id}
-          // Pass product data if required
           dictionary={dictionary.productPage}
           dictionaryModal={dictionary.modalForm}
         />
