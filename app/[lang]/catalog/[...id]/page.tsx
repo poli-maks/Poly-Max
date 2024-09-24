@@ -3,7 +3,7 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound, redirect } from 'next/navigation'
+import { notFound /*, redirect*/ } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
@@ -89,10 +89,12 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   // Construct the expected URL with the slug
   const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
 
-  // Redirect if the current URL does not match the expected URL
+  // Commented out redirect logic for now
+  /*
   if (id !== `${productId}-${slug}`) {
     return redirect(expectedUrl)
   }
+  */
 
   return (
     <>
