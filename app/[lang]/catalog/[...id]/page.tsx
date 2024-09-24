@@ -81,15 +81,6 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Generate slug from product title
-  const slug = generateSlugFromTitle(productDetails.title)
-
-  // Переадресація закоментована
-  // if (!id.includes('-')) {
-  //   const expectedUrl = `/catalog/${productId}-${slug}`
-  //   return redirect(expectedUrl)
-  // }
-
   return (
     <>
       <Suspense fallback={<SingleProductSkeleton />}>
