@@ -3,34 +3,26 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug (we assume it's always correct)
-const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
-  if (!idSlug) return undefined
-  const numericPart = parseInt(idSlug, 10)
-  return isNaN(numericPart) ? undefined : numericPart
-}
-
-// Generate a slug from the product title
+// Генеруємо slug з назви продукту
 const generateSlugFromTitle = (title: string): string => {
   return title
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with hyphens
-    .replace(/(^-|-$)+/g, '') // Remove leading/trailing hyphens
+    .replace(/[^a-z0-9]+/g, '-') // Замінюємо всі символи, крім букв і цифр, на дефіси
+    .replace(/(^-|-$)+/g, '') // Видаляємо дефіси на початку і в кінці
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   if (!id) return notFound()
 
-  const productId = extractIdFromSlug(id)
-  if (!productId) return notFound()
+  const productId = parseInt(id, 10)
+  if (isNaN(productId)) return notFound()
 
   let data
   try {
     data = await getProductByUid(lang, productId)
-    console.log("Product data fetched:", data)
   } catch (error) {
     console.error("Error fetching product by UID:", error)
     return notFound()
@@ -47,7 +39,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
     title: product.title,
     metadataBase: new URL('https://www.poli-maks.com'),
     alternates: {
-      canonical: `/catalog/${id}`, // Original structure
+      canonical: `/catalog/${id}`, 
       languages: {
         en: `/en/catalog/${id}`,
         de: `/de/catalog/${id}`,
@@ -67,8 +59,8 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   if (!id) return notFound()
 
-  const productId = extractIdFromSlug(id)
-  if (!productId) return notFound()
+  const productId = parseInt(id, 10)
+  if (isNaN(productId)) return notFound()
 
   const dictionary = await getDictionary(lang)
 
@@ -86,25 +78,27 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Для продукту з ID = 4 та мовою "en" ми завжди показуємо сторінку "/en/catalog/4-barrage-post"
+  // Спеціальний випадок для ID = 4 та мови = "en"
   if (productId === 4 && lang === 'en') {
-    // Відразу показуємо потрібну сторінку, не виконуючи редірект
-    const expectedUrl = `/en/catalog/4-barrage-post`
-    return (
-      <>
-        <Suspense fallback={<SingleProductSkeleton />}>
-          <Product
-            lang={lang}
-            id={productId.toString()}
-            dictionary={dictionary.productPage}
-            dictionaryModal={dictionary.modalForm}
-          />
-        </Suspense>
-      </>
-    )
+    const specificSlug = 'barrage-post'
+    const expectedUrl = `/en/catalog/${productId}-${specificSlug}`
+
+    // Якщо URL не є очікуваним і це не правильний урл з дефісом, робимо редирект
+    if (id !== `${productId}-${specificSlug}`) {
+      return redirect(expectedUrl)
+    }
   }
 
-  // Відображення сторінок для інших випадків
+  // Створюємо загальний slug для інших продуктів
+  const slug = generateSlugFromTitle(productDetails.title)
+
+  // Якщо поточний URL — тільки ID (наприклад, /en/catalog/4), робимо редирект
+  if (id === `${productId}`) {
+    const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
+    return redirect(expectedUrl)
+  }
+
+  // Якщо поточний URL — вже коректний (наприклад, /en/catalog/4-barrage-post), рендеримо сторінку
   return (
     <>
       <Suspense fallback={<SingleProductSkeleton />}>
