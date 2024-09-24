@@ -3,7 +3,7 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
@@ -52,8 +52,8 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
     alternates: {
       canonical: canonicalUrl, // Use the generated slug-based URL as canonical
       languages: {
-        en: `/en/catalog/${id}`,
-        de: `/de/catalog/${id}`,
+        en: `/en/catalog/${productId}-${slug}`,
+        de: `/de/catalog/${productId}-${slug}`,
       },
     },
     description: product.descShort,
@@ -88,15 +88,6 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
-
-  // Generate slug from product title
-  const slug = generateSlugFromTitle(productDetails.title)
-
-  // Redirect if the current URL does not include the slug (is just numeric ID)
-  if (id && !id.includes('-')) {
-    const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
-    return redirect(expectedUrl)
-  }
 
   return (
     <>
