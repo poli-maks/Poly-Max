@@ -3,7 +3,7 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug
@@ -22,16 +22,10 @@ const generateSlugFromTitle = (title: string): string => {
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  if (!id) {
-    console.error("ID is undefined")
-    return notFound()
-  }
+  if (!id) return notFound()
 
   const productId = extractIdFromSlug(id)
-  if (!productId) {
-    console.error("Product ID is invalid")
-    return notFound()
-  }
+  if (!productId) return notFound()
 
   let data
   try {
@@ -42,16 +36,10 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
     return notFound()
   }
 
-  if (!data || data.length === 0) {
-    console.error("No product data found")
-    return notFound()
-  }
+  if (!data || data.length === 0) return notFound()
 
   const { attributes: product } = data[0] || {}
-  if (!product) {
-    console.error("No product attributes found")
-    return notFound()
-  }
+  if (!product) return notFound()
 
   const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
 
@@ -76,16 +64,10 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  if (!id) {
-    console.error("ID is undefined")
-    return notFound()
-  }
+  if (!id) return notFound()
 
   const productId = extractIdFromSlug(id)
-  if (!productId) {
-    console.error("Product ID is invalid")
-    return notFound()
-  }
+  if (!productId) return notFound()
 
   const dictionary = await getDictionary(lang)
 
@@ -98,39 +80,41 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
     return notFound()
   }
 
-  if (!product || product.length === 0) {
-    console.error("No product found")
-    return notFound()
-  }
+  if (!product || product.length === 0) return notFound()
 
   const { attributes: productDetails } = product[0]
-  if (!productDetails || !productDetails.title) {
-    console.error("Product details missing or title is invalid")
-    return notFound()
-  }
+  if (!productDetails || !productDetails.title) return notFound()
 
   // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
   console.log("Generated slug:", slug)
 
-  // Only allow /id or /id-title formats
-  if (id !== `${productId}` && id !== `${productId}-${slug}`) {
-    console.error("ID format is incorrect")
-    return notFound()
+  // Construct the expected URL with the slug
+  const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
+
+  // If only `/id` is provided, redirect to `/id-title`
+  if (id === `${productId}`) {
+    return redirect(expectedUrl)
   }
 
-  return (
-    <>
-      <Suspense fallback={<SingleProductSkeleton />}>
-        <Product
-          lang={lang}
-          id={productId.toString()}
-          dictionary={dictionary.productPage}
-          dictionaryModal={dictionary.modalForm}
-        />
-      </Suspense>
-    </>
-  )
+  // If `/id-title` is correct, proceed to show the product
+  if (id === `${productId}-${slug}`) {
+    return (
+      <>
+        <Suspense fallback={<SingleProductSkeleton />}>
+          <Product
+            lang={lang}
+            id={productId.toString()}
+            dictionary={dictionary.productPage}
+            dictionaryModal={dictionary.modalForm}
+          />
+        </Suspense>
+      </>
+    )
+  }
+
+  // If none of the above conditions match, show a 404 page
+  return notFound()
 }
 
 export default ProductPage
