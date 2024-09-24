@@ -3,7 +3,7 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct and is a number without hyphens)
@@ -86,13 +86,14 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Закоментовано редірект для перевірки
-  // const slug = generateSlugFromTitle(productDetails.title)
-  // const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
+  // Генеруємо slug з назви продукту
+  const slug = generateSlugFromTitle(productDetails.title)
 
-  // if (id !== `${productId}-${slug}`) {
-  //   return redirect(expectedUrl)
-  // }
+  // Перевіряємо, чи потрапляє користувач на сторінку лише з ID (без slug)
+  if (id === `${productId}`) {
+    const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
+    return redirect(expectedUrl) // Перенаправляємо на сторінку з id-title
+  }
 
   return (
     <>
