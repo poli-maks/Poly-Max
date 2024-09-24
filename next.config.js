@@ -15,9 +15,9 @@ const nextConfig = {
 	async redirects() {
     return [
       {
-        source: '/catalog/4',
-        destination: '/catalog/4-barrage-post',
-        permanent: true,
+        source: '/catalog/:id(\\d+)', // Match only numeric IDs
+        destination: '/catalog/:id:slug', // Redirect to the URL with the slug
+        permanent: true, // This makes the redirect permanent (301)
       },
       
       // Add more redirects here manually for each product
