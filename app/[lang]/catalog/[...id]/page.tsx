@@ -41,15 +41,17 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
   if (!product) return notFound()
 
+  const productSlug = generateSlugFromTitle(product.title)
+
   const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
 
   return {
     title: product.title,
     alternates: {
-      canonical: `/catalog/${id}`, // Keeping this unchanged as requested
+      canonical: `/catalog/${productId}-${productSlug}`, // Update the URL to /id-title
       languages: {
-        en: `/en/catalog/${id}`, // Keeping this unchanged as requested
-        de: `/de/catalog/${id}`, // Keeping this unchanged as requested
+        en: `/en/catalog/${productId}-${productSlug}`, // For English
+        de: `/de/catalog/${productId}-${productSlug}`, // For German
       },
     },
     description: product.descShort,
