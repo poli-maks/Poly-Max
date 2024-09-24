@@ -22,7 +22,7 @@ const generateSlugFromTitle = (title: string): string => {
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   if (!id) return notFound() // Ensure id is defined
-  
+
   const productId = extractIdFromSlug(id)
 
   if (!productId) return notFound() // Ensure productId is valid
@@ -31,7 +31,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   try {
     data = await getProductByUid(lang, productId)
   } catch (error) {
-    console.error("Error fetching product by UID:", error)
+    console.error(`Error fetching product by UID for lang: ${lang}:`, error)
     return notFound()
   }
 
@@ -65,7 +65,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   if (!id) return notFound() // Ensure id is defined
-  
+
   const productId = extractIdFromSlug(id || '')
 
   if (!productId) return notFound() // Ensure productId is valid
@@ -75,14 +75,24 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   let product
   try {
     product = await getProductByUid(lang, productId)
+    console.log(`Fetched product for lang: ${lang}`, product) // Debugging the fetched product
   } catch (error) {
-    console.error("Error fetching product data:", error)
+    console.error(`Error fetching product data for lang: ${lang}:`, error)
     return notFound()
   }
 
   if (!product || product.length === 0) return notFound()
 
   const { attributes: productDetails } = product[0]
+
+  // Debug the language-specific product data
+  console.log(`Product details for lang: ${lang}:`, productDetails)
+
+  // Check if productDetails exists and has the necessary data
+  if (!productDetails || !productDetails.title) {
+    console.error("Product details are missing or invalid:", productDetails)
+    return notFound()
+  }
 
   // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
@@ -92,6 +102,7 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 
   // Check if the current id doesn't match the correct slug format and redirect once
   if (id !== `${productId}-${slug}`) {
+    console.log(`Redirecting to correct URL: ${expectedUrl}`)
     return redirect(expectedUrl)
   }
 
