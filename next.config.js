@@ -12,6 +12,15 @@ const nextConfig = {
 	experimental: {
 		missingSuspenseWithCSRBailout: false,
 	},
+	async redirects() {
+    return [
+      {
+        source: '/catalog/:id', // Match just the ID route
+        destination: '/catalog/:id:slug', // Redirect to the ID-Slug format
+        permanent: true, // Use 301 permanent redirect
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
