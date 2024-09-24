@@ -14,12 +14,14 @@ const extractIdFromSlug = (idSlug: string): number | undefined => {
 
 // New function to generate a product slug from the product title
 const generateProductSlug = (title: string) => {
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
+  if (!id) return notFound() // Ensure id is defined and not undefined
+
   const productId = extractIdFromSlug(id)
-  if (!productId) return notFound()
+  if (!productId) return notFound() // Ensure productId is valid
 
   let data
   try {
@@ -58,9 +60,10 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  const productId = extractIdFromSlug(id)
+  if (!id) return notFound() // Ensure id is defined and not undefined
 
-  if (!productId) return notFound()
+  const productId = extractIdFromSlug(id)
+  if (!productId) return notFound() // Ensure productId is valid
 
   const dictionary = await getDictionary(lang)
 
