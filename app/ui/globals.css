@@ -240,3 +240,11 @@ margin-right: auto;
 	color: #212121; /* Darker color on hover */
 	text-decoration: underline; /* Underline on hover for emphasis */
 }
+.breadcrumb-link {
+  display: inline-block;      /* Дозволяє встановити фіксовану ширину */
+  max-width: 80px;            /* Максимальна ширина в 80 пікселів */
+  white-space: nowrap;        /* Забороняє перенос тексту на новий рядок */
+  overflow: hidden;           /* Обрізає текст, який не поміщається в контейнер */
+  text-overflow: ellipsis;    /* Додає три крапки ("...") при обрізанні тексту */
+  vertical-align: middle;     /* Вирівнювання по центру по вертикалі */
+}
