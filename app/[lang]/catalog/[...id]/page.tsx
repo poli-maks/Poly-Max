@@ -1,10 +1,9 @@
-
 import { getProductByUid } from '@/app/lib/api/services'
 import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
@@ -13,12 +12,16 @@ const extractIdFromSlug = (idSlug: string): number | undefined => {
   return parseInt(idSlug, 10) // Extracts the numeric part of the slug
 }
 
-export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  if (!id) return notFound() // Ensure id is defined
-  
-  const productId = extractIdFromSlug(id)
+// Generate a slug from the product title
+const generateSlugFromTitle = (title: string): string => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with hyphens
+    .replace(/(^-|-$)+/g, '') // Remove leading/trailing hyphens
+}
 
-  if (!productId) return notFound() // Ensure productId is valid
+export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
+  const productId = extractIdFromSlug(id)
 
   let data
   try {
@@ -36,13 +39,14 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
   const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
 
+  // Preserve the original alternates
   return {
     title: product.title,
     alternates: {
-      canonical: `/catalog/${id}`,
+      canonical: `/catalog/${id}`, // Preserve original structure
       languages: {
-        en: `/en/catalog/${id}`,
-        de: `/de/catalog/${id}`,
+        en: `/en/catalog/${id}`, // Preserve original
+        de: `/de/catalog/${id}`, // Preserve original
       },
     },
     description: product.descShort,
@@ -57,11 +61,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  if (!id) return notFound() // Ensure id is defined
-  
   const productId = extractIdFromSlug(id)
-
-  if (!productId) return notFound() // Ensure productId is valid
 
   const dictionary = await getDictionary(lang)
 
@@ -74,6 +74,19 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   }
 
   if (!product || product.length === 0) return notFound()
+
+  const { attributes: productDetails } = product[0]
+
+  // Generate slug from product title
+  const slug = generateSlugFromTitle(productDetails.title)
+
+  // Construct the expected URL with the slug
+  const expectedUrl = `/catalog/${productId}-${slug}`
+
+  // Redirect if the current URL does not include the correct slug
+  if (id !== `${productId}-${slug}`) {
+    redirect(expectedUrl)
+  }
 
   return (
     <>
