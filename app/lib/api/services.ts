@@ -1,8 +1,8 @@
-import axios from 'axios'
-import { notFound } from 'next/navigation'
-import { cache } from 'react'
-import { instance } from '../instance'
-import { ICategory, IProduct, IContacts } from '../interfaces'
+import axios from 'axios';
+import { notFound } from 'next/navigation';
+import { cache } from 'react';
+import { instance } from '../instance';
+import { ICategory, IProduct, IContacts } from '../interfaces';
 
 // Fetch product by slug
 export const getProductBySlug = async (lang: string, slug: string) => {
@@ -45,7 +45,7 @@ export const getProductByUid = async (lang: string, uid: number) => {
 }
 
 // Fetch all products
-export const getAllProducts = async (lang: string, page: number, limit = 8) => {
+export const fetchAllProducts = async (lang: string, page: number, limit = 8) => {
   try {
     const { data: { data, meta: { pagination: { total: count } } } } = await instance.get(
       `/api/products?locale=${lang}&populate=img&sort[0]=uid:asc&pagination[page]=${page}&pagination[pageSize]=${limit}`
@@ -67,7 +67,7 @@ export const getAllProducts = async (lang: string, page: number, limit = 8) => {
 }
 
 // Fetch categories
-export const getCategories = async (lang: string) => {
+export const fetchCategories = async (lang: string): Promise<ICategory[]> => {
   try {
     const { data: { data } } = await instance.get(`/api/categories?locale=${lang}&populate=sub_categories`);
     if (data.length === 0) {
@@ -84,242 +84,105 @@ export const getCategories = async (lang: string) => {
   }
 }
 
-const getCategories = async (lang: string): Promise<ICategory[]> => {
-	try {
-		const {
-			data: { data },
-		} = await instance.get(`/api/categories?locale=${lang}&populate=sub_categories`)
-		if (data.length === 0) {
-			return notFound()
-		}
-
-		return data
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			console.error(error.status)
-			console.error(error.response)
-
-			return notFound()
-		} else {
-			console.error(error)
-
-			return notFound()
-		}
-	}
-}
-
-export const fetchCategories = cache(getCategories)
-
-export const getAllProducts = async (
-	lang: string,
-	page: number,
-	limit = 8
+// Fetch products by category
+export const fetchProductsByCategory = async (
+  lang: string,
+  catUid: string,
+  page: number
 ): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
-	try {
-		const {
-			data: {
-				data,
-				meta: {
-					pagination: { total: count },
-				},
-			},
-		} = await instance.get(
-			`/api/products?locale=${lang}&populate=img&sort[0]=uid:asc&pagination[page]=${page}&pagination[pageSize]=${limit}`
-		)
-		if (data.length === 0) {
-			return notFound()
-		}
+  try {
+    const { data: { data, meta: { pagination: { total: count } } } } = await instance.get(
+      `/api/products?locale=${lang}&populate=deep,2&filters[categories][uid][$eq]=${catUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+    );
 
-		return { data, count }
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			console.error(error.status)
-			console.error(error.response)
+    if (data.length === 0) {
+      return notFound();
+    }
 
-			return notFound()
-		} else {
-			if (typeof error === 'object' && error !== null && 'digest' in error) {
-				if (error.digest === 'NEXT_NOT_FOUND') {
-					return 'NOT_FOUND'
-				}
-			} else return notFound()
-		}
-	}
+    return { data, count };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(error.status);
+      console.error(error.response);
+      return notFound();
+    }
+    return notFound();
+  }
 }
 
-export const fetchAllProducts = cache(getAllProducts)
-
-export const getProductByUid = async (lang: string, uid: number) => {
-	try {
-		const {
-			data: { data },
-		} = await instance.get(`/api/products?locale=${lang}&filters[uid][$in][0]=${uid}&populate=deep`)
-		if (data.length === 0) {
-			return notFound()
-		}
-
-		return data
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			console.error(error.status)
-			console.error(error.response)
-
-			return notFound()
-		} else {
-			if (typeof error === 'object' && error !== null && 'digest' in error) {
-				if (error.digest === 'NEXT_NOT_FOUND') {
-					return 'NOT_FOUND'
-				}
-			} else return notFound()
-		}
-	}
-}
-
-export const fetchProductByUid = cache(getProductByUid)
-
-const getProductsByTitle = async (
-	lang: string,
-	query: string,
-	page: number
+// Fetch products by sub-category
+export const fetchProductsBySubCategory = async (
+  lang: string,
+  subCatUid: number,
+  page: number
 ): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
-	try {
-		const {
-			data: {
-				data,
-				meta: {
-					pagination: { total: count },
-				},
-			},
-		} = await instance.get(
-			`/api/products?locale=${lang}&filters[title][$containsi]=${query}&populate=img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
-		)
-		if (data.length === 0) {
-			return notFound()
-		}
+  try {
+    const { data: { data, meta: { pagination: { total: count } } } } = await instance.get(
+      `/api/products?locale=${lang}&populate=deep,2&filters[sub_categories][uid][$eq]=${subCatUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+    );
 
-		return { data, count }
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			console.error(error.status)
-			console.error(error.response)
+    if (data.length === 0) {
+      return notFound();
+    }
 
-			return notFound()
-		} else {
-			if (typeof error === 'object' && error !== null && 'digest' in error) {
-				if (error.digest === 'NEXT_NOT_FOUND') {
-					return 'NOT_FOUND'
-				}
-			} else return notFound()
-		}
-	}
+    return { data, count };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(error.status);
+      console.error(error.response);
+      return notFound();
+    }
+    return notFound();
+  }
 }
 
-export const searchProductsByTitle = cache(getProductsByTitle)
-
-const getProductsByCategory = async (
-	lang: string,
-	catUid: string,
-	page: number
+// Fetch products by title
+export const searchProductsByTitle = async (
+  lang: string,
+  query: string,
+  page: number
 ): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
-	try {
-		const {
-			data: {
-				data,
-				meta: {
-					pagination: { total: count },
-				},
-			},
-		} = await instance.get(
-			`/api/products?locale=${lang}&populate=deep,2&filters[categories][uid][$eq]=${catUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
-		)
+  try {
+    const { data: { data, meta: { pagination: { total: count } } } } = await instance.get(
+      `/api/products?locale=${lang}&filters[title][$containsi]=${query}&populate=img&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
+    );
 
-		if (data.length === 0) {
-			return notFound()
-		}
+    if (data.length === 0) {
+      return notFound();
+    }
 
-		return { data, count }
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			console.error(error.status)
-			console.error(error.response)
-
-			return notFound()
-		} else {
-			if (typeof error === 'object' && error !== null && 'digest' in error) {
-				if (error.digest === 'NEXT_NOT_FOUND') {
-					return 'NOT_FOUND'
-				}
-			} else return notFound()
-		}
-	}
+    return { data, count };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(error.status);
+      console.error(error.response);
+      return notFound();
+    }
+    return notFound();
+  }
 }
 
-export const fetchProductsByCategory = cache(getProductsByCategory)
+// Fetch contacts
+export const fetchContacts = async (lang: string): Promise<IContacts | undefined> => {
+  try {
+    const response = await instance.get(`/api/contacts?locale=${lang}`);
+    const { data } = response.data;
 
-const getProductsBySubCategory = async (
-	lang: string,
-	subCatUid: number,
-	page: number
-): Promise<{ data: IProduct[]; count: number; type?: string } | string | undefined> => {
-	try {
-		const {
-			data: {
-				data,
-				meta: {
-					pagination: { total: count },
-				},
-			},
-		} = await instance.get(
-			`api/products?locale=${lang}&populate=deep,2&filters[sub_categories][uid][$eq]=${subCatUid}&sort[0]=title:asc&pagination[page]=${page}&pagination[pageSize]=8`
-		)
+    if (!data || data.length === 0) {
+      return undefined;
+    }
 
-		if (data.length === 0) {
-			return notFound()
-		}
+    const [{ attributes }] = data;
 
-		return { data, count }
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			console.error(error.status)
-			console.error(error.response)
-
-			return notFound()
-		} else {
-			if (typeof error === 'object' && error !== null && 'digest' in error) {
-				if (error.digest === 'NEXT_NOT_FOUND') {
-					return 'NOT_FOUND'
-				}
-			} else return notFound()
-		}
-	}
+    return attributes;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(error.status);
+      console.error(error.response);
+      return undefined;
+    } else {
+      console.error(error);
+      return undefined;
+    }
+  }
 }
-
-export const fetchProductsBySubCategory = cache(getProductsBySubCategory)
-
-const getContacts = async (lang: string): Promise<IContacts | undefined> => {
-	try {
-		const response = await instance.get(`/api/contacts?locale=${lang}`)
-		const { data } = response.data
-
-		if (!data || data.length === 0) {
-			return undefined
-		}
-
-		const [{ attributes }] = data
-
-		return attributes
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			console.error(error.status)
-			console.error(error.response)
-
-			return undefined
-		} else {
-			console.error(error)
-
-			return undefined
-		}
-	}
-}
-
-export const fetchContacts = cache(getContacts)
