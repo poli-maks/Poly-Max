@@ -28,16 +28,15 @@ const SliderImages = [
 	ManufactureImg6,
 ]
 
-const manufactureSwiper = ({ lang }) => {
+const manufactureSwiper = () => {
 	return (
 		<>
 			<Swiper
-				key={lang}  // Add key based on the language to re-render properly
 				className="manufactureSwiper"
 				navigation
 				spaceBetween={20}
 				slidesPerView={'auto'}
-				loop={SliderImages.length > 3} // Only enable loop if there are enough slides
+				loop={true}
 				grabCursor
 				breakpoints={{
 					270: {
@@ -75,7 +74,6 @@ const manufactureSwiper = ({ lang }) => {
 								src={image || '/img/blurPlaceholder.png'}
 								alt={`Manufacture slider image ${index + 1}`}
 								fill
-								priority={index === 0} // Prioritize the first image for faster loading
 								style={{
 									objectFit: 'cover',
 								}}
