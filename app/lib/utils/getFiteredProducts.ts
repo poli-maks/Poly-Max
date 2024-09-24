@@ -1,10 +1,10 @@
 import { Locale } from '@/i18n.config'
 
 import {
-  getAllProducts, // Change this from 'fetchAllProducts' to 'getAllProducts'
-  getProductsByCategory, // Change from 'fetchProductsByCategory'
-  getProductsBySubCategory, // Change from 'fetchProductsBySubCategory'
-  searchProductsByTitle // Ensure this is correctly exported in services.ts
+  getAllProducts,
+  getProductsByCategory,
+  getProductsBySubCategory,
+  searchProductsByTitle
 } from '../api/services'
 import { SEARCH_PARAMS } from '../interfaces'
 
@@ -16,9 +16,8 @@ export const getFilteredProducts = async (
 
   if (category) {
     const data = sub
-      ? await getProductsBySubCategory(lang, parseInt(sub), parseInt(page)) // Updated function name
-      : await getProductsByCategory(lang, category, parseInt(page)) // Updated function name
-
+      ? await getProductsBySubCategory(lang, parseInt(sub), parseInt(page))
+      : await getProductsByCategory(lang, category, parseInt(page))
     return data
   }
 
@@ -27,5 +26,5 @@ export const getFilteredProducts = async (
     return data
   }
 
-  return await getAllProducts(lang, parseInt(page)) // Updated function name
+  return await getAllProducts(lang, parseInt(page))
 }
