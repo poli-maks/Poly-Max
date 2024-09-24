@@ -43,15 +43,14 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
   const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
 
-  const canonicalUrl = productId === 4 && lang === 'en'
-    ? '/en/catalog/4-barrage-post' // Specific canonical URL for product ID 4
-    : `/catalog/${id}` // Default structure for others
+  const slug = generateSlugFromTitle(product.title)
+  const canonicalUrl = `/catalog/${productId}-${slug}` // Generate canonical URL with title slug
 
   return {
     title: product.title,
     metadataBase: new URL('https://www.poli-maks.com'),
     alternates: {
-      canonical: canonicalUrl, // Use the specific or default URL
+      canonical: canonicalUrl, // Use the generated slug-based URL as canonical
       languages: {
         en: `/en/catalog/${id}`,
         de: `/de/catalog/${id}`,
@@ -93,9 +92,9 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
 
-  // Специфічний випадок для редіректу
-  if (productId === 4 && lang === 'en' && !id.includes('-')) {
-    const expectedUrl = `/en/catalog/4-barrage-post`
+  // Redirect if the current URL does not include the slug (is just numeric ID)
+  if (id && !id.includes('-')) {
+    const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
     return redirect(expectedUrl)
   }
 
