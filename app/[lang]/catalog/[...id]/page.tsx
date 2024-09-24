@@ -6,7 +6,7 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug (we assume it's always correct)
+// Extract numeric ID directly from slug
 const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
   if (!idSlug) return undefined
   const numericPart = parseInt(idSlug, 10)
@@ -90,28 +90,31 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const slug = generateSlugFromTitle(productDetails.title)
 
   // Check if the current URL is only `/id` (id is a number and does not contain a hyphen)
-  if (id && !id.includes('-')) {
+  if (/^\d+$/.test(id)) {
     const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
     
-    // If the current URL does not match `/id-title`, do the redirect
-    if (expectedUrl !== `${lang}/catalog/${id}`) {
-      return redirect(expectedUrl)
-    }
+    // Redirect only if it's just the numeric ID
+    return redirect(expectedUrl)
   }
 
   // If the URL is already `/id-title`, render the page
-  return (
-    <>
-      <Suspense fallback={<SingleProductSkeleton />}>
-        <Product
-          lang={lang}
-          id={productId.toString()}
-          dictionary={dictionary.productPage}
-          dictionaryModal={dictionary.modalForm}
-        />
-      </Suspense>
-    </>
-  )
+  if (id === `${productId}-${slug}`) {
+    return (
+      <>
+        <Suspense fallback={<SingleProductSkeleton />}>
+          <Product
+            lang={lang}
+            id={productId.toString()}
+            dictionary={dictionary.productPage}
+            dictionaryModal={dictionary.modalForm}
+          />
+        </Suspense>
+      </>
+    )
+  }
+
+  // If none of the conditions match, return 404
+  return notFound()
 }
 
 export default ProductPage
