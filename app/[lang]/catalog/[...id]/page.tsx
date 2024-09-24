@@ -3,21 +3,16 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
-const extractIdFromSlug = (idSlug: string): number | undefined => {
-  if (!idSlug) return undefined
+const extractIdFromSlug = (idSlug: string): number => {
   return parseInt(idSlug, 10) // Extracts the numeric part of the slug
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  if (!id) return notFound() // Ensure id is defined
-  
   const productId = extractIdFromSlug(id)
-
-  if (!productId) return notFound() // Ensure productId is valid
 
   let data
   try {
@@ -56,11 +51,9 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  if (!id) return notFound() // Ensure id is defined
-  
   const productId = extractIdFromSlug(id)
 
-  if (!productId) return notFound() // Ensure productId is valid
+  const dictionary = await getDictionary(lang)
 
   let product
   try {
@@ -71,19 +64,6 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   }
 
   if (!product || product.length === 0) return notFound()
-
-  const { attributes: productDetails } = product[0]
-
-  const slug = productDetails.slug
-  const expectedUrl = `/catalog/${productId}-${slug}`
-
-  // Avoid infinite redirect loop
-  if (id !== `${productId}-${slug}` && !id.includes(slug)) {
-    // Redirect only if the current URL does not already contain the correct slug
-    redirect(expectedUrl)
-  }
-
-  const dictionary = await getDictionary(lang)
 
   return (
     <>
