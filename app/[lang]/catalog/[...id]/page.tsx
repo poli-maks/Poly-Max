@@ -6,10 +6,11 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug
-const extractIdFromSlug = (idSlug: string): number | undefined => {
+// Extract numeric ID directly from slug (we assume it's always correct)
+const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
   if (!idSlug) return undefined
-  return parseInt(idSlug, 10)
+  const numericPart = parseInt(idSlug, 10)
+  return isNaN(numericPart) ? undefined : numericPart
 }
 
 // Generate a slug from the product title
@@ -21,22 +22,22 @@ const generateSlugFromTitle = (title: string): string => {
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  const productId = extractIdFromSlug(id)
+  if (!id) return notFound()
 
+  const productId = extractIdFromSlug(id)
   if (!productId) return notFound()
 
   let data
   try {
     data = await getProductByUid(lang, productId)
   } catch (error) {
-    console.error(`Error fetching product by UID for lang: ${lang}:`, error)
+    console.error("Error fetching product by UID:", error)
     return notFound()
   }
 
   if (!data || data.length === 0) return notFound()
 
   const { attributes: product } = data[0] || {}
-
   if (!product) return notFound()
 
   const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
@@ -62,9 +63,10 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  const productId = extractIdFromSlug(id)
+  if (!id) return notFound()
 
-  if (!productId) return notFound() // Ensure productId is valid
+  const productId = extractIdFromSlug(id)
+  if (!productId) return notFound()
 
   const dictionary = await getDictionary(lang)
 
@@ -72,17 +74,14 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   try {
     product = await getProductByUid(lang, productId)
   } catch (error) {
-    console.error(`Error fetching product data for lang: ${lang}:`, error)
+    console.error("Error fetching product data:", error)
     return notFound()
   }
 
   if (!product || product.length === 0) return notFound()
 
   const { attributes: productDetails } = product[0]
-
-  if (!productDetails || !productDetails.title) {
-    return notFound()
-  }
+  if (!productDetails || !productDetails.title) return notFound()
 
   // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
@@ -90,9 +89,8 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   // Construct the expected URL with the slug
   const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
 
-  // Check if the current URL does not match the expected URL, and redirect if needed
+  // Redirect if the current URL does not match the expected URL
   if (id !== `${productId}-${slug}`) {
-    console.log(`Redirecting to the correct URL: ${expectedUrl}`)
     return redirect(expectedUrl)
   }
 
