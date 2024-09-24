@@ -79,38 +79,32 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   if (!productDetails || !productDetails.title) return notFound()
 
   // Спеціальний випадок для ID = 4 та мови = "en"
-  if (productId === 4 && lang === 'en') {
-    const specificSlug = 'barrage-post'
-    const expectedUrl = `/en/catalog/${productId}-${specificSlug}`
+  const specificSlug = generateSlugFromTitle(productDetails.title)
+  const expectedUrl = `/en/catalog/${productId}-${specificSlug}`
 
-    // Якщо URL не є очікуваним і це не правильний урл з дефісом, робимо редирект
-    if (id !== `${productId}-${specificSlug}`) {
-      return redirect(expectedUrl)
-    }
+  // Перевірка на цикл: якщо вже на правильній сторінці — не редіректимо
+  if (id === `${productId}-${specificSlug}`) {
+    return (
+      <>
+        <Suspense fallback={<SingleProductSkeleton />}>
+          <Product
+            lang={lang}
+            id={productId.toString()}
+            dictionary={dictionary.productPage}
+            dictionaryModal={dictionary.modalForm}
+          />
+        </Suspense>
+      </>
+    )
   }
 
-  // Створюємо загальний slug для інших продуктів
-  const slug = generateSlugFromTitle(productDetails.title)
-
-  // Якщо поточний URL — тільки ID (наприклад, /en/catalog/4), робимо редирект
+  // Якщо URL — це тільки ID без слагу, редіректимо на правильний URL
   if (id === `${productId}`) {
-    const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
     return redirect(expectedUrl)
   }
 
-  // Якщо поточний URL — вже коректний (наприклад, /en/catalog/4-barrage-post), рендеримо сторінку
-  return (
-    <>
-      <Suspense fallback={<SingleProductSkeleton />}>
-        <Product
-          lang={lang}
-          id={productId.toString()}
-          dictionary={dictionary.productPage}
-          dictionaryModal={dictionary.modalForm}
-        />
-      </Suspense>
-    </>
-  )
+  // Якщо ніякі умови не підходять — показуємо помилку
+  return notFound()
 }
 
 export default ProductPage
