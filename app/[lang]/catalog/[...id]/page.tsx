@@ -1,3 +1,4 @@
+
 import { getProductByUid } from '@/app/lib/api/services'
 import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
@@ -10,11 +11,6 @@ import { Suspense } from 'react'
 const extractIdFromSlug = (idSlug: string): number | undefined => {
   if (!idSlug) return undefined
   return parseInt(idSlug, 10) // Extracts the numeric part of the slug
-}
-
-// Function to generate product slug from the title (to be used later)
-const generateProductSlug = (title: string) => {
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
@@ -43,7 +39,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   return {
     title: product.title,
     alternates: {
-      canonical: `/catalog/${id}`, // Keeping the canonical URL as requested
+      canonical: `/catalog/${id}`,
       languages: {
         en: `/en/catalog/${id}`,
         de: `/de/catalog/${id}`,
@@ -79,21 +75,12 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 
   if (!product || product.length === 0) return notFound()
 
-  const { attributes: productDetails } = product[0]
-  const productSlug = generateProductSlug(productDetails.title)
-
-  // Commented out redirect logic for now to test the rest of the logic
-  // if (!id.includes(productSlug)) {
-  //   redirect(`/${lang}/catalog/${productId}-${productSlug}`)
-  // }
-
   return (
     <>
       <Suspense fallback={<SingleProductSkeleton />}>
         <Product
           lang={lang}
           id={productId.toString()}
-          product={productDetails} // Passing product details to Product component
           dictionary={dictionary.productPage}
           dictionaryModal={dictionary.modalForm}
         />
