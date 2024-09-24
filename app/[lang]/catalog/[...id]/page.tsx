@@ -6,21 +6,13 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Helper function to extract ID from the string (4barrage-post => 4)
-const extractIdFromSlug = (idSlug: string | undefined): number | null => {
-  if (!idSlug) return null
-  // Extract numeric part from the beginning
-  const idMatch = idSlug.match(/^\d+/) // This will match the numeric part at the beginning
-  if (!idMatch) return null
-  const parsedId = parseInt(idMatch[0], 10)
-  return isNaN(parsedId) ? null : parsedId
+// Extract numeric ID directly from slug (we assume it's always correct)
+const extractIdFromSlug = (idSlug: string): number => {
+  return parseInt(idSlug, 10) // Extracts the numeric part of the slug
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   const productId = extractIdFromSlug(id)
-
-  // If product ID is not valid, return 404
-  if (!productId) return notFound()
 
   let data
   try {
@@ -59,11 +51,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  if (!id) return notFound()
-
   const productId = extractIdFromSlug(id)
-
-  if (!productId) return notFound()
 
   const dictionary = await getDictionary(lang)
 
