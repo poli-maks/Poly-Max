@@ -3,29 +3,29 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
-const extractIdFromSlug = (idSlug: string): number | undefined => {
+const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
   if (!idSlug) return undefined
-  return parseInt(idSlug, 10) // Extracts the numeric part of the slug
+  const numericPart = parseInt(idSlug, 10)
+  return isNaN(numericPart) ? undefined : numericPart
 }
 
-// Function to generate a slug from the product title
+// Generate a slug from the product title
 const generateSlugFromTitle = (title: string): string => {
   return title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with hyphens
-    .replace(/(^-|-$)+/g, '') // Trim hyphens from the start and end
+    .replace(/(^-|-$)+/g, '') // Remove leading/trailing hyphens
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  if (!id) return notFound() // Ensure id is defined
-  
-  const productId = extractIdFromSlug(id)
+  if (!id) return notFound()
 
-  if (!productId) return notFound() // Ensure productId is valid
+  const productId = extractIdFromSlug(id)
+  if (!productId) return notFound()
 
   let data
   try {
@@ -38,20 +38,17 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   if (!data || data.length === 0) return notFound()
 
   const { attributes: product } = data[0] || {}
-
   if (!product) return notFound()
-
-  const productSlug = generateSlugFromTitle(product.title)
 
   const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
 
   return {
     title: product.title,
     alternates: {
-      canonical: `/catalog/${productId}-${productSlug}`, // Update the URL to /id-title
+      canonical: `/catalog/${id}`, // Preserve the original structure for the canonical URL
       languages: {
-        en: `/en/catalog/${productId}-${productSlug}`, // For English
-        de: `/de/catalog/${productId}-${productSlug}`, // For German
+        en: `/en/catalog/${id}`, // English alternate
+        de: `/de/catalog/${id}`, // German alternate
       },
     },
     description: product.descShort,
@@ -66,11 +63,10 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  if (!id) return notFound() // Ensure id is defined
-  
-  const productId = extractIdFromSlug(id)
+  if (!id) return notFound()
 
-  if (!productId) return notFound() // Ensure productId is valid
+  const productId = extractIdFromSlug(id)
+  if (!productId) return notFound()
 
   const dictionary = await getDictionary(lang)
 
@@ -85,6 +81,18 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   if (!product || product.length === 0) return notFound()
 
   const { attributes: productDetails } = product[0]
+  if (!productDetails || !productDetails.title) return notFound()
+
+  // Generate slug from product title
+  const slug = generateSlugFromTitle(productDetails.title)
+
+  // Construct the expected URL with the slug
+  const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
+
+  // Redirect if the current URL does not match the expected URL
+  if (id !== `${productId}-${slug}`) {
+    return redirect(expectedUrl)
+  }
 
   return (
     <>
@@ -92,7 +100,6 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
         <Product
           lang={lang}
           id={productId.toString()}
-          product={productDetails} // Pass product details to the component
           dictionary={dictionary.productPage}
           dictionaryModal={dictionary.modalForm}
         />
