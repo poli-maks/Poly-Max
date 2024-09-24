@@ -3,10 +3,10 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug
+// Extract numeric ID directly from slug (we assume it's always correct)
 const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
   if (!idSlug || isNaN(Number(idSlug))) return undefined
   const numericPart = parseInt(idSlug, 10)
@@ -42,7 +42,6 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
   return {
     title: product.title,
-    metadataBase: new URL('https://www.poli-maks.com'),  // Add metadataBase
     alternates: {
       canonical: `/catalog/${id}`, // Preserve the original structure for the canonical URL
       languages: {
@@ -72,7 +71,6 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   let product
   try {
     product = await getProductByUid(lang, productId)
-    console.log("Fetched product:", product)
   } catch (error) {
     console.error("Error fetching product data:", error)
     return notFound()
@@ -86,13 +84,11 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
 
-  // Construct the expected URL with the slug
-  const expectedUrl = `/catalog/${productId}-${slug}`
-
-  // Check if the current URL is `/catalog/{id}` and redirect to `/catalog/{id}-{title}`
-  if (!id.includes('-')) {
-    return redirect(expectedUrl)
-  }
+  // Переадресація закоментована
+  // if (!id.includes('-')) {
+  //   const expectedUrl = `/catalog/${productId}-${slug}`
+  //   return redirect(expectedUrl)
+  // }
 
   return (
     <>
