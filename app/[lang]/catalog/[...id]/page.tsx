@@ -3,7 +3,7 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
@@ -86,17 +86,13 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Generate slug from product title
-  const slug = generateSlugFromTitle(productDetails.title)
-  console.log("Generated slug:", slug)
+  // Закоментовано редірект для перевірки
+  // const slug = generateSlugFromTitle(productDetails.title)
+  // const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
 
-  // Always redirect to the /id-title format
-  const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
-
-  // Redirect if the current URL is not the expected /id-title format
-  if (id !== `${productId}-${slug}`) {
-    return redirect(expectedUrl)
-  }
+  // if (id !== `${productId}-${slug}`) {
+  //   return redirect(expectedUrl)
+  // }
 
   return (
     <>
