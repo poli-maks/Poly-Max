@@ -83,8 +83,13 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Skip redirect logic for now to avoid 404
-  // The redirection can be re-enabled after basic functionality works
+  // Generate slug from product title
+  const slug = generateSlugFromTitle(productDetails.title)
+
+  // Check if the URL is valid, only allow /id or /id-title
+  if (id !== `${productId}` && id !== `${productId}-${slug}`) {
+    return notFound() // Return 404 for any format other than /id or /id-title
+  }
 
   return (
     <>
