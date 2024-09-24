@@ -15,11 +15,17 @@ const nextConfig = {
 	async redirects() {
     return [
       {
-        source: '/:lang/catalog/:id', // Old pattern with UID
-        destination: '/:lang/catalog/:slug', // Redirect to slug-based URL
-        permanent: true, // Permanent redirect
+        source: '/:lang/catalog/:id', // Source pattern
+        destination: '/:lang/catalog/:slug', // Destination pattern
+        has: [
+          {
+            type: 'query',
+            key: 'slug', // Ensure the presence of `slug` in query
+          },
+        ],
+        permanent: true,
       },
-    ]
+    ];
   },
 }
 
