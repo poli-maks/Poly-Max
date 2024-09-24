@@ -21,11 +21,9 @@ const generateSlugFromTitle = (title: string): string => {
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  if (!id) return notFound() // Ensure id is defined
-
   const productId = extractIdFromSlug(id)
 
-  if (!productId) return notFound() // Ensure productId is valid
+  if (!productId) return notFound()
 
   let data
   try {
@@ -46,10 +44,10 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   return {
     title: product.title,
     alternates: {
-      canonical: `/catalog/${id}`, // Preserve original structure
+      canonical: `/catalog/${id}`, // Preserve the original structure for the canonical URL
       languages: {
-        en: `/en/catalog/${id}`, // Preserve original
-        de: `/de/catalog/${id}`, // Preserve original
+        en: `/en/catalog/${id}`, // English alternate
+        de: `/de/catalog/${id}`, // German alternate
       },
     },
     description: product.descShort,
@@ -64,9 +62,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  if (!id) return notFound() // Ensure id is defined
-
-  const productId = extractIdFromSlug(id || '')
+  const productId = extractIdFromSlug(id)
 
   if (!productId) return notFound() // Ensure productId is valid
 
@@ -75,7 +71,6 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   let product
   try {
     product = await getProductByUid(lang, productId)
-    console.log(`Fetched product for lang: ${lang}`, product) // Debugging the fetched product
   } catch (error) {
     console.error(`Error fetching product data for lang: ${lang}:`, error)
     return notFound()
@@ -85,12 +80,7 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 
   const { attributes: productDetails } = product[0]
 
-  // Debug the language-specific product data
-  console.log(`Product details for lang: ${lang}:`, productDetails)
-
-  // Check if productDetails exists and has the necessary data
   if (!productDetails || !productDetails.title) {
-    console.error("Product details are missing or invalid:", productDetails)
     return notFound()
   }
 
@@ -98,11 +88,11 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const slug = generateSlugFromTitle(productDetails.title)
 
   // Construct the expected URL with the slug
-  const expectedUrl = `/catalog/${productId}-${slug}`
+  const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
 
-  // Check if the current id doesn't match the correct slug format and redirect once
+  // Check if the current URL does not match the expected URL, and redirect if needed
   if (id !== `${productId}-${slug}`) {
-    console.log(`Redirecting to correct URL: ${expectedUrl}`)
+    console.log(`Redirecting to the correct URL: ${expectedUrl}`)
     return redirect(expectedUrl)
   }
 
