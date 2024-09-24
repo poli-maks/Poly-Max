@@ -14,8 +14,43 @@ const generateSlugFromTitle = (title: string): string => {
     .replace(/(^-|-$)+/g, '') // Видаляємо дефіси на початку і в кінці
 }
 
+// Функція для генерації метаданих (канонічного URL)
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  // Продовжуємо як було раніше, все працює
+  const productId = parseInt(id, 10)
+  if (!productId) return notFound()
+
+  let data
+  try {
+    data = await getProductByUid(lang, productId)
+  } catch (error) {
+    console.error("Error fetching product by UID:", error)
+    return notFound()
+  }
+
+  if (!data || data.length === 0) return notFound()
+
+  const { attributes: product } = data[0] || {}
+  if (!product || !product.title) return notFound()
+
+  const slug = generateSlugFromTitle(product.title)
+
+  // Генеруємо канонічний URL для продукту з ID = 4
+  const canonicalUrl = productId === 4 ? `/en/catalog/4-barrage-post` : `/catalog/${id}-${slug}`
+
+  return {
+    title: product.title,
+    description: product.descShort,
+    alternates: {
+      canonical: canonicalUrl, // Задаємо канонічний URL
+    },
+    openGraph: {
+      images: [
+        {
+          url: product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg',
+        },
+      ],
+    },
+  }
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
@@ -39,15 +74,12 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Спеціальний випадок для конкретного продукту
-  if (productId === 4 && lang === 'en') {
-    const slug = 'barrage-post'
-    const expectedUrl = `/en/catalog/4-${slug}`
+  // Генеруємо slug
+  const slug = generateSlugFromTitle(productDetails.title)
 
-    // Якщо URL вже правильний, не робимо редірект
-    if (id !== `4-${slug}`) {
-      return redirect(expectedUrl)
-    }
+  // Виконуємо редірект тільки для товару з ID = 4
+  if (productId === 4 && id !== '4-barrage-post') {
+    return redirect(`/en/catalog/4-barrage-post`)
   }
 
   return (
