@@ -6,11 +6,11 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug (we assume it's always correct and is a number without hyphens)
+// Extract numeric ID directly from slug (we assume it's always correct)
 const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
   if (!idSlug) return undefined
   const numericPart = parseInt(idSlug, 10)
-  return isNaN(numericPart) ? undefined : numericPart // Ensure the ID is numeric
+  return isNaN(numericPart) ? undefined : numericPart
 }
 
 // Generate a slug from the product title
@@ -45,12 +45,12 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
   return {
     title: product.title,
-    metadataBase: new URL('https://www.poli-maks.com'), // Base URL for metadata
+    metadataBase: new URL('https://www.poli-maks.com'),
     alternates: {
-      canonical: `/catalog/${id}`, // Preserve the original structure for the canonical URL
+      canonical: `/catalog/${id}`, // Original structure
       languages: {
-        en: `/en/catalog/${id}`, // English alternate
-        de: `/de/catalog/${id}`, // German alternate
+        en: `/en/catalog/${id}`,
+        de: `/de/catalog/${id}`,
       },
     },
     description: product.descShort,
@@ -92,8 +92,11 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   // Check if the current URL is only `/id` (id is a number and does not contain a hyphen)
   if (id && !id.includes('-')) {
     const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
-    // Redirect only if it's just the numeric ID
-    return redirect(expectedUrl)
+    
+    // If the current URL does not match `/id-title`, do the redirect
+    if (expectedUrl !== `${lang}/catalog/${id}`) {
+      return redirect(expectedUrl)
+    }
   }
 
   // If the URL is already `/id-title`, render the page
