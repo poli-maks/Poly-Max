@@ -3,10 +3,10 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug (we assume it's always correct)
+// Extract numeric ID directly from slug
 const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
   if (!idSlug || isNaN(Number(idSlug))) return undefined
   const numericPart = parseInt(idSlug, 10)
@@ -82,6 +82,17 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
+
+  // Generate slug from product title
+  const slug = generateSlugFromTitle(productDetails.title)
+
+  // Construct the expected URL with the slug
+  const expectedUrl = `/catalog/${productId}-${slug}`
+
+  // Check if the current URL is `/catalog/{id}` and redirect to `/catalog/{id}-{title}`
+  if (!id.includes('-')) {
+    return redirect(expectedUrl)
+  }
 
   return (
     <>
