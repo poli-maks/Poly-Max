@@ -86,16 +86,12 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Generate slug from product title
-  const slug = generateSlugFromTitle(productDetails.title)
-
-  // Якщо урл складається з менш ніж 2 частин (тільки id), робимо редірект
-  if (id.split('-').length < 2) {
-    const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
+  // Специфічний випадок для редіректу
+  if (productId === 4 && lang === 'en') {
+    const expectedUrl = `/en/catalog/4-barrage-post`
     return redirect(expectedUrl)
   }
 
-  // Якщо урл вже має більше 2 частин, сторінка рендериться без редіректу
   return (
     <>
       <Suspense fallback={<SingleProductSkeleton />}>
