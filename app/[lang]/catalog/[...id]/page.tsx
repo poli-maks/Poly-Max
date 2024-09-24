@@ -3,10 +3,10 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug
+// Extract numeric ID directly from slug (we assume it's always correct)
 const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
   if (!idSlug || isNaN(Number(idSlug))) return undefined
   const numericPart = parseInt(idSlug, 10)
@@ -83,34 +83,18 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Generate slug from product title
-  const slug = generateSlugFromTitle(productDetails.title)
-
-  // Check if the current URL is only `/id` (id is a number and does not contain a hyphen)
-  if (id && !id.includes('-')) {
-    const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
-    // Redirect only if it's just the numeric ID
-    return redirect(expectedUrl)
-  }
-
-  // If the URL is already `/id-title`, no redirect needed, render the page
-  if (id === `${productId}-${slug}`) {
-    return (
-      <>
-        <Suspense fallback={<SingleProductSkeleton />}>
-          <Product
-            lang={lang}
-            id={productId.toString()}
-            dictionary={dictionary.productPage}
-            dictionaryModal={dictionary.modalForm}
-          />
-        </Suspense>
-      </>
-    )
-  } else {
-    // Handle other cases to avoid a 404 error
-    return notFound()
-  }
+  return (
+    <>
+      <Suspense fallback={<SingleProductSkeleton />}>
+        <Product
+          lang={lang}
+          id={productId.toString()}
+          dictionary={dictionary.productPage}
+          dictionaryModal={dictionary.modalForm}
+        />
+      </Suspense>
+    </>
+  )
 }
 
 export default ProductPage
