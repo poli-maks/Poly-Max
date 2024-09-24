@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/catalog/4",
+      "destination": "/catalog/4-barrage-post",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/5",
+      "destination": "/catalog/5-batten-post",
+      "permanent": true
+    }
+  ]
+}
