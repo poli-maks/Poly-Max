@@ -1,39 +1,20 @@
-import { getProductByUid } from '@/app/lib/api/services'
-import { getDictionary } from '@/app/lib/dictionary'
-import { IParams } from '@/app/lib/interfaces'
-import Product from '@/app/ui/ProductPage/Product'
-import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
-
-// Extract numeric ID directly from slug (we assume it's always correct)
-const extractIdFromSlug = (idSlug: string): number | undefined => {
-  if (!idSlug) return undefined
-  return parseInt(idSlug, 10) // Extracts the numeric part of the slug
-}
+import { getProductByUid } from '@/app/lib/api/services';
+import { getDictionary } from '@/app/lib/dictionary';
+import { IParams } from '@/app/lib/interfaces';
+import Product from '@/app/ui/ProductPage/Product';
+import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton';
+import { notFound, redirect } from 'next/navigation';
+import { Suspense, useEffect } from 'react';
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  if (!id) return notFound() // Ensure id is defined
-  
-  const productId = extractIdFromSlug(id)
+  let productId = extractIdFromSlug(id);
 
-  if (!productId) return notFound() // Ensure productId is valid
+  let data;
+  if (productId) data = await getProductByUid(lang, productId);
 
-  let data
-  try {
-    data = await getProductByUid(lang, productId)
-  } catch (error) {
-    console.error("Error fetching product by UID:", error)
-    return notFound()
-  }
-
-  if (!data || data.length === 0) return notFound()
-
-  const { attributes: product } = data[0] || {}
-
-  if (!product) return notFound()
-
-  const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
+  const { attributes: product } = data[0];
+  const imgUrl =
+    product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg';
 
   return {
     title: product.title,
@@ -46,46 +27,41 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
     },
     description: product.descShort,
     openGraph: {
-      images: [
-        {
-          url: imgUrl,
-        },
-      ],
+      images: [{ url: imgUrl }],
     },
-  }
-}
+  };
+};
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  if (!id) return notFound() // Ensure id is defined
-  
-  const productId = extractIdFromSlug(id)
+  const productId = extractIdFromSlug(id); // get the actual product id
 
-  if (!productId) return notFound() // Ensure productId is valid
+  if (!productId) return notFound();
 
-  const dictionary = await getDictionary(lang)
+  const data = await getProductByUid(lang, productId);
+  if (!data || data.length === 0) return notFound();
 
-  let product
-  try {
-    product = await getProductByUid(lang, productId)
-  } catch (error) {
-    console.error("Error fetching product data:", error)
-    return notFound()
+  const { attributes: product } = data[0];
+  const productSlug = product.slug;
+
+  // If the URL doesn't match the `id-slug` format, redirect to the correct URL
+  if (id !== `${productId}-${productSlug}`) {
+    redirect(`/catalog/${productId}-${productSlug}`);
   }
 
-  if (!product || product.length === 0) return notFound()
+  const dictionary = await getDictionary(lang);
 
   return (
     <>
       <Suspense fallback={<SingleProductSkeleton />}>
         <Product
           lang={lang}
-          id={productId.toString()}
+          id={productId}
           dictionary={dictionary.productPage}
           dictionaryModal={dictionary.modalForm}
         />
       </Suspense>
     </>
-  )
-}
+  );
+};
 
-export default ProductPage
+export default ProductPage;
