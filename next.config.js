@@ -12,6 +12,17 @@ const nextConfig = {
 	experimental: {
 		missingSuspenseWithCSRBailout: false,
 	},
+	async redirects() {
+    return [
+      {
+        source: '/catalog/4',
+        destination: '/catalog/4-barrage-post',
+        permanent: true,
+      },
+      
+      // Add more redirects here manually for each product
+    ];
+  },
 }
 
 module.exports = nextConfig
