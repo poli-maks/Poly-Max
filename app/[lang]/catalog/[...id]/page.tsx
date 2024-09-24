@@ -6,7 +6,7 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug (we assume it's always correct)
+// Extract numeric ID directly from slug
 const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
   if (!idSlug) return undefined
   const numericPart = parseInt(idSlug, 10)
@@ -22,30 +22,43 @@ const generateSlugFromTitle = (title: string): string => {
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  if (!id) return notFound()
+  if (!id) {
+    console.error("ID is undefined")
+    return notFound()
+  }
 
   const productId = extractIdFromSlug(id)
-  if (!productId) return notFound()
+  if (!productId) {
+    console.error("Product ID is invalid")
+    return notFound()
+  }
 
   let data
   try {
     data = await getProductByUid(lang, productId)
+    console.log("Product data fetched:", data)
   } catch (error) {
     console.error("Error fetching product by UID:", error)
     return notFound()
   }
 
-  if (!data || data.length === 0) return notFound()
+  if (!data || data.length === 0) {
+    console.error("No product data found")
+    return notFound()
+  }
 
   const { attributes: product } = data[0] || {}
-  if (!product) return notFound()
+  if (!product) {
+    console.error("No product attributes found")
+    return notFound()
+  }
 
   const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
 
   return {
     title: product.title,
     alternates: {
-      canonical: `/catalog/${id}`, // Maintain original structure
+      canonical: `/catalog/${id}`, // Preserve the original structure for the canonical URL
       languages: {
         en: `/en/catalog/${id}`, // English alternate
         de: `/de/catalog/${id}`, // German alternate
@@ -63,32 +76,47 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  if (!id) return notFound()
+  if (!id) {
+    console.error("ID is undefined")
+    return notFound()
+  }
 
   const productId = extractIdFromSlug(id)
-  if (!productId) return notFound()
+  if (!productId) {
+    console.error("Product ID is invalid")
+    return notFound()
+  }
 
   const dictionary = await getDictionary(lang)
 
   let product
   try {
     product = await getProductByUid(lang, productId)
+    console.log("Fetched product:", product)
   } catch (error) {
     console.error("Error fetching product data:", error)
     return notFound()
   }
 
-  if (!product || product.length === 0) return notFound()
+  if (!product || product.length === 0) {
+    console.error("No product found")
+    return notFound()
+  }
 
   const { attributes: productDetails } = product[0]
-  if (!productDetails || !productDetails.title) return notFound()
+  if (!productDetails || !productDetails.title) {
+    console.error("Product details missing or title is invalid")
+    return notFound()
+  }
 
   // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
+  console.log("Generated slug:", slug)
 
-  // Allow only /id or /id-title formats
+  // Only allow /id or /id-title formats
   if (id !== `${productId}` && id !== `${productId}-${slug}`) {
-    return notFound() // 404 for any format that isn't /id or /id-title
+    console.error("ID format is incorrect")
+    return notFound()
   }
 
   return (
