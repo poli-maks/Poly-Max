@@ -86,15 +86,10 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
 
-  // Construct the expected URL with the slug
-  const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
-
-  // Commented out redirect logic for now
-  /*
-  if (id !== `${productId}-${slug}`) {
-    return redirect(expectedUrl)
+  // Only allow /id and /id-title URLs
+  if (id !== `${productId}` && id !== `${productId}-${slug}`) {
+    return notFound() // Return 404 for any URL not in the correct format
   }
-  */
 
   return (
     <>
