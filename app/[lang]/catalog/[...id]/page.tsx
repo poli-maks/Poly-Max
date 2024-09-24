@@ -6,11 +6,11 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug (we assume it's always correct)
+// Extract numeric ID directly from slug (we assume it's always correct and is a number without hyphens)
 const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
   if (!idSlug) return undefined
   const numericPart = parseInt(idSlug, 10)
-  return isNaN(numericPart) ? undefined : numericPart
+  return isNaN(numericPart) ? undefined : numericPart // Ensure the ID is numeric
 }
 
 // Generate a slug from the product title
@@ -25,7 +25,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   if (!id) return notFound()
 
   const productId = extractIdFromSlug(id)
-  if (!productId) return notFound()
+  if (!productId) return notFound() // Ensure the ID is valid (a number without hyphens)
 
   let data
   try {
@@ -45,7 +45,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
   return {
     title: product.title,
-    metadataBase: new URL('https://www.poli-maks.com'),  // Add metadataBase
+    metadataBase: new URL('https://www.poli-maks.com'), // Base URL for metadata
     alternates: {
       canonical: `/catalog/${id}`, // Preserve the original structure for the canonical URL
       languages: {
