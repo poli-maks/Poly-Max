@@ -94,18 +94,23 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   }
 
   // If the URL is already `/id-title`, no redirect needed, render the page
-  return (
-    <>
-      <Suspense fallback={<SingleProductSkeleton />}>
-        <Product
-          lang={lang}
-          id={productId.toString()}
-          dictionary={dictionary.productPage}
-          dictionaryModal={dictionary.modalForm}
-        />
-      </Suspense>
-    </>
-  )
+  if (id === `${productId}-${slug}`) {
+    return (
+      <>
+        <Suspense fallback={<SingleProductSkeleton />}>
+          <Product
+            lang={lang}
+            id={productId.toString()}
+            dictionary={dictionary.productPage}
+            dictionaryModal={dictionary.modalForm}
+          />
+        </Suspense>
+      </>
+    )
+  } else {
+    // Handle other cases to avoid a 404 error
+    return notFound()
+  }
 }
 
 export default ProductPage
