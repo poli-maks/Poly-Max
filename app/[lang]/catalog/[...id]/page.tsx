@@ -3,7 +3,7 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
@@ -43,7 +43,6 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
   const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
 
-  // Generate canonical URL specifically for product with ID = 4
   const canonicalUrl = productId === 4 && lang === 'en'
     ? '/en/catalog/4-barrage-post' // Specific canonical URL for product ID 4
     : `/catalog/${id}` // Default structure for others
@@ -91,7 +90,15 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Рендеримо сторінку без редіректу
+  // Generate slug from product title
+  const slug = generateSlugFromTitle(productDetails.title)
+
+  // Специфічний випадок для редіректу
+  if (productId === 4 && lang === 'en' && !id.includes('-')) {
+    const expectedUrl = `/en/catalog/4-barrage-post`
+    return redirect(expectedUrl)
+  }
+
   return (
     <>
       <Suspense fallback={<SingleProductSkeleton />}>
