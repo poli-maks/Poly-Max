@@ -7,13 +7,17 @@ import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Helper function to extract ID from the slug
-const extractIdFromSlug = (idSlug: string) => {
+const extractIdFromSlug = (idSlug: string | undefined): number | null => {
+  if (!idSlug) return null;
   const [id] = idSlug.split('-')
-  return parseInt(id, 10)
+  const parsedId = parseInt(id, 10)
+  return isNaN(parsedId) ? null : parsedId
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   const productId = extractIdFromSlug(id)
+
+  if (!productId) return notFound()
 
   let data
   if (productId) data = await getProductByUid(lang, productId)
