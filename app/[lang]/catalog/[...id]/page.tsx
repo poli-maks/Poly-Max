@@ -90,9 +90,9 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   // Construct the expected URL with the slug
   const expectedUrl = `/catalog/${productId}-${slug}`
 
-  // Redirect if the current URL does not include the correct slug
+  // Check if the current id doesn't match the correct slug format and redirect once
   if (id !== `${productId}-${slug}`) {
-    redirect(expectedUrl)
+    return redirect(expectedUrl)
   }
 
   return (
