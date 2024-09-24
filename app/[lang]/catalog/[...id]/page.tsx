@@ -3,7 +3,7 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
@@ -86,12 +86,25 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Специфічний випадок для редіректу
+  // Для продукту з ID = 4 та мовою "en" ми завжди показуємо сторінку "/en/catalog/4-barrage-post"
   if (productId === 4 && lang === 'en') {
+    // Відразу показуємо потрібну сторінку, не виконуючи редірект
     const expectedUrl = `/en/catalog/4-barrage-post`
-    return redirect(expectedUrl)
+    return (
+      <>
+        <Suspense fallback={<SingleProductSkeleton />}>
+          <Product
+            lang={lang}
+            id={productId.toString()}
+            dictionary={dictionary.productPage}
+            dictionaryModal={dictionary.modalForm}
+          />
+        </Suspense>
+      </>
+    )
   }
 
+  // Відображення сторінок для інших випадків
   return (
     <>
       <Suspense fallback={<SingleProductSkeleton />}>
