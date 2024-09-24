@@ -12,17 +12,14 @@ const extractIdFromSlug = (idSlug: string): number | undefined => {
   return parseInt(idSlug, 10) // Extracts the numeric part of the slug
 }
 
-// New function to generate a slug from the product title
-const generateSlug = (title: string) => {
+// New function to generate a product slug from the product title
+const generateProductSlug = (title: string) => {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  if (!id) return notFound() // Ensure id is defined
-  
   const productId = extractIdFromSlug(id)
-
-  if (!productId) return notFound() // Ensure productId is valid
+  if (!productId) return notFound()
 
   let data
   try {
@@ -43,10 +40,10 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   return {
     title: product.title,
     alternates: {
-      canonical: `/catalog/${id}`, // Keeping as requested
+      canonical: `/catalog/${id}`, // Keeping the canonical as requested
       languages: {
-        en: `/en/catalog/${id}`, // Keeping as requested
-        de: `/de/catalog/${id}`, // Keeping as requested
+        en: `/en/catalog/${id}`,
+        de: `/de/catalog/${id}`,
       },
     },
     description: product.descShort,
@@ -61,11 +58,9 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  if (!id) return notFound() // Ensure id is defined
-  
   const productId = extractIdFromSlug(id)
 
-  if (!productId) return notFound() // Ensure productId is valid
+  if (!productId) return notFound()
 
   const dictionary = await getDictionary(lang)
 
@@ -80,11 +75,11 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   if (!product || product.length === 0) return notFound()
 
   const { attributes: productDetails } = product[0]
-  const slug = generateSlug(productDetails.title) // Generate slug from title
+  const productSlug = generateProductSlug(productDetails.title)
 
   // Redirect if the slug is not present in the current URL
-  if (!id.includes(slug)) {
-    redirect(`/${lang}/catalog/${productId}-${slug}`)
+  if (!id.includes(productSlug)) {
+    redirect(`/${lang}/catalog/${productId}-${productSlug}`)
   }
 
   return (
