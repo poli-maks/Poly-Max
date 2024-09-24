@@ -7,6 +7,8 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
+  if (!id) return notFound();
+
   let data;
   
   // Fetch product by slug first
@@ -14,7 +16,10 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   
   // Fallback to fetching by UID if slug isn't found
   if (!data || data.length === 0) {
-    data = await getProductByUid(lang, parseInt(id));
+    const uid = parseInt(id);
+    if (!isNaN(uid)) {
+      data = await getProductByUid(lang, uid);
+    }
   }
 
   if (!data || data.length === 0) {
@@ -56,10 +61,13 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 
   // Fallback to fetching by UID
   if (!productData || productData.length === 0) {
-    productData = await getProductByUid(lang, parseInt(id));
+    const uid = parseInt(id);
+    if (!isNaN(uid)) {
+      productData = await getProductByUid(lang, uid);
+    }
   }
 
-  if (!productData) return notFound();
+  if (!productData || productData.length === 0) return notFound();
 
   return (
     <>
