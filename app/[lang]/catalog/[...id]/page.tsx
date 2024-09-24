@@ -6,7 +6,7 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug
+// Extract numeric ID directly from slug (we assume it's always correct)
 const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
   if (!idSlug) return undefined
   const numericPart = parseInt(idSlug, 10)
@@ -45,6 +45,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
   return {
     title: product.title,
+    metadataBase: new URL('https://www.poli-maks.com'),  // Add metadataBase
     alternates: {
       canonical: `/catalog/${id}`, // Preserve the original structure for the canonical URL
       languages: {
