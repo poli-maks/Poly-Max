@@ -248,15 +248,15 @@ margin-right: auto;
   text-overflow: ellipsis;    /* Додає три крапки ("...") при обрізанні тексту */
   vertical-align: middle;     /* Вирівнювання по центру по вертикалі */
 }
-@media (min-width: 992px) {
+@media (max-width: 992px) {
   .breadcrumb {
   
     margin-top: 135px;     /* Adjust margin */
   }
 }
 
-/* Breakpoint for screens 768px and above */
-@media (min-width: 768px) {
+
+@media (max-width: 768px) {
   .breadcrumb {
 
     margin-top: 65px;     /* Adjust margin */
