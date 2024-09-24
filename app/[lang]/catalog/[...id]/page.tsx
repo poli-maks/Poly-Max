@@ -6,30 +6,37 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Helper function to extract ID from the slug
+// Helper function to extract ID from the string (4barrage-post => 4)
 const extractIdFromSlug = (idSlug: string | undefined): number | null => {
-  if (!idSlug) return null;
-  const [id] = idSlug.split('-')
-  const parsedId = parseInt(id, 10)
+  if (!idSlug) return null
+  // Extract numeric part from the beginning
+  const idMatch = idSlug.match(/^\d+/) // This will match the numeric part at the beginning
+  if (!idMatch) return null
+  const parsedId = parseInt(idMatch[0], 10)
   return isNaN(parsedId) ? null : parsedId
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   const productId = extractIdFromSlug(id)
 
+  // If product ID is not valid, return 404
   if (!productId) return notFound()
 
   let data
-  if (productId) data = await getProductByUid(lang, productId)
+  try {
+    data = await getProductByUid(lang, productId)
+  } catch (error) {
+    console.error("Error fetching product by UID:", error)
+    return notFound()
+  }
 
   if (!data || data.length === 0) return notFound()
 
-  const { attributes: product } = data[0]
+  const { attributes: product } = data[0] || {}
 
-  const imgUrl =
-    product.img?.data !== null
-      ? product.img.data[0]?.attributes?.formats?.small?.url
-      : '/img/productPlaceholder.jpg'
+  if (!product) return notFound()
+
+  const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
 
   return {
     title: product.title,
@@ -59,6 +66,16 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   if (!productId) return notFound()
 
   const dictionary = await getDictionary(lang)
+
+  let product
+  try {
+    product = await getProductByUid(lang, productId)
+  } catch (error) {
+    console.error("Error fetching product data:", error)
+    return notFound()
+  }
+
+  if (!product || product.length === 0) return notFound()
 
   return (
     <>
