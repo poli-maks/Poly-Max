@@ -62,6 +62,8 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
+  if (!id) return notFound() // Ensure id is defined
+
   const productId = extractIdFromSlug(id)
   if (!productId) return notFound()
 
@@ -85,7 +87,7 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const slug = generateSlugFromTitle(productDetails.title)
 
   // Check if the current URL is only `/id` (id is a number and does not contain a hyphen)
-  if (!id.includes('-')) {
+  if (id && !id.includes('-')) {
     const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
     // Redirect only if it's just the numeric ID
     return redirect(expectedUrl)
