@@ -20,6 +20,7 @@ interface IProps {
 	lang: Locale
 	dictionary: IProductDictionary
 	dictionaryModal: IDictionaryModal
+	product: any
 }
 
 const Product = async ({ dictionary, dictionaryModal, lang, id }: IProps) => {
