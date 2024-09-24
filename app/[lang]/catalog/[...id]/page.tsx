@@ -6,11 +6,11 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug (we assume it's always correct)
+// Extract numeric ID directly from slug
 const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
-  if (!idSlug) return undefined
+  if (!idSlug || isNaN(Number(idSlug))) return undefined
   const numericPart = parseInt(idSlug, 10)
-  return isNaN(numericPart) ? undefined : numericPart
+  return numericPart <= 100 ? numericPart : undefined
 }
 
 // Generate a slug from the product title
@@ -22,15 +22,12 @@ const generateSlugFromTitle = (title: string): string => {
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  if (!id) return notFound()
-
   const productId = extractIdFromSlug(id)
   if (!productId) return notFound()
 
   let data
   try {
     data = await getProductByUid(lang, productId)
-    console.log("Product data fetched:", data)
   } catch (error) {
     console.error("Error fetching product by UID:", error)
     return notFound()
@@ -65,8 +62,6 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  if (!id) return notFound()
-
   const productId = extractIdFromSlug(id)
   if (!productId) return notFound()
 
@@ -89,11 +84,10 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
 
-  // Check if the current URL is only `/id`
-  if (id === `${productId}`) {
+  // Check if the current URL is only `/id` (id is a number and does not contain a hyphen)
+  if (!id.includes('-')) {
     const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
-
-    // Redirect if the current URL is just `/id`
+    // Redirect only if it's just the numeric ID
     return redirect(expectedUrl)
   }
 
