@@ -1,10 +1,9 @@
 import { Locale } from '@/i18n.config'
-
 import {
   getAllProducts,
   getProductsByCategory,
   getProductsBySubCategory,
-  searchProductsByTitle
+  searchProductsByTitle,
 } from '../api/services'
 import { SEARCH_PARAMS } from '../interfaces'
 
@@ -18,6 +17,7 @@ export const getFilteredProducts = async (
     const data = sub
       ? await getProductsBySubCategory(lang, parseInt(sub), parseInt(page))
       : await getProductsByCategory(lang, category, parseInt(page))
+
     return data
   }
 
