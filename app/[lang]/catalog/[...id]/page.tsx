@@ -3,7 +3,7 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
@@ -62,8 +62,6 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 
   if (!productId) return notFound() // Ensure productId is valid
 
-  const dictionary = await getDictionary(lang)
-
   let product
   try {
     product = await getProductByUid(lang, productId)
@@ -73,6 +71,19 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   }
 
   if (!product || product.length === 0) return notFound()
+
+  const { attributes: productDetails } = product[0]
+
+  // Check if the URL already contains the slug, if not redirect to correct URL
+  const slug = productDetails.slug
+  const expectedUrl = `/catalog/${productId}-${slug}`
+
+  if (id !== `${productId}-${slug}`) {
+    // Redirect to the correct URL with slug
+    redirect(expectedUrl)
+  }
+
+  const dictionary = await getDictionary(lang)
 
   return (
     <>
