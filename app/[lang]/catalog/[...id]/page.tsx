@@ -1,4 +1,3 @@
-
 import { getProductByUid } from '@/app/lib/api/services'
 import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
@@ -11,6 +10,14 @@ import { Suspense } from 'react'
 const extractIdFromSlug = (idSlug: string): number | undefined => {
   if (!idSlug) return undefined
   return parseInt(idSlug, 10) // Extracts the numeric part of the slug
+}
+
+// Function to generate a slug from the product title
+const generateSlugFromTitle = (title: string): string => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with hyphens
+    .replace(/(^-|-$)+/g, '') // Trim hyphens from the start and end
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
@@ -34,15 +41,17 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
   if (!product) return notFound()
 
+  const productSlug = generateSlugFromTitle(product.title)
+
   const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
 
   return {
     title: product.title,
     alternates: {
-      canonical: `/catalog/${id}`,
+      canonical: `/catalog/${productId}-${productSlug}`, // Update the URL to /id-title
       languages: {
-        en: `/en/catalog/${id}`,
-        de: `/de/catalog/${id}`,
+        en: `/en/catalog/${productId}-${productSlug}`, // For English
+        de: `/de/catalog/${productId}-${productSlug}`, // For German
       },
     },
     description: product.descShort,
@@ -75,12 +84,15 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 
   if (!product || product.length === 0) return notFound()
 
+  const { attributes: productDetails } = product[0]
+
   return (
     <>
       <Suspense fallback={<SingleProductSkeleton />}>
         <Product
           lang={lang}
           id={productId.toString()}
+          product={productDetails} // Pass product details to the component
           dictionary={dictionary.productPage}
           dictionaryModal={dictionary.modalForm}
         />
