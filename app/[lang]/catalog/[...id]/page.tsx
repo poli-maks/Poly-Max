@@ -74,12 +74,12 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
 
   const { attributes: productDetails } = product[0]
 
-  // Check if the URL already contains the slug, if not redirect to correct URL
   const slug = productDetails.slug
   const expectedUrl = `/catalog/${productId}-${slug}`
 
-  if (id !== `${productId}-${slug}`) {
-    // Redirect to the correct URL with slug
+  // Avoid infinite redirect loop
+  if (id !== `${productId}-${slug}` && !id.includes(slug)) {
+    // Redirect only if the current URL does not already contain the correct slug
     redirect(expectedUrl)
   }
 
