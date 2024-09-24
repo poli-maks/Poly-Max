@@ -20,3 +20,4 @@ coverage
 *.hbs
 
 app/ui/Breadcrumbs.tsx
+app/ui/CatalogPage/ProductItem/ProductItem.tsx
