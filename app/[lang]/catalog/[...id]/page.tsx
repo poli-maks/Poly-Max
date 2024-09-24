@@ -6,10 +6,10 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug (we assume it's always correct)
+// Extract numeric ID directly from slug
 const extractIdFromSlug = (idSlug: string): number | undefined => {
   if (!idSlug) return undefined
-  return parseInt(idSlug, 10) // Extracts the numeric part of the slug
+  return parseInt(idSlug, 10)
 }
 
 // Generate a slug from the product title
@@ -21,7 +21,11 @@ const generateSlugFromTitle = (title: string): string => {
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
+  if (!id) return notFound() // Ensure id is defined
+  
   const productId = extractIdFromSlug(id)
+
+  if (!productId) return notFound() // Ensure productId is valid
 
   let data
   try {
@@ -39,7 +43,6 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 
   const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
 
-  // Preserve the original alternates
   return {
     title: product.title,
     alternates: {
@@ -61,7 +64,11 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  const productId = extractIdFromSlug(id)
+  if (!id) return notFound() // Ensure id is defined
+  
+  const productId = extractIdFromSlug(id || '')
+
+  if (!productId) return notFound() // Ensure productId is valid
 
   const dictionary = await getDictionary(lang)
 
