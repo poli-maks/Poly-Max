@@ -25,7 +25,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   if (!id) return notFound()
 
   const productId = extractIdFromSlug(id)
-  if (!productId) return notFound() // Ensure the ID is valid (a number without hyphens)
+  if (!productId) return notFound()
 
   let data
   try {
@@ -86,15 +86,17 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Генеруємо slug з назви продукту
+  // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
 
-  // Перевіряємо, чи потрапляє користувач на сторінку лише з ID (без slug)
-  if (id === `${productId}`) {
+  // Check if the current URL is only `/id` (id is a number and does not contain a hyphen)
+  if (id && !id.includes('-')) {
     const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
-    return redirect(expectedUrl) // Перенаправляємо на сторінку з id-title
+    // Redirect only if it's just the numeric ID
+    return redirect(expectedUrl)
   }
 
+  // If the URL is already `/id-title`, render the page
   return (
     <>
       <Suspense fallback={<SingleProductSkeleton />}>
