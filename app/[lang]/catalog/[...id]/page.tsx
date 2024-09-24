@@ -6,7 +6,7 @@ import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
 import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Extract numeric ID directly from slug
+// Extract numeric ID directly from slug (we assume it's always correct)
 const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
   if (!idSlug) return undefined
   const numericPart = parseInt(idSlug, 10)
@@ -89,16 +89,8 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
 
-  // Check if the current URL is only `/id` (id is a number and does not contain a hyphen)
-  if (/^\d+$/.test(id)) {
-    const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
-    
-    // Redirect only if it's just the numeric ID
-    return redirect(expectedUrl)
-  }
-
-  // If the URL is already `/id-title`, render the page
-  if (id === `${productId}-${slug}`) {
+  // Якщо в URL є дефіс, то не робимо редірект
+  if (id.includes('-')) {
     return (
       <>
         <Suspense fallback={<SingleProductSkeleton />}>
@@ -113,8 +105,9 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
     )
   }
 
-  // If none of the conditions match, return 404
-  return notFound()
+  // Якщо дефіса немає, виконуємо редірект на /id-title
+  const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
+  return redirect(expectedUrl)
 }
 
 export default ProductPage
