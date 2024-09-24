@@ -3,25 +3,34 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
-// Генеруємо slug з назви продукту
+// Extract numeric ID directly from slug (we assume it's always correct)
+const extractIdFromSlug = (idSlug: string | undefined): number | undefined => {
+  if (!idSlug) return undefined
+  const numericPart = parseInt(idSlug, 10)
+  return isNaN(numericPart) ? undefined : numericPart
+}
+
+// Generate a slug from the product title
 const generateSlugFromTitle = (title: string): string => {
   return title
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-') // Замінюємо всі символи, крім букв і цифр, на дефіси
-    .replace(/(^-|-$)+/g, '') // Видаляємо дефіси на початку і в кінці
+    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with hyphens
+    .replace(/(^-|-$)+/g, '') // Remove leading/trailing hyphens
 }
 
-// Функція для генерації метаданих (канонічного URL)
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  const productId = parseInt(id, 10)
+  if (!id) return notFound()
+
+  const productId = extractIdFromSlug(id)
   if (!productId) return notFound()
 
   let data
   try {
     data = await getProductByUid(lang, productId)
+    console.log("Product data fetched:", data)
   } catch (error) {
     console.error("Error fetching product by UID:", error)
     return notFound()
@@ -30,23 +39,30 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   if (!data || data.length === 0) return notFound()
 
   const { attributes: product } = data[0] || {}
-  if (!product || !product.title) return notFound()
+  if (!product) return notFound()
 
-  const slug = generateSlugFromTitle(product.title)
+  const imgUrl = product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg'
 
-  // Генеруємо канонічний URL для продукту з ID = 4
-  const canonicalUrl = productId === 4 ? `/en/catalog/4-barrage-post` : `/catalog/${id}-${slug}`
+  // Generate canonical URL specifically for product with ID = 4
+  const canonicalUrl = productId === 4 && lang === 'en'
+    ? '/en/catalog/4-barrage-post' // Specific canonical URL for product ID 4
+    : `/catalog/${id}` // Default structure for others
 
   return {
     title: product.title,
-    description: product.descShort,
+    metadataBase: new URL('https://www.poli-maks.com'),
     alternates: {
-      canonical: canonicalUrl, // Задаємо канонічний URL
+      canonical: canonicalUrl, // Use the specific or default URL
+      languages: {
+        en: `/en/catalog/${id}`,
+        de: `/de/catalog/${id}`,
+      },
     },
+    description: product.descShort,
     openGraph: {
       images: [
         {
-          url: product.img?.data?.[0]?.attributes?.formats?.small?.url || '/img/productPlaceholder.jpg',
+          url: imgUrl,
         },
       ],
     },
@@ -56,7 +72,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   if (!id) return notFound()
 
-  const productId = parseInt(id, 10)
+  const productId = extractIdFromSlug(id)
   if (!productId) return notFound()
 
   const dictionary = await getDictionary(lang)
@@ -64,6 +80,7 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   let product
   try {
     product = await getProductByUid(lang, productId)
+    console.log("Fetched product:", product)
   } catch (error) {
     console.error("Error fetching product data:", error)
     return notFound()
@@ -74,14 +91,7 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   if (!productDetails || !productDetails.title) return notFound()
 
-  // Генеруємо slug
-  const slug = generateSlugFromTitle(productDetails.title)
-
-  // Виконуємо редірект тільки для товару з ID = 4
-  if (productId === 4 && id !== '4-barrage-post') {
-    return redirect(`/en/catalog/4-barrage-post`)
-  }
-
+  // Рендеримо сторінку без редіректу
   return (
     <>
       <Suspense fallback={<SingleProductSkeleton />}>
