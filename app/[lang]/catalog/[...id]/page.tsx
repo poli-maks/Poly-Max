@@ -89,25 +89,25 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   // Generate slug from product title
   const slug = generateSlugFromTitle(productDetails.title)
 
-  // Якщо в URL є дефіс, то не робимо редірект
-  if (id.includes('-')) {
-    return (
-      <>
-        <Suspense fallback={<SingleProductSkeleton />}>
-          <Product
-            lang={lang}
-            id={productId.toString()}
-            dictionary={dictionary.productPage}
-            dictionaryModal={dictionary.modalForm}
-          />
-        </Suspense>
-      </>
-    )
+  // Якщо урл складається з менш ніж 2 частин (тільки id), робимо редірект
+  if (id.split('-').length < 2) {
+    const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
+    return redirect(expectedUrl)
   }
 
-  // Якщо дефіса немає, виконуємо редірект на /id-title
-  const expectedUrl = `/${lang}/catalog/${productId}-${slug}`
-  return redirect(expectedUrl)
+  // Якщо урл вже має більше 2 частин, сторінка рендериться без редіректу
+  return (
+    <>
+      <Suspense fallback={<SingleProductSkeleton />}>
+        <Product
+          lang={lang}
+          id={productId.toString()}
+          dictionary={dictionary.productPage}
+          dictionaryModal={dictionary.modalForm}
+        />
+      </Suspense>
+    </>
+  )
 }
 
 export default ProductPage
