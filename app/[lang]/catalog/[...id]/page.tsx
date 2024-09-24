@@ -7,12 +7,17 @@ import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
-const extractIdFromSlug = (idSlug: string): number => {
+const extractIdFromSlug = (idSlug: string): number | undefined => {
+  if (!idSlug) return undefined
   return parseInt(idSlug, 10) // Extracts the numeric part of the slug
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
+  if (!id) return notFound() // Ensure id is defined
+  
   const productId = extractIdFromSlug(id)
+
+  if (!productId) return notFound() // Ensure productId is valid
 
   let data
   try {
@@ -51,7 +56,11 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
+  if (!id) return notFound() // Ensure id is defined
+  
   const productId = extractIdFromSlug(id)
+
+  if (!productId) return notFound() // Ensure productId is valid
 
   const dictionary = await getDictionary(lang)
 
