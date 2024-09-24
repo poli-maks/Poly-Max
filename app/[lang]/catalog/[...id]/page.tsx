@@ -3,7 +3,7 @@ import { getDictionary } from '@/app/lib/dictionary'
 import { IParams } from '@/app/lib/interfaces'
 import Product from '@/app/ui/ProductPage/Product'
 import SingleProductSkeleton from '@/app/ui/Skeletons/SingleProductSkeleton'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 // Extract numeric ID directly from slug (we assume it's always correct)
@@ -12,15 +12,16 @@ const extractIdFromSlug = (idSlug: string): number | undefined => {
   return parseInt(idSlug, 10) // Extracts the numeric part of the slug
 }
 
-// New function to generate a product slug from the product title
+// Function to generate product slug from the title (to be used later)
 const generateProductSlug = (title: string) => {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
 }
 
 export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
-  if (!id) return notFound() // Ensure id is defined and not undefined
-
+  if (!id) return notFound() // Ensure id is defined
+  
   const productId = extractIdFromSlug(id)
+
   if (!productId) return notFound() // Ensure productId is valid
 
   let data
@@ -42,7 +43,7 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
   return {
     title: product.title,
     alternates: {
-      canonical: `/catalog/${id}`, // Keeping the canonical as requested
+      canonical: `/catalog/${id}`, // Keeping the canonical URL as requested
       languages: {
         en: `/en/catalog/${id}`,
         de: `/de/catalog/${id}`,
@@ -60,9 +61,10 @@ export const generateMetadata = async ({ params: { id, lang } }: IParams) => {
 }
 
 const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
-  if (!id) return notFound() // Ensure id is defined and not undefined
-
+  if (!id) return notFound() // Ensure id is defined
+  
   const productId = extractIdFromSlug(id)
+
   if (!productId) return notFound() // Ensure productId is valid
 
   const dictionary = await getDictionary(lang)
@@ -80,10 +82,10 @@ const ProductPage: React.FC<IParams> = async ({ params: { lang, id } }) => {
   const { attributes: productDetails } = product[0]
   const productSlug = generateProductSlug(productDetails.title)
 
-  // Redirect if the slug is not present in the current URL
-  if (!id.includes(productSlug)) {
-    redirect(`/${lang}/catalog/${productId}-${productSlug}`)
-  }
+  // Commented out redirect logic for now to test the rest of the logic
+  // if (!id.includes(productSlug)) {
+  //   redirect(`/${lang}/catalog/${productId}-${productSlug}`)
+  // }
 
   return (
     <>
