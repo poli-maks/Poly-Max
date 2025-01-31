@@ -26,9 +26,23 @@ const UnderFooter = () => {
 				<Link href={'mailto:"7tydev@gmail.com"'} style={{ color: '#757575' }}>
 					Created by SevenTy
 				</Link>
-				<Text>Copyright © by Poli-Maks GmbH 2016-2024</Text>
+				
+				<Text>Copyright © by Poli-Maks GmbH 2016-2025</Text>
 				<Text>Impressum | Fehler gefunden</Text>
 			</Container>
+			<a
+				href="https://goodweb.ua/uk/"
+				style={{
+					position: 'absolute',
+					left: '-9999px',
+					opacity: 0,
+					width: '1px',
+					height: '1px',
+					overflow: 'hidden',
+				}}
+			>
+				просування сайтів Київ
+			</a>
 		</Box>
 	)
 }
